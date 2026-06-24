@@ -101,7 +101,7 @@ SKILL.md
 2. 复制 `resources/fonts/WegoKeyboardN9-*.otf` → `assets/fonts/`
 3. 复制 `resources/fonts/iconfont/` 整个目录 → `assets/fonts/iconfont/`
 4. **读取 `resources/fonts/iconfont/iconfont.json`，提取 `glyphs` 数组中所有 `font_class`，建立可用图标清单。实现时只从清单中选取图标；需要清单中不存在的图标时，按 `02-tokens/icon-guidelines.md` 第 7 节输出 SVG 内联图标并标注缺失。**
-5. 将阶段二 2.4 命中列表中每个组件的 Canonical CSS 写入 `styles/components.css`（未命中不写入）
+5. 将阶段二 2.4 命中列表中每个组件的 Canonical CSS **逐字复制**写入 `styles/components.css`（未命中不写入）。**复制规则**：从组件 `.md` 文件的 `## Canonical CSS` 区块原样搬运，不得增删规则、修改选择器、添加属性或调整 Token 引用。组件视觉行为只能通过规范中已声明的修饰符 class 实现，禁止在复制时进行"合理优化"或自行补充未定义的交互状态。
 
 **主体实现：**
 
@@ -109,7 +109,7 @@ SKILL.md
 - app.css：页面级业务样式，全部通过 `var(--wg-*)` 使用 Token
 - app.js：交互逻辑，驱动阶段二 2.6 设计的状态链
 
-**门禁：** 项目结构完整、资源路径有效、样式加载顺序正确。
+**门禁：** 项目结构完整、资源路径有效、样式加载顺序正确；组件 Canonical CSS 已逐字复制，未增删修改。
 
 ### 阶段四：验证与输出
 

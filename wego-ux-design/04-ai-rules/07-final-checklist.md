@@ -73,8 +73,11 @@
 □ 是否没有自创组件变体
 □ 未注册结构是否使用页面级命名并标注为组件候选
 □ 是否没有读取或引用 KuiklyUI 组件 API
-□ 命中组件的 Canonical CSS 是否写入 styles/components.css
-□ page 级按钮宽度是否符合宽度策略（表单型自适应 / 结果型固定）
+□ 命中组件的 Canonical CSS 是否逐字复制写入 styles/components.css（未增删规则、未修改选择器、未添加属性）
+□ 页面中所有可点击的 `<a>` 标签是否使用了 `.wg-link` 组件（包括协议链接、帮助链接、注册入口等）
+□ 可点击链接的 pressed / hover / focus-visible 状态是否符合 Link 组件规范（不得用 `opacity` 替代 Link 的 pressed 态背景色）
+□ page 级按钮宽度是否符合宽度策略（表单型用 `--form` 修饰符 / 结果型用固定宽度）
+□ 按钮宽度是否通过 Button Group 修饰符控制（未在 app.css 中直接覆盖 `.wg-button` 的 `inline-size`）
 □ NavBar 背景色是否与页面背景色联动（白底页面 NavBar 白色）
 ```
 
