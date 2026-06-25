@@ -35,6 +35,33 @@ Loading 加载指示组件，用于在数据加载、内容刷新、操作等待
 - 底部多选项列表：使用 ActionSheet。
 - 非加载状态的空页面：使用 Result。
 
+### Loading 必须有任务语义
+
+Loading 不是装饰状态，必须表达：
+
+- 当前正在处理什么
+- 处理对象是什么
+- 处理完成后会发生什么
+
+生成 Loading 前必须回答：
+
+```text
+这个 Loading 代表什么任务？
+├─ 页面初始化 → 优先 Skeleton
+├─ 局部数据加载 → 局部 spinner + 任务说明
+├─ 提交 / 保存 / 发布 → Modal Loading 或按钮 loading，必须有明确文案
+├─ 上传 → 靠近上传对象显示局部 loading / progress
+└─ 短时局部反馈 → 才允许纯 spinner
+```
+
+### Loading 禁止事项
+
+- 禁止长时间空 spinner
+- 禁止全屏 loading 没有文案
+- 禁止 loading 与真实任务无关
+- 禁止 loading 结束后页面没有状态变化
+- 禁止提交类 loading 不防重复点击
+
 ### 场景与变体映射
 
 | 场景 | 变体 | 尺寸 | 说明 |
@@ -145,6 +172,8 @@ div.wg-loading.wg-loading--{variant}[data-state]
 - 文案单行展示，不换行；超长时截断显示省略号。
 - 文案不超过 8 个字符。
 - 文案使用省略号结尾表示进行中状态，如"加载中..."。
+- modal 变体必须提供文案，不得使用无文案的 modal loading（无文案 modal loading 等同于空 spinner）。
+- 文案必须说明当前正在处理的任务，如"提交中...""保存中...""发布中..."，不得使用模糊的"加载中..."。
 
 ## Canonical HTML
 
@@ -379,6 +408,9 @@ V1 未定义 `progress`（带进度条）视觉变体。模态加载需要进度
 - `skeleton` 变体的色块形状由页面布局决定，但必须使用 `wg-loading__skeleton-block` 命名。
 - 页面脚本可以控制 Loading 的显示/隐藏，但不得绕过组件规定的 Anatomy、状态语义和可访问性约束。
 - 完整页面中出现 Loading 时，必须读取并遵守本文件。
+- modal 变体必须提供文案，禁止无文案的 modal loading。
+- 提交类 loading 必须防止重复点击（通过 disabled 或遮罩实现）。
+- loading 完成后必须有明确的状态变化（内容加载、页面跳转、结果反馈等）。
 
 ## 自检
 
@@ -395,6 +427,11 @@ V1 未定义 `progress`（带进度条）视觉变体。模态加载需要进度
 □ 是否设置 role="status" 和 aria-live="polite"
 □ 是否没有自创 progress、bar 变体
 □ modal 变体是否由业务逻辑控制关闭时机
+□ Loading 是否表达具体任务语义
+□ modal 变体是否提供文案
+□ 提交类 loading 是否防止重复点击
+□ loading 完成后是否有状态变化
+□ 是否没有使用空 spinner 长时间占位
 ```
 
 ## 规范来源
