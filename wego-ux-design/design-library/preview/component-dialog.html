@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../scaffold.css">
   <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <style>
     /* @component-css-start */
 
@@ -74,23 +75,23 @@
     }
 
     .wg-dialog__icon {
-      display: inline-block;
-      inline-size: var(--wg-size-24);
-      block-size: var(--wg-size-24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-24);
       flex-shrink: 0;
-      border-radius: var(--wg-radius-full);
     }
 
     .wg-dialog__icon--success {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-dialog__icon--danger {
-      background-color: var(--wg-color-status-danger-default);
+      color: var(--wg-color-status-danger-default);
     }
 
     .wg-dialog__icon--warning {
-      background-color: var(--wg-color-status-warning-default);
+      color: var(--wg-color-status-warning-default);
     }
 
     .wg-dialog__description {
@@ -338,7 +339,7 @@
         <div class="wg-dialog">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
-              <span class="wg-dialog__icon wg-dialog__icon--success"></span>
+              <i class="wego-iconfont-s icon-yuangou-mian wg-dialog__icon wg-dialog__icon--success"></i>
               <span class="wg-dialog__title">操作成功</span>
             </div>
           </div>
@@ -364,7 +365,7 @@
         <div class="wg-dialog">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
-              <span class="wg-dialog__icon wg-dialog__icon--danger"></span>
+              <i class="wego-iconfont-s icon-yuancha-mian wg-dialog__icon wg-dialog__icon--danger"></i>
               <span class="wg-dialog__title">退款失败</span>
             </div>
           </div>

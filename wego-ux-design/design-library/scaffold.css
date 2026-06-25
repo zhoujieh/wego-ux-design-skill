@@ -209,3 +209,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+/* ---- 图标尺寸工具类 ---- */
+
+.wg-icon--16 { font-size: var(--wg-size-16); }
+.wg-icon--20 { font-size: var(--wg-size-20); }
+.wg-icon--24 { font-size: var(--wg-size-24); }
+.wg-icon--28 { font-size: var(--wg-size-28); }
+.wg-icon--32 { font-size: var(--wg-size-32); }
+.wg-icon--48 { font-size: var(--wg-size-48); }

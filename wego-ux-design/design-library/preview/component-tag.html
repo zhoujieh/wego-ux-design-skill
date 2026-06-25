@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../scaffold.css">
   <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <style>
     /* @component-css-start */
 
@@ -272,7 +273,7 @@
     <div class="tag-demo-row">
       <span class="tag-demo-label">添加标签</span>
       <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--icon-left" tabindex="0">
-        <span class="wg-tag__icon">+</span>
+        <i class="wego-iconfont-s icon-jia wg-tag__icon"></i>
         <span class="wg-tag__text">添加标签</span>
       </div>
     </div>
@@ -284,7 +285,7 @@
       <span class="tag-demo-label">商品标签</span>
       <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--icon-right" tabindex="0">
         <span class="wg-tag__text">商品标签</span>
-        <span class="wg-tag__icon">&times;</span>
+        <i class="wego-iconfont-s icon-cha wg-tag__icon"></i>
       </div>
     </div>
   </div>
@@ -320,7 +321,7 @@
       <span class="tag-demo-label">查看更多</span>
       <div class="wg-tag wg-tag--28 wg-tag--white wg-tag--icon-right" tabindex="0">
         <span class="wg-tag__text">查看更多</span>
-        <span class="wg-tag__icon">&rarr;</span>
+        <i class="wego-iconfont-s icon-youjiantou wg-tag__icon"></i>
       </div>
     </div>
   </div>
@@ -427,7 +428,7 @@
       <li class="wg-text-body-sm">size=32/28/24 为可交互标签，支持点击切换 selected 态，20 为纯展示标签 (<code>cursor: default</code>)</li>
       <li class="wg-text-body-sm">grey 为默认灰色背景，white 为白色带边框，green 为绿色边框语义标签</li>
       <li class="wg-text-body-sm">selected 态感知：灰色/白色选中变绿色实底 + 绿色文字，绿色选中变绿色实底</li>
-      <li class="wg-text-body-sm">图标使用文字符号代替（+ / × / →），实际项目中替换为 iconfont 图标</li>
+      <li class="wg-text-body-sm">图标使用 wego-iconfont-s 字体图标（icon-jia / icon-cha / icon-youjiantou）</li>
       <li class="wg-text-body-sm">TagGroup 使用 flex-wrap + gap 布局，自动换行，间距统一为 <code>var(--wg-spacing-8)</code></li>
       <li class="wg-text-body-sm">active 态需点击体验，focus-visible 态需 Tab 键聚焦查看</li>
       <li class="wg-text-body-sm">所有样式值通过 <code>var(--wg-*)</code> 引用，零硬编码</li>

@@ -538,17 +538,12 @@
     }
 
     .wg-cell__arrow {
-      display: inline-block;
-      inline-size: var(--wg-size-16);
-      block-size: var(--wg-size-16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-16);
       flex-shrink: 0;
-      background-color: var(--wg-color-text-tertiary);
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z'/%3E%3C/svg%3E");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
+      color: var(--wg-color-text-tertiary);
     }
 
     .wg-cell__switch {
@@ -717,23 +712,23 @@
     }
 
     .wg-dialog__icon {
-      display: inline-block;
-      inline-size: var(--wg-size-24);
-      block-size: var(--wg-size-24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-24);
       flex-shrink: 0;
-      border-radius: var(--wg-radius-full);
     }
 
     .wg-dialog__icon--success {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-dialog__icon--danger {
-      background-color: var(--wg-color-status-danger-default);
+      color: var(--wg-color-status-danger-default);
     }
 
     .wg-dialog__icon--warning {
-      background-color: var(--wg-color-status-warning-default);
+      color: var(--wg-color-status-warning-default);
     }
 
     .wg-dialog__description {
@@ -1435,7 +1430,13 @@
 
 /* ===== Navbar ===== */
 
-.wg-navbar {
+/* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
+    :root {
+      --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
+      --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
+    }
+
+    .wg-navbar {
       position: sticky;
       top: 0;
       z-index: var(--wg-zindex-sticky);
@@ -1561,8 +1562,10 @@
     }
 
     .wg-navbar__left-icon {
-      inline-size: var(--wg-size-24);
-      block-size: var(--wg-size-24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-24);
     }
 
     .wg-navbar__left-btn--text {
@@ -1647,8 +1650,10 @@
     }
 
     .wg-navbar__action-icon {
-      inline-size: var(--wg-size-20);
-      block-size: var(--wg-size-20);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-20);
     }
 
     .wg-navbar__action--icon-text .wg-navbar__action-label {
@@ -1769,7 +1774,9 @@
     }
 
     .wg-result__icon {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
@@ -1778,29 +1785,27 @@
     .wg-result__icon--warning,
     .wg-result__icon--waiting,
     .wg-result__icon--celebrate {
-      inline-size: var(--wg-size-72);
-      block-size: var(--wg-size-72);
-      border-radius: var(--wg-radius-full);
+      font-size: var(--wg-size-72);
     }
 
     .wg-result__icon--success {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-result__icon--error {
-      background-color: var(--wg-color-status-danger-default);
+      color: var(--wg-color-status-danger-default);
     }
 
     .wg-result__icon--warning {
-      background-color: var(--wg-color-status-warning-default);
+      color: var(--wg-color-status-warning-default);
     }
 
     .wg-result__icon--waiting {
-      background-color: var(--wg-color-status-info-default);
+      color: var(--wg-color-status-info-default);
     }
 
     .wg-result__icon--celebrate {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-result__icon--not-found,
@@ -1809,8 +1814,27 @@
     .wg-result__icon--time-expired,
     .wg-result__icon--network-error,
     .wg-result__icon--custom {
-      inline-size: 120px;
-      block-size: 120px;
+      font-size: 120px;
+    }
+
+    .wg-result__icon--not-found {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--search-not-found {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--no-permission {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--time-expired {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--network-error {
+      color: var(--wg-color-text-tertiary);
     }
 
     .wg-result__title {
@@ -2262,7 +2286,13 @@
 
 /* ===== Toast ===== */
 
-.wg-toast-container {
+/* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
+    :root {
+      --wg-color-bg-toast: var(--wg-color-feedback-toast-bg);
+      --wg-color-text-inverse-secondary: rgba(255, 255, 255, 0.70);
+    }
+
+    .wg-toast-container {
       position: fixed;
       inset-inline: 0;
       block-end: calc(var(--wg-spacing-72) + env(safe-area-inset-bottom));
@@ -2293,23 +2323,24 @@
     }
 
     .wg-toast__icon {
-      display: inline-block;
-      inline-size: var(--wg-size-20);
-      block-size: var(--wg-size-20);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-20);
       flex-shrink: 0;
-      border-radius: var(--wg-radius-full);
+      color: var(--wg-color-text-inverse);
     }
 
     .wg-toast__icon--success {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-toast__icon--error {
-      background-color: var(--wg-color-status-danger-default);
+      color: var(--wg-color-status-danger-default);
     }
 
     .wg-toast__icon--info {
-      background-color: var(--wg-color-status-info-default);
+      color: var(--wg-color-status-info-default);
     }
 
     .wg-toast__message {

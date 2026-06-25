@@ -7,8 +7,15 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../scaffold.css">
   <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <style>
     /* @component-css-start */
+
+    /* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
+    :root {
+      --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
+      --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
+    }
 
     .wg-navbar {
       position: sticky;
@@ -136,8 +143,10 @@
     }
 
     .wg-navbar__left-icon {
-      inline-size: var(--wg-size-24);
-      block-size: var(--wg-size-24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-24);
     }
 
     .wg-navbar__left-btn--text {
@@ -222,8 +231,10 @@
     }
 
     .wg-navbar__action-icon {
-      inline-size: var(--wg-size-20);
-      block-size: var(--wg-size-20);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--wg-size-20);
     }
 
     .wg-navbar__action--icon-text .wg-navbar__action-label {
@@ -389,9 +400,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -410,9 +419,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-custom wg-navbar--divider" style="background: var(--wg-color-base-neutral-900, #1a1a1a);">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回" style="color: var(--wg-color-text-inverse);">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -431,9 +438,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="关闭">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-guanbi wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -471,9 +476,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -481,18 +484,11 @@
       </div>
       <div class="wg-navbar__actions">
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="收藏">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <path d="M10 16.5L4.2 12.9C3.4 12.4 2.5 11.2 2.5 9.8V9.6C2.5 6.7 4.8 4.5 7.5 4.5C8.9 4.5 10.2 5.1 10 6C9.8 5.1 11.1 4.5 12.5 4.5C15.2 4.5 17.5 6.7 17.5 9.6V9.8C17.5 11.2 16.6 12.4 15.8 12.9L10 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-aixin wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">收藏</span>
         </button>
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="分享">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <circle cx="5" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="15" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="15" cy="15" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M7 9L13 6M7 11L13 14" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fenxiang wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">分享</span>
         </button>
         <button class="wg-navbar__action wg-navbar__action--button" type="button">
@@ -515,24 +511,15 @@
       </div>
       <div class="wg-navbar__actions">
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="筛选">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <path d="M3 5H17L11 10.5V15L9 16V10.5L3 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-shaixuan wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">筛选</span>
         </button>
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="搜索">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-sousuo wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">搜索</span>
         </button>
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="更多">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="4" r="2" fill="currentColor"/>
-            <circle cx="10" cy="10" r="2" fill="currentColor"/>
-            <circle cx="10" cy="16" r="2" fill="currentColor"/>
-          </svg>
+          <i class="wego-iconfont-s icon-sandian wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">更多</span>
         </button>
       </div>
@@ -580,17 +567,12 @@
     <div class="wg-navbar wg-navbar--search wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <svg viewBox="0 0 20 20" fill="none" style="inline-size: var(--wg-size-20); block-size: var(--wg-size-20); flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);">
-            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);"></i>
           <input class="wg-navbar__search-input" type="search" placeholder="搜索商品">
         </div>
       </div>
@@ -607,17 +589,12 @@
     <div class="wg-navbar wg-navbar--search wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <svg viewBox="0 0 20 20" fill="none" style="inline-size: var(--wg-size-20); block-size: var(--wg-size-20); flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);">
-            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);"></i>
           <input class="wg-navbar__search-input" type="search" value="连衣裙" readonly>
         </div>
       </div>
@@ -639,9 +616,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-transparent wg-navbar--divider" style="position: relative;">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -649,18 +624,11 @@
       </div>
       <div class="wg-navbar__actions">
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="收藏">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <path d="M10 16.5L4.2 12.9C3.4 12.4 2.5 11.2 2.5 9.8V9.6C2.5 6.7 4.8 4.5 7.5 4.5C8.9 4.5 10.2 5.1 10 6C9.8 5.1 11.1 4.5 12.5 4.5C15.2 4.5 17.5 6.7 17.5 9.6V9.8C17.5 11.2 16.6 12.4 15.8 12.9L10 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-aixin wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">收藏</span>
         </button>
         <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="分享">
-          <svg class="wg-navbar__action-icon" viewBox="0 0 20 20" fill="none">
-            <circle cx="5" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="15" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="15" cy="15" r="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M7 9L13 6M7 11L13 14" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fenxiang wg-navbar__action-icon"></i>
           <span class="wg-navbar__action-label">分享</span>
         </button>
       </div>
@@ -672,17 +640,12 @@
     <div class="wg-navbar wg-navbar--search wg-navbar--bg-transparent" style="position: relative;">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回">
-          <svg class="wg-navbar__left-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <svg viewBox="0 0 20 20" fill="none" style="inline-size: var(--wg-size-20); block-size: var(--wg-size-20); flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-inverse-weak);">
-            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-inverse-weak);"></i>
           <input class="wg-navbar__search-input" type="search" placeholder="搜索品牌商品">
         </div>
       </div>

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../scaffold.css">
   <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <style>
     /* @component-css-start */
 
@@ -57,7 +58,9 @@
     }
 
     .wg-result__icon {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
@@ -66,29 +69,27 @@
     .wg-result__icon--warning,
     .wg-result__icon--waiting,
     .wg-result__icon--celebrate {
-      inline-size: var(--wg-size-72);
-      block-size: var(--wg-size-72);
-      border-radius: var(--wg-radius-full);
+      font-size: var(--wg-size-72);
     }
 
     .wg-result__icon--success {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-result__icon--error {
-      background-color: var(--wg-color-status-danger-default);
+      color: var(--wg-color-status-danger-default);
     }
 
     .wg-result__icon--warning {
-      background-color: var(--wg-color-status-warning-default);
+      color: var(--wg-color-status-warning-default);
     }
 
     .wg-result__icon--waiting {
-      background-color: var(--wg-color-status-info-default);
+      color: var(--wg-color-status-info-default);
     }
 
     .wg-result__icon--celebrate {
-      background-color: var(--wg-color-status-success-default);
+      color: var(--wg-color-status-success-default);
     }
 
     .wg-result__icon--not-found,
@@ -97,8 +98,27 @@
     .wg-result__icon--time-expired,
     .wg-result__icon--network-error,
     .wg-result__icon--custom {
-      inline-size: 120px;
-      block-size: 120px;
+      font-size: 120px;
+    }
+
+    .wg-result__icon--not-found {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--search-not-found {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--no-permission {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--time-expired {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-result__icon--network-error {
+      color: var(--wg-color-text-tertiary);
     }
 
     .wg-result__title {
@@ -339,7 +359,7 @@
       <div class="wg-result wg-result--result-60">
         <div class="wg-result__message">
           <div class="wg-result__image">
-            <span class="wg-result__icon wg-result__icon--success"></span>
+            <i class="wego-iconfont-s icon-yuangou-mian wg-result__icon wg-result__icon--success"></i>
           </div>
           <h3 class="wg-result__title">提交成功</h3>
           <p class="wg-result__description">你的报名信息已成功提交</p>
@@ -365,7 +385,7 @@
       <div class="wg-result wg-result--result-60">
         <div class="wg-result__message">
           <div class="wg-result__image">
-            <span class="wg-result__icon wg-result__icon--error"></span>
+            <i class="wego-iconfont-s icon-yuancha-mian wg-result__icon wg-result__icon--error"></i>
           </div>
           <h3 class="wg-result__title">提交失败</h3>
         </div>
@@ -394,7 +414,7 @@
       <div class="wg-result wg-result--result-80">
         <div class="wg-result__message">
           <div class="wg-result__image">
-            <span class="wg-result__icon wg-result__icon--not-found"></span>
+            <i class="wego-iconfont-s icon-tishi-mian wg-result__icon wg-result__icon--not-found"></i>
           </div>
           <h3 class="wg-result__title">暂无数据</h3>
         </div>
@@ -418,7 +438,7 @@
       <div class="wg-result wg-result--result-40">
         <div class="wg-result__message">
           <div class="wg-result__image">
-            <span class="wg-result__icon wg-result__icon--search-not-found"></span>
+            <i class="wego-iconfont-s icon-sousuo wg-result__icon wg-result__icon--search-not-found"></i>
           </div>
           <h3 class="wg-result__title">未找到相关结果</h3>
           <p class="wg-result__description">
@@ -441,7 +461,7 @@
       <div class="wg-result wg-result--result-60">
         <div class="wg-result__message">
           <div class="wg-result__image">
-            <span class="wg-result__icon wg-result__icon--success"></span>
+            <i class="wego-iconfont-s icon-yuangou-mian wg-result__icon wg-result__icon--success"></i>
           </div>
           <h3 class="wg-result__title">支付成功</h3>
           <p class="wg-result__description">感谢你的购买</p>
@@ -469,7 +489,7 @@
     <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
       <li class="wg-text-body-sm">result-60 / result-80 需配合 <code>flex: 1</code> 的父容器以撑满高度，演示中通过 <code>min-block-size: 400px</code> 模拟</li>
       <li class="wg-text-body-sm">result-40 适用于页面内嵌场景，无弹性填充，仅以上下 padding 控制间距</li>
-      <li class="wg-text-body-sm">图标为纯色圆角方块占位符，实际使用时替换为 SVG 或图标字体</li>
+      <li class="wg-text-body-sm">图标使用 wego-iconfont-s 字体图标，通过 font-size 控制尺寸</li>
       <li class="wg-text-body-sm">按钮 active 态需点击体验，focus-visible 态需 Tab 键聚焦查看</li>
       <li class="wg-text-body-sm">所有样式值通过 <code>var(--wg-*)</code> 引用，零硬编码</li>
     </ul>
