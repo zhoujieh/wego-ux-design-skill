@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Button 组件预览 — 微购设计库</title>
   <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <link rel="stylesheet" href="../scaffold.css">
   <link rel="stylesheet" href="../components.css">
   <style>
@@ -165,6 +166,33 @@
 
     /* @component-css-end */
 
+    /* ── 图标 ── */
+    .wg-button__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: var(--wg-size-20);
+      line-height: 1;
+    }
+
+    .wg-button--compact .wg-button__icon {
+      font-size: var(--wg-size-16);
+    }
+
+    .wg-button--icon-left .wg-button__surface {
+      gap: var(--wg-spacing-4);
+    }
+
+    .wg-button--icon-only {
+      inline-size: var(--button-visual-height);
+      min-inline-size: 0;
+    }
+
+    .wg-button--icon-only .wg-button__surface {
+      padding-inline: 0;
+    }
+
     /* ── 预览页专用样式 ── */
     .preview-header {
       margin: var(--wg-spacing-40) var(--wg-spacing-16);
@@ -251,6 +279,7 @@
   <p class="wg-text-secondary" style="margin-top: var(--wg-spacing-8);">
     scope: page / container / compact &nbsp;|&nbsp;
     emphasis: strong / medium / weak &nbsp;|&nbsp;
+    hasIcon: none / icon-left / icon-only &nbsp;|&nbsp;
     state: default / hover / pressed / disabled
   </p>
 </div>
@@ -536,6 +565,199 @@
           <span class="wg-button__surface"><span class="wg-button__label">拒绝</span></span>
         </button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 图标场景 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">图标场景 (hasIcon: icon-left / icon-only)</h2>
+
+  <div class="variant-card">
+    <h3>icon-left — page 级带图标 (strong / medium / weak)</h3>
+    <div class="btn-row">
+      <div class="btn-demo-cell">
+        <span class="state-label">strong</span>
+        <button class="wg-button wg-button--page wg-button--strong wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+            <span class="wg-button__label">新建</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">medium</span>
+        <button class="wg-button wg-button--page wg-button--medium wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-sousuo wg-button__icon"></i>
+            <span class="wg-button__label">搜索</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">weak</span>
+        <button class="wg-button wg-button--page wg-button--weak wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-fanhui wg-button__icon"></i>
+            <span class="wg-button__label">返回</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">disabled</span>
+        <button class="wg-button wg-button--page wg-button--strong wg-button--icon-left" type="button" disabled>
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+            <span class="wg-button__label">新建</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-left — container 级 (strong / medium / weak)</h3>
+    <div class="btn-row">
+      <div class="btn-demo-cell">
+        <span class="state-label">strong</span>
+        <button class="wg-button wg-button--container wg-button--strong wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-gou wg-button__icon"></i>
+            <span class="wg-button__label">确认</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">medium</span>
+        <button class="wg-button wg-button--container wg-button--medium wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-bianji wg-button__icon"></i>
+            <span class="wg-button__label">编辑</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">weak</span>
+        <button class="wg-button wg-button--container wg-button--weak wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-shanchu wg-button__icon"></i>
+            <span class="wg-button__label">删除</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-left — compact 级 (strong / medium / weak)</h3>
+    <div class="btn-row">
+      <div class="btn-demo-cell">
+        <span class="state-label">strong</span>
+        <button class="wg-button wg-button--compact wg-button--strong wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+            <span class="wg-button__label">发布</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">medium</span>
+        <button class="wg-button wg-button--compact wg-button--medium wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-shaixuan wg-button__icon"></i>
+            <span class="wg-button__label">筛选</span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">weak</span>
+        <button class="wg-button wg-button--compact wg-button--weak wg-button--icon-left" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-cha wg-button__icon"></i>
+            <span class="wg-button__label">拒绝</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-only — 仅图标按钮（各尺寸 × 各强调级）</h3>
+    <div class="btn-row">
+      <div class="btn-demo-cell">
+        <span class="state-label">page·strong</span>
+        <button class="wg-button wg-button--page wg-button--strong wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">page·medium</span>
+        <button class="wg-button wg-button--page wg-button--medium wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-shezhi wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">page·weak</span>
+        <button class="wg-button wg-button--page wg-button--weak wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-cha wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">container·strong</span>
+        <button class="wg-button wg-button--container wg-button--strong wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-sousuo wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">compact·strong</span>
+        <button class="wg-button wg-button--compact wg-button--strong wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">compact·medium</span>
+        <button class="wg-button wg-button--compact wg-button--medium wg-button--icon-only" type="button">
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-shaixuan wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+      <div class="btn-demo-cell">
+        <span class="state-label">disabled</span>
+        <button class="wg-button wg-button--page wg-button--strong wg-button--icon-only" type="button" disabled>
+          <span class="wg-button__surface">
+            <i class="wego-iconfont-s icon-jia wg-button__icon"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-left 在按钮组中 — page inline</h3>
+    <div class="wg-button-group wg-button-group--page wg-button-group--inline">
+      <button class="wg-button wg-button--page wg-button--weak wg-button--icon-left" type="button">
+        <span class="wg-button__surface">
+          <i class="wego-iconfont-s icon-fanhui wg-button__icon"></i>
+          <span class="wg-button__label">上一步</span>
+        </span>
+      </button>
+      <button class="wg-button wg-button--page wg-button--strong wg-button--icon-left" type="button">
+        <span class="wg-button__surface">
+          <i class="wego-iconfont-s icon-gou wg-button__icon"></i>
+          <span class="wg-button__label">确认提交</span>
+        </span>
+      </button>
     </div>
   </div>
 </section>

@@ -30,6 +30,11 @@
           "medium",
           "weak"
         ],
+        "hasIcon": [
+          "none",
+          "icon-left",
+          "icon-only"
+        ],
         "state": [
           "default",
           "hover",

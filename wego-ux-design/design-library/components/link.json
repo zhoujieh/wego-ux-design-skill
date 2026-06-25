@@ -5,12 +5,12 @@
   "category": "action",
   "variantDimensions": {
     "context": {
-      "description": "链接的上下文环境",
+      "description": "链接出现的上下文，决定布局方式",
       "values": ["standalone", "inline"],
       "default": "standalone"
     },
     "behavior": {
-      "description": "点击行为类型",
+      "description": "交互行为类型",
       "values": ["navigation", "command"],
       "default": "navigation"
     },
@@ -24,11 +24,11 @@
     "wg-spacing-0", "wg-spacing-2", "wg-spacing-16",
     "wg-touch-min",
     "wg-radius-none",
-    "wg-font-size-14", "wg-font-lineheight-14",
+    "wg-font-size-14",
+    "wg-font-lineheight-14",
     "wg-font-weight-medium",
-    "wg-color-action-link-default", "wg-color-action-link-hover", "wg-color-action-link-pressed",
-    "wg-color-action-link-disabled",
-    "wg-color-state-focus", "wg-color-state-pressed",
+    "wg-color-action-link-default", "wg-color-action-link-hover", "wg-color-action-link-pressed", "wg-color-action-link-disabled",
+    "wg-color-state-pressed", "wg-color-state-focus",
     "wg-stroke-width-none", "wg-stroke-width-strong",
     "wg-stroke-style-none", "wg-stroke-style-solid",
     "wg-motion-duration-fast", "wg-motion-ease-standard"
@@ -48,18 +48,20 @@
     }
   },
   "usageHints": [
-    "standalone 用于独立链接（如表单下方的辅助链接）",
-    "inline 用于段落/文本内的行内链接，继承父元素字体",
-    "navigation 用于页面跳转",
-    "command 用于触发操作（如查看详情）",
-    "disabled 通过 disabled 属性或 aria-disabled='true' 控制",
-    "多个链接并排用 .wg-link-group 包裹"
+    "standalone 用于独立放置的链接，有最小触摸区域",
+    "inline 用于文本内嵌链接，display/字体/行高均继承父级",
+    "navigation 用于页面跳转（默认值）",
+    "command 用于触发操作（如编辑、删除、支付）",
+    "多个 standalone 链接用 .wg-link-group 包裹实现横向间距排列",
+    "disabled 使用 aria-disabled=\"true\" 而非 disabled 属性，兼容 a 标签语义"
   ],
   "doNotInvent": [
-    "不要改变链接颜色（只能用 link 系列 token）",
-    "不要给链接加下划线",
-    "不要在 disabled 状态使用 pointer-events: none 以外的禁用方式",
-    "不要自创链接尺寸或强调级别"
+    "不要自创 context 值（只能用 standalone / inline）",
+    "不要修改链接颜色（用 wg-color-action-link-* 系列）",
+    "不要在 visited 伪类覆盖颜色（必须保持与默认一致以保护隐私）",
+    "不要在 inline 模式修改字体样式（必须继承父级 font/line-height）",
+    "不要给 link 加图标（link 仅承载纯文字）",
+    "不要在 standalone 模式修改 min-block-size（用 wg-touch-min）"
   ],
   "provenance": {
     "preview": "preview/component-link.html",

@@ -14,17 +14,17 @@
       "slug": "button",
       "name": "按钮",
       "category": "action",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-button.html",
-      "contract": null
+      "contract": "button.json"
     },
     {
       "slug": "link",
       "name": "链接",
       "category": "action",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-link.html",
-      "contract": null
+      "contract": "link.json"
     },
     {
       "slug": "navbar",
