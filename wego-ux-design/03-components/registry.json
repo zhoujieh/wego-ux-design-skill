@@ -338,6 +338,189 @@
         ]
       },
       "interactionMode": "css"
+    },
+    {
+      "id": "cell",
+      "name": "Cell",
+      "category": "display",
+      "status": "stable",
+      "file": "cell.md",
+      "keywords": [
+        "列表",
+        "cell",
+        "单元格",
+        "列表项",
+        "设置项",
+        "跳转",
+        "开关",
+        "头像列表",
+        "选择列表"
+      ],
+      "decisionAxes": {
+        "variant": [
+          "default",
+          "avatar",
+          "action"
+        ],
+        "action": [
+          "jump",
+          "text",
+          "switch",
+          "button",
+          "custom"
+        ],
+        "divider": [
+          "full",
+          "inset",
+          "none"
+        ],
+        "state": [
+          "default",
+          "pressed",
+          "disabled"
+        ]
+      },
+      "interactionMode": "css+js"
+    },
+    {
+      "id": "form",
+      "name": "Form",
+      "category": "form",
+      "status": "stable",
+      "file": "form.md",
+      "keywords": [
+        "表单",
+        "form",
+        "表单行",
+        "数据录入",
+        "提交",
+        "保存",
+        "输入表单",
+        "金额输入",
+        "手机号输入",
+        "选择表单",
+        "校验",
+        "银行卡",
+        "转账",
+        "编辑"
+      ],
+      "decisionAxes": {
+        "layout": [
+          "horizontal",
+          "vertical"
+        ],
+        "action": [
+          "text",
+          "number",
+          "money",
+          "phone",
+          "select",
+          "custom"
+        ],
+        "rightButton": [
+          "none",
+          "link",
+          "button",
+          "icon-text"
+        ],
+        "state": [
+          "default",
+          "focused",
+          "disabled"
+        ],
+        "error": [
+          "false",
+          "true"
+        ]
+      },
+      "interactionMode": "css+js"
+    },
+    {
+      "id": "tag",
+      "name": "Tag",
+      "category": "display",
+      "status": "stable",
+      "file": "tag.md",
+      "keywords": [
+        "标签",
+        "tag",
+        "标记",
+        "筛选",
+        "分类",
+        "选中",
+        "移除",
+        "添加标签",
+        "身份标签",
+        "商品标签",
+        "历史记录",
+        "信息展示"
+      ],
+      "decisionAxes": {
+        "size": [
+          "32",
+          "28",
+          "24",
+          "20"
+        ],
+        "color": [
+          "grey",
+          "white",
+          "green"
+        ],
+        "icon": [
+          "none",
+          "close",
+          "add",
+          "jump-to",
+          "edit"
+        ],
+        "state": [
+          "default",
+          "selected",
+          "pressed",
+          "focus-visible"
+        ]
+      },
+      "interactionMode": "css+js"
+    },
+    {
+      "id": "loading",
+      "name": "Loading",
+      "category": "feedback",
+      "status": "stable",
+      "file": "loading.md",
+      "keywords": [
+        "加载",
+        "loading",
+        "加载中",
+        "等待",
+        "刷新",
+        "下拉刷新",
+        "页面加载",
+        "模态加载",
+        "局部加载",
+        "骨架屏",
+        "图片占位",
+        "spinner",
+        "skeleton"
+      ],
+      "decisionAxes": {
+        "variant": [
+          "spinner",
+          "modal",
+          "skeleton",
+          "image"
+        ],
+        "size": [
+          "lg",
+          "sm"
+        ],
+        "state": [
+          "visible",
+          "hidden"
+        ]
+      },
+      "interactionMode": "js"
     }
   ]
 }
