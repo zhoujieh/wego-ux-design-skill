@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "slug": "actionsheet",
+  "name": "操作表",
+  "category": "feedback",
+  "variantDimensions": {
+    "mode": {
+      "description": "操作表模式：action 为操作列表（文字居中），select 为单选列表（文字左对齐，带勾选图标）",
+      "values": ["action", "select"],
+      "default": "action"
+    },
+    "header": {
+      "description": "面板顶部 header 类型",
+      "values": ["none", "simple", "with-icon", "with-link"],
+      "default": "none"
+    },
+    "itemType": {
+      "description": "选项行类型：single 为单行（56px），multi 为双行（76px，标题+副标题）",
+      "values": ["single", "multi"],
+      "default": "single"
+    },
+    "state": {
+      "description": "选项交互状态",
+      "values": ["default", "pressed", "disabled", "selected", "focus-visible"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-8", "wg-spacing-12", "wg-spacing-16",
+    "wg-size-16", "wg-size-20", "wg-size-56", "wg-size-64", "wg-size-76",
+    "wg-radius-full", "wg-radius-xl",
+    "wg-font-size-12", "wg-font-size-14", "wg-font-size-16",
+    "wg-font-lineheight-12", "wg-font-lineheight-14", "wg-font-lineheight-16",
+    "wg-font-weight-regular", "wg-font-weight-medium",
+    "wg-color-bg-surface",
+    "wg-color-overlay-modal",
+    "wg-color-text-primary", "wg-color-text-secondary", "wg-color-text-disabled",
+    "wg-color-divider-default",
+    "wg-color-state-pressed", "wg-color-state-focus",
+    "wg-color-base-accent-green-500",
+    "wg-stroke-width-hairline", "wg-stroke-width-strong",
+    "wg-stroke-style-solid",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-zindex-modal"
+  ],
+  "domAnatomy": {
+    "root": ".wg-actionsheet",
+    "modifiers": [],
+    "children": {
+      "overlay": ".wg-actionsheet__overlay",
+      "panel": {
+        "root": ".wg-actionsheet__panel",
+        "modifiers": [
+          ".wg-actionsheet__panel--action",
+          ".wg-actionsheet__panel--select"
+        ]
+      },
+      "header": {
+        "root": ".wg-actionsheet__header",
+        "modifiers": [
+          ".wg-actionsheet__header--with-link"
+        ],
+        "children": {
+          "icon": ".wg-actionsheet__header-icon",
+          "text": ".wg-actionsheet__header-text"
+        }
+      },
+      "list": ".wg-actionsheet__list",
+      "item": {
+        "root": ".wg-actionsheet__item",
+        "modifiers": [
+          ".wg-actionsheet__item--multi"
+        ],
+        "children": {
+          "icon": ".wg-actionsheet__item-icon",
+          "title": ".wg-actionsheet__item-title",
+          "subtitle": ".wg-actionsheet__item-subtitle",
+          "content": ".wg-actionsheet__item-content",
+          "text": ".wg-actionsheet__item-text",
+          "check": ".wg-actionsheet__item-check"
+        }
+      },
+      "separator": ".wg-actionsheet__separator",
+      "cancel": {
+        "root": ".wg-actionsheet__cancel",
+        "children": {
+          "text": ".wg-actionsheet__cancel-text"
+        }
+      },
+      "safeArea": ".wg-actionsheet__safe-area"
+    }
+  },
+  "usageHints": [
+    "action 模式：选项文字居中，适合「拍照/从相册选择」等操作列表",
+    "select 模式：选项左对齐 + 右侧勾选图标，通过 aria-selected='true/false' 控制选中态",
+    "header 为 none 时不渲染 header 元素",
+    "header 为 simple 时仅渲染 .wg-actionsheet__header-text",
+    "header 为 with-icon 时同时渲染 .wg-actionsheet__header-icon + .wg-actionsheet__header-text",
+    "header 为 with-link 时添加 .wg-actionsheet__header--with-link，右侧放置 link 组件",
+    "multi 选项行用于需要展示副标题的场景（如「标准功能 / 所有用户可用」）",
+    "single 选项行高度 56px，multi 为 76px",
+    "separator 用于选项区与取消区之间的 8px 分隔",
+    "cancel 按钮始终在面板底部，含 safe-area 适配 iPhone X 底部",
+    "disabled 选项通过 disabled 属性控制，文字和图标变灰",
+    "实际使用时 .wg-actionsheet 为 position: fixed 全屏，预览中模拟为 position: relative"
+  ],
+  "doNotInvent": [
+    "不要自创 mode（只能用 action/select）",
+    "不要修改选项行高度（single=56px, multi=76px）",
+    "不要去掉 safe-area（底部安全区适配必须保留）",
+    "不要修改 cancel 按钮的文案颜色或布局",
+    "不要给 item 添加额外的背景色（只能用 surface/pressed）",
+    "不要在 select 模式隐藏 check 图标",
+    "不要改变 panel 的圆角（顶部圆角+底部直角是设计规范）"
+  ],
+  "knownIssues": [
+    "wg-actionsheet__safe-area::after 的 inline-size (134px) 与 block-size (5px) 为 iOS Home Indicator 规范约定值，非通用 Token"
+  ],
+  "provenance": {
+    "preview": "preview/component-actionsheet.html",
+    "css": { "file": "components.css", "marker": "Actionsheet" }
+  }
+}

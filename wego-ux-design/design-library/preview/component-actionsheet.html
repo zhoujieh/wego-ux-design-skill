@@ -203,7 +203,7 @@
 
     .wg-actionsheet__separator {
       block-size: var(--wg-spacing-8);
-      background-color: #F8F9FA;
+      background-color: var(--wg-color-bg-subtle);
     }
 
     .wg-actionsheet__cancel {
@@ -234,7 +234,7 @@
     }
 
     .wg-actionsheet__safe-area {
-      block-size: 34px;
+      block-size: env(safe-area-inset-bottom, 34px);
       display: flex;
       align-items: flex-end;
       justify-content: center;

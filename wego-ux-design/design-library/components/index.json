@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 2,
+  "description": "微购设计库组件注册表。列出全部组件的发现信息与 JSON 契约路径。",
+  "components": [
+    {
+      "slug": "actionsheet",
+      "name": "操作表",
+      "category": "feedback",
+      "status": "stable",
+      "preview": "preview/component-actionsheet.html",
+      "contract": "actionsheet.json"
+    },
+    {
+      "slug": "button",
+      "name": "按钮",
+      "category": "action",
+      "status": "optimizing",
+      "preview": "preview/component-button.html",
+      "contract": null
+    },
+    {
+      "slug": "link",
+      "name": "链接",
+      "category": "action",
+      "status": "optimizing",
+      "preview": "preview/component-link.html",
+      "contract": null
+    },
+    {
+      "slug": "navbar",
+      "name": "导航栏",
+      "category": "navigation",
+      "status": "optimizing",
+      "preview": "preview/component-navbar.html",
+      "contract": null
+    },
+    {
+      "slug": "tabs",
+      "name": "标签栏",
+      "category": "navigation",
+      "status": "optimizing",
+      "preview": "preview/component-tabs.html",
+      "contract": null
+    },
+    {
+      "slug": "dialog",
+      "name": "对话框",
+      "category": "feedback",
+      "status": "optimizing",
+      "preview": "preview/component-dialog.html",
+      "contract": null
+    },
+    {
+      "slug": "toast",
+      "name": "轻提示",
+      "category": "feedback",
+      "status": "optimizing",
+      "preview": "preview/component-toast.html",
+      "contract": null
+    },
+    {
+      "slug": "loading",
+      "name": "加载",
+      "category": "feedback",
+      "status": "optimizing",
+      "preview": "preview/component-loading.html",
+      "contract": null
+    },
+    {
+      "slug": "input",
+      "name": "输入框",
+      "category": "form",
+      "status": "optimizing",
+      "preview": "preview/component-input.html",
+      "contract": null
+    },
+    {
+      "slug": "form",
+      "name": "表单",
+      "category": "form",
+      "status": "optimizing",
+      "preview": "preview/component-form.html",
+      "contract": null
+    },
+    {
+      "slug": "tag",
+      "name": "标签",
+      "category": "display",
+      "status": "optimizing",
+      "preview": "preview/component-tag.html",
+      "contract": null
+    },
+    {
+      "slug": "cell",
+      "name": "单元格",
+      "category": "display",
+      "status": "optimizing",
+      "preview": "preview/component-cell.html",
+      "contract": null
+    },
+    {
+      "slug": "result",
+      "name": "结果页",
+      "category": "feedback",
+      "status": "optimizing",
+      "preview": "preview/component-result.html",
+      "contract": null
+    }
+  ]
+}

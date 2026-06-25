@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "slug": "dialog",
+  "name": "对话框",
+  "category": "feedback",
+  "variantDimensions": {
+    "variant": {
+      "description": "对话框内容类型",
+      "values": ["text", "title", "status", "custom"],
+      "default": "title"
+    },
+    "buttons": {
+      "description": "按钮排列方式",
+      "values": ["single", "dual"],
+      "default": "dual"
+    },
+    "tone": {
+      "description": "对话框语气/危险性",
+      "values": ["default", "danger"],
+      "default": "default"
+    },
+    "state": {
+      "description": "显示状态",
+      "values": ["open", "closed"],
+      "default": "open"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-4", "wg-spacing-12", "wg-spacing-16", "wg-spacing-20", "wg-spacing-24",
+    "wg-size-24", "wg-size-48",
+    "wg-radius-xl",
+    "wg-font-size-16", "wg-font-size-18",
+    "wg-font-lineheight-16", "wg-font-lineheight-18",
+    "wg-font-weight-regular", "wg-font-weight-medium",
+    "wg-font-family-text",
+    "wg-color-bg-surface",
+    "wg-color-overlay-modal",
+    "wg-color-text-primary", "wg-color-text-secondary", "wg-color-text-disabled",
+    "wg-color-action-primary-default", "wg-color-action-danger-default",
+    "wg-color-status-success-default", "wg-color-status-danger-default", "wg-color-status-warning-default",
+    "wg-color-divider-default",
+    "wg-color-state-focus",
+    "wg-shadow-xl",
+    "wg-stroke-width-none", "wg-stroke-width-hairline", "wg-stroke-width-strong",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-motion-duration-fast", "wg-motion-duration-normal",
+    "wg-motion-ease-standard", "wg-motion-ease-emphasized",
+    "wg-zindex-modal"
+  ],
+  "domAnatomy": {
+    "root": ".wg-dialog-overlay",
+    "modifiers": [],
+    "children": {
+      "dialog": ".wg-dialog",
+      "content": ".wg-dialog__content",
+      "header": ".wg-dialog__header",
+      "title": ".wg-dialog__title",
+      "icon": ".wg-dialog__icon",
+      "description": ".wg-dialog__description",
+      "custom": ".wg-dialog__custom",
+      "action": ".wg-dialog__action",
+      "buttons": ".wg-dialog__buttons",
+      "button": ".wg-dialog__button"
+    }
+  },
+  "usageHints": [
+    "text 变体：仅描述文本，无标题",
+    "title 变体：标题 + 描述文本",
+    "status 变体：标题 + 图标（success/danger/warning）+ 描述",
+    "custom 变体：标题 + 自定义内容区域",
+    "dual 按钮为取消 + 确认，single 仅一个确认按钮",
+    "danger 确认按钮需加 .wg-dialog__button--danger",
+    "通过 data-state='open'/'closed' 控制显示，closed 时 pointer-events: none",
+    "confirm 按钮用 .wg-dialog__button--confirm，dismiss 用 .wg-dialog__button--dismiss"
+  ],
+  "doNotInvent": [
+    "不要自创对话框尺寸或最大宽度",
+    "不要添加第三个按钮",
+    "不要修改 overlay 的背景色",
+    "不要改变按钮的排列布局",
+    "不要使用 css animation 以外的动画方式"
+  ],
+  "provenance": {
+    "preview": "preview/component-dialog.html",
+    "css": { "file": "components.css", "marker": "Dialog" }
+  }
+}

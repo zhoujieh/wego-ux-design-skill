@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 2,
+  "slug": "navbar",
+  "name": "导航栏",
+  "category": "navigation",
+  "variantDimensions": {
+    "mode": {
+      "description": "导航栏布局模式",
+      "values": ["standard", "title-only", "search"],
+      "default": "standard"
+    },
+    "leftButton": {
+      "description": "左侧按钮类型",
+      "values": ["none", "back", "close", "text"],
+      "default": "back"
+    },
+    "background": {
+      "description": "背景样式",
+      "values": ["default", "transparent", "custom"],
+      "default": "default"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "pressed", "focus-visible"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-4", "wg-spacing-8", "wg-spacing-12", "wg-spacing-16",
+    "wg-size-20", "wg-size-24", "wg-size-32",
+    "wg-touch-default", "wg-touch-min",
+    "wg-radius-sm", "wg-radius-md",
+    "wg-font-size-10", "wg-font-size-14", "wg-font-size-16", "wg-font-size-18",
+    "wg-font-lineheight-10", "wg-font-lineheight-14", "wg-font-lineheight-16", "wg-font-lineheight-18",
+    "wg-font-weight-medium", "wg-font-weight-semibold",
+    "wg-color-bg-page", "wg-color-bg-subtle",
+    "wg-color-text-primary", "wg-color-text-inverse", "wg-color-text-placeholder",
+    "wg-color-action-primary-default", "wg-color-action-primary-hover", "wg-color-action-primary-pressed",
+    "wg-color-state-focus",
+    "wg-stroke-width-none", "wg-stroke-width-hairline", "wg-stroke-width-strong",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-stroke-color-default",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-zindex-sticky"
+  ],
+  "domAnatomy": {
+    "root": ".wg-navbar",
+    "modifiers": [
+      ".wg-navbar--standard",
+      ".wg-navbar--title-only",
+      ".wg-navbar--search",
+      ".wg-navbar--bg-default",
+      ".wg-navbar--bg-transparent",
+      ".wg-navbar--bg-custom",
+      ".wg-navbar--divider"
+    ],
+    "children": {
+      "left": ".wg-navbar__left",
+      "leftBtn": ".wg-navbar__left-btn",
+      "leftIcon": ".wg-navbar__left-icon",
+      "leftText": ".wg-navbar__left-text",
+      "center": ".wg-navbar__center",
+      "title": ".wg-navbar__title",
+      "actions": ".wg-navbar__actions",
+      "action": ".wg-navbar__action",
+      "actionIcon": ".wg-navbar__action-icon",
+      "actionLabel": ".wg-navbar__action-label",
+      "searchBox": ".wg-navbar__search-box",
+      "searchInput": ".wg-navbar__search-input"
+    }
+  },
+  "usageHints": [
+    "standard 模式三列布局（左-中-右），适用于有标题和操作按钮的页面",
+    "title-only 模式标题左对齐、操作按钮在右",
+    "search 模式左侧返回按钮、中间搜索框",
+    "transparent 背景用于沉浸式页面（如商品详情页顶部）",
+    "--divider 修饰符给导航栏底部加分割线",
+    "左侧按钮 back 用返回箭头、close 用关闭图标、text 用文字"
+  ],
+  "doNotInvent": [
+    "不要自创背景色（只能用 default/transparent/custom）",
+    "不要修改导航栏高度（固定 44px via --wg-touch-default）",
+    "不要给导航栏添加第二个标题",
+    "不要改变 action 按钮的布局方向",
+    "不要在 search 模式下隐藏返回按钮"
+  ],
+  "provenance": {
+    "preview": "preview/component-navbar.html",
+    "css": { "file": "components.css", "marker": "Navbar" }
+  }
+}

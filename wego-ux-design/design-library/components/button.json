@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "slug": "button",
+  "name": "按钮",
+  "category": "action",
+  "variantDimensions": {
+    "scope": {
+      "description": "按钮所处的页面位置，决定尺寸与宽度",
+      "values": ["page", "container", "compact"],
+      "default": "page"
+    },
+    "emphasis": {
+      "description": "视觉强调级别",
+      "values": ["strong", "medium", "weak"],
+      "default": "strong"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "hover", "pressed", "focus-visible", "disabled"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-8", "wg-spacing-12", "wg-spacing-16",
+    "wg-size-32", "wg-size-40", "wg-size-48",
+    "wg-touch-min",
+    "wg-radius-sm",
+    "wg-font-size-14", "wg-font-size-16",
+    "wg-font-lineheight-14", "wg-font-lineheight-16",
+    "wg-font-weight-medium",
+    "wg-color-action-primary-default", "wg-color-action-primary-hover", "wg-color-action-primary-pressed",
+    "wg-color-action-secondary-default", "wg-color-action-secondary-hover", "wg-color-action-secondary-pressed",
+    "wg-color-text-primary", "wg-color-text-inverse",
+    "wg-color-state-disabled-bg", "wg-color-state-disabled-text", "wg-color-state-focus",
+    "wg-stroke-width-none", "wg-stroke-width-strong",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-component-button-width-page-single", "wg-component-button-width-page-paired",
+    "wg-component-button-width-compact-max", "wg-component-button-width-container-max"
+  ],
+  "domAnatomy": {
+    "root": ".wg-button",
+    "modifiers": [
+      ".wg-button--page",
+      ".wg-button--container",
+      ".wg-button--compact",
+      ".wg-button--strong",
+      ".wg-button--medium",
+      ".wg-button--weak"
+    ],
+    "children": {
+      "surface": ".wg-button__surface",
+      "label": ".wg-button__label"
+    },
+    "group": {
+      "root": ".wg-button-group",
+      "modifiers": [
+        ".wg-button-group--single",
+        ".wg-button-group--page",
+        ".wg-button-group--container",
+        ".wg-button-group--compact",
+        ".wg-button-group--inline",
+        ".wg-button-group--form"
+      ]
+    }
+  },
+  "usageHints": [
+    "page 级按钮用于页面底部固定操作区",
+    "container 级按钮用于表单/卡片内，flex 自适应宽度",
+    "compact 级按钮用于表格行内或小空间内",
+    "strong 用于主操作（提交/保存/确认）",
+    "medium 用于单按钮强调场景",
+    "weak 用于次要操作（取消/返回）",
+    "多个按钮用 .wg-button-group 包裹实现间距与对齐",
+    "双按钮 inline 排列用 .wg-button-group--page.wg-button-group--inline"
+  ],
+  "doNotInvent": [
+    "不要自创按钮尺寸（只能用 page / container / compact）",
+    "不要给按钮加图标",
+    "不要改变按钮的圆角值",
+    "不要用 inline style 覆盖按钮颜色",
+    "不要修改 .wg-button__surface 内的 padding-inline 值",
+    "不要在 disabled 状态使用其他颜色"
+  ],
+  "provenance": {
+    "preview": "preview/component-button.html",
+    "css": { "file": "components.css", "marker": "Button" }
+  }
+}

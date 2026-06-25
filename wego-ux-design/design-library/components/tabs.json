@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 2,
+  "slug": "tabs",
+  "name": "标签栏",
+  "category": "navigation",
+  "variantDimensions": {
+    "size": {
+      "description": "标签栏尺寸",
+      "values": ["standard", "mini"],
+      "default": "standard"
+    },
+    "layout": {
+      "description": "标签布局方式",
+      "values": ["divide", "scroll"],
+      "default": "divide"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "pressed", "focus-visible"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-8", "wg-spacing-16",
+    "wg-size-48", "wg-size-56",
+    "wg-radius-full",
+    "wg-font-size-14", "wg-font-size-16",
+    "wg-font-lineheight-14", "wg-font-lineheight-16",
+    "wg-font-weight-medium",
+    "wg-color-bg-surface",
+    "wg-color-text-primary", "wg-color-text-secondary",
+    "wg-color-action-primary-default",
+    "wg-color-state-focus",
+    "wg-stroke-width-none", "wg-stroke-width-strong",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-motion-duration-fast", "wg-motion-ease-standard"
+  ],
+  "domAnatomy": {
+    "root": ".wg-tabs",
+    "modifiers": [
+      ".wg-tabs--standard",
+      ".wg-tabs--mini",
+      ".wg-tabs--divide",
+      ".wg-tabs--scroll"
+    ],
+    "children": {
+      "scroll": ".wg-tabs__scroll",
+      "item": ".wg-tabs__item",
+      "label": ".wg-tabs__label",
+      "indicator": ".wg-tabs__indicator"
+    }
+  },
+  "usageHints": [
+    "divide 模式均分容器宽度，适合 2-4 个标签",
+    "scroll 模式横向滚动，适合标签数量较多时",
+    "选中的标签项设置 aria-selected='true'",
+    "standard 尺寸高 56px，mini 尺寸高 48px",
+    "指示条自动在选中标签下方显示"
+  ],
+  "doNotInvent": [
+    "不要自创标签尺寸（只能用 standard/mini）",
+    "不要修改指示条颜色",
+    "不要给标签栏添加背景色（固定白色表面）",
+    "不要自创选中态的 class 名（只能用 aria-selected）",
+    "不要修改指示条的宽度（standard 100%，mini flex）"
+  ],
+  "provenance": {
+    "preview": "preview/component-tabs.html",
+    "css": { "file": "components.css", "marker": "Tabs" }
+  }
+}

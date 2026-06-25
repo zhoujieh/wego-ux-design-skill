@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "slug": "link",
+  "name": "链接",
+  "category": "action",
+  "variantDimensions": {
+    "context": {
+      "description": "链接的上下文环境",
+      "values": ["standalone", "inline"],
+      "default": "standalone"
+    },
+    "behavior": {
+      "description": "点击行为类型",
+      "values": ["navigation", "command"],
+      "default": "navigation"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "hover", "pressed", "focus-visible", "disabled"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-16",
+    "wg-touch-min",
+    "wg-radius-none",
+    "wg-font-size-14", "wg-font-lineheight-14",
+    "wg-font-weight-medium",
+    "wg-color-action-link-default", "wg-color-action-link-hover", "wg-color-action-link-pressed",
+    "wg-color-action-link-disabled",
+    "wg-color-state-focus", "wg-color-state-pressed",
+    "wg-stroke-width-none", "wg-stroke-width-strong",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-motion-duration-fast", "wg-motion-ease-standard"
+  ],
+  "domAnatomy": {
+    "root": ".wg-link",
+    "modifiers": [
+      ".wg-link--standalone",
+      ".wg-link--inline"
+    ],
+    "children": {
+      "surface": ".wg-link__surface",
+      "label": ".wg-link__label"
+    },
+    "group": {
+      "root": ".wg-link-group"
+    }
+  },
+  "usageHints": [
+    "standalone 用于独立链接（如表单下方的辅助链接）",
+    "inline 用于段落/文本内的行内链接，继承父元素字体",
+    "navigation 用于页面跳转",
+    "command 用于触发操作（如查看详情）",
+    "disabled 通过 disabled 属性或 aria-disabled='true' 控制",
+    "多个链接并排用 .wg-link-group 包裹"
+  ],
+  "doNotInvent": [
+    "不要改变链接颜色（只能用 link 系列 token）",
+    "不要给链接加下划线",
+    "不要在 disabled 状态使用 pointer-events: none 以外的禁用方式",
+    "不要自创链接尺寸或强调级别"
+  ],
+  "provenance": {
+    "preview": "preview/component-link.html",
+    "css": { "file": "components.css", "marker": "Link" }
+  }
+}

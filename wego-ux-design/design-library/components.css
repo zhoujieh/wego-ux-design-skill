@@ -68,6 +68,8 @@
     .wg-actionsheet__header:has(.wg-actionsheet__header-icon):not(.wg-actionsheet__header--with-link) {
       justify-content: flex-start;
     }
+
+    .wg-actionsheet__list {
       display: flex;
       flex-direction: column;
       padding: 0;
@@ -139,13 +141,6 @@
       overflow: hidden;
     }
 
-    .wg-actionsheet__item-main {
-      display: flex;
-      align-items: center;
-      gap: var(--wg-spacing-12);
-      overflow: hidden;
-    }
-
     .wg-actionsheet__item-text {
       display: flex;
       flex-direction: column;
@@ -199,7 +194,7 @@
 
     .wg-actionsheet__separator {
       block-size: var(--wg-spacing-8);
-      background-color: #F8F9FA;
+      background-color: var(--wg-color-bg-subtle);
     }
 
     .wg-actionsheet__cancel {
@@ -230,7 +225,7 @@
     }
 
     .wg-actionsheet__safe-area {
-      block-size: 34px;
+      block-size: env(safe-area-inset-bottom, 34px);
       display: flex;
       align-items: flex-end;
       justify-content: center;
