@@ -1,0 +1,236 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Components CSS — 已注册组件的 Canonical CSS
+   命中组件：Input / Button / Toast
+   未命中组件不写入本文件
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Input ── */
+
+.wg-input {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+}
+
+/* 通栏模式 */
+.wg-input--full .wg-input__field {
+  block-size: var(--wg-touch-default);
+  padding-inline: var(--wg-spacing-0);
+  border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+  border-block-end: var(--wg-stroke-width-hairline) var(--wg-stroke-style-solid) var(--wg-color-divider-default);
+  background: transparent;
+}
+
+.wg-input__field {
+  appearance: none;
+  flex: 1 1 0;
+  min-inline-size: 0;
+  block-size: 100%;
+  padding: var(--wg-spacing-0);
+  border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+  background: transparent;
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-16);
+  line-height: var(--wg-font-lineheight-16);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-primary);
+  outline: none;
+}
+
+.wg-input__field::placeholder {
+  color: var(--wg-color-text-placeholder);
+}
+
+/* 焦点状态 */
+.wg-input--full .wg-input__field:focus {
+  border-block-end-color: var(--wg-color-border-focus);
+}
+
+/* 错误状态 */
+.wg-input--error .wg-input__field {
+  border-block-end-color: var(--wg-color-status-danger-border);
+}
+
+.wg-input__error {
+  margin-block-start: var(--wg-spacing-4);
+  font-size: var(--wg-font-size-12);
+  line-height: var(--wg-font-lineheight-12);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-status-danger-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-inline-size: 100%;
+}
+
+/* 禁用状态 */
+.wg-input--disabled .wg-input__field {
+  color: var(--wg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Button ── */
+
+.wg-button-group {
+  display: flex;
+  gap: var(--wg-spacing-8);
+}
+
+.wg-button-group--single,
+.wg-button-group--page {
+  justify-content: center;
+}
+
+.wg-button-group--page:not(.wg-button-group--inline) {
+  flex-direction: column;
+  align-items: center;
+}
+
+.wg-button-group--inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+.wg-button {
+  --button-visual-height: var(--wg-size-40);
+  appearance: none;
+  display: inline-flex;
+  min-inline-size: 0;
+  min-block-size: max(var(--wg-touch-min), var(--button-visual-height));
+  padding: var(--wg-spacing-0);
+  border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wg-button__surface {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: var(--button-visual-height);
+  padding-inline: var(--wg-spacing-16);
+  overflow: hidden;
+  border-radius: var(--wg-radius-sm);
+  font-size: var(--wg-font-size-16);
+  line-height: var(--wg-font-lineheight-16);
+  font-weight: var(--wg-font-weight-medium);
+  transition:
+    color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+    background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+    outline-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+}
+
+.wg-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wg-button--page {
+  --button-visual-height: var(--wg-size-48);
+}
+
+.wg-button--strong .wg-button__surface {
+  background-color: var(--wg-color-action-primary-default);
+  color: var(--wg-color-text-inverse);
+}
+
+.wg-button--weak .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-default);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-button--strong:not(:disabled):hover .wg-button__surface {
+  background-color: var(--wg-color-action-primary-hover);
+}
+
+.wg-button--weak:not(:disabled):hover .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-hover);
+}
+
+.wg-button--strong:not(:disabled):active .wg-button__surface {
+  background-color: var(--wg-color-action-primary-pressed);
+}
+
+.wg-button--weak:not(:disabled):active .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-pressed);
+}
+
+.wg-button:focus-visible {
+  outline: none;
+}
+
+.wg-button:focus-visible .wg-button__surface {
+  outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+  outline-offset: var(--wg-spacing-2);
+}
+
+.wg-button:disabled {
+  cursor: not-allowed;
+}
+
+.wg-button:disabled .wg-button__surface {
+  background-color: var(--wg-color-state-disabled-bg);
+  color: var(--wg-color-state-disabled-text);
+}
+
+/* ── Toast ── */
+
+.wg-toast-container {
+  position: fixed;
+  inset-inline: 0;
+  block-end: calc(var(--wg-spacing-72) + env(safe-area-inset-bottom));
+  z-index: var(--wg-zindex-toast);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transition:
+    opacity var(--wg-motion-duration-normal) var(--wg-motion-ease-standard),
+    transform var(--wg-motion-duration-normal) var(--wg-motion-ease-emphasized);
+}
+
+.wg-toast-container[data-state="hidden"] {
+  opacity: 0;
+  transform: translateY(var(--wg-spacing-16));
+}
+
+.wg-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wg-spacing-8);
+  padding: var(--wg-spacing-12) var(--wg-spacing-16);
+  background-color: var(--wg-color-feedback-toast-bg);
+  border-radius: var(--wg-radius-lg);
+  box-shadow: var(--wg-shadow-md);
+  pointer-events: auto;
+  max-inline-size: 90vw;
+}
+
+.wg-toast__icon {
+  display: inline-block;
+  inline-size: var(--wg-size-20);
+  block-size: var(--wg-size-20);
+  flex-shrink: 0;
+  border-radius: var(--wg-radius-full);
+}
+
+.wg-toast__icon--success {
+  background-color: var(--wg-color-status-success-default);
+}
+
+.wg-toast__icon--error {
+  background-color: var(--wg-color-status-danger-default);
+}
+
+.wg-toast__message {
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-feedback-toast-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-inline-size: 100%;
+}

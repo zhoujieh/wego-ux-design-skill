@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   App CSS — 登录页页面级业务样式
+   所有设计值通过 var(--wg-*) 使用，禁止硬编码
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 全局滚动条隐藏 ── */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 页面容器 ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  block-size: 100vh;
+  block-size: 100dvh;
+  overflow: hidden;
+  background-color: var(--wg-color-bg-surface);
+  margin-inline: auto;
+  padding-inline: var(--wg-layout-page-m3-margin);
+}
+
+/* ── 头部区域 ── */
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block-start: var(--wg-spacing-48);
+  padding-block-end: var(--wg-spacing-32);
+}
+
+.login-header__logo {
+  inline-size: var(--wg-size-48);
+  block-size: var(--wg-size-48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wg-radius-lg);
+  background-color: var(--wg-color-bg-subtle);
+  margin-block-end: var(--wg-spacing-16);
+}
+
+.login-header__logo-icon {
+  font-size: var(--wg-size-28);
+  color: var(--wg-color-action-primary-default);
+}
+
+.login-header__title {
+  font-size: var(--wg-font-size-22);
+  line-height: var(--wg-font-lineheight-22);
+  font-weight: var(--wg-font-weight-semibold);
+  color: var(--wg-color-text-primary);
+}
+
+.login-header__subtitle {
+  margin-block-start: var(--wg-spacing-8);
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-secondary);
+}
+
+/* ── 表单区域 ── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  gap: var(--wg-layout-group-g2-outside);
+}
+
+.login-form__field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-layout-group-g1-outside);
+}
+
+/* ── 验证码行 ── */
+.login-form__code-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--wg-spacing-12);
+}
+
+.login-form__code-row .wg-input {
+  flex: 1 1 0;
+  min-inline-size: 0;
+}
+
+.login-form__code-btn {
+  flex: 0 0 auto;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--wg-touch-default);
+  padding-inline: var(--wg-spacing-12);
+  border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+  background: transparent;
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  font-weight: var(--wg-font-weight-medium);
+  color: var(--wg-color-action-primary-default);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+}
+
+.login-form__code-btn:disabled {
+  color: var(--wg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.login-form__code-btn:not(:disabled):active {
+  opacity: 0.6;
+}
+
+/* ── 提交按钮区域 ── */
+.login-form__submit-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wg-spacing-16);
+  margin-block-start: var(--wg-spacing-16);
+}
+
+.login-form__submit-area .wg-button {
+  inline-size: 100%;
+}
+
+/* ── 协议文案 ── */
+.login-form__agreement {
+  font-size: var(--wg-font-size-12);
+  line-height: var(--wg-font-lineheight-12);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-tertiary);
+  text-align: center;
+}
+
+.login-form__agreement-link {
+  color: var(--wg-color-text-link);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-form__agreement-link:active {
+  opacity: 0.6;
+}
+
+/* ── 成功页面 ── */
+.login-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  block-size: 100vh;
+  block-size: 100dvh;
+  overflow: hidden;
+  background-color: var(--wg-color-bg-surface);
+  margin-inline: auto;
+  padding-inline: var(--wg-layout-page-m3-margin);
+  text-align: center;
+}
+
+.login-success--visible {
+  display: flex;
+}
+
+.login-success__icon {
+  inline-size: var(--wg-size-72);
+  block-size: var(--wg-size-72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wg-radius-full);
+  background-color: var(--wg-color-status-success-default);
+  margin-block-end: var(--wg-spacing-24);
+}
+
+.login-success__icon-inner {
+  font-size: var(--wg-size-40);
+  color: var(--wg-color-text-inverse);
+}
+
+.login-success__title {
+  font-size: var(--wg-font-size-18);
+  line-height: var(--wg-font-lineheight-18);
+  font-weight: var(--wg-font-weight-medium);
+  color: var(--wg-color-text-primary);
+}
+
+.login-success__desc {
+  margin-block-start: var(--wg-spacing-8);
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  color: var(--wg-color-text-secondary);
+}
+
+.login-success__button {
+  margin-block-start: var(--wg-spacing-32);
+  inline-size: var(--wg-component-button-width-page-single);
+}
