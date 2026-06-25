@@ -1,0 +1,38 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Check generated token files
+      run: |
+        cd wego-ux-design
+        python scripts/generate_tokens.py --check
+    
+    - name: Validate tokens
+      run: |
+        cd wego-ux-design
+        python scripts/validate_tokens.py
+    
+    - name: Validate skill routing
+      run: |
+        cd wego-ux-design
+        python scripts/validate_skill.py
+    
+    - name: Validate generated projects
+      run: |
+        python scripts/validate_generated_projects.py

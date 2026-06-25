@@ -1,0 +1,153 @@
+/* Button — Canonical CSS 逐字复制自 03-components/button.md */
+
+.wg-button-group {
+  display: flex;
+  gap: var(--wg-spacing-8);
+}
+
+.wg-button-group--single,
+.wg-button-group--page {
+  justify-content: center;
+}
+
+.wg-button-group--page:not(.wg-button-group--inline) {
+  flex-direction: column;
+  align-items: center;
+}
+
+.wg-button-group--inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+.wg-button-group--container {
+  inline-size: 100%;
+  max-inline-size: var(--wg-component-button-width-container-max);
+}
+
+.wg-button-group--compact {
+  inline-size: fit-content;
+}
+
+.wg-button {
+  --button-visual-height: var(--wg-size-40);
+  appearance: none;
+  display: inline-flex;
+  min-inline-size: 0;
+  min-block-size: max(var(--wg-touch-min), var(--button-visual-height));
+  padding: var(--wg-spacing-0);
+  border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wg-button__surface {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: var(--button-visual-height);
+  padding-inline: var(--wg-spacing-16);
+  overflow: hidden;
+  border-radius: var(--wg-radius-sm);
+  font-size: var(--wg-font-size-16);
+  line-height: var(--wg-font-lineheight-16);
+  font-weight: var(--wg-font-weight-medium);
+  transition:
+    color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+    background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+    outline-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+}
+
+.wg-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wg-button--page {
+  --button-visual-height: var(--wg-size-48);
+  inline-size: var(--wg-component-button-width-page-single);
+}
+
+.wg-button-group--page.wg-button-group--inline .wg-button {
+  inline-size: var(--wg-component-button-width-page-paired);
+}
+
+.wg-button--container {
+  --button-visual-height: var(--wg-size-40);
+  flex: 1 1 0;
+  inline-size: 100%;
+}
+
+.wg-button--compact {
+  --button-visual-height: var(--wg-size-32);
+  inline-size: fit-content;
+  max-inline-size: var(--wg-component-button-width-compact-max);
+}
+
+.wg-button-group--form {
+  inline-size: 100%;
+}
+
+.wg-button-group--form .wg-button {
+  inline-size: 100%;
+}
+
+.wg-button--compact .wg-button__surface {
+  padding-inline: var(--wg-spacing-12);
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+}
+
+.wg-button--strong .wg-button__surface {
+  background-color: var(--wg-color-action-primary-default);
+  color: var(--wg-color-text-inverse);
+}
+
+.wg-button--medium .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-default);
+  color: var(--wg-color-action-primary-default);
+}
+
+.wg-button--weak .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-default);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-button--strong:not(:disabled):hover .wg-button__surface {
+  background-color: var(--wg-color-action-primary-hover);
+}
+
+.wg-button--medium:not(:disabled):hover .wg-button__surface,
+.wg-button--weak:not(:disabled):hover .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-hover);
+}
+
+.wg-button--strong:not(:disabled):active .wg-button__surface {
+  background-color: var(--wg-color-action-primary-pressed);
+}
+
+.wg-button--medium:not(:disabled):active .wg-button__surface,
+.wg-button--weak:not(:disabled):active .wg-button__surface {
+  background-color: var(--wg-color-action-secondary-pressed);
+}
+
+.wg-button:focus-visible {
+  outline: none;
+}
+
+.wg-button:focus-visible .wg-button__surface {
+  outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+  outline-offset: var(--wg-spacing-2);
+}
+
+.wg-button:disabled {
+  cursor: not-allowed;
+}
+
+.wg-button:disabled .wg-button__surface {
+  background-color: var(--wg-color-state-disabled-bg);
+  color: var(--wg-color-state-disabled-text);
+}
