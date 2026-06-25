@@ -32,7 +32,6 @@
       flex-direction: column;
       background-color: var(--wg-color-bg-surface);
       border-radius: var(--wg-radius-xl) var(--wg-radius-xl) 0 0;
-      padding-top: var(--wg-spacing-4);
       max-block-size: 70vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
@@ -43,7 +42,19 @@
       align-items: center;
       justify-content: center;
       gap: var(--wg-spacing-8);
-      padding: var(--wg-spacing-12) var(--wg-spacing-16);
+      block-size: var(--wg-size-64);
+      padding: 0 var(--wg-spacing-16);
+      position: relative;
+    }
+
+    .wg-actionsheet__header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      block-size: var(--wg-stroke-width-hairline);
+      background-color: var(--wg-color-divider-default);
     }
 
     .wg-actionsheet__header-icon {
@@ -63,35 +74,24 @@
       justify-content: space-between;
     }
 
-    .wg-actionsheet__header-link {
-      appearance: none;
-      border: none;
-      background: transparent;
-      padding: 0;
-      font-size: var(--wg-font-size-14);
-      line-height: var(--wg-font-lineheight-14);
-      font-weight: var(--wg-font-weight-regular);
-      color: var(--wg-color-text-link);
-      cursor: pointer;
-      white-space: nowrap;
+    .wg-actionsheet__header:has(.wg-actionsheet__header-icon):not(.wg-actionsheet__header--with-link) {
+      justify-content: flex-start;
     }
 
     .wg-actionsheet__list {
       display: flex;
       flex-direction: column;
-      padding: var(--wg-spacing-8) var(--wg-spacing-12);
+      padding: 0;
     }
 
     .wg-actionsheet__item {
       appearance: none;
       display: flex;
       align-items: center;
-      gap: var(--wg-spacing-8);
       block-size: var(--wg-size-56);
-      padding-inline: var(--wg-spacing-12);
+      padding-inline: var(--wg-spacing-16);
       border: none;
       background-color: var(--wg-color-bg-surface);
-      border-radius: var(--wg-radius-md);
       cursor: pointer;
       position: relative;
       transition:
@@ -106,8 +106,13 @@
       justify-content: flex-start;
     }
 
+    .wg-actionsheet__item:has(.wg-actionsheet__item-icon) {
+      justify-content: flex-start;
+    }
+
     .wg-actionsheet__item-icon {
-      font-size: var(--wg-size-24);
+      font-size: var(--wg-size-20);
+      line-height: 24px;
       color: var(--wg-color-text-primary);
       flex-shrink: 0;
     }
@@ -126,12 +131,49 @@
       font-weight: var(--wg-font-weight-medium);
     }
 
+    .wg-actionsheet__item--multi {
+      block-size: var(--wg-size-76);
+    }
+
+    .wg-actionsheet__item--multi:has(.wg-actionsheet__item-icon) {
+      justify-content: flex-start;
+    }
+
+    .wg-actionsheet__item--multi .wg-actionsheet__item-content {
+      align-items: flex-start;
+    }
+
+    .wg-actionsheet__item-content {
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+      overflow: hidden;
+    }
+
+    .wg-actionsheet__item-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--wg-spacing-2);
+      overflow: hidden;
+    }
+
+    .wg-actionsheet__item-subtitle {
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-regular);
+      color: var(--wg-color-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .wg-actionsheet__item + .wg-actionsheet__item::after {
       content: "";
       position: absolute;
       top: 0;
-      left: var(--wg-spacing-12);
-      right: var(--wg-spacing-12);
+      left: 0;
+      right: 0;
       block-size: var(--wg-stroke-width-hairline);
       background-color: var(--wg-color-divider-default);
     }
@@ -140,39 +182,36 @@
       display: none;
       margin-inline-start: auto;
       flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item-check {
-      display: block;
-      inline-size: var(--wg-size-20);
-      block-size: var(--wg-size-20);
+      display: inline-flex;
+      font-size: var(--wg-size-20);
+      color: var(--wg-color-base-accent-green-500);
+      line-height: 1;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item[aria-selected="true"] .wg-actionsheet__item-check {
-      background-color: var(--wg-color-base-accent-green-500);
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
+      visibility: visible;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item[aria-selected="false"] .wg-actionsheet__item-check {
-      background-color: transparent;
+      visibility: hidden;
     }
 
     .wg-actionsheet__separator {
       block-size: var(--wg-spacing-8);
-      background-color: var(--wg-color-bg-page);
+      background-color: #F8F9FA;
     }
 
     .wg-actionsheet__cancel {
       appearance: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      block-size: var(--wg-size-56);
       padding-inline: var(--wg-spacing-12);
       border: none;
       background-color: var(--wg-color-bg-surface);
@@ -182,6 +221,10 @@
     }
 
     .wg-actionsheet__cancel-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      block-size: var(--wg-size-56);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
       font-weight: var(--wg-font-weight-regular);
@@ -192,7 +235,6 @@
 
     .wg-actionsheet__safe-area {
       block-size: 34px;
-      background-color: var(--wg-color-bg-surface);
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -246,11 +288,6 @@
       outline-offset: var(--wg-spacing-2);
     }
 
-    .wg-actionsheet__header-link:focus-visible {
-      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
-      outline-offset: var(--wg-spacing-2);
-    }
-
     /* @component-css-end */
 
     /* ── 预览页专用样式 ── */
@@ -291,6 +328,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      padding-top: var(--wg-spacing-24);
       border-radius: var(--wg-radius-md);
       overflow: hidden;
     }
@@ -315,22 +353,19 @@
   <h2 class="wg-h2">action 模式 — 操作列表</h2>
 
   <div class="variant-card">
-    <h3>无 header · 3 个操作项 + 取消</h3>
+    <h3>无图标 · 3 个纯文本操作项（居中）</h3>
     <div class="demo-actionsheet">
       <div class="wg-actionsheet__overlay"></div>
       <div class="wg-actionsheet__panel wg-actionsheet__panel--action">
         <div class="wg-actionsheet__list" role="listbox">
           <button class="wg-actionsheet__item" role="option" tabindex="0">
-            <i class="wego-iconfont-s icon-xiangji wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">拍照</span>
+            <span class="wg-actionsheet__item-title">分享给好友</span>
           </button>
           <button class="wg-actionsheet__item" role="option">
-            <i class="wego-iconfont-s icon-tupian wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">从手机相册选择</span>
+            <span class="wg-actionsheet__item-title">复制链接</span>
           </button>
           <button class="wg-actionsheet__item" role="option">
-            <i class="wego-iconfont-s icon-mulu wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">从文件选择</span>
+            <span class="wg-actionsheet__item-title">收藏</span>
           </button>
         </div>
 
@@ -338,9 +373,74 @@
 
         <button class="wg-actionsheet__cancel" type="button">
           <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
         </button>
+      </div>
+    </div>
+  </div>
 
-        <div class="wg-actionsheet__safe-area"></div>
+  <div class="variant-card">
+    <h3>双行文本 · 无图标 + 副标题</h3>
+    <div class="demo-actionsheet">
+      <div class="wg-actionsheet__overlay"></div>
+      <div class="wg-actionsheet__panel wg-actionsheet__panel--action">
+        <div class="wg-actionsheet__list" role="listbox">
+          <button class="wg-actionsheet__item wg-actionsheet__item--multi" role="option" tabindex="0">
+            <div class="wg-actionsheet__item-text">
+              <span class="wg-actionsheet__item-title">标准功能</span>
+              <span class="wg-actionsheet__item-subtitle">所有用户可用</span>
+            </div>
+          </button>
+          <button class="wg-actionsheet__item wg-actionsheet__item--multi" role="option">
+            <div class="wg-actionsheet__item-text">
+              <span class="wg-actionsheet__item-title">高级功能</span>
+              <span class="wg-actionsheet__item-subtitle">需要 VIP 权限</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="wg-actionsheet__separator"></div>
+
+        <button class="wg-actionsheet__cancel" type="button">
+          <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>无 header · 3 个操作项 + 取消</h3>
+    <div class="demo-actionsheet">
+      <div class="wg-actionsheet__overlay"></div>
+      <div class="wg-actionsheet__panel wg-actionsheet__panel--action">
+        <div class="wg-actionsheet__list" role="listbox">
+          <button class="wg-actionsheet__item" role="option" tabindex="0">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-xiangji wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">拍照</span>
+            </div>
+          </button>
+          <button class="wg-actionsheet__item" role="option">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-tupian wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">从手机相册选择</span>
+            </div>
+          </button>
+          <button class="wg-actionsheet__item" role="option">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-mulu wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">从文件选择</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="wg-actionsheet__separator"></div>
+
+        <button class="wg-actionsheet__cancel" type="button">
+          <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
+        </button>
       </div>
     </div>
   </div>
@@ -352,16 +452,22 @@
       <div class="wg-actionsheet__panel wg-actionsheet__panel--action">
         <div class="wg-actionsheet__list" role="listbox">
           <button class="wg-actionsheet__item" role="option" tabindex="0">
-            <i class="wego-iconfont-s icon-bianji wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">编辑</span>
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-bianji wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">编辑</span>
+            </div>
           </button>
           <button class="wg-actionsheet__item" role="option" disabled>
-            <i class="wego-iconfont-s icon-fuzhi-mian wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">复制（不可用）</span>
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-fuzhi-mian wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">复制（不可用）</span>
+            </div>
           </button>
           <button class="wg-actionsheet__item" role="option">
-            <i class="wego-iconfont-s icon-shanchu wg-actionsheet__item-icon"></i>
-            <span class="wg-actionsheet__item-title">删除</span>
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-shanchu wg-actionsheet__item-icon"></i>
+              <span class="wg-actionsheet__item-title">删除</span>
+            </div>
           </button>
         </div>
 
@@ -369,9 +475,53 @@
 
         <button class="wg-actionsheet__cancel" type="button">
           <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
         </button>
+      </div>
+    </div>
+  </div>
 
-        <div class="wg-actionsheet__safe-area"></div>
+  <div class="variant-card">
+    <h3>双行文本 · 带图标 + 副标题</h3>
+    <div class="demo-actionsheet">
+      <div class="wg-actionsheet__overlay"></div>
+      <div class="wg-actionsheet__panel wg-actionsheet__panel--action">
+        <div class="wg-actionsheet__list" role="listbox">
+          <button class="wg-actionsheet__item wg-actionsheet__item--multi" role="option" tabindex="0">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-zhibo wg-actionsheet__item-icon"></i>
+              <div class="wg-actionsheet__item-text">
+                <span class="wg-actionsheet__item-title">直播</span>
+                <span class="wg-actionsheet__item-subtitle">开启直播间</span>
+              </div>
+            </div>
+          </button>
+          <button class="wg-actionsheet__item wg-actionsheet__item--multi" role="option">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-xiaoxi1 wg-actionsheet__item-icon"></i>
+              <div class="wg-actionsheet__item-text">
+                <span class="wg-actionsheet__item-title">消息通知</span>
+                <span class="wg-actionsheet__item-subtitle">5 条新消息</span>
+              </div>
+            </div>
+          </button>
+          <button class="wg-actionsheet__item wg-actionsheet__item--multi" role="option">
+            <div class="wg-actionsheet__item-content">
+              <i class="wego-iconfont-s icon-dingdan wg-actionsheet__item-icon"></i>
+              <div class="wg-actionsheet__item-text">
+                <span class="wg-actionsheet__item-title">我的订单</span>
+                <span class="wg-actionsheet__item-subtitle">查看物流信息</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div class="wg-actionsheet__separator"></div>
+
+        <button class="wg-actionsheet__cancel" type="button">
+          <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
+        </button>
       </div>
     </div>
   </div>
@@ -393,15 +543,15 @@
         <div class="wg-actionsheet__list" role="listbox">
           <button class="wg-actionsheet__item" role="option" aria-selected="true" tabindex="0">
             <span class="wg-actionsheet__item-title">综合排序</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
           <button class="wg-actionsheet__item" role="option" aria-selected="false">
             <span class="wg-actionsheet__item-title">价格从低到高</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
           <button class="wg-actionsheet__item" role="option" aria-selected="false">
             <span class="wg-actionsheet__item-title">价格从高到低</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
         </div>
 
@@ -409,9 +559,8 @@
 
         <button class="wg-actionsheet__cancel" type="button">
           <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
         </button>
-
-        <div class="wg-actionsheet__safe-area"></div>
       </div>
     </div>
   </div>
@@ -423,21 +572,25 @@
       <div class="wg-actionsheet__panel wg-actionsheet__panel--select">
         <div class="wg-actionsheet__header wg-actionsheet__header--with-link">
           <span class="wg-actionsheet__header-text">选择分类</span>
-          <button class="wg-actionsheet__header-link" type="button">管理</button>
+          <button class="wg-link wg-link--standalone" type="button">
+            <span class="wg-link__surface">
+              <span class="wg-link__label">管理</span>
+            </span>
+          </button>
         </div>
 
         <div class="wg-actionsheet__list" role="listbox">
           <button class="wg-actionsheet__item" role="option" aria-selected="true" tabindex="0">
             <span class="wg-actionsheet__item-title">全部商品</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
           <button class="wg-actionsheet__item" role="option" aria-selected="false">
             <span class="wg-actionsheet__item-title">服饰鞋包</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
           <button class="wg-actionsheet__item" role="option" aria-selected="false">
             <span class="wg-actionsheet__item-title">数码家电</span>
-            <span class="wg-actionsheet__item-check"></span>
+            <i class="wego-iconfont-s icon-gou-jiacu wg-actionsheet__item-check"></i>
           </button>
         </div>
 
@@ -445,9 +598,8 @@
 
         <button class="wg-actionsheet__cancel" type="button">
           <span class="wg-actionsheet__cancel-text">取消</span>
+          <div class="wg-actionsheet__safe-area"></div>
         </button>
-
-        <div class="wg-actionsheet__safe-area"></div>
       </div>
     </div>
   </div>
@@ -466,6 +618,26 @@
     </ul>
   </div>
 </section>
+
+<script>
+(function() {
+  var selectPanels = document.querySelectorAll('.wg-actionsheet__panel--select');
+  selectPanels.forEach(function(panel) {
+    var items = panel.querySelectorAll('.wg-actionsheet__item');
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        if (this.hasAttribute('disabled')) return;
+        items.forEach(function(sibling) {
+          sibling.setAttribute('aria-selected', 'false');
+          sibling.tabIndex = -1;
+        });
+        this.setAttribute('aria-selected', 'true');
+        this.tabIndex = 0;
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

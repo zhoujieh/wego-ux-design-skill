@@ -23,7 +23,6 @@
       flex-direction: column;
       background-color: var(--wg-color-bg-surface);
       border-radius: var(--wg-radius-xl) var(--wg-radius-xl) 0 0;
-      padding-top: var(--wg-spacing-4);
       max-block-size: 70vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
@@ -34,7 +33,19 @@
       align-items: center;
       justify-content: center;
       gap: var(--wg-spacing-8);
-      padding: var(--wg-spacing-12) var(--wg-spacing-16);
+      block-size: var(--wg-size-64);
+      padding: 0 var(--wg-spacing-16);
+      position: relative;
+    }
+
+    .wg-actionsheet__header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      block-size: var(--wg-stroke-width-hairline);
+      background-color: var(--wg-color-divider-default);
     }
 
     .wg-actionsheet__header-icon {
@@ -54,35 +65,22 @@
       justify-content: space-between;
     }
 
-    .wg-actionsheet__header-link {
-      appearance: none;
-      border: none;
-      background: transparent;
-      padding: 0;
-      font-size: var(--wg-font-size-14);
-      line-height: var(--wg-font-lineheight-14);
-      font-weight: var(--wg-font-weight-regular);
-      color: var(--wg-color-text-link);
-      cursor: pointer;
-      white-space: nowrap;
+    .wg-actionsheet__header:has(.wg-actionsheet__header-icon):not(.wg-actionsheet__header--with-link) {
+      justify-content: flex-start;
     }
-
-    .wg-actionsheet__list {
       display: flex;
       flex-direction: column;
-      padding: var(--wg-spacing-8) var(--wg-spacing-12);
+      padding: 0;
     }
 
     .wg-actionsheet__item {
       appearance: none;
       display: flex;
       align-items: center;
-      gap: var(--wg-spacing-8);
       block-size: var(--wg-size-56);
-      padding-inline: var(--wg-spacing-12);
+      padding-inline: var(--wg-spacing-16);
       border: none;
       background-color: var(--wg-color-bg-surface);
-      border-radius: var(--wg-radius-md);
       cursor: pointer;
       position: relative;
       transition:
@@ -97,8 +95,13 @@
       justify-content: flex-start;
     }
 
+    .wg-actionsheet__item:has(.wg-actionsheet__item-icon) {
+      justify-content: flex-start;
+    }
+
     .wg-actionsheet__item-icon {
-      font-size: var(--wg-size-24);
+      font-size: var(--wg-size-20);
+      line-height: 24px;
       color: var(--wg-color-text-primary);
       flex-shrink: 0;
     }
@@ -117,12 +120,56 @@
       font-weight: var(--wg-font-weight-medium);
     }
 
+    .wg-actionsheet__item--multi {
+      block-size: var(--wg-size-76);
+    }
+
+    .wg-actionsheet__item--multi:has(.wg-actionsheet__item-icon) {
+      justify-content: flex-start;
+    }
+
+    .wg-actionsheet__item--multi .wg-actionsheet__item-content {
+      align-items: flex-start;
+    }
+
+    .wg-actionsheet__item-content {
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+      overflow: hidden;
+    }
+
+    .wg-actionsheet__item-main {
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+      overflow: hidden;
+    }
+
+    .wg-actionsheet__item-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--wg-spacing-2);
+      overflow: hidden;
+    }
+
+    .wg-actionsheet__item-subtitle {
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-regular);
+      color: var(--wg-color-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .wg-actionsheet__item + .wg-actionsheet__item::after {
       content: "";
       position: absolute;
       top: 0;
-      left: var(--wg-spacing-12);
-      right: var(--wg-spacing-12);
+      left: 0;
+      right: 0;
       block-size: var(--wg-stroke-width-hairline);
       background-color: var(--wg-color-divider-default);
     }
@@ -131,39 +178,36 @@
       display: none;
       margin-inline-start: auto;
       flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item-check {
-      display: block;
-      inline-size: var(--wg-size-20);
-      block-size: var(--wg-size-20);
+      display: inline-flex;
+      font-size: var(--wg-size-20);
+      color: var(--wg-color-base-accent-green-500);
+      line-height: 1;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item[aria-selected="true"] .wg-actionsheet__item-check {
-      background-color: var(--wg-color-base-accent-green-500);
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
+      visibility: visible;
     }
 
     .wg-actionsheet__panel--select .wg-actionsheet__item[aria-selected="false"] .wg-actionsheet__item-check {
-      background-color: transparent;
+      visibility: hidden;
     }
 
     .wg-actionsheet__separator {
       block-size: var(--wg-spacing-8);
-      background-color: var(--wg-color-bg-page);
+      background-color: #F8F9FA;
     }
 
     .wg-actionsheet__cancel {
       appearance: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      block-size: var(--wg-size-56);
       padding-inline: var(--wg-spacing-12);
       border: none;
       background-color: var(--wg-color-bg-surface);
@@ -173,6 +217,10 @@
     }
 
     .wg-actionsheet__cancel-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      block-size: var(--wg-size-56);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
       font-weight: var(--wg-font-weight-regular);
@@ -183,7 +231,6 @@
 
     .wg-actionsheet__safe-area {
       block-size: 34px;
-      background-color: var(--wg-color-bg-surface);
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -233,11 +280,6 @@
     }
 
     .wg-actionsheet__cancel:focus-visible .wg-actionsheet__cancel-text {
-      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
-      outline-offset: var(--wg-spacing-2);
-    }
-
-    .wg-actionsheet__header-link:focus-visible {
       outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
       outline-offset: var(--wg-spacing-2);
     }
