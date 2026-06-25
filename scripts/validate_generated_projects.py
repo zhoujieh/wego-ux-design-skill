@@ -11,6 +11,7 @@ Checks:
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -277,7 +278,21 @@ def validate_project(project_dir: Path) -> list[str]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Validate generated prototype projects under tests/fixtures/generated/."
+    )
+    parser.add_argument(
+        "--require-fixtures",
+        action="store_true",
+        help="Fail if no generated projects are found (for CI gate).",
+    )
+    args = parser.parse_args()
+
     if not FIXTURES_DIR.exists():
+        if args.require_fixtures:
+            print(f"Error: Fixtures directory not found: {FIXTURES_DIR}")
+            print("No generated projects to validate (--require-fixtures enabled).")
+            return 1
         print(f"Fixtures directory not found: {FIXTURES_DIR}")
         print("No projects to validate.")
         return 0
@@ -289,6 +304,10 @@ def main() -> int:
     ]
 
     if not project_dirs:
+        if args.require_fixtures:
+            print("Error: No generated projects found in tests/fixtures/generated/")
+            print("At least one fixture is required (--require-fixtures enabled).")
+            return 1
         print("No generated projects found in tests/fixtures/generated/")
         print("Skipping validation.")
         return 0

@@ -35,4 +35,4 @@ jobs:
     
     - name: Validate generated projects
       run: |
-        python scripts/validate_generated_projects.py
+        python scripts/validate_generated_projects.py --require-fixtures
