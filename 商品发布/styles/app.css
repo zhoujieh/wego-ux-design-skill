@@ -1,0 +1,182 @@
+/* ============================================
+   商品发布页 — 页面级业务样式
+   ============================================ */
+
+/* ── 全局滚动条隐藏 ── */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 白底页面皮肤 ── */
+.page-surface {
+  background-color: var(--wg-color-bg-surface);
+}
+
+.page-surface .wg-navbar--bg-default {
+  background-color: var(--wg-color-bg-surface);
+}
+
+/* ── 页面容器 ── */
+.page-content {
+  block-size: 100dvh;
+  overflow-y: auto;
+  padding-block-end: calc(var(--wg-touch-comfortable) + var(--wg-spacing-16) + env(safe-area-inset-bottom));
+}
+
+/* ── 分组标题 ── */
+.section-header {
+  padding-inline: var(--wg-spacing-16);
+  padding-block-start: var(--wg-spacing-24);
+  padding-block-end: var(--wg-spacing-8);
+}
+
+.section-header__title {
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-secondary);
+}
+
+/* ── 底部操作栏 ── */
+.page-footer {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: var(--wg-zindex-sticky);
+  padding: var(--wg-spacing-12) var(--wg-spacing-16);
+  padding-block-end: calc(var(--wg-spacing-12) + env(safe-area-inset-bottom));
+  background-color: var(--wg-color-bg-surface);
+}
+
+.page-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  block-size: var(--wg-stroke-width-hairline);
+  background-color: var(--wg-color-divider-default);
+}
+
+/* ── 底部间距占位 ── */
+.bottom-spacer {
+  block-size: var(--wg-spacing-40);
+}
+
+/* ── 图片上传区域 ── */
+.image-upload-area {
+  inline-size: 100%;
+}
+
+.image-upload__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wg-spacing-8);
+}
+
+.image-upload__add {
+  appearance: none;
+  inline-size: var(--wg-size-72);
+  block-size: var(--wg-size-72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--wg-stroke-width-default) var(--wg-stroke-style-dashed) var(--wg-color-border-default);
+  border-radius: var(--wg-radius-sm);
+  background-color: var(--wg-color-bg-subtle);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+}
+
+.image-upload__add:active {
+  background-color: var(--wg-color-state-pressed);
+}
+
+.image-upload__add-icon {
+  font-size: var(--wg-size-24);
+  color: var(--wg-color-text-tertiary);
+}
+
+/* 图片缩略图 */
+.image-upload__item {
+  position: relative;
+  inline-size: var(--wg-size-72);
+  block-size: var(--wg-size-72);
+  border-radius: var(--wg-radius-sm);
+  overflow: hidden;
+}
+
+.image-upload__item img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.image-upload__remove {
+  position: absolute;
+  top: var(--wg-spacing-4);
+  right: var(--wg-spacing-4);
+  appearance: none;
+  inline-size: var(--wg-size-20);
+  block-size: var(--wg-size-20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--wg-radius-full);
+  background-color: var(--wg-color-overlay-modal);
+  color: var(--wg-color-text-inverse);
+  cursor: pointer;
+  padding: 0;
+  font-size: var(--wg-font-size-12);
+  line-height: 1;
+}
+
+/* 超过9张隐藏添加按钮 */
+.image-upload__add--hidden {
+  display: none;
+}
+
+/* ── Tags wrapper 在 Form 的 action 内 ── */
+.wg-form__action .wg-tag-group {
+  justify-content: flex-end;
+  inline-size: 100%;
+}
+
+/* ── NavBar 分割线 ── */
+.wg-navbar--divider {
+  position: relative;
+}
+
+.wg-navbar--divider::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  block-size: var(--wg-stroke-width-hairline);
+  background-color: var(--wg-stroke-color-default);
+}
+
+/* ── Toast icon 隐藏默认 ── */
+.wg-toast__icon {
+  display: none;
+}
+
+.wg-toast__icon--show {
+  display: inline-block;
+}
+
+/* ── 适配安全区 ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .page-footer {
+    padding-block-end: calc(var(--wg-spacing-12) + env(safe-area-inset-bottom));
+  }
+}

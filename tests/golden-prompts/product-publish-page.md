@@ -10,7 +10,8 @@
 表单型
 
 ## 必须命中的组件
-- Input
+- Cell
+- Form
 - Button
 - Toast
 - Dialog（草稿保存确认）
