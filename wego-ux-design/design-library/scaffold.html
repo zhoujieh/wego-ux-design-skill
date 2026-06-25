@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微购设计库 — 骨架测试页</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="scaffold.css">
+  <style>
+    .demo-section {
+      margin-bottom: var(--wg-spacing-32);
+    }
+    .demo-section h2 {
+      margin-bottom: var(--wg-spacing-16);
+      padding-bottom: var(--wg-spacing-8);
+      border-bottom: 1px solid var(--wg-color-divider-default);
+    }
+    .demo-card {
+      background: var(--wg-color-bg-surface);
+      border-radius: var(--wg-radius-md);
+      padding: var(--wg-spacing-16);
+    }
+  </style>
+</head>
+<body>
+
+<div class="wg-page-container" style="padding: var(--wg-spacing-24);">
+
+  <!-- 排版测试 -->
+  <section class="demo-section">
+    <h2 class="wg-h2">排版层级</h2>
+    <div class="demo-card wg-stack-12">
+      <h1 class="wg-h1">一级标题 H1 — 页面级大标题</h1>
+      <h2 class="wg-h2">二级标题 H2 — 区块标题</h2>
+      <h3 class="wg-h3">三级标题 H3 — 子区块标题</h3>
+      <p class="wg-eyebrow">EYEBROW 标签文字</p>
+      <p class="wg-text-body">正文内容 — 默认 14px，用于段落和一般信息展示。微购风格简洁干净淡雅克制。</p>
+      <p class="wg-text-body-sm">辅助正文 — 12px 次要说明文字。</p>
+      <p class="wg-text-secondary">二级文字颜色 — 辅助信息</p>
+      <p class="wg-text-tertiary">三级文字颜色 — 弱辅助说明</p>
+      <a href="#" class="wg-text-link">链接文字样式</a>
+      <p class="wg-text-danger">危险/错误文字</p>
+      <span class="wg-text-number" style="font-size: var(--wg-font-number-nf24);">¥128.00</span>
+    </div>
+  </section>
+
+  <!-- 布局测试 -->
+  <section class="demo-section">
+    <h2 class="wg-h2">布局工具类</h2>
+
+    <div class="demo-card wg-stack-16">
+      <h3 class="wg-h3">Flex Row</h3>
+      <div class="wg-row" style="gap: var(--wg-spacing-8);">
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-8) var(--wg-spacing-16); border-radius: var(--wg-radius-sm);">项 1</div>
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-8) var(--wg-spacing-16); border-radius: var(--wg-radius-sm);">项 2</div>
+        <div class="wg-flex-1" style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-8) var(--wg-spacing-16); border-radius: var(--wg-radius-sm);">flex-1 填充</div>
+      </div>
+
+      <h3 class="wg-h3">wg-flex-between</h3>
+      <div class="wg-flex-between" style="background: var(--wg-color-bg-subtle); padding: var(--wg-spacing-12) var(--wg-spacing-16); border-radius: var(--wg-radius-sm);">
+        <span>左</span>
+        <span>右</span>
+      </div>
+
+      <h3 class="wg-h3">Stack 垂直堆叠</h3>
+      <div class="wg-stack-8">
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-8); border-radius: var(--wg-radius-xs);">stack-8 间距</div>
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-8); border-radius: var(--wg-radius-xs);">stack-8 间距</div>
+      </div>
+
+      <h3 class="wg-h3">Grid 网格</h3>
+      <div class="wg-grid-3">
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-12); text-align: center; border-radius: var(--wg-radius-sm);">3列</div>
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-12); text-align: center; border-radius: var(--wg-radius-sm);">3列</div>
+        <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-12); text-align: center; border-radius: var(--wg-radius-sm);">3列</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 表面容器测试 -->
+  <section class="demo-section">
+    <h2 class="wg-h2">表面 / 背景</h2>
+    <div class="wg-stack-8">
+      <div class="wg-surface wg-p-16" style="border: 1px solid var(--wg-color-border-default);">
+        <span class="wg-text-body">wg-surface — 白色表面容器</span>
+      </div>
+      <div style="background: var(--wg-color-bg-subtle); padding: var(--wg-spacing-16); border-radius: var(--wg-radius-md);">
+        <span class="wg-text-body">bg-subtle — 极浅灰背景</span>
+      </div>
+      <div style="background: var(--wg-color-bg-muted); padding: var(--wg-spacing-16); border-radius: var(--wg-radius-md);">
+        <span class="wg-text-body">bg-muted — 弱灰背景</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

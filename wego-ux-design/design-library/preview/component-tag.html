@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tag 组件预览 — 微购设计库</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    /* @component-css-start */
+
+    .wg-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-solid) transparent;
+      border-radius: var(--wg-radius-full);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-tag--32 {
+      block-size: var(--wg-size-32);
+      min-inline-size: 52px;
+      padding-inline: var(--wg-spacing-12);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      font-weight: var(--wg-font-weight-regular);
+    }
+
+    .wg-tag--28 {
+      block-size: var(--wg-size-28);
+      min-inline-size: 48px;
+      padding-inline: var(--wg-spacing-12);
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-regular);
+    }
+
+    .wg-tag--24 {
+      block-size: var(--wg-size-24);
+      min-inline-size: 40px;
+      padding-inline: var(--wg-spacing-8);
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-regular);
+      border-radius: var(--wg-radius-full);
+    }
+
+    .wg-tag--20 {
+      block-size: var(--wg-size-20);
+      min-inline-size: 36px;
+      padding-inline: var(--wg-spacing-8);
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-regular);
+      border-radius: var(--wg-radius-sm);
+      cursor: default;
+    }
+
+    .wg-tag__text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .wg-tag__icon {
+      font-size: var(--wg-size-16);
+      flex-shrink: 0;
+    }
+
+    .wg-tag--icon-left .wg-tag__icon {
+      margin-inline-end: var(--wg-spacing-4);
+    }
+
+    .wg-tag--icon-right .wg-tag__icon {
+      margin-inline-start: var(--wg-spacing-4);
+    }
+
+    .wg-tag--grey {
+      background-color: var(--wg-color-bg-subtle);
+      color: var(--wg-color-text-primary);
+    }
+
+    .wg-tag--grey.wg-tag--selected {
+      background-color: var(--wg-color-bg-success);
+      color: var(--wg-color-text-success);
+    }
+
+    .wg-tag--white {
+      background-color: var(--wg-color-bg-surface);
+      color: var(--wg-color-text-primary);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
+    }
+
+    .wg-tag--white.wg-tag--selected {
+      background-color: var(--wg-color-bg-success);
+      color: var(--wg-color-text-success);
+      border-color: var(--wg-color-border-success);
+    }
+
+    .wg-tag--green {
+      background-color: var(--wg-color-bg-surface);
+      color: var(--wg-color-text-success);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-success);
+    }
+
+    .wg-tag--green.wg-tag--selected {
+      background-color: var(--wg-color-bg-success);
+      color: var(--wg-color-text-success);
+    }
+
+    .wg-tag--20.wg-tag--grey {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-tag--20.wg-tag--grey.wg-tag--selected {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-tag--grey:not(.wg-tag--20):active {
+      background-color: var(--wg-color-state-pressed);
+    }
+
+    .wg-tag--grey.wg-tag--selected:not(.wg-tag--20):active {
+      background-color: var(--wg-color-border-success);
+    }
+
+    .wg-tag--white:not(.wg-tag--20):active {
+      background-color: var(--wg-color-state-hover);
+    }
+
+    .wg-tag--white.wg-tag--selected:not(.wg-tag--20):active {
+      background-color: var(--wg-color-border-success);
+    }
+
+    .wg-tag--green:not(.wg-tag--20):active {
+      background-color: var(--wg-color-state-hover);
+    }
+
+    .wg-tag--green.wg-tag--selected:not(.wg-tag--20):active {
+      background-color: var(--wg-color-border-success);
+    }
+
+    .wg-tag:focus-visible {
+      outline: none;
+    }
+
+    .wg-tag:not(.wg-tag--20):focus-visible {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: var(--wg-spacing-2);
+    }
+
+    .wg-tag--grey .wg-tag__icon,
+    .wg-tag--white .wg-tag__icon {
+      color: var(--wg-color-text-primary);
+    }
+
+    .wg-tag--grey.wg-tag--icon-right .wg-tag__icon,
+    .wg-tag--white.wg-tag--icon-right .wg-tag__icon {
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .wg-tag--green .wg-tag__icon {
+      color: var(--wg-color-text-success);
+    }
+
+    .wg-tag--grey.wg-tag--selected .wg-tag__icon,
+    .wg-tag--white.wg-tag--selected .wg-tag__icon {
+      color: var(--wg-color-text-success);
+    }
+
+    .wg-tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--wg-spacing-8);
+    }
+
+    /* @component-css-end */
+
+    /* ── 预览页专用样式 ── */
+    .preview-body {
+      max-width: 670px;
+      margin: 0 auto;
+      background: var(--wg-color-bg-page);
+      min-height: 100vh;
+    }
+
+    .preview-header {
+      margin: var(--wg-spacing-40) var(--wg-spacing-16);
+    }
+
+    .scope-section {
+      margin: var(--wg-spacing-24) var(--wg-spacing-16);
+    }
+
+    .scope-section > h2 {
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card {
+      background: var(--wg-color-bg-surface);
+      border-radius: var(--wg-radius-md);
+      padding: var(--wg-spacing-16);
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card h3 {
+      margin-bottom: var(--wg-spacing-12);
+      color: var(--wg-color-text-secondary);
+    }
+
+    .tag-demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+    }
+
+    .tag-demo-label {
+      inline-size: 80px;
+      flex-shrink: 0;
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      color: var(--wg-color-text-tertiary);
+    }
+  </style>
+</head>
+<body class="preview-body">
+
+<div class="preview-header">
+  <h1 class="wg-h1">Tag 组件预览</h1>
+  <p class="wg-text-secondary" style="margin-top: var(--wg-spacing-8);">
+    size: 32 / 28 / 24 / 20 &nbsp;|&nbsp;
+    color: grey / white / green &nbsp;|&nbsp;
+    state: default / selected
+  </p>
+</div>
+
+<!-- ===== size=32 grey: default + selected + icon-left(add) + icon-right(close) ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=32 · grey</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">商品标签</span>
+      <div class="wg-tag wg-tag--32 wg-tag--grey" tabindex="0">
+        <span class="wg-tag__text">商品标签</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>selected</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">商品标签</span>
+      <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--selected" tabindex="0">
+        <span class="wg-tag__text">商品标签</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-left (+)</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">添加标签</span>
+      <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--icon-left" tabindex="0">
+        <span class="wg-tag__icon">+</span>
+        <span class="wg-tag__text">添加标签</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-right (&times;)</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">商品标签</span>
+      <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--icon-right" tabindex="0">
+        <span class="wg-tag__text">商品标签</span>
+        <span class="wg-tag__icon">&times;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== size=28 white: default + selected + icon-right(jump-to) ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=28 · white</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">新品</span>
+      <div class="wg-tag wg-tag--28 wg-tag--white" tabindex="0">
+        <span class="wg-tag__text">新品</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>selected</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">新品</span>
+      <div class="wg-tag wg-tag--28 wg-tag--white wg-tag--selected" tabindex="0">
+        <span class="wg-tag__text">新品</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>icon-right (&rarr;)</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">查看更多</span>
+      <div class="wg-tag wg-tag--28 wg-tag--white wg-tag--icon-right" tabindex="0">
+        <span class="wg-tag__text">查看更多</span>
+        <span class="wg-tag__icon">&rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== size=28 green: default + selected ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=28 · green</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">限时优惠</span>
+      <div class="wg-tag wg-tag--28 wg-tag--green" tabindex="0">
+        <span class="wg-tag__text">限时优惠</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>selected</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">限时优惠</span>
+      <div class="wg-tag wg-tag--28 wg-tag--green wg-tag--selected" tabindex="0">
+        <span class="wg-tag__text">限时优惠</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== size=24 grey: 不可选中但可点击 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=24 · grey (可点击)</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">热销</span>
+      <div class="wg-tag wg-tag--24 wg-tag--grey" tabindex="0">
+        <span class="wg-tag__text">热销</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== size=20 grey: 纯展示 (不可点击) ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=20 · grey (纯展示)</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">已售罄</span>
+      <div class="wg-tag wg-tag--20 wg-tag--grey">
+        <span class="wg-tag__text">已售罄</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== size=20 green: 纯展示绿色 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">size=20 · green (纯展示)</h2>
+
+  <div class="variant-card">
+    <h3>default</h3>
+    <div class="tag-demo-row">
+      <span class="tag-demo-label">已认证</span>
+      <div class="wg-tag wg-tag--20 wg-tag--green">
+        <span class="wg-tag__text">已认证</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TagGroup: 4 个 size=32 grey 标签组合 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">TagGroup · 标签组合</h2>
+
+  <div class="variant-card">
+    <h3>4 个 size=32 grey 标签</h3>
+    <div class="wg-tag-group">
+      <div class="wg-tag wg-tag--32 wg-tag--grey wg-tag--selected" tabindex="0">
+        <span class="wg-tag__text">全部</span>
+      </div>
+      <div class="wg-tag wg-tag--32 wg-tag--grey" tabindex="0">
+        <span class="wg-tag__text">服饰</span>
+      </div>
+      <div class="wg-tag wg-tag--32 wg-tag--grey" tabindex="0">
+        <span class="wg-tag__text">美妆</span>
+      </div>
+      <div class="wg-tag wg-tag--32 wg-tag--grey" tabindex="0">
+        <span class="wg-tag__text">数码</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 说明 -->
+<section class="scope-section">
+  <div class="variant-card">
+    <h3>使用说明</h3>
+    <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
+      <li class="wg-text-body-sm">size=32/28/24 为可交互标签，支持点击切换 selected 态，20 为纯展示标签 (<code>cursor: default</code>)</li>
+      <li class="wg-text-body-sm">grey 为默认灰色背景，white 为白色带边框，green 为绿色边框语义标签</li>
+      <li class="wg-text-body-sm">selected 态感知：灰色/白色选中变绿色实底 + 绿色文字，绿色选中变绿色实底</li>
+      <li class="wg-text-body-sm">图标使用文字符号代替（+ / × / →），实际项目中替换为 iconfont 图标</li>
+      <li class="wg-text-body-sm">TagGroup 使用 flex-wrap + gap 布局，自动换行，间距统一为 <code>var(--wg-spacing-8)</code></li>
+      <li class="wg-text-body-sm">active 态需点击体验，focus-visible 态需 Tab 键聚焦查看</li>
+      <li class="wg-text-body-sm">所有样式值通过 <code>var(--wg-*)</code> 引用，零硬编码</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>

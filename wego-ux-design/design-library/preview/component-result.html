@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result 组件预览 — 微购设计库</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    /* @component-css-start */
+
+    .wg-result {
+      display: flex;
+      flex-direction: column;
+      inline-size: 100%;
+    }
+
+    .wg-result--result-40 {
+      padding: var(--wg-spacing-40) 0;
+    }
+
+    .wg-result--result-60 {
+      flex: 1;
+    }
+
+    .wg-result--result-80 {
+      flex: 1;
+    }
+
+    .wg-result__message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-inline: var(--wg-spacing-32);
+    }
+
+    .wg-result--result-60 .wg-result__message {
+      flex: 6;
+      justify-content: center;
+    }
+
+    .wg-result--result-80 .wg-result__message {
+      padding-block-start: 40%;
+    }
+
+    .wg-result--result-40 .wg-result__message {
+      align-items: center;
+    }
+
+    .wg-result__image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-block-end: var(--wg-spacing-24);
+    }
+
+    .wg-result__icon {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .wg-result__icon--success,
+    .wg-result__icon--error,
+    .wg-result__icon--warning,
+    .wg-result__icon--waiting,
+    .wg-result__icon--celebrate {
+      inline-size: var(--wg-size-72);
+      block-size: var(--wg-size-72);
+      border-radius: var(--wg-radius-full);
+    }
+
+    .wg-result__icon--success {
+      background-color: var(--wg-color-status-success-default);
+    }
+
+    .wg-result__icon--error {
+      background-color: var(--wg-color-status-danger-default);
+    }
+
+    .wg-result__icon--warning {
+      background-color: var(--wg-color-status-warning-default);
+    }
+
+    .wg-result__icon--waiting {
+      background-color: var(--wg-color-status-info-default);
+    }
+
+    .wg-result__icon--celebrate {
+      background-color: var(--wg-color-status-success-default);
+    }
+
+    .wg-result__icon--not-found,
+    .wg-result__icon--search-not-found,
+    .wg-result__icon--no-permission,
+    .wg-result__icon--time-expired,
+    .wg-result__icon--network-error,
+    .wg-result__icon--custom {
+      inline-size: 120px;
+      block-size: 120px;
+    }
+
+    .wg-result__title {
+      font-size: var(--wg-font-size-18);
+      line-height: var(--wg-font-lineheight-18);
+      font-weight: var(--wg-font-weight-medium);
+      color: var(--wg-color-text-primary);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-inline-size: 100%;
+    }
+
+    .wg-result__description {
+      margin-block-start: var(--wg-spacing-8);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      font-weight: var(--wg-font-weight-regular);
+      color: var(--wg-color-text-secondary);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-inline-size: 100%;
+    }
+
+    .wg-result__link {
+      color: var(--wg-color-action-primary-default);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .wg-result__link:active {
+      opacity: 0.6;
+    }
+
+    .wg-result__custom {
+      margin-block-start: var(--wg-spacing-16);
+      inline-size: 100%;
+    }
+
+    .wg-result__operate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-inline: var(--wg-spacing-32);
+    }
+
+    .wg-result--result-60 .wg-result__operate {
+      flex: 4;
+      justify-content: center;
+    }
+
+    .wg-result--result-80 .wg-result__operate {
+      margin-block-start: var(--wg-spacing-40);
+    }
+
+    .wg-result__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 100%;
+    }
+
+    .wg-result__buttons--dual {
+      gap: var(--wg-spacing-16);
+    }
+
+    .wg-result__buttons--single {
+      justify-content: center;
+    }
+
+    .wg-result__button {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      block-size: var(--wg-size-48);
+      inline-size: 100%;
+      padding: 0;
+      border: none;
+      border-radius: var(--wg-radius-lg);
+      cursor: pointer;
+      font-family: var(--wg-font-family-text);
+      font-size: var(--wg-font-size-16);
+      line-height: var(--wg-font-lineheight-16);
+      font-weight: var(--wg-font-weight-medium);
+      transition:
+        opacity var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-result__button--confirm {
+      background-color: var(--wg-color-action-primary-default);
+      color: var(--wg-color-text-inverse);
+    }
+
+    .wg-result__button--cancel {
+      background-color: var(--wg-color-bg-secondary);
+      color: var(--wg-color-text-primary);
+    }
+
+    .wg-result__button:not(:disabled):active {
+      opacity: 0.6;
+    }
+
+    .wg-result__button:focus-visible {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: calc(-1 * var(--wg-spacing-2));
+    }
+
+    .wg-result__button:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+
+    .wg-result__links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--wg-spacing-12);
+      margin-block-start: var(--wg-spacing-24);
+    }
+
+    .wg-result__link-btn {
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      color: var(--wg-color-text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .wg-result__link-btn:active {
+      opacity: 0.6;
+    }
+
+    .wg-result__link-divider {
+      inline-size: var(--wg-stroke-width-hairline);
+      block-size: var(--wg-spacing-12);
+      background-color: var(--wg-color-divider-default);
+    }
+
+    /* @component-css-end */
+
+    /* ── 预览页专用样式 ── */
+    .preview-body {
+      max-width: 670px;
+      margin: 0 auto;
+      background: var(--wg-color-bg-page);
+      min-height: 100vh;
+    }
+
+    .preview-header {
+      margin: var(--wg-spacing-40) var(--wg-spacing-16);
+    }
+
+    .scope-section {
+      margin: var(--wg-spacing-24) var(--wg-spacing-16);
+    }
+
+    .scope-section > h2 {
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card {
+      background: var(--wg-color-bg-surface);
+      border-radius: var(--wg-radius-md);
+      padding: var(--wg-spacing-16);
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card h3 {
+      margin-bottom: var(--wg-spacing-12);
+      color: var(--wg-color-text-secondary);
+    }
+
+    .result-demo-stage {
+      position: relative;
+      background-color: var(--wg-color-bg-page);
+      border-radius: var(--wg-radius-md);
+      overflow: hidden;
+      min-block-size: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .result-demo-stage--short {
+      min-block-size: auto;
+    }
+
+    .result-custom-amount {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: var(--wg-spacing-4);
+      margin-block-start: var(--wg-spacing-8);
+    }
+
+    .result-custom-amount__value {
+      font-family: var(--wg-font-family-number-decorative);
+      font-size: var(--wg-font-number-nf32);
+      line-height: 1.2;
+      color: var(--wg-color-text-primary);
+    }
+
+    .result-custom-amount__unit {
+      font-size: var(--wg-font-size-14);
+      color: var(--wg-color-text-primary);
+    }
+
+    .result-custom-order {
+      font-family: var(--wg-font-family-text);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      color: var(--wg-color-text-secondary);
+      margin-block-start: var(--wg-spacing-8);
+    }
+  </style>
+</head>
+<body class="preview-body">
+
+<div class="preview-header">
+  <h1 class="wg-h1">Result 组件预览</h1>
+  <p class="wg-text-secondary" style="margin-top: var(--wg-spacing-8);">
+    layout: result-40 / result-60 / result-80 &nbsp;|&nbsp;
+    icon: success / error / not-found / search-not-found
+  </p>
+</div>
+
+<!-- ===== result-60 + success + dual buttons ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">result-60 · success · dual buttons</h2>
+
+  <div class="variant-card">
+    <h3>提交成功 — 图标 + 标题 + 描述 + 双按钮</h3>
+    <div class="result-demo-stage">
+      <div class="wg-result wg-result--result-60">
+        <div class="wg-result__message">
+          <div class="wg-result__image">
+            <span class="wg-result__icon wg-result__icon--success"></span>
+          </div>
+          <h3 class="wg-result__title">提交成功</h3>
+          <p class="wg-result__description">你的报名信息已成功提交</p>
+        </div>
+        <div class="wg-result__operate">
+          <div class="wg-result__buttons wg-result__buttons--dual">
+            <button class="wg-result__button wg-result__button--cancel" type="button">查看详情</button>
+            <button class="wg-result__button wg-result__button--confirm" type="button">完成</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== result-60 + error + single button + links ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">result-60 · error · single button · links</h2>
+
+  <div class="variant-card">
+    <h3>提交失败 — 图标 + 标题 + 单按钮 + 底部链接</h3>
+    <div class="result-demo-stage">
+      <div class="wg-result wg-result--result-60">
+        <div class="wg-result__message">
+          <div class="wg-result__image">
+            <span class="wg-result__icon wg-result__icon--error"></span>
+          </div>
+          <h3 class="wg-result__title">提交失败</h3>
+        </div>
+        <div class="wg-result__operate">
+          <div class="wg-result__buttons wg-result__buttons--single">
+            <button class="wg-result__button wg-result__button--confirm" type="button">重新提交</button>
+          </div>
+          <div class="wg-result__links">
+            <a class="wg-result__link-btn" href="javascript:;">联系客服</a>
+            <span class="wg-result__link-divider"></span>
+            <a class="wg-result__link-btn" href="javascript:;">查看帮助</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== result-80 + not-found + single button ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">result-80 · not-found · single button</h2>
+
+  <div class="variant-card">
+    <h3>暂无数据 — 图标 + 标题 + 单按钮</h3>
+    <div class="result-demo-stage">
+      <div class="wg-result wg-result--result-80">
+        <div class="wg-result__message">
+          <div class="wg-result__image">
+            <span class="wg-result__icon wg-result__icon--not-found"></span>
+          </div>
+          <h3 class="wg-result__title">暂无数据</h3>
+        </div>
+        <div class="wg-result__operate">
+          <div class="wg-result__buttons wg-result__buttons--single">
+            <button class="wg-result__button wg-result__button--confirm" type="button">刷新</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== result-40 + search-not-found ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">result-40 · search-not-found · inline link</h2>
+
+  <div class="variant-card">
+    <h3>未找到相关结果 — 图标 + 标题 + 内联链接</h3>
+    <div class="result-demo-stage result-demo-stage--short">
+      <div class="wg-result wg-result--result-40">
+        <div class="wg-result__message">
+          <div class="wg-result__image">
+            <span class="wg-result__icon wg-result__icon--search-not-found"></span>
+          </div>
+          <h3 class="wg-result__title">未找到相关结果</h3>
+          <p class="wg-result__description">
+            尝试更换关键词或
+            <a class="wg-result__link" href="javascript:;">浏览全部</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== result-60 + success + custom content + single button ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">result-60 · success · custom content · single button</h2>
+
+  <div class="variant-card">
+    <h3>支付成功 — 图标 + 标题 + 自定义金额 + 单按钮</h3>
+    <div class="result-demo-stage">
+      <div class="wg-result wg-result--result-60">
+        <div class="wg-result__message">
+          <div class="wg-result__image">
+            <span class="wg-result__icon wg-result__icon--success"></span>
+          </div>
+          <h3 class="wg-result__title">支付成功</h3>
+          <p class="wg-result__description">感谢你的购买</p>
+          <div class="wg-result__custom">
+            <p class="result-custom-order">订单号 NO20240601001</p>
+            <div class="result-custom-amount">
+              <span class="result-custom-amount__value">¥299.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="wg-result__operate">
+          <div class="wg-result__buttons wg-result__buttons--single">
+            <button class="wg-result__button wg-result__button--confirm" type="button">完成</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 说明 -->
+<section class="scope-section">
+  <div class="variant-card">
+    <h3>使用说明</h3>
+    <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
+      <li class="wg-text-body-sm">result-60 / result-80 需配合 <code>flex: 1</code> 的父容器以撑满高度，演示中通过 <code>min-block-size: 400px</code> 模拟</li>
+      <li class="wg-text-body-sm">result-40 适用于页面内嵌场景，无弹性填充，仅以上下 padding 控制间距</li>
+      <li class="wg-text-body-sm">图标为纯色圆角方块占位符，实际使用时替换为 SVG 或图标字体</li>
+      <li class="wg-text-body-sm">按钮 active 态需点击体验，focus-visible 态需 Tab 键聚焦查看</li>
+      <li class="wg-text-body-sm">所有样式值通过 <code>var(--wg-*)</code> 引用，零硬编码</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>

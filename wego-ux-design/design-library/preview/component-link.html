@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link 组件预览 — 微购设计库</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    /* @component-css-start */
+
+    .wg-link-group {
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-16);
+    }
+
+    .wg-link {
+      appearance: none;
+      padding: var(--wg-spacing-0);
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+      background: transparent;
+      color: var(--wg-color-action-link-default);
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-link__surface {
+      border-radius: var(--wg-radius-none);
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        outline-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-link--standalone {
+      display: inline-flex;
+      min-block-size: var(--wg-touch-min);
+      align-items: center;
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      font-weight: var(--wg-font-weight-medium);
+    }
+
+    .wg-link--standalone .wg-link__surface {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wg-link--standalone .wg-link__label {
+      white-space: nowrap;
+    }
+
+    .wg-link--inline,
+    .wg-link--inline .wg-link__surface,
+    .wg-link--inline .wg-link__label {
+      display: inline;
+      font: inherit;
+      line-height: inherit;
+    }
+
+    .wg-link:visited {
+      color: var(--wg-color-action-link-default);
+    }
+
+    .wg-link:not(:disabled):not([aria-disabled="true"]):hover {
+      color: var(--wg-color-action-link-hover);
+    }
+
+    .wg-link:not(:disabled):not([aria-disabled="true"]):hover .wg-link__surface,
+    .wg-link:not(:disabled):not([aria-disabled="true"]):active .wg-link__surface {
+      background-color: var(--wg-color-state-pressed);
+    }
+
+    .wg-link:not(:disabled):not([aria-disabled="true"]):active {
+      color: var(--wg-color-action-link-pressed);
+    }
+
+    .wg-link:focus-visible {
+      outline: none;
+    }
+
+    .wg-link:focus-visible .wg-link__surface {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: var(--wg-spacing-2);
+    }
+
+    .wg-link:disabled,
+    .wg-link[aria-disabled="true"] {
+      color: var(--wg-color-action-link-disabled);
+      cursor: not-allowed;
+    }
+
+    a.wg-link[aria-disabled="true"] {
+      pointer-events: none;
+    }
+
+    /* @component-css-end */
+
+    /* ── 预览页专用样式 ── */
+    .preview-header {
+      margin: var(--wg-spacing-40) var(--wg-spacing-16);
+    }
+
+    .preview-body {
+      max-width: 670px;
+      margin: var(--wg-spacing-0) auto;
+      background: var(--wg-color-bg-page);
+      min-height: 100vh;
+    }
+
+    .scope-section {
+      margin: var(--wg-spacing-24) var(--wg-spacing-16);
+    }
+
+    .scope-section > h2 {
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card {
+      background: var(--wg-color-bg-surface);
+      border-radius: var(--wg-radius-md);
+      padding: var(--wg-spacing-16);
+      margin-bottom: var(--wg-spacing-16);
+    }
+
+    .variant-card h3 {
+      margin-bottom: var(--wg-spacing-12);
+      color: var(--wg-color-text-secondary);
+    }
+
+    .link-row {
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+      flex-wrap: wrap;
+    }
+
+    .link-demo-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--wg-spacing-4);
+    }
+
+    .link-demo-cell .state-label {
+      font-size: var(--wg-font-size-10);
+      color: var(--wg-color-text-tertiary);
+    }
+
+    .state-label {
+      font-size: var(--wg-font-size-12);
+      color: var(--wg-color-text-secondary);
+      margin-bottom: var(--wg-spacing-8);
+      font-weight: var(--wg-font-weight-medium);
+    }
+
+    .inline-text {
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      color: var(--wg-color-text-primary);
+    }
+  </style>
+</head>
+<body class="preview-body">
+
+<div class="preview-header"></div>
+
+<!-- ===== standalone navigation 链接 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">standalone — navigation</h2>
+
+  <div class="variant-card">
+    <h3>交互状态</h3>
+    <div class="link-row">
+      <div class="link-demo-cell">
+        <span class="state-label">默认</span>
+        <a class="wg-link wg-link--standalone" href="#">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">首页</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">hover</span>
+        <a class="wg-link wg-link--standalone" href="#">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">首页</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">pressed</span>
+        <a class="wg-link wg-link--standalone" href="#" style="color: var(--wg-color-action-link-pressed);">
+          <span class="wg-link__surface" style="background-color: var(--wg-color-state-pressed);">
+            <span class="wg-link__label">首页</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">focus-visible</span>
+        <a class="wg-link wg-link--standalone" href="#">
+          <span class="wg-link__surface" style="outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus); outline-offset: var(--wg-spacing-2);">
+            <span class="wg-link__label">首页</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">disabled</span>
+        <a class="wg-link wg-link--standalone" href="#" aria-disabled="true">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">首页</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== standalone command 链接 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">standalone — command</h2>
+
+  <div class="variant-card">
+    <h3>交互状态</h3>
+    <div class="link-row">
+      <div class="link-demo-cell">
+        <span class="state-label">默认</span>
+        <a class="wg-link wg-link--standalone" href="#">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">编辑</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">hover</span>
+        <a class="wg-link wg-link--standalone" href="#">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">编辑</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">pressed</span>
+        <a class="wg-link wg-link--standalone" href="#" style="color: var(--wg-color-action-link-pressed);">
+          <span class="wg-link__surface" style="background-color: var(--wg-color-state-pressed);">
+            <span class="wg-link__label">编辑</span>
+          </span>
+        </a>
+      </div>
+      <div class="link-demo-cell">
+        <span class="state-label">disabled</span>
+        <a class="wg-link wg-link--standalone" href="#" aria-disabled="true">
+          <span class="wg-link__surface">
+            <span class="wg-link__label">编辑</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== inline navigation 链接 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">inline — navigation</h2>
+
+  <div class="variant-card">
+    <h3>文本内嵌导航链接</h3>
+    <p class="inline-text">
+      欢迎回来，前往
+      <a class="wg-link wg-link--inline" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">消息中心</span>
+        </span>
+      </a>
+      查看最新通知，或访问
+      <a class="wg-link wg-link--inline" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">个人设置</span>
+        </span>
+      </a>
+      管理账户信息。
+    </p>
+  </div>
+</section>
+
+<!-- ===== inline command 链接 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">inline — command</h2>
+
+  <div class="variant-card">
+    <h3>文本内嵌操作链接</h3>
+    <p class="inline-text">
+      你有一笔新的订单，可以
+      <a class="wg-link wg-link--inline" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">立即支付</span>
+        </span>
+      </a>
+      或
+      <a class="wg-link wg-link--inline" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">取消订单</span>
+        </span>
+      </a>
+      ，操作将在 30 分钟后失效。
+    </p>
+  </div>
+</section>
+
+<!-- ===== LinkGroup ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">LinkGroup</h2>
+
+  <div class="variant-card">
+    <h3>多个 standalone 链接横向排列</h3>
+    <div class="wg-link-group">
+      <a class="wg-link wg-link--standalone" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">首页</span>
+        </span>
+      </a>
+      <a class="wg-link wg-link--standalone" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">消息</span>
+        </span>
+      </a>
+      <a class="wg-link wg-link--standalone" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">设置</span>
+        </span>
+      </a>
+      <a class="wg-link wg-link--standalone" href="#">
+        <span class="wg-link__surface">
+          <span class="wg-link__label">帮助</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 说明 -->
+<section class="scope-section">
+  <div class="variant-card">
+    <h3>使用说明</h3>
+    <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
+      <li class="wg-text-body-sm">hover 效果需鼠标悬停查看</li>
+      <li class="wg-text-body-sm">pressed 效果已硬展示，:active 需实际点击体验</li>
+      <li class="wg-text-body-sm">focus-visible 效果已硬展示，或使用 Tab 键聚焦查看</li>
+      <li class="wg-text-body-sm">所有样式值通过 var(--wg-*) 引用，零硬编码</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
