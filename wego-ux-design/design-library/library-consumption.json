@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "description": "微购设计库消费契约。定义 AI / 下游消费者的读取顺序、复制边界和禁止事项。",
+  "tokenSource": "tokens.json",
+  "tokenCss": "tokens.css",
+  "scaffoldCss": "scaffold.css",
+  "componentsCss": "components.css",
+  "componentsIndex": "components/index.json",
+  "componentContractDir": "components",
+  "previewDir": "preview",
+  "iconsDir": "assets/fonts/iconfont",
+  "uiKitsDir": "ui_kits",
+  "consumptionLayers": {
+    "tokens": {
+      "files": ["tokens.json", "tokens.css", "scaffold.css"],
+      "copyable": {
+        "tokens.json": false,
+        "tokens.css": true,
+        "scaffold.css": true
+      },
+      "purpose": "设计语言基础层：Token 投影、基础排版、页面骨架。",
+      "downstreamRule": "先读 tokens.json 理解可用 Token，再复制 tokens.css；需要通用排版与布局工具时再复制 scaffold.css。不得手写新的设计值或改写已有 Token。"
+    },
+    "components": {
+      "files": [
+        "components/index.json",
+        "components/{slug}.json",
+        "preview/component-{slug}.html",
+        "components.css"
+      ],
+      "copyable": {
+        "components/index.json": false,
+        "components/{slug}.json": false,
+        "preview/component-{slug}.html#markup": true,
+        "components.css": true
+      },
+      "purpose": "组件层：发现组件、读取契约、复制 Canonical markup、复用聚合 CSS。",
+      "downstreamRule": "必须按 index.json -> {slug}.json -> preview/component-{slug}.html 的顺序读取。先理解 variantDimensions、domAnatomy、doNotInvent，再从 preview 复制 markup；组件视觉样式只能来自 components.css，禁止自己手写组件 CSS。"
+    },
+    "icons": {
+      "files": [
+        "assets/fonts/iconfont/iconfont.css",
+        "assets/fonts/iconfont/iconfont.woff2",
+        "assets/fonts/iconfont/iconfont.woff",
+        "assets/fonts/iconfont/iconfont.ttf"
+      ],
+      "copyable": {
+        "assets/fonts/iconfont/*": true
+      },
+      "purpose": "图标字体资源层：为组件和页面中的图标位提供统一字形与 CSS。",
+      "downstreamRule": "使用图标时复制整个 assets/fonts/iconfont/ 目录，HTML 中通过 <i class=\"wego-iconfont-s icon-{font_class}\"></i> 渲染。不得只复制 iconfont.css，不得替换为自绘 SVG，除非 iconfont 确认缺失。"
+    },
+    "resourceAssets": {
+      "files": [
+        "resources/images",
+        "resources/fonts",
+        "design-library/assets/icons",
+        "design-library/assets/video"
+      ],
+      "copyable": {
+        "resources/images/*": true,
+        "resources/fonts/*": true,
+        "design-library/assets/icons/*": true,
+        "design-library/assets/video/*": true
+      },
+      "purpose": "素材资源层：提供后续页面规则、业务场景和示例原型可复用的图片、视频、SVG 和字体素材。",
+      "downstreamRule": "只有当页面需求、组件契约或规则明确需要素材时才读取对应资源；不得为了寻找组件而扫描素材目录。复制素材时保持原目录结构，并在 app.css 中继续通过 Token 控制尺寸、圆角、遮罩和层级。"
+    },
+    "uikit": {
+      "files": ["ui_kits/{type}/index.html"],
+      "copyable": false,
+      "purpose": "页面级 showcase 层：仅用于后续结构参考，当前库未提供正式 ui_kits 页面。",
+      "downstreamRule": "目前 ui_kits/ 为空目录。存在页面级 showcase 后，只能作为结构参考，不能直接复制其外层 shell。"
+    }
+  },
+  "downstreamScenarios": {
+    "useTokensOnly": {
+      "read": ["tokens.json", "tokens.css", "scaffold.css"],
+      "consume": "复制 tokens.css；只在需要排版工具类或布局骨架时复制 scaffold.css；业务样式全部通过 var(--wg-*) 使用 Token。"
+    },
+    "buildSingleComponent": {
+      "read": [
+        "components/index.json",
+        "components/{slug}.json",
+        "preview/component-{slug}.html",
+        "components.css",
+        "tokens.css"
+      ],
+      "consume": "从 preview 复制目标组件 markup，保留 class、层级和 modifier；引入 components.css + tokens.css；如果组件含图标，再引入 iconfont.css 并复制字体资源。"
+    },
+    "buildFullPageCustomCanvas": {
+      "read": [
+        "tokens.json",
+        "scaffold.css",
+        "components/index.json",
+        "components/{slug}.json",
+        "preview/component-{slug}.html",
+        "components.css"
+      ],
+      "consume": "自己写页面级容器、栅格和业务布局胶水；组件区域从 preview 复制内层 markup；页面级样式可写在 app.css，但不得改写组件内部视觉规则。"
+    },
+    "useResourceAssets": {
+      "read": [
+        "resources/README.md",
+        "resources/images 或 design-library/assets/icons 或 design-library/assets/video 中的目标资源"
+      ],
+      "consume": "仅复制当前页面实际使用的素材，保留相对目录结构；图片、视频和 SVG 只作为内容或业务素材，不作为组件规范来源。"
+    }
+  },
+  "recommendedReadOrder": [
+    "library-consumption.json",
+    "tokens.json",
+    "tokens.css",
+    "scaffold.css",
+    "components/index.json",
+    "components/{slug}.json",
+    "preview/component-{slug}.html",
+    "components.css",
+    "assets/fonts/iconfont/iconfont.css",
+    "resources/README.md",
+    "ui_kits/{type}/index.html"
+  ],
+  "hardConstraints": [
+    "必须先读取 library-consumption.json，再决定要读哪些设计库文件。",
+    "组件发现只能从 components/index.json 开始，不得扫描整个 preview/ 或 components/ 目录自行猜测。",
+    "组件 markup 只能从 preview/component-{slug}.html 复制，不得凭视觉相似自行重写结构。",
+    "组件视觉样式只能来自 components.css；禁止手写或覆盖组件内部 CSS。",
+    "业务样式只能通过 var(--wg-*) 使用 Token；禁止在业务 CSS 中写 HEX、rgb()、命名色、裸 px/rem 等设计值。",
+    "组件契约中的 doNotInvent、variantDimensions、domAnatomy 属于硬边界；未声明的变体、状态和 anatomy 不得自创。",
+    "使用图标时必须复制整个 assets/fonts/iconfont/ 目录，保持 iconfont.css 与字体文件同目录。",
+    "素材资源只能在需求或规则明确需要时读取；不得把 resources/ 或 design-library/assets/ 当作组件发现入口。",
+    "ui_kits/ 仅作结构参考；当前目录为空时不得伪造 showcase 来源。"
+  ],
+  "uiKitsAvailable": []
+}

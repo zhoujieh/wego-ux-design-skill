@@ -27,7 +27,23 @@ SKILL.md
 本文件为当前任务指定的详细规则
 ```
 
-`README.md` 仅供维护者查看，不参与 AI 执行。`05-examples/` 仅作示例，不是规范来源。
+`README.md` 仅供维护者查看，不参与 AI 执行。`examples/` 仅作示例，不是规范来源。
+
+## 设计库路径
+
+运行时设计库根目录固定为：
+
+```text
+design-library/
+```
+
+生成页面、单组件、组件组合或设计库消费相关任务时，AI **必须先读取**：
+
+```text
+design-library/library-consumption.json
+```
+
+之后再按其中的 `recommendedReadOrder` 决定继续读取哪些文件。未读取该文件前，不得直接扫描 `design-library/preview/`、`design-library/components/` 或自行猜测组件路径。
 
 ## 当前阶段：产品设计（可交互 Web 原型）
 
@@ -42,7 +58,7 @@ SKILL.md
 - 检查 Token 时，输出合规检查结果。
 - 询问规范时，直接回答对应规则。
 - 当前阶段不涉及 KuiklyUI 代码。
-- `03-components/` 只定义 Web 原型中的正式组件契约，不包含或映射 KuiklyUI API。
+- 正式组件契约只来自 `design-library/components/*.json`，不包含或映射 KuiklyUI API。
 
 ## 角色
 
@@ -66,7 +82,7 @@ SKILL.md
 
 ### 阶段一：需求理解与确认（唯一用户门禁）
 
-执行 `04-ai-rules/08-requirement-confirmation-rules.md`，确认六个维度：
+执行 `rules/confirmation.md`，确认六个维度：
 
 - **用户角色**：这个页面主要给谁用，用户能力水平、操作习惯、痛点是什么
 - **使用场景**：用户从哪里进入，在什么情况下使用，完成后去哪里
@@ -128,29 +144,39 @@ SKILL.md
 
 依赖链：2.1 → 2.2 → 2.3 → 2.4 → 2.5 → 2.6（仅表单型）→ 2.7 → 2.8 → 2.9/2.10。跳过任一步，下一步缺少输入无法执行。2.6 仅在页面类型为表单型时执行，非表单型页面跳过 2.6 直接进入 2.7。
 
-具体设计规则见 `04-ai-rules/02-ui-generation-rules.md`，本表只定义步骤顺序、产物和门禁。
+具体设计规则见 `rules/generation.md`，本表只定义步骤顺序、产物和门禁。
 
 ### 阶段三：实现
 
 **前置准备：**
 
-1. 复制 `02-tokens/tokens.css` → 项目 `styles/tokens.css`
-2. 复制 `resources/fonts/WegoKeyboardN9-*.otf` → `assets/fonts/`
-3. 复制 `resources/fonts/iconfont/` 整个目录 → `assets/fonts/iconfont/`
-4. **读取 `resources/fonts/iconfont/iconfont.json`，提取 `glyphs` 数组中所有 `font_class`，建立可用图标清单。实现时只从清单中选取图标；需要清单中不存在的图标时，按 `02-tokens/icon-guidelines.md` 第 7 节输出 SVG 内联图标并标注缺失。**
-5. 将阶段二 2.4 命中列表中每个组件的 Canonical CSS **逐字复制**写入 `styles/components.css`（未命中不写入）。**复制规则**：从组件 `.md` 文件的 `## Canonical CSS` 区块原样搬运，不得增删规则、修改选择器、添加属性或调整 Token 引用。组件视觉行为只能通过规范中已声明的修饰符 class 实现，禁止在复制时进行"合理优化"或自行补充未定义的交互状态。
+1. 读取 `design-library/library-consumption.json`
+2. 按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/components/index.json`
+3. 针对阶段二 2.8 命中的每个组件，继续读取对应的 `design-library/components/{slug}.json` 与 `design-library/preview/component-{slug}.html`
+4. 复制 `design-library/tokens.css` → 项目 `styles/tokens.css`
+5. 需要基础排版和布局工具时，按需复用 `design-library/scaffold.css` 中的通用骨架规则
+6. 复制 `design-library/components.css` → 项目 `styles/components.css`
+7. 使用图标时，复制 `design-library/assets/fonts/iconfont/` 整个目录 → `assets/fonts/iconfont/`，并按 `02-tokens/icon-guidelines.md` 处理 iconfont 缺失场景
+8. 从 `preview/component-{slug}.html` 复制组件 markup；只复制组件本体，不复制演示壳、矩阵或说明文案
 
 **主体实现：**
 
 - HTML：语义结构 + 资源引用。样式加载顺序：`tokens.css` → `iconfont.css`（如有）→ `components.css` → `app.css`
-- app.css：页面级业务样式，全部通过 `var(--wg-*)` 使用 Token
-- app.js：交互逻辑，驱动阶段二 2.6 设计的状态链
+- app.css：只写页面级业务样式和布局胶水，全部通过 `var(--wg-*)` 使用 Token
+- app.js：交互逻辑，驱动阶段二设计的状态链
 
-**门禁：** 项目结构完整、资源路径有效、样式加载顺序正确；组件 Canonical CSS 已逐字复制，未增删修改。
+**硬性规则：**
+
+- 必须先读 `library-consumption.json`
+- 必须按 `components/index.json` → `components/{slug}.json` → `preview/component-{slug}.html` 的顺序消费组件
+- 严禁自己手写组件 CSS
+- 严禁改写组件内部 class、modifier、DOM anatomy 或未声明状态
+
+**门禁：** 项目结构完整、资源路径有效、样式加载顺序正确；组件 markup 来自 preview，组件 CSS 来自 `components.css`，未自行增删修改。
 
 ### 阶段四：验证与输出
 
-执行 `04-ai-rules/07-final-checklist.md`，对照阶段二设计产物逐项验证：
+执行 `rules/checkout.md`，对照阶段二设计产物逐项验证：
 
 - Step 1：浏览器验证（关键交互、控制台、资源、响应式）
   - **降级：** 当环境不支持本地服务器或浏览器时，改为静态代码审查
@@ -168,32 +194,31 @@ SKILL.md
 
 | 任务类型 | 必读文件 |
 |---------|---------|
-| 生成完整页面 | `01-principles/01-design-principles.md`、`02-tokens/token-usage-guidelines.md`、`02-tokens/token-reference.md`、`02-tokens/icon-guidelines.md`、`02-tokens/tokens.css`、`token-css-map.md`、`resources/fonts/iconfont/iconfont.json`、`03-components/registry.json`、`03-components/shared-rules.md`、`04-ai-rules/08-requirement-confirmation-rules.md`、`04-ai-rules/02-ui-generation-rules.md`、`04-ai-rules/06-output-format.md`、`04-ai-rules/07-final-checklist.md`；匹配到组件后再读 registry 指向的对应文件 |
-| 生成单个组件或按钮 | `02-tokens/token-usage-guidelines.md`、`02-tokens/token-reference.md`、`02-tokens/icon-guidelines.md`、`02-tokens/tokens.css`、`token-css-map.md`、`resources/fonts/iconfont/iconfont.json`、`03-components/registry.json`、`03-components/shared-rules.md`、`04-ai-rules/08-requirement-confirmation-rules.md`、`04-ai-rules/02-ui-generation-rules.md`、`04-ai-rules/06-output-format.md`、`04-ai-rules/07-final-checklist.md`；再读 registry 指向的目标组件文件 |
-| 审查已有界面 | `01-principles/01-design-principles.md`、`02-tokens/token-usage-guidelines.md`、`02-tokens/token-reference.md`、`03-components/registry.json`、`04-ai-rules/03-ui-review-rules.md`、`04-ai-rules/07-final-checklist.md`；识别到已注册组件时读取 `03-components/shared-rules.md` 和对应组件文件；涉及代码时再读 `token-css-map.md` |
+| 生成完整页面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`02-tokens/icon-guidelines.md`、`token-css-map.md`；再按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/components/index.json`，并针对命中组件读取对应 JSON 契约与 preview 文件 |
+| 生成单个组件或按钮 | `design-library/library-consumption.json`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`02-tokens/icon-guidelines.md`、`token-css-map.md`；再按 `recommendedReadOrder` 读取目标组件的 JSON 契约与 preview 文件 |
+| 审查已有界面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/tokens.md`、`rules/components.md`、`rules/review.md`、`rules/checkout.md`；识别到已注册组件时读取 `design-library/components/index.json`、对应组件 JSON 契约与 preview 文件；涉及代码时再读 `token-css-map.md` |
 | 优化已有界面 | 先按“审查已有界面”读取，再按对应生成任务补充读取 |
-| 检查 Token 合规性 | `04-ai-rules/04-token-usage-rules.md`、`02-tokens/token-usage-guidelines.md`、`02-tokens/token-reference.md`、`token-css-map.md` |
+| 检查 Token 合规性 | `design-library/library-consumption.json`、`rules/tokens.md`、`design-library/tokens.json`、`design-library/tokens.css`、`token-css-map.md` |
 | 询问规范、不生成 | 只读用户指定或与问题直接对应的单个规则文件 |
 
 补充限制：
 
 - 不默认读取 `README.md`。
-- 不扫描或通读 `03-components/`；只读取 registry、公共规则和当前任务命中的组件文件。
-- 不默认读取 `05-examples/`；只有用户明确要求参考示例时才读取对应单个文件。
+- 不扫描或通读 `design-library/components/`、`design-library/preview/`；只读取 `library-consumption.json`、`components/index.json` 和当前任务命中的组件文件。
+- 不默认读取 `examples/`；只有用户明确要求参考示例时才读取对应单个文件。
 - 不因为某个详细规则提到其他目录，就扩大本表定义的读取范围。
 
 ## Token → CSS 映射
 
-`02-tokens/tokens.json` 是唯一 Token 数据源。`token-css-map.md`、`02-tokens/token-reference.md` 和 `02-tokens/tokens.css` 均由脚本生成，禁止手工修改。
+`02-tokens/tokens.json` 是唯一 Token 源数据；`design-library/tokens.json` 和 `design-library/tokens.css` 是运行时消费产物；`token-css-map.md` 是查阅映射。除 `02-tokens/tokens.json` 外，相关生成物禁止手工修改。
 
 所有设计值通过 CSS 自定义属性使用，完整映射表见 **`token-css-map.md`**。
 
 生成项目时：
 
-- 将 `02-tokens/tokens.css` 复制为项目内的 `styles/tokens.css`。
-- 将 `tokens.css` 引用的 `resources/fonts/WegoKeyboardN9-*.otf` 复制到 `assets/fonts/`。
-- 将 `resources/fonts/iconfont/` 整个目录复制到 `assets/fonts/iconfont/`，保持 `iconfont.css` 与字体文件（woff2 / woff / ttf）在同一目录下。不得将 `iconfont.css` 单独复制到 `assets/fonts/` 根目录。
-- 将页面中使用的每个已注册组件的 Canonical CSS 写入 `styles/components.css`；页面未使用到的组件不写入。
+- 将 `design-library/tokens.css` 复制为项目内的 `styles/tokens.css`。
+- 将 `design-library/assets/fonts/iconfont/` 整个目录复制到 `assets/fonts/iconfont/`，保持 `iconfont.css` 与字体文件（woff2 / woff / ttf）在同一目录下。不得将 `iconfont.css` 单独复制到 `assets/fonts/` 根目录。
+- 将 `design-library/components.css` 复制为项目内的 `styles/components.css`。
 - 在 HTML 中按以下顺序引入样式：`tokens.css` → `iconfont/iconfont.css`（如有）→ `components.css` → `app.css`。`iconfont.css` 的引入路径必须与实际目录结构一致。
 - Token 定义层允许保存 HEX、RGBA、px 等原始值；业务 CSS 只能通过 `var(--wg-*)` 使用设计值。
 
@@ -238,9 +263,9 @@ SKILL.md
 
 ## 组件完善期处理
 
-- registry 中已注册的组件必须遵守对应组件契约。
-- registry 中尚未注册的界面元素，可以使用语义化 HTML、页面级 class 和 JavaScript 完成交互。
-- 未注册结构属于当前原型的页面实现，不得使用 `.wg-{component}` 命名、写入 registry，或宣称为正式设计系统组件。
+- `design-library/components/index.json` 中已注册的组件必须遵守对应 JSON 契约与 preview anatomy。
+- 注册表中尚未覆盖的界面元素，可以使用语义化 HTML、页面级 class 和 JavaScript 完成交互。
+- 未注册结构属于当前原型的页面实现，不得使用 `.wg-{component}` 命名、写入组件注册表，或宣称为正式设计系统组件。
 - 页面级临时结构可以完整实现 loading、empty、error、success、校验和导航等状态。
 - 如果临时结构具有跨页面复用价值，在交付说明中标记为“组件候选”，但不阻塞当前原型实现。
 
@@ -252,7 +277,7 @@ SKILL.md
 当前使用：<最接近的已有 Token 或页面层实现>
 原因：<为什么不够用>
 建议新增：<建议的 Token 名称或组件能力>
-归属位置：<应添加到哪个文件>
+归属位置：<应添加到 `02-tokens/tokens.json` 或 `design-library/components/*.json` 的哪个文件>
 ```
 
 ## 关键约束

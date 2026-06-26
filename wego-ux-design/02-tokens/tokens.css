@@ -24,6 +24,10 @@
 
 :root {
   /* Color */
+  --wg-checkbox-accent: var(--wg-color-action-primary-default);
+  --wg-checkbox-accent-disabled: var(--wg-color-action-primary-disabled);
+  --wg-radio-accent: var(--wg-color-action-primary-default);
+  --wg-radio-accent-disabled: var(--wg-color-action-primary-disabled);
   --wg-color-action-danger-default: var(--wg-color-base-danger-500);
   --wg-color-action-danger-hover: var(--wg-color-base-danger-alpha-80);
   --wg-color-action-danger-pressed: var(--wg-color-base-danger-alpha-80);
@@ -102,15 +106,21 @@
   --wg-color-bg-danger: var(--wg-color-base-danger-alpha-10);
   --wg-color-bg-info: var(--wg-color-base-info-alpha-10);
   --wg-color-bg-inverse: var(--wg-color-base-neutral-900);
+  --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
   --wg-color-bg-muted: var(--wg-color-base-neutral-100);
   --wg-color-bg-page: var(--wg-color-base-neutral-300);
+  --wg-color-bg-secondary: var(--wg-color-base-neutral-100);
   --wg-color-bg-promotion: var(--wg-color-base-promotion-alpha-10);
   --wg-color-bg-subtle: var(--wg-color-base-neutral-50);
   --wg-color-bg-success: var(--wg-color-base-success-alpha-10);
+  --wg-color-bg-skeleton: var(--wg-color-bg-muted);
   --wg-color-bg-surface: var(--wg-color-base-static-white);
+  --wg-color-bg-toast: var(--wg-color-feedback-toast-bg);
   --wg-color-bg-warning: var(--wg-color-base-warning-alpha-10);
   --wg-color-border-danger: var(--wg-color-base-danger-alpha-20);
   --wg-color-border-default: var(--wg-color-base-neutral-alpha-08);
+  --wg-color-border-loading-indicator: var(--wg-color-base-brand-500);
+  --wg-color-border-loading-track: var(--wg-color-base-neutral-alpha-08);
   --wg-color-border-focus: var(--wg-color-base-brand-500);
   --wg-color-border-info: var(--wg-color-base-info-alpha-20);
   --wg-color-border-promotion: var(--wg-color-base-promotion-alpha-20);
@@ -159,10 +169,13 @@
   --wg-color-surface-subtle: var(--wg-color-base-neutral-50);
   --wg-color-surface-toolbar-solid: #F6F6F6;
   --wg-color-surface-toolbar-translucent: rgba(246, 246, 246, 0.80);
+  --wg-color-transparent: transparent;
   --wg-color-text-danger: var(--wg-color-base-danger-500);
   --wg-color-text-disabled: var(--wg-color-base-neutral-500);
   --wg-color-text-info: var(--wg-color-base-info-500);
   --wg-color-text-inverse: var(--wg-color-base-static-white);
+  --wg-color-text-inverse-secondary: rgba(255, 255, 255, 0.70);
+  --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
   --wg-color-text-link: var(--wg-color-base-link-500);
   --wg-color-text-placeholder: var(--wg-color-base-neutral-500);
   --wg-color-text-primary: var(--wg-color-base-neutral-900);
@@ -209,6 +222,7 @@
   --wg-spacing-4: 4px;
   --wg-spacing-40: 40px;
   --wg-spacing-48: 48px;
+  --wg-spacing-72: 72px;
   --wg-spacing-8: 8px;
 
   /* Radius */
@@ -225,6 +239,26 @@
   --wg-component-button-width-container-max: 420px;
   --wg-component-button-width-page-paired: 120px;
   --wg-component-button-width-page-single: 180px;
+  --wg-component-actionsheet-home-indicator-height: 5px;
+  --wg-component-actionsheet-home-indicator-width: 134px;
+  --wg-component-actionsheet-safearea-bottom: 34px;
+  --wg-component-dialog-button-height: var(--wg-size-48);
+  --wg-component-dialog-closed-scale: 0.9;
+  --wg-component-dialog-padding-block: var(--wg-spacing-24);
+  --wg-component-dialog-padding-inline: 20px;
+  --wg-component-dialog-title-only-padding-block: var(--wg-spacing-32);
+  --wg-component-dialog-width: 300px;
+  --wg-component-result-icon-size-large: 120px;
+  --wg-component-tag-min-width-20: 36px;
+  --wg-component-tag-min-width-24: var(--wg-size-40);
+  --wg-component-tag-min-width-28: var(--wg-size-48);
+  --wg-component-tag-min-width-32: 52px;
+  --wg-component-toast-max-width: 320px;
+  --wg-cell-divider-end: var(--wg-spacing-0);
+  --wg-cell-divider-start: var(--wg-spacing-16);
+  --wg-cell-slot-avatar: var(--wg-spacing-0);
+  --wg-cell-slot-indent: var(--wg-spacing-0);
+  --wg-cell-slot-select: var(--wg-spacing-0);
   --wg-size-10: 10px;
   --wg-size-12: 12px;
   --wg-size-16: 16px;
@@ -235,7 +269,10 @@
   --wg-size-40: 40px;
   --wg-size-48: 48px;
   --wg-size-56: 56px;
+  --wg-size-64: 64px;
   --wg-size-72: 72px;
+  --wg-size-76: 76px;
+  --wg-size-104: 104px;
   --wg-touch-comfortable: 48px;
   --wg-touch-default: 44px;
   --wg-touch-min: 40px;
@@ -257,6 +294,7 @@
   --wg-layout-page-m1-margin: 0px;
   --wg-layout-page-m2-margin: 16px;
   --wg-layout-page-m3-margin: 32px;
+  --wg-layout-page-max-width: var(--wg-layout-screen-430);
   --wg-layout-screen-375: 375px;
   --wg-layout-screen-430: 430px;
   --wg-layout-width-375-m0: 359px;

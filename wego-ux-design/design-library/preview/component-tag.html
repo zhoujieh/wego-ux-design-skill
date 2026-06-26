@@ -15,7 +15,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: var(--wg-stroke-width-none) var(--wg-stroke-style-solid) transparent;
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-solid) var(--wg-color-transparent);
       border-radius: var(--wg-radius-full);
       cursor: pointer;
       user-select: none;
@@ -28,7 +28,7 @@
 
     .wg-tag--32 {
       block-size: var(--wg-size-32);
-      min-inline-size: 52px;
+      min-inline-size: var(--wg-component-tag-min-width-32);
       padding-inline: var(--wg-spacing-12);
       font-size: var(--wg-font-size-14);
       line-height: var(--wg-font-lineheight-14);
@@ -37,7 +37,7 @@
 
     .wg-tag--28 {
       block-size: var(--wg-size-28);
-      min-inline-size: 48px;
+      min-inline-size: var(--wg-component-tag-min-width-28);
       padding-inline: var(--wg-spacing-12);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);
@@ -46,7 +46,7 @@
 
     .wg-tag--24 {
       block-size: var(--wg-size-24);
-      min-inline-size: 40px;
+      min-inline-size: var(--wg-component-tag-min-width-24);
       padding-inline: var(--wg-spacing-8);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);
@@ -56,7 +56,7 @@
 
     .wg-tag--20 {
       block-size: var(--wg-size-20);
-      min-inline-size: 36px;
+      min-inline-size: var(--wg-component-tag-min-width-20);
       padding-inline: var(--wg-spacing-8);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "slug": "form",
+  "name": "表单",
+  "category": "form",
+  "variantDimensions": {
+    "layout": {
+      "description": "表单行排布方式",
+      "values": ["horizontal", "vertical"],
+      "default": "horizontal"
+    },
+    "action": {
+      "description": "输入/展示区类型",
+      "values": ["text", "number", "money", "phone", "select", "custom"],
+      "default": "text"
+    },
+    "rightButton": {
+      "description": "右侧补充动作",
+      "values": ["none", "link", "button", "icon-text"],
+      "default": "none"
+    },
+    "state": {
+      "description": "表单状态",
+      "values": ["default", "focused", "disabled"],
+      "default": "default"
+    },
+    "error": {
+      "description": "是否展示错误提示",
+      "values": ["false", "true"],
+      "default": "false"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-link-pressed",
+    "wg-color-action-primary-default",
+    "wg-color-bg-surface",
+    "wg-color-border-default",
+    "wg-color-divider-default",
+    "wg-color-status-danger-text",
+    "wg-color-text-disabled",
+    "wg-color-text-placeholder",
+    "wg-color-text-primary",
+    "wg-color-text-tertiary",
+    "wg-font-family-text",
+    "wg-font-lineheight-12",
+    "wg-font-lineheight-14",
+    "wg-font-lineheight-16",
+    "wg-font-size-12",
+    "wg-font-size-14",
+    "wg-font-size-16",
+    "wg-font-weight-medium",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-ease-standard",
+    "wg-size-16",
+    "wg-size-40",
+    "wg-size-48",
+    "wg-spacing-0",
+    "wg-spacing-16",
+    "wg-spacing-24",
+    "wg-spacing-4",
+    "wg-stroke-style-none",
+    "wg-stroke-width-default",
+    "wg-stroke-width-hairline",
+    "wg-stroke-width-none"
+  ],
+  "domAnatomy": {
+    "root": ".wg-form",
+    "modifiers": [
+      ".wg-form--horizontal",
+      ".wg-form--vertical",
+      ".wg-form--disabled",
+      ".wg-form--error",
+      ".wg-form--divider",
+      ".wg-form--divider-inset"
+    ],
+    "children": {
+      "body": ".wg-form__body",
+      "label": ".wg-form__label",
+      "action": {
+        "root": ".wg-form__action",
+        "modifiers": [
+          ".wg-form__action--select"
+        ]
+      },
+      "input": ".wg-form__input",
+      "currency": ".wg-form__currency",
+      "region": ".wg-form__region",
+      "separator": ".wg-form__separator",
+      "display": {
+        "root": ".wg-form__display",
+        "modifiers": [
+          ".wg-form__display--placeholder"
+        ]
+      },
+      "arrow": ".wg-form__arrow",
+      "right": ".wg-form__right",
+      "link": ".wg-form__link",
+      "hint": {
+        "root": ".wg-form__hint",
+        "modifiers": [
+          ".wg-form__hint--count"
+        ]
+      }
+    },
+    "group": {
+      "root": ".wg-form-group"
+    }
+  },
+  "usageHints": [
+    "horizontal 模式标签固定在左侧，action 区弹性撑满剩余空间",
+    "vertical 模式标签在上、输入区占满整行，适合备注等多行内容",
+    "money 场景通过 .wg-form__currency + .wg-form__input--number 组合实现",
+    "phone 场景使用 .wg-form__region + .wg-form__separator + .wg-form__input",
+    "select 场景只展示 .wg-form__display 与 .wg-form__arrow，不直接渲染 input",
+    "多条表单组合时使用 .wg-form-group 包裹，并在中间项加 .wg-form--divider"
+  ],
+  "doNotInvent": [
+    "不要把 horizontal 模式改成上下排列",
+    "不要在 select 场景里同时出现 input 和 display",
+    "不要把错误提示放到 label 或 right 区域",
+    "不要在 disabled 态保留可点击 link 或箭头强化色",
+    "不要跳过 .wg-form-group 直接手写分割线"
+  ],
+  "knownIssues": [
+    "focused 态当前主要依赖原生输入控件焦点反馈，尚未抽成显式的 .wg-form--focused 视觉修饰"
+  ],
+  "provenance": {
+    "preview": "preview/component-form.html",
+    "css": { "file": "components.css", "marker": "Form" }
+  }
+}

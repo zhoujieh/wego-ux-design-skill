@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "slug": "loading",
+  "name": "加载",
+  "category": "feedback",
+  "variantDimensions": {
+    "variant": {
+      "description": "加载展示形态",
+      "values": ["spinner", "overlay", "skeleton", "image"],
+      "default": "spinner"
+    },
+    "size": {
+      "description": "旋转指示器尺寸",
+      "values": ["lg", "sm"],
+      "default": "sm"
+    },
+    "text": {
+      "description": "overlay 模式下是否带文案",
+      "values": ["none", "caption"],
+      "default": "none"
+    },
+    "state": {
+      "description": "加载状态",
+      "values": ["visible", "hidden"],
+      "default": "visible"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-bg-skeleton",
+    "wg-color-bg-toast",
+    "wg-color-border-loading-indicator",
+    "wg-color-border-loading-track",
+    "wg-color-text-inverse",
+    "wg-font-lineheight-14",
+    "wg-font-size-14",
+    "wg-font-weight-regular",
+    "wg-motion-duration-slow",
+    "wg-motion-ease-standard",
+    "wg-radius-full",
+    "wg-radius-lg",
+    "wg-radius-sm",
+    "wg-shadow-md",
+    "wg-size-104",
+    "wg-size-16",
+    "wg-size-24",
+    "wg-size-48",
+    "wg-size-72",
+    "wg-spacing-12",
+    "wg-spacing-16",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-strong",
+    "wg-zindex-modal"
+  ],
+  "domAnatomy": {
+    "root": ".wg-loading",
+    "stateAttributes": ["data-state='visible'", "data-state='hidden'"],
+    "children": {
+      "spinner": {
+        "root": ".wg-loading__spinner",
+        "modifiers": [
+          ".wg-loading__spinner--lg",
+          ".wg-loading__spinner--sm"
+        ]
+      },
+      "overlay": ".wg-loading__overlay",
+      "toast": ".wg-loading__toast",
+      "text": ".wg-loading__text",
+      "skeleton": ".wg-loading__skeleton",
+      "skeletonBlock": {
+        "root": ".wg-loading__skeleton-block",
+        "modifiers": [
+          ".wg-loading__skeleton-block--rect",
+          ".wg-loading__skeleton-block--circle",
+          ".wg-loading__skeleton-block--line"
+        ]
+      },
+      "image": ".wg-loading__image",
+      "imageIcon": ".wg-loading__image-icon"
+    }
+  },
+  "usageHints": [
+    "spinner 用于局部刷新或小范围等待，尺寸只能选 lg / sm",
+    "overlay 形态必须使用 .wg-loading__overlay + .wg-loading__toast 组合，文案放在 .wg-loading__text",
+    "skeleton 用 rect / circle / line 三种块组合页面占位，不要替换成真实内容结构",
+    "image 形态是图片占位骨架，只保留方块背景和中间占位图标",
+    "spinner 旋转与 skeleton pulse 都由 CSS animation 驱动，无需 JavaScript"
+  ],
+  "doNotInvent": [
+    "不要新增第三档 spinner 尺寸",
+    "不要把 overlay 面板改成非居中的布局",
+    "不要给 skeleton block 增加边框或阴影",
+    "不要把 image 占位替换成网络图片资源",
+    "不要在 hidden 态保留可点击遮罩"
+  ],
+  "knownIssues": [
+    "Skeleton pulse 的中间帧透明度 0.4 仍是硬编码值",
+    "wg-loading__image-icon 通过内联 SVG mask-image 渲染，占位图形后续可替换为统一图标资产"
+  ],
+  "provenance": {
+    "preview": "preview/component-loading.html",
+    "css": { "file": "components.css", "marker": "Loading" }
+  }
+}

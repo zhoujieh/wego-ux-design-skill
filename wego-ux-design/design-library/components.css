@@ -225,7 +225,7 @@
     }
 
     .wg-actionsheet__safe-area {
-      block-size: env(safe-area-inset-bottom, 34px);
+      block-size: env(safe-area-inset-bottom, var(--wg-component-actionsheet-safearea-bottom));
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -235,8 +235,8 @@
     .wg-actionsheet__safe-area::after {
       content: "";
       display: block;
-      inline-size: 134px;
-      block-size: 5px;
+      inline-size: var(--wg-component-actionsheet-home-indicator-width);
+      block-size: var(--wg-component-actionsheet-home-indicator-height);
       background-color: var(--wg-color-text-primary);
       border-radius: var(--wg-radius-full);
     }
@@ -318,7 +318,7 @@
       min-block-size: max(var(--wg-touch-min), var(--button-visual-height));
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       color: inherit;
       cursor: pointer;
     }
@@ -825,12 +825,6 @@
 /* ===== Dialog ===== */
 
 .wg-dialog-overlay {
-      --wg-component-dialog-width: 300px;
-      --wg-component-dialog-padding-block: var(--wg-spacing-24);
-      --wg-component-dialog-padding-inline: 20px;
-      --wg-component-dialog-title-only-padding-block: var(--wg-spacing-32);
-      --wg-component-dialog-button-height: var(--wg-size-48);
-      --wg-component-dialog-closed-scale: 0.9;
       position: fixed;
       inset: 0;
       inline-size: 100%;
@@ -1102,7 +1096,7 @@
       flex: 1 1 0;
       min-inline-size: 0;
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       font-family: var(--wg-font-family-text);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
@@ -1146,7 +1140,7 @@
       appearance: none;
       flex: 0 0 var(--wg-size-48);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       font-family: var(--wg-font-family-text);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
@@ -1320,7 +1314,7 @@
     .wg-input--full .wg-input__container {
       block-size: var(--wg-touch-default);
       padding-inline: var(--wg-spacing-0);
-      background-color: transparent;
+      background-color: var(--wg-color-transparent);
       border-width: var(--wg-stroke-width-none) var(--wg-stroke-width-none) var(--wg-stroke-width-default);
       border-style: var(--wg-stroke-style-none) var(--wg-stroke-style-none) var(--wg-stroke-style-solid);
       border-color: var(--wg-color-border-default);
@@ -1383,7 +1377,7 @@
 
     .wg-input--full .wg-input__field {
       block-size: 100%;
-      background: transparent;
+      background: var(--wg-color-transparent);
     }
 
     .wg-input__field {
@@ -1393,7 +1387,7 @@
       block-size: 100%;
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       font-family: var(--wg-font-family-text);
       font-size: var(--wg-font-size-14);
       line-height: var(--wg-font-lineheight-14);
@@ -1485,7 +1479,7 @@
       appearance: none;
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       color: var(--wg-color-action-link-default);
       font-family: inherit;
       text-decoration: none;
@@ -1712,7 +1706,7 @@
     }
 
     .wg-navbar--bg-transparent {
-      background-color: transparent;
+      background-color: var(--wg-color-transparent);
       color: var(--wg-color-text-inverse);
     }
 
@@ -1818,7 +1812,7 @@
       margin-inline-start: calc(-1 * (var(--wg-touch-min) - var(--wg-size-24)) / 2);
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       color: var(--wg-color-text-primary);
       cursor: pointer;
       transition:
@@ -1874,7 +1868,7 @@
       min-block-size: var(--wg-touch-min);
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       color: var(--wg-color-text-primary);
       cursor: pointer;
       transition:
@@ -1971,7 +1965,7 @@
       block-size: 100%;
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       font-size: var(--wg-font-size-14);
       line-height: var(--wg-font-lineheight-14);
       color: var(--wg-color-text-primary);
@@ -2074,7 +2068,7 @@
 
     .wg-radio--dark.wg-radio--checked {
       border-color: var(--wg-color-bg-surface);
-      background-color: transparent;
+      background-color: var(--wg-color-transparent);
     }
 
     .wg-radio:not(.wg-radio--disabled):active {
@@ -2176,7 +2170,7 @@
     .wg-result__icon--time-expired,
     .wg-result__icon--network-error,
     .wg-result__icon--custom {
-      font-size: 120px;
+      font-size: var(--wg-component-result-icon-size-large);
     }
 
     .wg-result__icon--not-found {
@@ -2537,7 +2531,7 @@
       justify-content: center;
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       cursor: pointer;
       position: relative;
       transition:
@@ -2661,7 +2655,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: var(--wg-stroke-width-none) var(--wg-stroke-style-solid) transparent;
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-solid) var(--wg-color-transparent);
       border-radius: var(--wg-radius-full);
       cursor: pointer;
       user-select: none;
@@ -2674,7 +2668,7 @@
 
     .wg-tag--32 {
       block-size: var(--wg-size-32);
-      min-inline-size: 52px;
+      min-inline-size: var(--wg-component-tag-min-width-32);
       padding-inline: var(--wg-spacing-12);
       font-size: var(--wg-font-size-14);
       line-height: var(--wg-font-lineheight-14);
@@ -2683,7 +2677,7 @@
 
     .wg-tag--28 {
       block-size: var(--wg-size-28);
-      min-inline-size: 48px;
+      min-inline-size: var(--wg-component-tag-min-width-28);
       padding-inline: var(--wg-spacing-12);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);
@@ -2692,7 +2686,7 @@
 
     .wg-tag--24 {
       block-size: var(--wg-size-24);
-      min-inline-size: 40px;
+      min-inline-size: var(--wg-component-tag-min-width-24);
       padding-inline: var(--wg-spacing-8);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);
@@ -2702,7 +2696,7 @@
 
     .wg-tag--20 {
       block-size: var(--wg-size-20);
-      min-inline-size: 36px;
+      min-inline-size: var(--wg-component-tag-min-width-20);
       padding-inline: var(--wg-spacing-8);
       font-size: var(--wg-font-size-12);
       line-height: var(--wg-font-lineheight-12);
@@ -2832,13 +2826,7 @@
 
 /* ===== Toast ===== */
 
-/* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
-    :root {
-      --wg-color-bg-toast: var(--wg-color-feedback-toast-bg);
-      --wg-color-text-inverse-secondary: rgba(255, 255, 255, 0.70);
-    }
-
-    .wg-toast-container {
+.wg-toast-container {
       position: fixed;
       inset-inline: 0;
       block-end: calc(var(--wg-spacing-72) + env(safe-area-inset-bottom));
@@ -2865,7 +2853,7 @@
       border-radius: var(--wg-radius-lg);
       box-shadow: var(--wg-shadow-md);
       pointer-events: auto;
-      max-inline-size: min(320px, 90vw);
+      max-inline-size: min(var(--wg-component-toast-max-width), 90vw);
     }
 
     .wg-toast__icon {
@@ -2908,7 +2896,7 @@
       justify-content: center;
       padding: var(--wg-spacing-4) var(--wg-spacing-8);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background: var(--wg-color-transparent);
       cursor: pointer;
       font-family: var(--wg-font-family-text);
       font-size: var(--wg-font-size-14);

@@ -22,6 +22,7 @@ from token_utils import (
 
 
 CSS_VAR_USE_RE = re.compile(r"var\((--wg-[a-z0-9-]+)\)")
+CSS_VAR_DEF_RE = re.compile(r"(?m)^\s*(--wg-[a-z0-9-]+)\s*:")
 TOKEN_USE_RE = re.compile(r"(?<![A-Za-z0-9_-])(wg\.[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)+)")
 FENCE_RE = re.compile(r"```(?:css|html|text)?\n(.*?)```", re.DOTALL)
 HARDCODED_STYLE_RE = re.compile(
@@ -31,13 +32,19 @@ HARDCODED_STYLE_RE = re.compile(
 SCAN_FILES = [
     ROOT / "SKILL.md",
     ROOT / "README.md",
-    *sorted((ROOT / "01-principles").glob("*.md")),
-    ROOT / "02-tokens" / "01-token-architecture.md",
-    ROOT / "02-tokens" / "token-usage-guidelines.md",
-    *sorted((ROOT / "03-components").glob("*.md")),
-    *sorted((ROOT / "04-ai-rules").glob("*.md")),
-    *sorted((ROOT / "05-examples").glob("*.md")),
+    ROOT / "design-library" / "library-consumption.json",
+    ROOT / "design-library" / "tokens.json",
+    ROOT / "design-library" / "tokens.css",
+    ROOT / "design-library" / "scaffold.css",
+    ROOT / "design-library" / "components.css",
+    *sorted((ROOT / "design-library" / "preview").glob("component-*.html")),
+    *sorted((ROOT / "principles").glob("*.md")),
+    ROOT / "02-tokens" / "icon-guidelines.md",
+    *sorted((ROOT / "rules").glob("*.md")),
+    *sorted((ROOT / "examples").glob("*.md")),
+    ROOT / "resources" / "README.md",
 ]
+DESIGN_LIBRARY_TOKENS_CSS = ROOT / "design-library" / "tokens.css"
 
 IGNORED_TOKEN_SUFFIXES = (
     ".xxx",
@@ -160,9 +167,29 @@ def validate_references(data: dict) -> list[str]:
     return sorted(set(errors))
 
 
+def validate_design_library_token_names(
+    data: dict,
+    css_path: Path = DESIGN_LIBRARY_TOKENS_CSS,
+) -> list[str]:
+    expected = {
+        css_name(name)
+        for name, entry in data["tokens"].items()
+        if css_enabled(entry)
+    }
+    text = css_path.read_text(encoding="utf-8")
+    actual = set(CSS_VAR_DEF_RE.findall(text))
+
+    errors: list[str] = []
+    for variable in sorted(expected - actual):
+        errors.append(f"design-library/tokens.css missing CSS variable {variable}")
+    for variable in sorted(actual - expected):
+        errors.append(f"design-library/tokens.css defines unknown CSS variable {variable}")
+    return errors
+
+
 def validate_examples() -> list[str]:
     errors: list[str] = []
-    for path in sorted((ROOT / "05-examples").glob("*.md")):
+    for path in sorted((ROOT / "examples").glob("*.md")):
         text = path.read_text(encoding="utf-8")
         allow_next = False
         position = 0
@@ -202,6 +229,7 @@ def main() -> int:
     errors = [
         *validate_source(data),
         *validate_generated_files(),
+        *validate_design_library_token_names(data),
         *validate_references(data),
         *validate_examples(),
     ]

@@ -72,7 +72,7 @@ def render_css_map(data: dict) -> str:
         "",
         "## 使用方式",
         "",
-        "原型项目直接复制 `02-tokens/tokens.css` 为 `styles/tokens.css`，并通过 `<link>` 引入。下面内容仅用于查阅映射。",
+        "原型项目直接复制 `design-library/tokens.css` 为 `styles/tokens.css`，并通过 `<link>` 引入。下面内容仅用于查阅映射。",
         "",
         "```css",
     ]
