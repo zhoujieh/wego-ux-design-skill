@@ -50,6 +50,18 @@ components.css
 
 ## 复制规则
 
+
+### 标记定位
+
+每个 `design-library/preview/component-{slug}.html` 中，组件本体由以下标记包裹：
+
+```
+<!-- @component-markup-start -->
+<!-- @component-markup-end -->
+```
+
+AI 复制组件 markup 时，**必须通过这两个标记定位**，只复制标记之间的 HTML 片段，不得依赖语义推断或 class 名猜测边界。
+标记之间的内容已是组件本体的完整展示（包含各 variant 示例），可直接按需裁剪使用。
 - 组件 markup 只能从 `preview/component-{slug}.html` 复制
 - 复制时保留 class 名、修饰符、DOM 层级和辅助节点
 - 只复制组件本体，不复制 preview 页面的演示壳、矩阵、标题或说明文案

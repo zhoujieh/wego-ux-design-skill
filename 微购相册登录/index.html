@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微购相册登录</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="assets/fonts/iconfont/iconfont.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="login-page">
+    <!-- 品牌区 -->
+    <header class="login-brand">
+      <h1 class="login-brand__title">微购相册</h1>
+      <p class="login-brand__subtitle">登录后管理你的商品相册</p>
+    </header>
+
+    <!-- 表单区 -->
+    <div class="login-form">
+      <!-- 手机号 -->
+      <div class="login-form__field">
+        <label class="login-form__label">手机号</label>
+        <div class="wg-input wg-input--card" id="phoneInput">
+          <div class="wg-input__container">
+            <input class="wg-input__field" type="tel" placeholder="请输入手机号" maxlength="11" id="phone">
+          </div>
+        </div>
+        <span class="login-form__error" id="phoneError" hidden></span>
+      </div>
+
+      <!-- 验证码 -->
+      <div class="login-form__field">
+        <label class="login-form__label">验证码</label>
+        <div class="login-form__row">
+          <div class="login-form__code-input">
+            <div class="wg-input wg-input--card" id="codeInput">
+              <div class="wg-input__container">
+                <input class="wg-input__field" type="text" placeholder="请输入验证码" maxlength="6" id="code">
+              </div>
+            </div>
+            <span class="login-form__error" id="codeError" hidden></span>
+          </div>
+          <button class="wg-button wg-button--compact wg-button--strong" type="button" id="sendCodeBtn">
+            <span class="wg-button__surface"><span class="wg-button__label">发送验证码</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作区 -->
+    <div class="login-action">
+      <div class="wg-button-group wg-button-group--page wg-button-group--form">
+        <button class="wg-button wg-button--page wg-button--strong" type="button" id="loginBtn">
+          <span class="wg-button__surface"><span class="wg-button__label">登录</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>

@@ -20,6 +20,9 @@ INDEX = COMPONENT_DIR / "index.json"
 CSS_START_MARKER = "/* @component-css-start */"
 CSS_END_MARKER = "/* @component-css-end */"
 
+MARKUP_START_MARKER = "<!-- @component-markup-start -->"
+MARKUP_END_MARKER = "<!-- @component-markup-end -->"
+
 REQUIRED_INDEX_FIELDS = {
     "slug",
     "name",
@@ -226,10 +229,30 @@ def validate_component_contracts() -> list[str]:
 
     return errors
 
+def validate_preview_markup_markers(preview_dir: Path = PREVIEW_DIR) -> list[str]:
+    """Check that every preview HTML file contains @component-markup-start and @component-markup-end."""
+    errors: list[str] = []
+    for path in sorted(preview_dir.glob("component-*.html")):
+        text = path.read_text(encoding="utf-8")
+        start = text.find(MARKUP_START_MARKER)
+        end = text.find(MARKUP_END_MARKER)
+        if start == -1:
+            errors.append(f"{relative(path)} missing {MARKUP_START_MARKER}")
+        if end == -1:
+            errors.append(f"{relative(path)} missing {MARKUP_END_MARKER}")
+        if start != -1 and end != -1 and end <= start:
+            errors.append(f"{relative(path)} has markup end marker before start marker")
+    if not errors:
+        indexed = len(list(preview_dir.glob("component-*.html")))
+        print(f"Markup marker validation passed: {indexed} files")
+    return errors
+
+
 
 def main() -> int:
     errors = [
         *validate_component_contracts(),
+        *validate_preview_markup_markers(),
         *validate_preview_css_hardcoding(),
     ]
     if errors:

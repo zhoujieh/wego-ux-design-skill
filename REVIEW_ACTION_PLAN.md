@@ -102,14 +102,14 @@
 
 ### P1-2 preview HTML 加 markup 标记注释，让 AI 精确复制
 
-- [ ] **P1-2.1** 在每个 `design-library/preview/component-*.html` 中，用 `<!-- @component-markup-start -->` / `<!-- @component-markup-end -->` 包裹组件本体的 HTML 结构（不含演示壳、矩阵、说明文案）
+- [x] **P1-2.1** 在每个 `design-library/preview/component-*.html` 中，用 `<!-- @component-markup-start -->` / `<!-- @component-markup-end -->` 包裹组件本体的 HTML 结构（不含演示壳、矩阵、说明文案）
   - 17 个文件逐个修改
   - 验收：每个 preview HTML 中能精确定位到带标记的组件本体
 
-- [ ] **P1-2.2** 更新 `rules/components.md` 的"复制规则"章节，明确 AI 应通过标记注释定位并复制，而不是靠语义判断
+- [x] **P1-2.2** 更新 `rules/components.md` 的"复制规则"章节，明确 AI 应通过标记注释定位并复制，而不是靠语义判断
   - 验收：规则文字指定了 `<!-- @component-markup-start -->` 和 `<!-- @component-markup-end -->` 标记
 
-- [ ] **P1-2.3** 在 `scripts/validate_components.py` 中增加检查项：所有 preview HTML 文件必须包含 `@component-markup-start` 和 `@component-markup-end` 标记
+- [x] **P1-2.3** 在 `scripts/validate_components.py` 中增加检查项：所有 preview HTML 文件必须包含 `@component-markup-start` 和 `@component-markup-end` 标记
   - 验收：运行 `python scripts/validate_components.py`，缺失标记的文件被检出
 
 ### P1-3 削减 SKILL.md 内容密度
