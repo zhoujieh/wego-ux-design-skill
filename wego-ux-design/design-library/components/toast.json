@@ -97,9 +97,7 @@
     "不要把 success / error / info 图标颜色改成其他语义色",
     "不要在 hidden 态使用 display: none 直接移除，必须保留过渡动画"
   ],
-  "knownIssues": [
-    "active opacity 0.6 仍是样式侧待收敛项"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-toast.html",
     "css": { "file": "components.css", "marker": "Toast" }

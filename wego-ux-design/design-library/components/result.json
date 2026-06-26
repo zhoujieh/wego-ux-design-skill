@@ -139,10 +139,7 @@
     "不要把 custom 内容替换掉 title 或 description 主信息层",
     "不要给按钮或链接新增未定义的强调色"
   ],
-  "knownIssues": [
-    "result-80 的主内容起始位置仍含固定百分比偏移，后续可继续 token 化",
-    "按钮和链接的 active / disabled 透明度 0.6、0.4 仍是硬编码值"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-result.html",
     "css": { "file": "components.css", "marker": "Result" }

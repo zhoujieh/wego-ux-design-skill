@@ -148,9 +148,7 @@
     "不要给 disabled 态保留高对比箭头或操作文字",
     "不要绕过基础组件，重复实现 checkbox / radio / switch / button"
   ],
-  "knownIssues": [
-    "active 态当前同时使用 wg-color-state-pressed 与 wg-color-surface-active，两套表面态 token 语义后续可再统一"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-cell.html",
     "css": { "file": "components.css", "marker": "Cell" }

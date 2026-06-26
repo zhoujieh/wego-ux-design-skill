@@ -92,10 +92,7 @@
     "不要把 image 占位替换成网络图片资源",
     "不要在 hidden 态保留可点击遮罩"
   ],
-  "knownIssues": [
-    "Skeleton pulse 的中间帧透明度 0.4 仍是硬编码值",
-    "wg-loading__image-icon 通过内联 SVG mask-image 渲染，占位图形后续可替换为统一图标资产"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-loading.html",
     "css": { "file": "components.css", "marker": "Loading" }

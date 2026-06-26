@@ -101,9 +101,7 @@
     "不要用 placeholder 代替错误文案",
     "不要给 disabled 态保留可编辑光标或 hover 强化"
   ],
-  "knownIssues": [
-    "number 模式的宽度目前通过 wg-size-64 / wg-size-40 组合推导，后续可评估是否沉淀为专用组件 token"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-input.html",
     "css": { "file": "components.css", "marker": "Input" }

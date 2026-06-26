@@ -78,7 +78,7 @@
       "slug": "dialog",
       "name": "对话框",
       "category": "feedback",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-dialog.html",
       "contract": "dialog.json"
     },
@@ -86,7 +86,7 @@
       "slug": "toast",
       "name": "轻提示",
       "category": "feedback",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-toast.html",
       "contract": "toast.json"
     },
@@ -94,7 +94,7 @@
       "slug": "loading",
       "name": "加载",
       "category": "feedback",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-loading.html",
       "contract": "loading.json"
     },
@@ -102,7 +102,7 @@
       "slug": "input",
       "name": "输入框",
       "category": "form",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-input.html",
       "contract": "input.json"
     },
@@ -110,7 +110,7 @@
       "slug": "form",
       "name": "表单",
       "category": "form",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-form.html",
       "contract": "form.json"
     },
@@ -118,7 +118,7 @@
       "slug": "tag",
       "name": "标签",
       "category": "display",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-tag.html",
       "contract": "tag.json"
     },
@@ -126,7 +126,7 @@
       "slug": "cell",
       "name": "单元格",
       "category": "display",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-cell.html",
       "contract": "cell.json"
     },
@@ -134,7 +134,7 @@
       "slug": "result",
       "name": "结果页",
       "category": "feedback",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-result.html",
       "contract": "result.json"
     }

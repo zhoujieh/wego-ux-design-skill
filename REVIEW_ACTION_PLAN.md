@@ -52,20 +52,20 @@
 
 ### P0-2 修复 icon 路径引用分裂
 
-- [ ] **P0-2.1** 在 `rules/icon-guidelines.md` 中，将所有 `resources/fonts/iconfont/iconfont.json` 路径统一改为 `design-library/assets/fonts/iconfont/iconfont.json`
+- [x] **P0-2.1** 在 `rules/icon-guidelines.md` 中，将所有 `resources/fonts/iconfont/iconfont.json` 路径统一改为 `design-library/assets/fonts/iconfont/iconfont.json`
   - 影响章节：第 1 节"图标资源"、第 2 节"图标查询"、第 7 节"缺失标注"
   - 验收：`rg "resources/fonts" rules/icon-guidelines.md` 无结果
 
-- [ ] **P0-2.2** 扫描其他 rules/ 文件，确认没有残留的 `resources/fonts/iconfont` 旧路径
+- [x] **P0-2.2** 扫描其他 rules/ 文件，确认没有残留的 `resources/fonts/iconfont` 旧路径
   - 搜索范围：`rules/*.md`、`principles/*.md`
   - 验收：`rg "resources/fonts/iconfont" rules/ principles/` 无结果（icon-guidelines.md 除外，已在上一步修正）
 
-- [ ] **P0-2.3** 在 `rules/icon-guidelines.md` 中补充说明：`design-library/assets/fonts/iconfont/iconfont.json` 是运行时查询源，`website/assets/fonts/iconfont/iconfont.json` 是 website 本地副本，两者内容一致
+- [x] **P0-2.3** 在 `rules/icon-guidelines.md` 中补充说明：`design-library/assets/fonts/iconfont/iconfont.json` 是运行时查询源，`website/assets/fonts/iconfont/iconfont.json` 是 website 本地副本，两者内容一致
   - 验收：AI 不会再在运行时去读 `website/assets/fonts/` 或 `resources/` 下的 iconfont 文件
 
 ### P0-3 统一组件状态，消除 AI 行为不确定性
 
-- [ ] **P0-3.1** 逐个审查 8 个 `optimizing` 组件的 `knownIssues`，判断每个 knownIssue 的处置方式
+- [x] **P0-3.1** 逐个审查 8 个 `optimizing` 组件的 `knownIssues`，判断每个 knownIssue 的处置方式
   - 处置选项：
     - A）修复 → 修改 preview HTML 中的 Canonical CSS，运行 `extract_components_css.py`，从 `knownIssues` 中移除
     - B）降级为约束 → 从 `knownIssues` 移除，改写为 `usageHints` 或 `doNotInvent` 中的一条
@@ -73,11 +73,11 @@
   - 8 个 optimizing 组件：`dialog`、`toast`、`loading`、`input`、`form`、`tag`、`cell`、`result`
   - 验收：每个组件的 `knownIssues` 数组为空或已清空
 
-- [ ] **P0-3.2** 将所有组件 `status` 统一为 `stable`
+- [x] **P0-3.2** 将所有组件 `status` 统一为 `stable`
   - 修改 `design-library/components/index.json`，8 个 optimizing → stable
   - 验收：`rg '"status": "optimizing"' design-library/components/index.json` 无结果
 
-- [ ] **P0-3.3** 在 `SKILL.md` 或 `rules/components.md` 中补充规则：AI 遇到 `knownIssues` 字段时，应照搬契约不修改，不得自行修补；`knownIssues` 仅供维护者查阅
+- [x] **P0-3.3** 在 `SKILL.md` 或 `rules/components.md` 中补充规则：AI 遇到 `knownIssues` 字段时，应照搬契约不修改，不得自行修补；`knownIssues` 仅供维护者查阅
   - 验收：规则文字明确，AI 的行为可预期
 
 ---
@@ -124,6 +124,32 @@
 - [ ] **P1-3.3** 在 SKILL.md 末尾增加"上下文保护"说明：当 AI context window 不足时，优先保留"任务路由表"和"design-library 路径"区块，其余部分可从 rules/ 按需读取
   - 验收：说明文字清晰，AI 知道截断时的保底行为
 
+
+### P1-4 统一组件硬编码值为设计 Token（来自 P0-3 knownIssues 转化）
+
+- [ ] **P1-4.1** toast: active opacity 0.6 收敛为组件 Token（`--wg-component-toast-active-opacity`）
+  - 验收：toast 的 active 透明度通过 CSS 变量引用而非硬编码
+
+- [ ] **P1-4.2** loading: Skeleton pulse 中间帧透明度 0.4 收敛为 Token
+  - 验收：skeleton pulse 动画关键帧透明度通过 CSS 变量引用
+
+- [ ] **P1-4.3** loading: wg-loading__image-icon 内联 SVG mask-image 替换为统一图标资产
+  - 验收：image-icon 不再内联 SVG，改用 iconfont 或独立图标引用
+
+- [ ] **P1-4.4** input: number 模式宽度评估是否沉淀为专用组件 Token（`--wg-component-input-number-width` 等）
+  - 验收：number 宽度通过单一 Token 表达，不再用 wg-size-64 / wg-size-40 组合推导
+
+- [ ] **P1-4.5** form: focused 态抽取为显式 `.wg-form--focused` 视觉修饰（当前依赖原生焦点反馈）
+  - 验收：form 的 focused 态有独立且可预览的 CSS 规则
+
+- [ ] **P1-4.6** cell: active 态统一使用单一表面 Token（`wg-color-state-pressed` 与 `wg-color-surface-active` 二选一）
+  - 验收：cell active 态只引用一个表面颜色 Token
+
+- [ ] **P1-4.7** result: result-80 主内容起始位置的固定百分比偏移 Token 化
+  - 验收：偏移值通过 CSS 变量表达
+
+- [ ] **P1-4.8** result + toast: active / disabled 透明度 0.6、0.4 收敛为组件级 Token
+  - 验收：所有组件透明度通过 CSS 变量引用，无硬编码 0.6 / 0.4 值
 ---
 
 ## P2：细节优化

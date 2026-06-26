@@ -46,6 +46,7 @@ components.css
 - `domAnatomy` 决定根节点、子节点和 modifier class
 - `doNotInvent` 是硬限制，不能突破
 - `provenance.preview` 指向要复制 markup 的预览文件
+- `knownIssues` 仅供维护者查阅，AI 照搬不修改，不得自行修补
 
 ## 复制规则
 

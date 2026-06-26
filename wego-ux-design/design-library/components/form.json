@@ -122,9 +122,7 @@
     "不要在 disabled 态保留可点击 link 或箭头强化色",
     "不要跳过 .wg-form-group 直接手写分割线"
   ],
-  "knownIssues": [
-    "focused 态当前主要依赖原生输入控件焦点反馈，尚未抽成显式的 .wg-form--focused 视觉修饰"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-form.html",
     "css": { "file": "components.css", "marker": "Form" }
