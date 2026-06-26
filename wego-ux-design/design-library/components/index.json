@@ -38,9 +38,9 @@
       "slug": "tabs",
       "name": "标签栏",
       "category": "navigation",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-tabs.html",
-      "contract": null
+      "contract": "tabs.json"
     },
     {
       "slug": "dialog",

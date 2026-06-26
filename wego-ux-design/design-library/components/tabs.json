@@ -35,6 +35,10 @@
     "wg-stroke-style-none", "wg-stroke-style-solid",
     "wg-motion-duration-fast", "wg-motion-ease-standard"
   ],
+  "internalProperties": {
+    "--_tabs-indicator-standard-height": "3px",
+    "--_tabs-indicator-mini-height": "2px"
+  },
   "domAnatomy": {
     "root": ".wg-tabs",
     "modifiers": [
@@ -51,18 +55,29 @@
     }
   },
   "usageHints": [
-    "divide 模式均分容器宽度，适合 2-4 个标签",
-    "scroll 模式横向滚动，适合标签数量较多时",
-    "选中的标签项设置 aria-selected='true'",
-    "standard 尺寸高 56px，mini 尺寸高 48px",
-    "指示条自动在选中标签下方显示"
+    "divide 模式：均分容器宽度，每个 tab flex: 1，适合 2-4 个标签",
+    "scroll 模式：横向滚动，overflow-x: auto 且隐藏滚动条，适合 5+ 标签",
+    "选中态通过 aria-selected='true' 控制，配合 .wg-tabs__indicator 显示底部指示条",
+    "standard 尺寸：item 高 56px、label 字号 16px、indicator 高 3px",
+    "mini 尺寸：item 高 48px、label 字号 14px、indicator 高 2px",
+    "mini 模式首个 item 添加 .wg-tabs__item--first 增加左侧 padding",
+    "indicator 默认 display: none，aria-selected='true' 时 display: block",
+    "standard indicator：block-size 由 --_tabs-indicator-standard-height 定义，inline-size: 100%",
+    "mini indicator：block-size 由 --_tabs-indicator-mini-height 定义，flex: 1 自适应",
+    "indicator 使用 --wg-color-action-primary-default 品牌绿色，border-radius: full 胶囊形",
+    "所有状态通过 :active（opacity 0.6）、:focus-visible（outline ring）实现",
+    "根元素背景固定为 --wg-color-bg-surface（白色），不随页面背景变化"
   ],
   "doNotInvent": [
     "不要自创标签尺寸（只能用 standard/mini）",
-    "不要修改指示条颜色",
-    "不要给标签栏添加背景色（固定白色表面）",
-    "不要自创选中态的 class 名（只能用 aria-selected）",
-    "不要修改指示条的宽度（standard 100%，mini flex）"
+    "不要自创布局方式（只能用 divide/scroll）",
+    "不要修改指示条颜色（固定品牌绿色）",
+    "不要修改指示条高度（standard=3px, mini=2px）",
+    "不要给标签栏添加额外背景色",
+    "不要自创选中态 class 名（只能用 aria-selected 属性选择器）",
+    "不要在 scroll 模式下给 item 设置固定宽度",
+    "不要修改 label 的截断策略（white-space: nowrap + text-overflow: ellipsis + max-width: 4em）",
+    "不要去掉 indicator 的 display: none 默认隐藏逻辑"
   ],
   "provenance": {
     "preview": "preview/component-tabs.html",

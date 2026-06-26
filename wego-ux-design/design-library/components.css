@@ -2026,6 +2026,8 @@
       display: flex;
       inline-size: 100%;
       background-color: var(--wg-color-bg-surface);
+      --_tabs-indicator-standard-height: 3px;
+      --_tabs-indicator-mini-height: 2px;
     }
 
     .wg-tabs__scroll {
@@ -2129,12 +2131,12 @@
     }
 
     .wg-tabs--standard .wg-tabs__indicator {
-      block-size: 3px;
+      block-size: var(--_tabs-indicator-standard-height);
       inline-size: 100%;
     }
 
     .wg-tabs--mini .wg-tabs__indicator {
-      block-size: 2px;
+      block-size: var(--_tabs-indicator-mini-height);
       flex: 1 1 0;
       min-inline-size: 0;
     }
