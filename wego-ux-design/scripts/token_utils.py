@@ -10,10 +10,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "02-tokens" / "tokens.json"
-REFERENCE = ROOT / "02-tokens" / "token-reference.md"
-PROJECT_CSS = ROOT / "02-tokens" / "tokens.css"
-CSS_MAP = ROOT / "token-css-map.md"
+SOURCE = ROOT / "design-library" / "tokens-source.json"
+TOKENS_JSON = ROOT / "design-library" / "tokens.json"
 
 CATEGORY_ORDER = [
     "color",
@@ -93,3 +91,4 @@ def grouped_tokens(data: dict[str, Any]) -> list[tuple[str, list[tuple[str, dict
         )
         for category in CATEGORY_ORDER
     ]
+DESIGN_TOKENS_CSS = ROOT / "design-library" / "tokens.css"

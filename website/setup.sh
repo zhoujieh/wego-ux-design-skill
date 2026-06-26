@@ -7,7 +7,7 @@ SKILL_DIR="$(cd "$(dirname "$0")/../wego-ux-design" && pwd)"
 SITE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "==> 复制 tokens.css ..."
-cp "$SKILL_DIR/02-tokens/tokens.css" "$SITE_DIR/styles/tokens.css"
+cp "$SKILL_DIR/design-library/tokens.css" "$SITE_DIR/styles/tokens.css"
 
 echo "==> 复制字体文件 ..."
 cp "$SKILL_DIR/resources/fonts/WegoKeyboardN9-Regular.otf" "$SITE_DIR/assets/fonts/"

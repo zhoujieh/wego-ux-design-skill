@@ -9,9 +9,6 @@ import sys
 from pathlib import Path
 
 from token_utils import (
-    CSS_MAP,
-    PROJECT_CSS,
-    REFERENCE,
     ROOT,
     TOKEN_NAME_RE,
     css_enabled,
@@ -39,7 +36,7 @@ SCAN_FILES = [
     ROOT / "design-library" / "components.css",
     *sorted((ROOT / "design-library" / "preview").glob("component-*.html")),
     *sorted((ROOT / "principles").glob("*.md")),
-    ROOT / "02-tokens" / "icon-guidelines.md",
+    ROOT / "rules" / "icon-guidelines.md",
     *sorted((ROOT / "rules").glob("*.md")),
     *sorted((ROOT / "examples").glob("*.md")),
     ROOT / "resources" / "README.md",
@@ -152,7 +149,8 @@ def validate_references(data: dict) -> list[str]:
     tokens = data["tokens"]
     css_variables = {css_name(name) for name, entry in tokens.items() if css_enabled(entry)}
 
-    for path in [CSS_MAP, PROJECT_CSS, REFERENCE, *SCAN_FILES]:
+    for path in [*SCAN_FILES]:
+
         text = path.read_text(encoding="utf-8")
         for variable in CSS_VAR_USE_RE.findall(text):
             if variable not in css_variables:

@@ -119,4 +119,4 @@ CI 不依赖 Node、不依赖外部 API、不调用 LLM。
 
 ### Token 文件校验
 
-每个生成项目的 `styles/tokens.css` 必须与仓库 `wego-ux-design/02-tokens/tokens.css` 内容一致。
+每个生成项目的 `styles/tokens.css` 必须与仓库 `wego-ux-design/design-library/tokens.css` 内容一致。

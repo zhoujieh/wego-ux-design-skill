@@ -17,4 +17,4 @@
 - 不扫描素材目录来发现组件；组件发现只从 `design-library/components/index.json` 开始。
 - 复制资源时保持原目录结构，避免破坏 CSS 内部字体路径和原型相对路径。
 - 图片、视频和 SVG 只作为内容或业务素材；尺寸、圆角、遮罩、层级和间距仍通过 Token 控制。
-- iconfont 查询与 SVG 兜底规则以 `02-tokens/icon-guidelines.md` 为准。
+- iconfont 查询与 SVG 兜底规则以 `rules/icon-guidelines.md` 为准。

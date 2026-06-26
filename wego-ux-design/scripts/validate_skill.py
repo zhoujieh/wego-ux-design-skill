@@ -14,8 +14,8 @@ SKILL = ROOT / "SKILL.md"
 
 REQUIRED_FILES = {
     "principles/design-principles.md",
-    "02-tokens/icon-guidelines.md",
-    "02-tokens/tokens.css",
+    "rules/icon-guidelines.md",
+    
     "agents/openai.yaml",
     "design-library/library-consumption.json",
     "design-library/tokens.json",
@@ -35,7 +35,7 @@ REQUIRED_FILES = {
     "examples/bad-ui.md",
     "examples/output.md",
     "resources/README.md",
-    "token-css-map.md",
+    
 }
 
 RUNTIME_FILES = [

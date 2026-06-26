@@ -75,7 +75,7 @@ components.css
 - 组件需要图标时，复制整个 `design-library/assets/fonts/iconfont/` 目录
 - HTML 中使用 `<i class="wego-iconfont-s icon-{font_class}"></i>`
 - `font_class` 必须来自图标字体资源或项目既有契约，不得臆造
-- 只有在 iconfont 明确缺失目标图标时，才按 `02-tokens/icon-guidelines.md` 使用 SVG 兜底
+- 只有在 iconfont 明确缺失目标图标时，才按 `rules/icon-guidelines.md` 使用 SVG 兜底
 
 ## 未命中组件时
 

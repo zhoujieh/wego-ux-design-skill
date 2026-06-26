@@ -156,7 +156,7 @@ design-library/library-consumption.json
 4. 复制 `design-library/tokens.css` → 项目 `styles/tokens.css`
 5. 需要基础排版和布局工具时，按需复用 `design-library/scaffold.css` 中的通用骨架规则
 6. 复制 `design-library/components.css` → 项目 `styles/components.css`
-7. 使用图标时，复制 `design-library/assets/fonts/iconfont/` 整个目录 → `assets/fonts/iconfont/`，并按 `02-tokens/icon-guidelines.md` 处理 iconfont 缺失场景
+7. 使用图标时，复制 `design-library/assets/fonts/iconfont/` 整个目录 → `assets/fonts/iconfont/`，并按 `rules/icon-guidelines.md` 处理 iconfont 缺失场景
 8. 从 `preview/component-{slug}.html` 复制组件 markup；只复制组件本体，不复制演示壳、矩阵或说明文案
 
 **主体实现：**
@@ -194,11 +194,11 @@ design-library/library-consumption.json
 
 | 任务类型 | 必读文件 |
 |---------|---------|
-| 生成完整页面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`02-tokens/icon-guidelines.md`、`token-css-map.md`；再按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/components/index.json`，并针对命中组件读取对应 JSON 契约与 preview 文件 |
-| 生成单个组件或按钮 | `design-library/library-consumption.json`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`02-tokens/icon-guidelines.md`、`token-css-map.md`；再按 `recommendedReadOrder` 读取目标组件的 JSON 契约与 preview 文件 |
-| 审查已有界面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/tokens.md`、`rules/components.md`、`rules/review.md`、`rules/checkout.md`；识别到已注册组件时读取 `design-library/components/index.json`、对应组件 JSON 契约与 preview 文件；涉及代码时再读 `token-css-map.md` |
+| 生成完整页面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`rules/icon-guidelines.md`、`design-library/tokens.css`；再按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/components/index.json`，并针对命中组件读取对应 JSON 契约与 preview 文件 |
+| 生成单个组件或按钮 | `design-library/library-consumption.json`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`rules/icon-guidelines.md`、`design-library/tokens.css`；再按 `recommendedReadOrder` 读取目标组件的 JSON 契约与 preview 文件 |
+| 审查已有界面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/tokens.md`、`rules/components.md`、`rules/review.md`、`rules/checkout.md`；识别到已注册组件时读取 `design-library/components/index.json`、对应组件 JSON 契约与 preview 文件；涉及代码时再读 `design-library/tokens.css` |
 | 优化已有界面 | 先按“审查已有界面”读取，再按对应生成任务补充读取 |
-| 检查 Token 合规性 | `design-library/library-consumption.json`、`rules/tokens.md`、`design-library/tokens.json`、`design-library/tokens.css`、`token-css-map.md` |
+| 检查 Token 合规性 | `design-library/library-consumption.json`、`rules/tokens.md`、`design-library/tokens.json`、`design-library/tokens.css`、`design-library/tokens.css` |
 | 询问规范、不生成 | 只读用户指定或与问题直接对应的单个规则文件 |
 
 补充限制：
@@ -210,9 +210,9 @@ design-library/library-consumption.json
 
 ## Token → CSS 映射
 
-`02-tokens/tokens.json` 是唯一 Token 源数据；`design-library/tokens.json` 和 `design-library/tokens.css` 是运行时消费产物；`token-css-map.md` 是查阅映射。除 `02-tokens/tokens.json` 外，相关生成物禁止手工修改。
+`design-library/tokens-source.json` 是唯一 Token 源数据；`design-library/tokens.json` 和 `design-library/tokens.css` 是运行时消费产物；`design-library/tokens.css` 是查阅映射。除 `design-library/tokens-source.json` 外，相关生成物禁止手工修改。
 
-所有设计值通过 CSS 自定义属性使用，完整映射表见 **`token-css-map.md`**。
+所有设计值通过 CSS 自定义属性使用，完整映射表见 **`design-library/tokens.css`**。
 
 生成项目时：
 
@@ -277,7 +277,7 @@ design-library/library-consumption.json
 当前使用：<最接近的已有 Token 或页面层实现>
 原因：<为什么不够用>
 建议新增：<建议的 Token 名称或组件能力>
-归属位置：<应添加到 `02-tokens/tokens.json` 或 `design-library/components/*.json` 的哪个文件>
+归属位置：<应添加到 `design-library/tokens-source.json` 或 `design-library/components/*.json` 的哪个文件>
 ```
 
 ## 关键约束

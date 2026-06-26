@@ -16,10 +16,9 @@
 | `SKILL.md` | 唯一运行时入口和任务路由 |
 | `principles/` | 微购设计判断原则 |
 | `rules/` | 运行时控制层规则（execution / generation / tokens / components / review / output / checkout / confirmation） |
-| `02-tokens/tokens.json` | 唯一 Token 数据源 |
-| `02-tokens/token-reference.md` | 自动生成的 Token 名称、值和 CSS 映射参考 |
-| `02-tokens/tokens.css` | 历史生成物引用，来源仍由脚本维护 |
-| `token-css-map.md` | 从 `tokens.json` 自动生成的 CSS 变量 |
+| `design-library/tokens-source.json` | 唯一 Token 数据源 |
+| `design-library/token-reference.md` | 自动生成的 Token 名称、值和 CSS 映射参考 |
+| `design-library/token-css-map.md` | 从 `tokens.json` 自动生成的 CSS 变量 |
 | `scripts/generate_tokens.py` | 生成 Token 参考文档、CSS 映射和项目 Token 样式 |
 | `scripts/validate_tokens.py` | 校验引用、映射、漂移和示例硬编码 |
 | `scripts/validate_skill.py` | 校验任务路由、交互项目契约和旧约束回归 |
@@ -64,6 +63,6 @@ GitHub Actions 在 push 到 main 和 pull_request 时自动运行所有校验：
 - 不在详细规则中新增独立任务路由。
 - 修改运行时行为时，只在 `SKILL.md` 中维护路由，再同步调整被引用规则的内容。
 - 新增资料时明确其阶段和用途，避免产品设计资料与开发实现资料混用。
-- 修改 Token 时只编辑 `02-tokens/tokens.json`，随后运行生成和校验脚本。
+- 修改 Token 时只编辑 `design-library/tokens-source.json`，随后运行生成和校验脚本。
 - 组件发现以 `design-library/components/index.json` 为唯一入口，不再维护旧组件注册表。
 - 规则入口统一在 `rules/`，示例统一在 `examples/`，原则统一在 `principles/`。

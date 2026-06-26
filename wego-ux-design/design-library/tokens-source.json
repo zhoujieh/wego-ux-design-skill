@@ -1,5 +1,4 @@
 {
-  "$schema": "./tokens.schema.json",
   "name": "Wego Design Tokens",
   "version": "3.2.0",
   "description": "微购设计系统唯一 Token 数据源。所有 Token 值、CSS 变量和参考文档均由此文件生成。",

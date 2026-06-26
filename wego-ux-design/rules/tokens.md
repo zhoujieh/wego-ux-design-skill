@@ -5,13 +5,13 @@
 
 ## 权威来源
 
-- 唯一源数据：`02-tokens/tokens.json`
+- 唯一源数据：`design-library/tokens-source.json`
 - 机器可读投影：`design-library/tokens.json`
 - 可复制 CSS：`design-library/tokens.css`
 - 页面骨架：`design-library/scaffold.css`
-- CSS 映射参考：`token-css-map.md`
+- CSS 映射参考：`design-library/token-css-map.md`
 
-`design-library/tokens.json` 和 `design-library/tokens.css` 是供 AI / 下游消费的产物；`02-tokens/tokens.json` 是维护入口。不得手工修改生成物去绕过源数据。
+`design-library/tokens.json` 和 `design-library/tokens.css` 是供 AI / 下游消费的产物；`design-library/tokens-source.json` 是维护入口。不得手工修改生成物去绕过源数据。
 
 ## 读取顺序
 
@@ -30,7 +30,7 @@ design-library/scaffold.css（需要布局骨架时）
 ## 总原则
 
 - 优先使用 Semantic Token，其次使用 Pattern Token，最后使用 Base Token。
-- HTML/CSS 只使用 `token-css-map.md` 中存在的 `var(--wg-*)`。
+- HTML/CSS 只使用 `design-library/token-css-map.md` 中存在的 `var(--wg-*)`。
 - 业务样式不直接写颜色、字号、间距、圆角、尺寸、阴影、动效或层级值。
 - 不把组件结构、组件状态或页面专属补丁写进 Token。
 - 页面级辅助排版优先复用 `scaffold.css`，不要用临时样式重新定义同类基础规则。
@@ -97,7 +97,7 @@ design-library/scaffold.css（需要布局骨架时）
 
 检查界面或代码时必须确认：
 
-- 使用的 `wg.*` 名称存在于 `design-library/tokens.json` 或 `token-css-map.md`
+- 使用的 `wg.*` 名称存在于 `design-library/tokens.json` 或 `design-library/token-css-map.md`
 - 使用的 `var(--wg-*)` 存在于 `design-library/tokens.css`
 - 业务样式不存在硬编码颜色、字号、间距、圆角、尺寸、阴影、动效或 z-index
 - Semantic Token 可以表达时，没有退回 Base Token
@@ -106,7 +106,7 @@ design-library/scaffold.css（需要布局骨架时）
 
 ## 图标关系
 
-图标尺寸、颜色和 SVG 兜底规则仍以 `02-tokens/icon-guidelines.md` 为准。图标资源的消费边界以 `design-library/library-consumption.json` 的 `icons` layer 为准。
+图标尺寸、颜色和 SVG 兜底规则仍以 `rules/icon-guidelines.md` 为准。图标资源的消费边界以 `design-library/library-consumption.json` 的 `icons` layer 为准。
 
 ## 缺失处理
 
@@ -116,7 +116,7 @@ design-library/scaffold.css（需要布局骨架时）
 当前使用：
 原因：
 建议新增：
-归属位置：02-tokens/tokens.json
+归属位置：design-library/tokens-source.json
 ```
 
 ## 使用示例
@@ -169,13 +169,13 @@ box-shadow: 0 8px 40px rgba(...)
 当前使用：wg.spacing.24
 原因：缺少专用于「筛选区与结果列表之间」的间距 Token
 建议新增：wg.spacing.xxx
-归属位置：02-tokens/tokens.json
+归属位置：design-library/tokens-source.json
 ```
 
 ## 禁止事项
 
 - 为单页面或单个临时变体新增 Token
-- 手工修改 `design-library/tokens.json`、`design-library/tokens.css` 或 `token-css-map.md`
+- 手工修改 `design-library/tokens.json`、`design-library/tokens.css` 或 `design-library/token-css-map.md`
 - 使用未定义的 `wg.*` 或 `--wg-*`
 - 用魔法数字绕过 Token
 - 把组件结构写进 Token

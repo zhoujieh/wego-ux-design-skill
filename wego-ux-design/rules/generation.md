@@ -73,7 +73,7 @@ AI 生成界面时，必须优先保证：
 
 # 5. 布局选择
 
-页面布局按 `rules/tokens.md` 选择，具体 Token 以 `design-library/tokens.json`、`design-library/tokens.css` 和 `token-css-map.md` 为准。
+页面布局按 `rules/tokens.md` 选择，具体 Token 以 `design-library/tokens.json`、`design-library/tokens.css` 和 `design-library/token-css-map.md` 为准。
 
 默认规则：
 
@@ -195,7 +195,7 @@ Copywriting
 - 所有图标优先使用 iconfont 字体库（`wego-iconfont-s`）
 - 图标尺寸使用 `wg.size.*` Token，不得硬编码
 - 图标颜色通过 `color` 属性 + `wg.color.*` Token 控制，不得硬编码
-- 图标与文字搭配时遵循字号-图标尺寸对应关系（详见 `02-tokens/icon-guidelines.md`）
+- 图标与文字搭配时遵循字号-图标尺寸对应关系（详见 `rules/icon-guidelines.md`）
 - SVG 兜底图标必须遵守绘制规则：线粗 1.5、端点方、角点圆
 - 使用 SVG 兜底时必须标注 iconfont 缺失
 

@@ -1,6 +1,6 @@
 # 图标使用规范
 
-> 微购 Design System Skill / 02-tokens
+> 微购 Design System Skill / rules
 > 本文档定义微购设计系统中图标的使用方式、尺寸规范、颜色规则、绘制规则和 SVG 兜底方案。
 
 ---

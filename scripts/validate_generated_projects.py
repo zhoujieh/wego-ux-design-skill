@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "wego-ux-design"
 FIXTURES_DIR = ROOT / "tests" / "fixtures" / "generated"
-SOURCE_TOKENS = SKILL_DIR / "02-tokens" / "tokens.css"
+SOURCE_TOKENS = SKILL_DIR / "design-library" / "tokens.css"
 
 REQUIRED_FILES = [
     "index.html",
