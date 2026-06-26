@@ -30,9 +30,9 @@
       "slug": "navbar",
       "name": "导航栏",
       "category": "navigation",
-      "status": "optimizing",
+      "status": "stable",
       "preview": "preview/component-navbar.html",
-      "contract": null
+      "contract": "navbar.json"
     },
     {
       "slug": "tabs",

@@ -11,12 +11,6 @@
   <style>
     /* @component-css-start */
 
-    /* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
-    :root {
-      --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
-      --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
-    }
-
     .wg-navbar {
       position: sticky;
       top: 0;
@@ -67,6 +61,10 @@
     }
 
     .wg-navbar--bg-transparent .wg-navbar__search-input::placeholder {
+      color: var(--wg-color-text-inverse-weak);
+    }
+
+    .wg-navbar--bg-transparent .wg-navbar__search-icon {
       color: var(--wg-color-text-inverse-weak);
     }
 
@@ -296,6 +294,13 @@
       color: var(--wg-color-text-placeholder);
     }
 
+    .wg-navbar__search-icon {
+      flex-shrink: 0;
+      margin-inline-end: var(--wg-spacing-4);
+      color: var(--wg-color-text-placeholder);
+      font-size: var(--wg-size-20);
+    }
+
     .wg-navbar--divider::after {
       content: "";
       position: absolute;
@@ -341,7 +346,7 @@
     }
 
     .variant-card--dark {
-      background: var(--wg-color-base-neutral-900, #1a1a1a);
+      background: var(--wg-color-bg-inverse);
       padding: var(--wg-spacing-0) var(--wg-spacing-0) var(--wg-spacing-16) var(--wg-spacing-0);
       border-radius: var(--wg-radius-md);
       overflow: hidden;
@@ -354,7 +359,7 @@
     }
 
     .variant-card--transparent {
-      background: linear-gradient(135deg, #6367F0 0%, #03C160 100%);
+      background: linear-gradient(135deg, var(--wg-color-base-accent-purple-500) 0%, var(--wg-color-base-brand-500) 100%);
       padding: var(--wg-spacing-0) var(--wg-spacing-0) var(--wg-spacing-16) var(--wg-spacing-0);
       border-radius: var(--wg-radius-md);
       overflow: hidden;
@@ -416,7 +421,7 @@
 
   <div class="variant-card variant-card--dark">
     <h3>standard + 返回按钮 + 按钮右侧 (暗色背景)</h3>
-    <div class="wg-navbar wg-navbar--standard wg-navbar--bg-custom wg-navbar--divider" style="background: var(--wg-color-base-neutral-900, #1a1a1a);">
+    <div class="wg-navbar wg-navbar--standard wg-navbar--bg-custom wg-navbar--divider" style="background: var(--wg-color-bg-inverse);">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="返回" style="color: var(--wg-color-text-inverse);">
           <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
@@ -572,7 +577,7 @@
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);"></i>
+          <i class="wego-iconfont-s icon-sousuo wg-navbar__search-icon"></i>
           <input class="wg-navbar__search-input" type="search" placeholder="搜索商品">
         </div>
       </div>
@@ -594,7 +599,7 @@
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-placeholder);"></i>
+          <i class="wego-iconfont-s icon-sousuo wg-navbar__search-icon"></i>
           <input class="wg-navbar__search-input" type="search" value="连衣裙" readonly>
         </div>
       </div>
@@ -645,7 +650,7 @@
       </div>
       <div class="wg-navbar__center">
         <div class="wg-navbar__search-box">
-          <i class="wego-iconfont-s icon-sousuo wg-icon--20" style="flex-shrink: 0; margin-inline-end: var(--wg-spacing-4); color: var(--wg-color-text-inverse-weak);"></i>
+          <i class="wego-iconfont-s icon-sousuo wg-navbar__search-icon"></i>
           <input class="wg-navbar__search-input" type="search" placeholder="搜索品牌商品">
         </div>
       </div>

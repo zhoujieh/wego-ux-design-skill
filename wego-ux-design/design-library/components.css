@@ -434,33 +434,6 @@
       color: var(--wg-color-state-disabled-text);
     }
 
-    /* ── 图标 ── */
-    .wg-button__icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: var(--wg-size-20);
-      line-height: 1;
-    }
-
-    .wg-button--compact .wg-button__icon {
-      font-size: var(--wg-size-16);
-    }
-
-    .wg-button--icon-left .wg-button__surface {
-      gap: var(--wg-spacing-4);
-    }
-
-    .wg-button--icon-only {
-      inline-size: var(--button-visual-height);
-      min-inline-size: 0;
-    }
-
-    .wg-button--icon-only .wg-button__surface {
-      padding-inline: 0;
-    }
-
 /* ===== Cell ===== */
 
 .wg-cell {
@@ -1494,13 +1467,7 @@
 
 /* ===== Navbar ===== */
 
-/* Token fallbacks — 上游 tokens.css 中暂无对应定义，待补充后移除 */
-    :root {
-      --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
-      --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
-    }
-
-    .wg-navbar {
+.wg-navbar {
       position: sticky;
       top: 0;
       z-index: var(--wg-zindex-sticky);
@@ -1550,6 +1517,10 @@
     }
 
     .wg-navbar--bg-transparent .wg-navbar__search-input::placeholder {
+      color: var(--wg-color-text-inverse-weak);
+    }
+
+    .wg-navbar--bg-transparent .wg-navbar__search-icon {
       color: var(--wg-color-text-inverse-weak);
     }
 
@@ -1777,6 +1748,13 @@
 
     .wg-navbar__search-input::placeholder {
       color: var(--wg-color-text-placeholder);
+    }
+
+    .wg-navbar__search-icon {
+      flex-shrink: 0;
+      margin-inline-end: var(--wg-spacing-4);
+      color: var(--wg-color-text-placeholder);
+      font-size: var(--wg-size-20);
     }
 
     .wg-navbar--divider::after {

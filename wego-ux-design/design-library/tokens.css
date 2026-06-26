@@ -102,6 +102,7 @@
   --wg-color-bg-danger: var(--wg-color-base-danger-alpha-10);
   --wg-color-bg-info: var(--wg-color-base-info-alpha-10);
   --wg-color-bg-inverse: var(--wg-color-base-neutral-900);
+  --wg-color-bg-inverse-subtle: rgba(255, 255, 255, 0.15);
   --wg-color-bg-muted: var(--wg-color-base-neutral-100);
   --wg-color-bg-page: var(--wg-color-base-neutral-300);
   --wg-color-bg-promotion: var(--wg-color-base-promotion-alpha-10);
@@ -163,6 +164,7 @@
   --wg-color-text-disabled: var(--wg-color-base-neutral-500);
   --wg-color-text-info: var(--wg-color-base-info-500);
   --wg-color-text-inverse: var(--wg-color-base-static-white);
+  --wg-color-text-inverse-weak: rgba(255, 255, 255, 0.50);
   --wg-color-text-link: var(--wg-color-base-link-500);
   --wg-color-text-placeholder: var(--wg-color-base-neutral-500);
   --wg-color-text-primary: var(--wg-color-base-neutral-900);
