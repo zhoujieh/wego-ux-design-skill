@@ -7,3 +7,9 @@ __pycache__/
 
 # Claude worktree 临时目录（不提交到仓库）
 .claude/worktrees/
+
+# External tools
+.trae/
+
+# Dependencies
+website/node_modules/
