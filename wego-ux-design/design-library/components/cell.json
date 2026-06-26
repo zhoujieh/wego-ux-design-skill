@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 2,
+  "slug": "cell",
+  "name": "单元格",
+  "category": "display",
+  "variantDimensions": {
+    "lineCount": {
+      "description": "文本行数密度",
+      "values": ["single", "double"],
+      "default": "single"
+    },
+    "avatar": {
+      "description": "头像槽位尺寸",
+      "values": ["none", "sm", "lg"],
+      "default": "none"
+    },
+    "select": {
+      "description": "是否包含左侧选择区",
+      "values": ["false", "true"],
+      "default": "false"
+    },
+    "indent": {
+      "description": "是否包含左侧缩进/层级标记区",
+      "values": ["false", "true"],
+      "default": "false"
+    },
+    "rightAction": {
+      "description": "右侧动作区类型",
+      "values": ["none", "jump", "text", "link", "switch", "button", "custom"],
+      "default": "none"
+    },
+    "divider": {
+      "description": "底部分割线策略",
+      "values": ["full", "inset", "none"],
+      "default": "none"
+    },
+    "tone": {
+      "description": "背景语义",
+      "values": ["surface", "grey"],
+      "default": "surface"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "pressed", "disabled"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-cell-divider-end",
+    "wg-cell-divider-start",
+    "wg-cell-slot-avatar",
+    "wg-cell-slot-indent",
+    "wg-cell-slot-select",
+    "wg-color-bg-page",
+    "wg-color-bg-surface",
+    "wg-color-divider-default",
+    "wg-color-state-focus",
+    "wg-color-state-pressed",
+    "wg-color-surface-active",
+    "wg-color-text-disabled",
+    "wg-color-text-link",
+    "wg-color-text-primary",
+    "wg-color-text-secondary",
+    "wg-color-text-tertiary",
+    "wg-font-lineheight-12",
+    "wg-font-lineheight-14",
+    "wg-font-lineheight-16",
+    "wg-font-size-12",
+    "wg-font-size-14",
+    "wg-font-size-16",
+    "wg-font-weight-medium",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-ease-standard",
+    "wg-radius-full",
+    "wg-size-16",
+    "wg-size-24",
+    "wg-size-40",
+    "wg-size-56",
+    "wg-size-64",
+    "wg-size-76",
+    "wg-spacing-0",
+    "wg-spacing-12",
+    "wg-spacing-16",
+    "wg-spacing-2",
+    "wg-spacing-24",
+    "wg-spacing-4",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-hairline",
+    "wg-stroke-width-strong"
+  ],
+  "domAnatomy": {
+    "root": ".wg-cell",
+    "modifiers": [
+      ".wg-cell--double",
+      ".wg-cell--avatar-sm",
+      ".wg-cell--avatar-lg",
+      ".wg-cell--select",
+      ".wg-cell--indent",
+      ".wg-cell--divider-full",
+      ".wg-cell--divider-inset",
+      ".wg-cell--grey",
+      ".wg-cell--disabled"
+    ],
+    "children": {
+      "indent": ".wg-cell__indent",
+      "indentMark": ".wg-cell__indent-mark",
+      "select": ".wg-cell__select",
+      "controlIcon": ".wg-cell__control-icon",
+      "avatarSlot": {
+        "root": ".wg-cell__avatar-slot",
+        "modifiers": [
+          ".wg-cell__avatar-slot--sm",
+          ".wg-cell__avatar-slot--lg"
+        ]
+      },
+      "avatar": ".wg-cell__avatar",
+      "main": ".wg-cell__main",
+      "text": ".wg-cell__text",
+      "titleRow": ".wg-cell__title-row",
+      "title": ".wg-cell__title",
+      "subtitle": ".wg-cell__subtitle",
+      "subtitleLink": ".wg-cell__subtitle-link",
+      "action": {
+        "root": ".wg-cell__action",
+        "modifiers": [
+          ".wg-cell__action--switch",
+          ".wg-cell__action--button",
+          ".wg-cell__action--link"
+        ]
+      },
+      "actionText": ".wg-cell__action-text",
+      "actionTextLink": ".wg-cell__action-text--link",
+      "arrow": ".wg-cell__arrow"
+    }
+  },
+  "usageHints": [
+    "Cell 根结构始终遵循 16 左边距 + 可选左槽位 + 主内容区的布局，不要手写新的栅格",
+    "左侧选择区直接复用 checkbox / radio，右侧开关直接复用 switch，右侧按钮直接复用 compact button",
+    "double 模式用于带副标题的两行文本；avatar-lg + single 的最小高度是 64，double 是 76",
+    "divider-inset 的起点会自动扣除左侧缩进、选择区和头像区宽度，不要再额外写死 inset 值",
+    "grey 背景用于灰底列表或分组块中的 cell"
+  ],
+  "doNotInvent": [
+    "不要把 Cell 改成固定两列栅格布局",
+    "不要在 select / indent / avatar 槽位里塞入未注册的新控件",
+    "不要手写分割线起点，必须依赖内置 CSS 变量累加逻辑",
+    "不要给 disabled 态保留高对比箭头或操作文字",
+    "不要绕过基础组件，重复实现 checkbox / radio / switch / button"
+  ],
+  "knownIssues": [
+    "active 态当前同时使用 wg-color-state-pressed 与 wg-color-surface-active，两套表面态 token 语义后续可再统一"
+  ],
+  "provenance": {
+    "preview": "preview/component-cell.html",
+    "css": { "file": "components.css", "marker": "Cell" }
+  }
+}

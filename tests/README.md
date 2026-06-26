@@ -30,7 +30,7 @@ tests/
 
 - **输入提示词**：喂给 Skill 的完整 prompt
 - **期望页面类型**：浏览/操作/表单/结果/异常/空 六类之一
-- **必须命中的组件**：从 `03-components/registry.json` 中选取
+- **必须命中的组件**：从 `wego-ux-design/design-library/components/index.json` 中选取
 - **必须覆盖的交互状态**：初始、输入、校验、处理中、成功、失败、恢复等
 - **必须使用的 Token 类别**：color、typography、spacing 等
 - **禁止问题**：单文件 HTML、内联样式、硬编码设计值等

@@ -15,6 +15,10 @@
 
 | Token | CSS Variable | Value / Reference | Description |
 |---|---|---|---|
+| `wg.checkbox.accent` | `--wg-checkbox-accent` | `wg.color.action.primary.default` | Checkbox 选中态强调色 |
+| `wg.checkbox.accent.disabled` | `--wg-checkbox-accent-disabled` | `wg.color.action.primary.disabled` | Checkbox 禁用选中态强调色 |
+| `wg.radio.accent` | `--wg-radio-accent` | `wg.color.action.primary.default` | Radio 选中态强调色 |
+| `wg.radio.accent.disabled` | `--wg-radio-accent-disabled` | `wg.color.action.primary.disabled` | Radio 禁用选中态强调色 |
 | `wg.color.action.danger.default` | `--wg-color-action-danger-default` | `wg.color.base.danger.500` | 危险操作默认态 |
 | `wg.color.action.danger.hover` | `--wg-color-action-danger-hover` | `wg.color.base.danger.alpha.80` | 危险操作 hover |
 | `wg.color.action.danger.pressed` | `--wg-color-action-danger-pressed` | `wg.color.base.danger.alpha.80` | 危险操作 pressed |
@@ -93,15 +97,21 @@
 | `wg.color.bg.danger` | `--wg-color-bg-danger` | `wg.color.base.danger.alpha.10` | 危险浅背景 |
 | `wg.color.bg.info` | `--wg-color-bg-info` | `wg.color.base.info.alpha.10` | 信息浅背景 |
 | `wg.color.bg.inverse` | `--wg-color-bg-inverse` | `wg.color.base.neutral.900` | 深色背景 |
+| `wg.color.bg.inverse.subtle` | `--wg-color-bg-inverse-subtle` | `rgba(255, 255, 255, 0.15)` | 深色背景上的弱填充 |
 | `wg.color.bg.muted` | `--wg-color-bg-muted` | `wg.color.base.neutral.100` | 弱灰背景 |
 | `wg.color.bg.page` | `--wg-color-bg-page` | `wg.color.base.neutral.300` | 页面默认背景 |
+| `wg.color.bg.secondary` | `--wg-color-bg-secondary` | `wg.color.base.neutral.100` | 次级容器背景 |
 | `wg.color.bg.promotion` | `--wg-color-bg-promotion` | `wg.color.base.promotion.alpha.10` | 促销浅背景 |
 | `wg.color.bg.subtle` | `--wg-color-bg-subtle` | `wg.color.base.neutral.50` | 极浅灰背景 |
 | `wg.color.bg.success` | `--wg-color-bg-success` | `wg.color.base.success.alpha.10` | 成功浅背景 |
+| `wg.color.bg.skeleton` | `--wg-color-bg-skeleton` | `wg.color.bg.muted` | 骨架屏占位背景 |
 | `wg.color.bg.surface` | `--wg-color-bg-surface` | `wg.color.base.static.white` | 卡片、表单、列表等主要容器背景 |
+| `wg.color.bg.toast` | `--wg-color-bg-toast` | `wg.color.feedback.toast.bg` | Toast 容器背景 |
 | `wg.color.bg.warning` | `--wg-color-bg-warning` | `wg.color.base.warning.alpha.10` | 警示浅背景 |
 | `wg.color.border.danger` | `--wg-color-border-danger` | `wg.color.base.danger.alpha.20` | 危险边框 |
 | `wg.color.border.default` | `--wg-color-border-default` | `wg.color.base.neutral.alpha.08` | 默认边框 |
+| `wg.color.border.loading.indicator` | `--wg-color-border-loading-indicator` | `wg.color.base.brand.500` | Loading 旋转指示条 |
+| `wg.color.border.loading.track` | `--wg-color-border-loading-track` | `wg.color.base.neutral.alpha.08` | Loading 轨道边框 |
 | `wg.color.border.focus` | `--wg-color-border-focus` | `wg.color.base.brand.500` | 聚焦边框 |
 | `wg.color.border.info` | `--wg-color-border-info` | `wg.color.base.info.alpha.20` | 信息边框 |
 | `wg.color.border.promotion` | `--wg-color-border-promotion` | `wg.color.base.promotion.alpha.20` | 促销边框 |
@@ -150,10 +160,13 @@
 | `wg.color.surface.subtle` | `--wg-color-surface-subtle` | `wg.color.base.neutral.50` | 弱容器 |
 | `wg.color.surface.toolbar.solid` | `--wg-color-surface-toolbar-solid` | `#F6F6F6` | 实底工具栏、输入法头部 |
 | `wg.color.surface.toolbar.translucent` | `--wg-color-surface-toolbar-translucent` | `rgba(246, 246, 246, 0.80)` | 毛玻璃工具栏背景，必须配合 blur 使用 |
+| `wg.color.transparent` | `--wg-color-transparent` | `transparent` | 透明色，仅用于重置浏览器默认背景或边框 |
 | `wg.color.text.danger` | `--wg-color-text-danger` | `wg.color.base.danger.500` | 危险 / 错误文字 |
 | `wg.color.text.disabled` | `--wg-color-text-disabled` | `wg.color.base.neutral.500` | 不可用文字 |
 | `wg.color.text.info` | `--wg-color-text-info` | `wg.color.base.info.500` | 信息文字 |
 | `wg.color.text.inverse` | `--wg-color-text-inverse` | `wg.color.base.static.white` | 深色背景上的文字 |
+| `wg.color.text.inverse.secondary` | `--wg-color-text-inverse-secondary` | `rgba(255, 255, 255, 0.70)` | 深色背景上的次级文字 |
+| `wg.color.text.inverse.weak` | `--wg-color-text-inverse-weak` | `rgba(255, 255, 255, 0.50)` | 深色背景上的弱文字 |
 | `wg.color.text.link` | `--wg-color-text-link` | `wg.color.base.link.500` | 文本链接 |
 | `wg.color.text.placeholder` | `--wg-color-text-placeholder` | `wg.color.base.neutral.500` | 输入框占位文案 |
 | `wg.color.text.primary` | `--wg-color-text-primary` | `wg.color.base.neutral.900` | 一级文字、主要内容、强标题 |
@@ -206,6 +219,7 @@
 | `wg.spacing.4` | `--wg-spacing-4` | `4px` | 强关联内容、极小距离 |
 | `wg.spacing.40` | `--wg-spacing-40` | `40px` | 大区块间距 |
 | `wg.spacing.48` | `--wg-spacing-48` | `48px` | 页面级大分隔 |
+| `wg.spacing.72` | `--wg-spacing-72` | `72px` | 底部浮层与安全区间距 |
 | `wg.spacing.8` | `--wg-spacing-8` | `8px` | 同组内容、标题与内容 |
 
 ## Radius
@@ -228,6 +242,26 @@
 | `wg.component.button.width.container.max` | `--wg-component-button-width-container-max` | `420px` | 局部容器按钮组的最大宽度 |
 | `wg.component.button.width.page.paired` | `--wg-component-button-width-page-paired` | `120px` | 页面级按钮横向成对排列时的单按钮宽度 |
 | `wg.component.button.width.page.single` | `--wg-component-button-width-page-single` | `180px` | 页面级单按钮或纵向按钮组的单按钮宽度 |
+| `wg.component.actionsheet.home.indicator.height` | `--wg-component-actionsheet-home-indicator-height` | `5px` | ActionSheet iOS Home Indicator 高度 |
+| `wg.component.actionsheet.home.indicator.width` | `--wg-component-actionsheet-home-indicator-width` | `134px` | ActionSheet iOS Home Indicator 宽度 |
+| `wg.component.actionsheet.safearea.bottom` | `--wg-component-actionsheet-safearea-bottom` | `34px` | ActionSheet 底部安全区 fallback |
+| `wg.component.dialog.button.height` | `--wg-component-dialog-button-height` | `wg.size.48` | Dialog 底部按钮高度 |
+| `wg.component.dialog.closed.scale` | `--wg-component-dialog-closed-scale` | `0.9` | Dialog 关闭态缩放比例 |
+| `wg.component.dialog.padding.block` | `--wg-component-dialog-padding-block` | `wg.spacing.24` | Dialog 内容区垂直内边距 |
+| `wg.component.dialog.padding.inline` | `--wg-component-dialog-padding-inline` | `20px` | Dialog 内容区水平内边距 |
+| `wg.component.dialog.title.only.padding.block` | `--wg-component-dialog-title-only-padding-block` | `wg.spacing.32` | Dialog 仅标题布局垂直内边距 |
+| `wg.component.dialog.width` | `--wg-component-dialog-width` | `300px` | Dialog 标准宽度 |
+| `wg.component.result.icon.size.large` | `--wg-component-result-icon-size-large` | `120px` | 结果页大型图标尺寸 |
+| `wg.component.tag.min.width.20` | `--wg-component-tag-min-width-20` | `36px` | 20px 标签最小宽度 |
+| `wg.component.tag.min.width.24` | `--wg-component-tag-min-width-24` | `wg.size.40` | 24px 标签最小宽度 |
+| `wg.component.tag.min.width.28` | `--wg-component-tag-min-width-28` | `wg.size.48` | 28px 标签最小宽度 |
+| `wg.component.tag.min.width.32` | `--wg-component-tag-min-width-32` | `52px` | 32px 标签最小宽度 |
+| `wg.component.toast.max.width` | `--wg-component-toast-max-width` | `320px` | Toast 最大宽度 |
+| `wg.cell.divider.end` | `--wg-cell-divider-end` | `wg.spacing.0` | Cell 分割线右侧默认偏移 |
+| `wg.cell.divider.start` | `--wg-cell-divider-start` | `wg.spacing.16` | Cell 分割线左侧默认起点 |
+| `wg.cell.slot.avatar` | `--wg-cell-slot-avatar` | `wg.spacing.0` | Cell 头像槽位默认宽度 |
+| `wg.cell.slot.indent` | `--wg-cell-slot-indent` | `wg.spacing.0` | Cell 缩进槽位默认宽度 |
+| `wg.cell.slot.select` | `--wg-cell-slot-select` | `wg.spacing.0` | Cell 选择控件槽位默认宽度 |
 | `wg.size.10` | `--wg-size-10` | `10px` |  |
 | `wg.size.12` | `--wg-size-12` | `12px` |  |
 | `wg.size.16` | `--wg-size-16` | `16px` |  |
@@ -238,7 +272,10 @@
 | `wg.size.40` | `--wg-size-40` | `40px` |  |
 | `wg.size.48` | `--wg-size-48` | `48px` |  |
 | `wg.size.56` | `--wg-size-56` | `56px` |  |
+| `wg.size.64` | `--wg-size-64` | `64px` |  |
 | `wg.size.72` | `--wg-size-72` | `72px` |  |
+| `wg.size.76` | `--wg-size-76` | `76px` |  |
+| `wg.size.104` | `--wg-size-104` | `104px` |  |
 | `wg.touch.comfortable` | `--wg-touch-comfortable` | `48px` |  |
 | `wg.touch.default` | `--wg-touch-default` | `44px` |  |
 | `wg.touch.min` | `--wg-touch-min` | `40px` |  |
@@ -263,6 +300,7 @@
 | `wg.layout.page.m1.margin` | `--wg-layout-page-m1-margin` | `0px` | 通栏页面、连续列表、沉浸式内容 |
 | `wg.layout.page.m2.margin` | `--wg-layout-page-m2-margin` | `16px` | 默认业务页面、常规卡片页面 |
 | `wg.layout.page.m3.margin` | `--wg-layout-page-m3-margin` | `32px` | 宽松页面、强聚焦页面、引导页 |
+| `wg.layout.page.max.width` | `--wg-layout-page-max-width` | `wg.layout.screen.430` | 页面主体最大宽度 |
 | `wg.layout.screen.375` | `--wg-layout-screen-375` | `375px` | 标准移动端设计参考宽度 |
 | `wg.layout.screen.430` | `--wg-layout-screen-430` | `430px` | 大屏移动端设计参考宽度 |
 | `wg.layout.width.375.m0` | `--wg-layout-width-375-m0` | `359px` | 8px |

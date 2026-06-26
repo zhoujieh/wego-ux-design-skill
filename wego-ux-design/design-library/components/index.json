@@ -80,7 +80,7 @@
       "category": "feedback",
       "status": "optimizing",
       "preview": "preview/component-dialog.html",
-      "contract": null
+      "contract": "dialog.json"
     },
     {
       "slug": "toast",
@@ -88,7 +88,7 @@
       "category": "feedback",
       "status": "optimizing",
       "preview": "preview/component-toast.html",
-      "contract": null
+      "contract": "toast.json"
     },
     {
       "slug": "loading",
@@ -96,7 +96,7 @@
       "category": "feedback",
       "status": "optimizing",
       "preview": "preview/component-loading.html",
-      "contract": null
+      "contract": "loading.json"
     },
     {
       "slug": "input",
@@ -104,7 +104,7 @@
       "category": "form",
       "status": "optimizing",
       "preview": "preview/component-input.html",
-      "contract": null
+      "contract": "input.json"
     },
     {
       "slug": "form",
@@ -112,7 +112,7 @@
       "category": "form",
       "status": "optimizing",
       "preview": "preview/component-form.html",
-      "contract": null
+      "contract": "form.json"
     },
     {
       "slug": "tag",
@@ -120,7 +120,7 @@
       "category": "display",
       "status": "optimizing",
       "preview": "preview/component-tag.html",
-      "contract": null
+      "contract": "tag.json"
     },
     {
       "slug": "cell",
@@ -128,7 +128,7 @@
       "category": "display",
       "status": "optimizing",
       "preview": "preview/component-cell.html",
-      "contract": null
+      "contract": "cell.json"
     },
     {
       "slug": "result",
@@ -136,7 +136,7 @@
       "category": "feedback",
       "status": "optimizing",
       "preview": "preview/component-result.html",
-      "contract": null
+      "contract": "result.json"
     }
   ]
 }

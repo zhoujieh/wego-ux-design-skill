@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "slug": "toast",
+  "name": "轻提示",
+  "category": "feedback",
+  "variantDimensions": {
+    "variant": {
+      "description": "Toast 展示形态：default 为纯消息，action 为带操作按钮",
+      "values": ["default", "action"],
+      "default": "default"
+    },
+    "action": {
+      "description": "操作按钮强弱层级",
+      "values": ["none", "weak", "strong"],
+      "default": "none"
+    },
+    "icon": {
+      "description": "消息左侧图标语义",
+      "values": ["none", "success", "error", "info"],
+      "default": "none"
+    },
+    "state": {
+      "description": "容器显示状态",
+      "values": ["visible", "hidden"],
+      "default": "visible"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default",
+    "wg-color-bg-toast",
+    "wg-color-feedback-toast-bg",
+    "wg-color-state-focus",
+    "wg-color-status-danger-default",
+    "wg-color-status-info-default",
+    "wg-color-status-success-default",
+    "wg-color-text-disabled",
+    "wg-color-text-inverse",
+    "wg-color-text-inverse-secondary",
+    "wg-font-family-text",
+    "wg-font-lineheight-14",
+    "wg-font-size-14",
+    "wg-font-weight-medium",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-duration-normal",
+    "wg-motion-ease-emphasized",
+    "wg-motion-ease-standard",
+    "wg-radius-lg",
+    "wg-shadow-md",
+    "wg-size-20",
+    "wg-spacing-12",
+    "wg-spacing-16",
+    "wg-spacing-2",
+    "wg-spacing-4",
+    "wg-spacing-72",
+    "wg-spacing-8",
+    "wg-stroke-style-none",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-none",
+    "wg-stroke-width-strong",
+    "wg-zindex-toast"
+  ],
+  "domAnatomy": {
+    "root": ".wg-toast-container",
+    "stateAttributes": ["data-state='visible'", "data-state='hidden'"],
+    "children": {
+      "toast": ".wg-toast",
+      "icon": {
+        "root": ".wg-toast__icon",
+        "modifiers": [
+          ".wg-toast__icon--success",
+          ".wg-toast__icon--error",
+          ".wg-toast__icon--info"
+        ]
+      },
+      "message": ".wg-toast__message",
+      "action": {
+        "root": ".wg-toast__action",
+        "modifiers": [
+          ".wg-toast__action--weak",
+          ".wg-toast__action--strong"
+        ]
+      }
+    }
+  },
+  "usageHints": [
+    "Toast 根节点固定使用 .wg-toast-container，通过 data-state 控制显示/隐藏",
+    "default 形态只渲染消息文本，可选 success / error / info 图标",
+    "action 形态在消息后追加一个操作按钮，按钮强弱只能用 weak / strong",
+    "Toast 定位为页面底部居中 fixed，预览页中的相对定位只用于展示",
+    "长文案优先截断在 .wg-toast__message，不要把按钮挤出容器"
+  ],
+  "doNotInvent": [
+    "不要新增第三种 action 强度",
+    "不要把 Toast 改成顶部或中间浮层",
+    "不要把 action 按钮替换成 link 组件结构",
+    "不要把 success / error / info 图标颜色改成其他语义色",
+    "不要在 hidden 态使用 display: none 直接移除，必须保留过渡动画"
+  ],
+  "knownIssues": [
+    "active opacity 0.6 仍是样式侧待收敛项"
+  ],
+  "provenance": {
+    "preview": "preview/component-toast.html",
+    "css": { "file": "components.css", "marker": "Toast" }
+  }
+}

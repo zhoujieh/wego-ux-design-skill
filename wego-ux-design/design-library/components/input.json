@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "slug": "input",
+  "name": "输入框",
+  "category": "form",
+  "variantDimensions": {
+    "layout": {
+      "description": "输入框外观形态",
+      "values": ["full", "card"],
+      "default": "card"
+    },
+    "type": {
+      "description": "输入内容类型",
+      "values": ["text", "multiline", "number"],
+      "default": "text"
+    },
+    "state": {
+      "description": "输入状态",
+      "values": ["default", "filled", "focused", "disabled"],
+      "default": "default"
+    },
+    "error": {
+      "description": "是否展示错误态与错误文案",
+      "values": ["false", "true"],
+      "default": "false"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-bg-subtle",
+    "wg-color-border-default",
+    "wg-color-border-focus",
+    "wg-color-border-strong",
+    "wg-color-border-subtle",
+    "wg-color-state-disabled-bg",
+    "wg-color-status-danger-bg",
+    "wg-color-status-danger-border",
+    "wg-color-status-danger-text",
+    "wg-color-text-disabled",
+    "wg-color-text-placeholder",
+    "wg-color-text-primary",
+    "wg-color-text-secondary",
+    "wg-font-family-number-fallback",
+    "wg-font-family-text",
+    "wg-font-lineheight-12",
+    "wg-font-lineheight-14",
+    "wg-font-size-12",
+    "wg-font-size-14",
+    "wg-font-weight-medium",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-ease-standard",
+    "wg-radius-none",
+    "wg-radius-sm",
+    "wg-shadow-none",
+    "wg-shadow-xs",
+    "wg-size-32",
+    "wg-size-40",
+    "wg-size-56",
+    "wg-size-64",
+    "wg-spacing-0",
+    "wg-spacing-12",
+    "wg-spacing-2",
+    "wg-spacing-4",
+    "wg-spacing-8",
+    "wg-stroke-style-none",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-default",
+    "wg-stroke-width-none",
+    "wg-touch-default"
+  ],
+  "domAnatomy": {
+    "root": ".wg-input",
+    "modifiers": [
+      ".wg-input--card",
+      ".wg-input--full",
+      ".wg-input--multiline",
+      ".wg-input--number",
+      ".wg-input--filled",
+      ".wg-input--focused",
+      ".wg-input--disabled",
+      ".wg-input--error"
+    ],
+    "children": {
+      "container": ".wg-input__container",
+      "field": ".wg-input__field",
+      "unit": ".wg-input__unit",
+      "error": ".wg-input__error"
+    }
+  },
+  "usageHints": [
+    "card 形态用于卡片或列表内的圆角输入框，full 形态用于页面满宽底部分割线输入",
+    "multiline 必须使用 textarea，单行输入使用 input",
+    "number 类型居中显示，单位文案通过 .wg-input__unit 追加在输入框尾部",
+    "错误提示通过 .wg-input--error + .wg-input__error 展示，不要把错误文案塞进 placeholder",
+    "focused 态既可以依赖 :focus-within，也可以在预览或静态文档中显式加 .wg-input--focused"
+  ],
+  "doNotInvent": [
+    "不要混用 full 和 card 两种布局修饰类",
+    "不要在 multiline 模式保留固定 44px 高度",
+    "不要把 number 模式改成左对齐",
+    "不要用 placeholder 代替错误文案",
+    "不要给 disabled 态保留可编辑光标或 hover 强化"
+  ],
+  "knownIssues": [
+    "number 模式的宽度目前通过 wg-size-64 / wg-size-40 组合推导，后续可评估是否沉淀为专用组件 token"
+  ],
+  "provenance": {
+    "preview": "preview/component-input.html",
+    "css": { "file": "components.css", "marker": "Input" }
+  }
+}

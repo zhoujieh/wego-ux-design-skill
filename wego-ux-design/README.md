@@ -7,25 +7,24 @@
 
 该 Skill 面向产品设计阶段，用于生成完整可交互 Web 原型项目、审查界面和检查 Token 合规性。
 
-当前阶段不生成 KuiklyUI 代码。`03-components/` 保存 Web 原型正式组件契约，由 `SKILL.md` 按 registry 路由读取。
+当前阶段不生成 KuiklyUI 代码。运行时组件契约位于 `design-library/components/`，由 `SKILL.md` 先读取 `design-library/library-consumption.json` 再按推荐顺序消费。
 
 ## 目录职责
 
 | 路径 | 作用 |
 |---|---|
 | `SKILL.md` | 唯一运行时入口和任务路由 |
-| `01-principles/` | 微购设计判断原则 |
+| `principles/` | 微购设计判断原则 |
+| `rules/` | 运行时控制层规则（execution / generation / tokens / components / review / output / checkout / confirmation） |
 | `02-tokens/tokens.json` | 唯一 Token 数据源 |
 | `02-tokens/token-reference.md` | 自动生成的 Token 名称、值和 CSS 映射参考 |
-| `02-tokens/tokens.css` | 可复制到原型项目 `styles/tokens.css` 的生成文件 |
-| `02-tokens/token-usage-guidelines.md` | 不包含具体值的人工使用规则 |
+| `02-tokens/tokens.css` | 历史生成物引用，来源仍由脚本维护 |
 | `token-css-map.md` | 从 `tokens.json` 自动生成的 CSS 变量 |
 | `scripts/generate_tokens.py` | 生成 Token 参考文档、CSS 映射和项目 Token 样式 |
 | `scripts/validate_tokens.py` | 校验引用、映射、漂移和示例硬编码 |
 | `scripts/validate_skill.py` | 校验任务路由、交互项目契约和旧约束回归 |
-| `03-components/` | Web 原型正式组件注册表和组件契约 |
-| `04-ai-rules/` | 被 `SKILL.md` 按任务选择的详细规则 |
-| `05-examples/` | 非规范示例，仅供人工参考或显式调用 |
+| `design-library/` | 设计库消费产物（tokens / scaffold / components / preview / assets / library-consumption） |
+| `examples/` | 非规范示例，仅供人工参考或显式调用 |
 | `resources/` | 字体、图片等原型资源 |
 
 ## 质量验证
@@ -66,3 +65,5 @@ GitHub Actions 在 push 到 main 和 pull_request 时自动运行所有校验：
 - 修改运行时行为时，只在 `SKILL.md` 中维护路由，再同步调整被引用规则的内容。
 - 新增资料时明确其阶段和用途，避免产品设计资料与开发实现资料混用。
 - 修改 Token 时只编辑 `02-tokens/tokens.json`，随后运行生成和校验脚本。
+- 组件发现以 `design-library/components/index.json` 为唯一入口，不再维护旧组件注册表。
+- 规则入口统一在 `rules/`，示例统一在 `examples/`，原则统一在 `principles/`。

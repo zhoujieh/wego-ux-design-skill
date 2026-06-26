@@ -284,4 +284,4 @@ iconfont 中已有部分 16px 图标，`font_class` 以 `16` 结尾，如 `icon-
 - 禁止硬编码图标颜色（必须使用 `wg.color.*` Token 或继承父元素）
 - 禁止自行创造 iconfont 中不存在的图标样式
 - 禁止使用 emoji 或图片替代功能图标
-- 禁止滥用图标（参见 `04-ai-rules/05-forbidden-rules.md`）
+- 禁止滥用图标（参见 `rules/forbidden.md`）

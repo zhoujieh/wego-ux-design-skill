@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "slug": "tag",
+  "name": "标签",
+  "category": "display",
+  "variantDimensions": {
+    "size": {
+      "description": "标签尺寸档位",
+      "values": ["32", "28", "24", "20"],
+      "default": "32"
+    },
+    "color": {
+      "description": "标签语义配色",
+      "values": ["grey", "white", "green"],
+      "default": "grey"
+    },
+    "icon": {
+      "description": "图标类型；icon-left 与 icon-right 由修饰类控制位置",
+      "values": ["none", "close", "add", "jump-to", "edit"],
+      "default": "none"
+    },
+    "state": {
+      "description": "交互状态",
+      "values": ["default", "selected", "pressed", "focus-visible"],
+      "default": "default"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-bg-subtle",
+    "wg-color-bg-success",
+    "wg-color-bg-surface",
+    "wg-color-border-default",
+    "wg-color-border-success",
+    "wg-color-state-focus",
+    "wg-color-state-hover",
+    "wg-color-state-pressed",
+    "wg-color-text-primary",
+    "wg-color-text-success",
+    "wg-color-text-tertiary",
+    "wg-font-lineheight-12",
+    "wg-font-lineheight-14",
+    "wg-font-size-12",
+    "wg-font-size-14",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-ease-standard",
+    "wg-radius-full",
+    "wg-radius-sm",
+    "wg-size-16",
+    "wg-size-20",
+    "wg-size-24",
+    "wg-size-28",
+    "wg-size-32",
+    "wg-spacing-12",
+    "wg-spacing-2",
+    "wg-spacing-4",
+    "wg-spacing-8",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-default",
+    "wg-stroke-width-none",
+    "wg-stroke-width-strong"
+  ],
+  "domAnatomy": {
+    "root": ".wg-tag",
+    "modifiers": [
+      ".wg-tag--32",
+      ".wg-tag--28",
+      ".wg-tag--24",
+      ".wg-tag--20",
+      ".wg-tag--grey",
+      ".wg-tag--white",
+      ".wg-tag--green",
+      ".wg-tag--selected",
+      ".wg-tag--icon-left",
+      ".wg-tag--icon-right"
+    ],
+    "children": {
+      "text": ".wg-tag__text",
+      "icon": ".wg-tag__icon"
+    },
+    "group": {
+      "root": ".wg-tag-group"
+    }
+  },
+  "usageHints": [
+    "size 32 / 28 / 24 是可交互标签，size 20 是纯展示标签，不要加 tabindex 或点击反馈",
+    "grey 是默认语义，white 带边框，green 用于强调标签或认证类语义",
+    "add 图标通常放左侧，close / jump-to 更常放右侧",
+    "选中态统一通过 .wg-tag--selected 表达，不单独创建新颜色类",
+    "一组筛选标签使用 .wg-tag-group 管理换行和间距"
+  ],
+  "doNotInvent": [
+    "不要新增第五档尺寸",
+    "不要让 size 20 标签进入 selected / pressed 交互态",
+    "不要把 white / green 标签的边框去掉",
+    "不要同时给一个标签加 icon-left 和 icon-right",
+    "不要把 tag-group 当作通用布局容器使用"
+  ],
+  "knownIssues": [],
+  "provenance": {
+    "preview": "preview/component-tag.html",
+    "css": { "file": "components.css", "marker": "Tag" }
+  }
+}

@@ -113,9 +113,7 @@
     "不要在 select 模式隐藏 check 图标",
     "不要改变 panel 的圆角（顶部圆角+底部直角是设计规范）"
   ],
-  "knownIssues": [
-    "wg-actionsheet__safe-area::after 的 inline-size (134px) 与 block-size (5px) 为 iOS Home Indicator 规范约定值，非通用 Token"
-  ],
+  "knownIssues": [],
   "provenance": {
     "preview": "preview/component-actionsheet.html",
     "css": { "file": "components.css", "marker": "Actionsheet" }

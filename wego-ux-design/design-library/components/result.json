@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 2,
+  "slug": "result",
+  "name": "结果页",
+  "category": "feedback",
+  "variantDimensions": {
+    "layout": {
+      "description": "结果页布局高度策略",
+      "values": ["result-40", "result-60", "result-80"],
+      "default": "result-60"
+    },
+    "image": {
+      "description": "结果页主图语义",
+      "values": [
+        "success",
+        "error",
+        "warning",
+        "waiting",
+        "celebrate",
+        "not-found",
+        "search-not-found",
+        "no-permission",
+        "time-expired",
+        "network-error",
+        "custom"
+      ],
+      "default": "success"
+    },
+    "buttons": {
+      "description": "底部操作区布局",
+      "values": ["none", "single", "dual", "with-links"],
+      "default": "single"
+    },
+    "customContent": {
+      "description": "是否在描述文案后插入自定义内容区域",
+      "values": ["false", "true"],
+      "default": "false"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default",
+    "wg-color-bg-secondary",
+    "wg-color-divider-default",
+    "wg-color-state-focus",
+    "wg-color-status-danger-default",
+    "wg-color-status-info-default",
+    "wg-color-status-success-default",
+    "wg-color-status-warning-default",
+    "wg-color-text-inverse",
+    "wg-color-text-primary",
+    "wg-color-text-secondary",
+    "wg-color-text-tertiary",
+    "wg-font-family-text",
+    "wg-font-lineheight-14",
+    "wg-font-lineheight-16",
+    "wg-font-lineheight-18",
+    "wg-font-size-14",
+    "wg-font-size-16",
+    "wg-font-size-18",
+    "wg-font-weight-medium",
+    "wg-font-weight-regular",
+    "wg-motion-duration-fast",
+    "wg-motion-ease-standard",
+    "wg-radius-lg",
+    "wg-size-48",
+    "wg-size-72",
+    "wg-spacing-12",
+    "wg-spacing-16",
+    "wg-spacing-2",
+    "wg-spacing-24",
+    "wg-spacing-32",
+    "wg-spacing-40",
+    "wg-spacing-8",
+    "wg-stroke-style-solid",
+    "wg-stroke-width-hairline",
+    "wg-stroke-width-strong"
+  ],
+  "domAnatomy": {
+    "root": ".wg-result",
+    "modifiers": [
+      ".wg-result--result-40",
+      ".wg-result--result-60",
+      ".wg-result--result-80"
+    ],
+    "children": {
+      "message": ".wg-result__message",
+      "image": ".wg-result__image",
+      "icon": {
+        "root": ".wg-result__icon",
+        "modifiers": [
+          ".wg-result__icon--success",
+          ".wg-result__icon--error",
+          ".wg-result__icon--warning",
+          ".wg-result__icon--waiting",
+          ".wg-result__icon--celebrate",
+          ".wg-result__icon--not-found",
+          ".wg-result__icon--search-not-found",
+          ".wg-result__icon--no-permission",
+          ".wg-result__icon--time-expired",
+          ".wg-result__icon--network-error",
+          ".wg-result__icon--custom"
+        ]
+      },
+      "title": ".wg-result__title",
+      "description": ".wg-result__description",
+      "link": ".wg-result__link",
+      "custom": ".wg-result__custom",
+      "operate": ".wg-result__operate",
+      "buttons": {
+        "root": ".wg-result__buttons",
+        "modifiers": [
+          ".wg-result__buttons--single",
+          ".wg-result__buttons--dual"
+        ]
+      },
+      "button": {
+        "root": ".wg-result__button",
+        "modifiers": [
+          ".wg-result__button--confirm",
+          ".wg-result__button--cancel"
+        ]
+      },
+      "links": ".wg-result__links",
+      "linkButton": ".wg-result__link-btn",
+      "linkDivider": ".wg-result__link-divider"
+    }
+  },
+  "usageHints": [
+    "result-60 / result-80 需要放在可拉伸父容器中使用，result-40 更适合页面内嵌空态",
+    "success / error / warning / waiting / celebrate 使用 72 尺寸图标，大图空态使用 not-found 等 120 尺寸图标",
+    "single / dual 决定主按钮区布局，with-links 表示主按钮下方追加 .wg-result__links",
+    "有额外金额或插槽内容时放进 .wg-result__custom，不要打散到 description 外部",
+    "描述文案中的内联跳转使用 .wg-result__link，底部辅助跳转使用 .wg-result__link-btn"
+  ],
+  "doNotInvent": [
+    "不要新增第四种布局档位",
+    "不要把双按钮改成上下堆叠",
+    "不要把大图空态与成功/失败小图标混用到同一尺寸体系",
+    "不要把 custom 内容替换掉 title 或 description 主信息层",
+    "不要给按钮或链接新增未定义的强调色"
+  ],
+  "knownIssues": [
+    "result-80 的主内容起始位置仍含固定百分比偏移，后续可继续 token 化",
+    "按钮和链接的 active / disabled 透明度 0.6、0.4 仍是硬编码值"
+  ],
+  "provenance": {
+    "preview": "preview/component-result.html",
+    "css": { "file": "components.css", "marker": "Result" }
+  }
+}
