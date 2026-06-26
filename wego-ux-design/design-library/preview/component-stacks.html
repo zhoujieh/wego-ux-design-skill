@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack 组件预览 — 微购设计库</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    /* @component-css-start */
+
+    .wg-stack {
+      inline-size: max-content;
+      max-inline-size: 100%;
+      min-inline-size: var(--wg-size-64);
+      min-block-size: var(--wg-touch-min);
+      padding: var(--wg-spacing-8) var(--wg-spacing-16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: var(--wg-radius-md);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
+      background-color: var(--wg-color-bg-surface);
+      color: var(--wg-color-text-secondary);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      font-weight: var(--wg-font-weight-regular);
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-stack__label {
+      min-inline-size: 0;
+      white-space: nowrap;
+    }
+
+    .wg-stack__check {
+      position: absolute;
+      inset-inline-end: var(--wg-spacing-4);
+      inset-block-start: var(--wg-spacing-4);
+      inline-size: var(--wg-size-16);
+      block-size: var(--wg-size-16);
+      border-radius: var(--wg-radius-full);
+      background-color: var(--wg-color-action-primary-default);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--wg-color-text-inverse);
+    }
+
+    .wg-stack__check::after {
+      content: "";
+      inline-size: var(--wg-spacing-4);
+      block-size: var(--wg-spacing-8);
+      border-inline-end: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) currentColor;
+      border-block-end: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) currentColor;
+      transform: rotate(45deg) translateY(calc(var(--wg-spacing-2) / -2));
+    }
+
+    .wg-stack--selected {
+      border-color: var(--wg-color-border-success);
+      background-color: var(--wg-color-bg-success);
+      color: var(--wg-color-text-success);
+    }
+
+    .wg-stack--selected .wg-stack__check {
+      display: inline-flex;
+    }
+
+    .wg-stack:focus-visible {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: var(--wg-spacing-2);
+    }
+
+    /* @component-css-end */
+
+    .preview-body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--wg-color-bg-page);
+      color: var(--wg-color-text-primary);
+    }
+
+    .preview-shell {
+      max-inline-size: 960px;
+      margin: 0 auto;
+      padding: var(--wg-spacing-40) var(--wg-spacing-16);
+    }
+
+    .preview-stack {
+      display: grid;
+      gap: var(--wg-spacing-8);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--wg-spacing-24);
+    }
+
+    .preview-panel {
+      padding: var(--wg-spacing-16);
+      border-radius: var(--wg-radius-md);
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .preview-card {
+      padding: var(--wg-spacing-24);
+      border-radius: var(--wg-radius-md);
+      background: var(--wg-color-bg-surface);
+      display: flex;
+      align-items: center;
+      gap: var(--wg-spacing-16);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .preview-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body class="preview-body">
+  <main class="preview-shell preview-stack">
+    <header class="preview-stack">
+      <h1 class="wg-h1">Stack 组件预览</h1>
+      <p class="wg-text-secondary">按 Figma 中的「Stack 选项卡」还原，自适应内容宽度，仅保留默认与选中两种状态。</p>
+    </header>
+
+    <section class="preview-grid">
+      <article class="preview-panel preview-stack">
+        <h2 class="wg-h2">基础状态</h2>
+        <div class="preview-card">
+          <button class="wg-stack" type="button">
+            <span class="wg-stack__label">选项</span>
+            <span class="wg-stack__check"></span>
+          </button>
+
+          <button class="wg-stack wg-stack--selected" type="button">
+            <span class="wg-stack__label">选项</span>
+            <span class="wg-stack__check"></span>
+          </button>
+        </div>
+      </article>
+
+      <article class="preview-panel preview-stack">
+        <h2 class="wg-h2">自适应内容</h2>
+        <div class="preview-card">
+          <button class="wg-stack" type="button">
+            <span class="wg-stack__label">短标签</span>
+            <span class="wg-stack__check"></span>
+          </button>
+
+          <button class="wg-stack wg-stack--selected" type="button">
+            <span class="wg-stack__label">更长一些的选项内容</span>
+            <span class="wg-stack__check"></span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

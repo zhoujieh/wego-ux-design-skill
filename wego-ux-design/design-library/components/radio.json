@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "slug": "radio",
+  "name": "单选框",
+  "category": "form",
+  "variantDimensions": {
+    "state": {
+      "description": "选中状态",
+      "values": ["unchecked", "checked", "disabled-unchecked", "disabled-checked"],
+      "default": "unchecked"
+    },
+    "theme": {
+      "description": "使用场景底色",
+      "values": ["surface", "dark"],
+      "default": "surface"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default", "wg-color-action-primary-disabled",
+    "wg-color-bg-inverse-subtle", "wg-color-bg-surface",
+    "wg-color-border-default",
+    "wg-color-state-disabled-bg", "wg-color-state-focus",
+    "wg-color-text-inverse-weak",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-radius-full",
+    "wg-size-10", "wg-size-24",
+    "wg-spacing-2", "wg-spacing-8",
+    "wg-stroke-style-solid", "wg-stroke-width-default", "wg-stroke-width-strong"
+  ],
+  "domAnatomy": {
+    "root": ".wg-radio",
+    "modifiers": [
+      ".wg-radio--checked",
+      ".wg-radio--disabled",
+      ".wg-radio--dark"
+    ],
+    "children": {
+      "dot": ".wg-radio__dot"
+    }
+  },
+  "usageHints": [
+    "选中态保留外环，只显示中心实心圆点，不要填满整个圆",
+    "Cell 左侧单选列表项使用 radio，当前项附加 .wg-radio--checked",
+    "暗底场景使用 .wg-radio--dark",
+    "Radio 与 Checkbox 尺寸保持一致，便于在 Cell 选择区切换"
+  ],
+  "doNotInvent": [
+    "不要把 radio 改成方形",
+    "不要自定义 dot 尺寸",
+    "不要在禁用态保留高饱和品牌色"
+  ],
+  "provenance": {
+    "preview": "preview/component-radio.html",
+    "css": { "file": "components.css", "marker": "Radio" }
+  }
+}

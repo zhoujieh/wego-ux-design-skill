@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "slug": "checkbox",
+  "name": "复选框",
+  "category": "form",
+  "variantDimensions": {
+    "state": {
+      "description": "选中状态",
+      "values": ["unchecked", "checked", "indeterminate", "disabled-unchecked", "disabled-checked"],
+      "default": "unchecked"
+    },
+    "mark": {
+      "description": "选中时的内部标记",
+      "values": ["check", "minus", "number"],
+      "default": "check"
+    },
+    "theme": {
+      "description": "使用场景底色",
+      "values": ["surface", "dark"],
+      "default": "surface"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default", "wg-color-action-primary-disabled",
+    "wg-color-bg-inverse-subtle", "wg-color-bg-surface",
+    "wg-color-border-default",
+    "wg-color-state-disabled-bg", "wg-color-state-disabled-text", "wg-color-state-focus",
+    "wg-color-text-inverse", "wg-color-text-inverse-weak",
+    "wg-font-size-10", "wg-font-lineheight-10", "wg-font-weight-semibold",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-radius-full", "wg-radius-sm",
+    "wg-size-12", "wg-size-24",
+    "wg-spacing-2", "wg-spacing-4", "wg-spacing-8",
+    "wg-stroke-style-solid", "wg-stroke-width-default", "wg-stroke-width-strong"
+  ],
+  "domAnatomy": {
+    "root": ".wg-checkbox",
+    "modifiers": [
+      ".wg-checkbox--checked",
+      ".wg-checkbox--indeterminate",
+      ".wg-checkbox--disabled",
+      ".wg-checkbox--dark",
+      ".wg-checkbox--mark-check",
+      ".wg-checkbox--mark-minus",
+      ".wg-checkbox--mark-number"
+    ],
+    "children": {
+      "indicator": ".wg-checkbox__indicator"
+    }
+  },
+  "usageHints": [
+    "Figma 里的 CheckBox 是圆形勾选，不要画成方形",
+    "Cell 左侧多选区默认使用 mark-check",
+    "批量选择半选态使用 mark-minus + indeterminate",
+    "排序或步骤选择场景使用 mark-number，并把数字文案放入 .wg-checkbox__indicator",
+    "暗底卡片或图片遮罩场景使用 .wg-checkbox--dark"
+  ],
+  "doNotInvent": [
+    "不要改变复选框的尺寸（固定 24px）",
+    "不要替换为自定义 SVG 图标",
+    "不要在未选中态填充品牌色背景",
+    "不要跳过 indeterminate 半选态命名"
+  ],
+  "provenance": {
+    "preview": "preview/component-checkbox.html",
+    "css": { "file": "components.css", "marker": "Checkbox" }
+  }
+}

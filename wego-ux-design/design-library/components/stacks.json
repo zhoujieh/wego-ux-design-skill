@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "slug": "stacks",
+  "name": "选项卡",
+  "category": "display",
+  "variantDimensions": {
+    "state": {
+      "description": "选项卡状态",
+      "values": ["default", "selected"],
+      "default": "default"
+    },
+    "contentWidth": {
+      "description": "内容宽度策略",
+      "values": ["adaptive"],
+      "default": "adaptive"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default",
+    "wg-color-bg-success", "wg-color-bg-surface",
+    "wg-color-border-default", "wg-color-border-success",
+    "wg-color-state-focus",
+    "wg-color-text-inverse", "wg-color-text-secondary", "wg-color-text-success",
+    "wg-font-size-14", "wg-font-lineheight-14", "wg-font-weight-regular",
+    "wg-motion-duration-fast", "wg-motion-ease-standard",
+    "wg-radius-full", "wg-radius-md",
+    "wg-size-16", "wg-size-64",
+    "wg-spacing-2", "wg-spacing-4", "wg-spacing-8", "wg-spacing-16",
+    "wg-stroke-style-solid", "wg-stroke-width-default", "wg-stroke-width-strong",
+    "wg-touch-min"
+  ],
+  "domAnatomy": {
+    "root": ".wg-stack",
+    "modifiers": [
+      ".wg-stack--selected"
+    ],
+    "children": {
+      "label": ".wg-stack__label",
+      "check": ".wg-stack__check"
+    }
+  },
+  "usageHints": [
+    "Stack 是自适应内容宽度的可选项卡，不是页面布局容器",
+    "默认态为白底灰字；选中态为浅绿底、绿字，并在右上显示勾选徽标",
+    "内容宽度随文案自适应增长，适合规格选择、筛选标签、选项卡片"
+  ],
+  "doNotInvent": [
+    "不要把 Stack 当作通用 gap 布局工具使用",
+    "不要写固定宽度，必须跟随内容自适应",
+    "不要新增 hover/disabled 等设计稿未给出的状态"
+  ],
+  "provenance": {
+    "preview": "preview/component-stacks.html",
+    "css": { "file": "components.css", "marker": "Stacks" }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 2,
+  "slug": "switch",
+  "name": "开关",
+  "category": "form",
+  "variantDimensions": {
+    "state": {
+      "description": "开关状态",
+      "values": ["off", "on", "disabled-off", "disabled-on"],
+      "default": "off"
+    }
+  },
+  "tokensConsumed": [
+    "wg-color-action-primary-default", "wg-color-base-brand-alpha-20",
+    "wg-color-bg-surface",
+    "wg-color-state-disabled-bg", "wg-color-state-focus",
+    "wg-motion-duration-fast", "wg-motion-duration-instant", "wg-motion-duration-normal", "wg-motion-ease-standard",
+    "wg-radius-full",
+    "wg-shadow-xs",
+    "wg-size-20", "wg-size-24",
+    "wg-spacing-2",
+    "wg-stroke-style-none", "wg-stroke-style-solid",
+    "wg-stroke-width-none", "wg-stroke-width-strong",
+    "wg-touch-default"
+  ],
+  "domAnatomy": {
+    "root": ".wg-switch",
+    "modifiers": [
+      ".wg-switch--on",
+      ".wg-switch--disabled"
+    ],
+    "children": {
+      "thumb": ".wg-switch__thumb"
+    }
+  },
+  "usageHints": [
+    "Cell 右侧动作区与设置页表单行都直接复用该开关",
+    "开启态使用 .wg-switch--on，禁用态额外叠加 .wg-switch--disabled",
+    "预览页应至少提供一个可点击的 live demo，直接展示切换动画",
+    "thumb 位移不要手写像素值，依赖轨道宽度与 thumb 尺寸计算"
+  ],
+  "doNotInvent": [
+    "不要修改轨道尺寸（固定 44 × 24）",
+    "不要给开关添加边框",
+    "不要手写 thumb 位移值",
+    "不要把禁用开启态改成正常品牌色"
+  ],
+  "provenance": {
+    "preview": "preview/component-switch.html",
+    "css": { "file": "components.css", "marker": "Switch" }
+  }
+}

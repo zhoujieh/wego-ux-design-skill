@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio 组件预览 — 微购设计库</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../components.css">
+  <style>
+    /* @component-css-start */
+
+    .wg-radio {
+      --wg-radio-accent: var(--wg-color-action-primary-default);
+      --wg-radio-accent-disabled: var(--wg-color-action-primary-disabled);
+      inline-size: var(--wg-size-24);
+      block-size: var(--wg-size-24);
+      padding: var(--wg-spacing-0);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: var(--wg-radius-full);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
+      background-color: var(--wg-color-bg-surface);
+      cursor: pointer;
+      font: inherit;
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        transform var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-radio__dot {
+      inline-size: var(--wg-size-10);
+      block-size: var(--wg-size-10);
+      border-radius: var(--wg-radius-full);
+      background-color: var(--wg-radio-accent);
+      opacity: 0;
+      transform: scale(0.7);
+      transition:
+        opacity var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        transform var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-radio--checked {
+      border-color: var(--wg-radio-accent);
+    }
+
+    .wg-radio--checked .wg-radio__dot {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .wg-radio--disabled {
+      cursor: not-allowed;
+    }
+
+    .wg-radio--disabled:not(.wg-radio--checked) {
+      border-color: var(--wg-color-state-disabled-bg);
+      background-color: var(--wg-color-state-disabled-bg);
+    }
+
+    .wg-radio--disabled.wg-radio--checked {
+      border-color: var(--wg-radio-accent-disabled);
+    }
+
+    .wg-radio--disabled.wg-radio--checked .wg-radio__dot {
+      background-color: var(--wg-radio-accent-disabled);
+    }
+
+    .wg-radio--dark:not(.wg-radio--checked) {
+      border-color: var(--wg-color-text-inverse-weak);
+      background-color: var(--wg-color-bg-inverse-subtle);
+    }
+
+    .wg-radio--dark.wg-radio--checked {
+      border-color: var(--wg-color-bg-surface);
+      background-color: transparent;
+    }
+
+    .wg-radio:not(.wg-radio--disabled):active {
+      transform: scale(0.94);
+    }
+
+    .wg-radio:focus-visible {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: var(--wg-spacing-2);
+    }
+
+    /* @component-css-end */
+
+    .preview-body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--wg-color-bg-page);
+      color: var(--wg-color-text-primary);
+    }
+
+    .preview-shell {
+      max-inline-size: 1120px;
+      margin: 0 auto;
+      padding: var(--wg-spacing-40) var(--wg-spacing-16);
+    }
+
+    .preview-stack {
+      display: grid;
+      gap: var(--wg-spacing-8);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--wg-spacing-24);
+    }
+
+    .preview-panel {
+      padding: var(--wg-spacing-16);
+      border-radius: var(--wg-radius-md);
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .preview-card {
+      padding: var(--wg-spacing-24);
+      border-radius: var(--wg-radius-md);
+      background: var(--wg-color-bg-surface);
+    }
+
+    .preview-dark-card {
+      background: var(--wg-color-surface-inverse);
+      color: var(--wg-color-text-inverse);
+    }
+
+    .preview-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--wg-spacing-16);
+    }
+
+    @media (max-width: 900px) {
+      .preview-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body class="preview-body">
+  <main class="preview-shell preview-stack">
+    <header class="preview-stack">
+      <h1 class="wg-h1">Radio 组件预览</h1>
+      <p class="wg-text-secondary">按 Figma 设计稿还原单选体系，区分白底与暗底、启用与禁用，选中态保留外环与中心实心圆点。</p>
+    </header>
+
+    <section class="preview-grid">
+      <article class="preview-panel preview-stack">
+        <h2 class="wg-h2">白底状态</h2>
+        <div class="preview-card preview-stack">
+          <div class="preview-row">
+            <span class="wg-text-secondary">未选中</span>
+            <button class="wg-radio" type="button" aria-checked="false">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">已选中</span>
+            <button class="wg-radio wg-radio--checked" type="button" aria-checked="true">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">禁用未选</span>
+            <button class="wg-radio wg-radio--disabled" type="button" aria-checked="false" disabled>
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">禁用已选</span>
+            <button class="wg-radio wg-radio--checked wg-radio--disabled" type="button" aria-checked="true" disabled>
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="preview-panel preview-stack">
+        <h2 class="wg-h2">暗底状态</h2>
+        <div class="preview-card preview-dark-card preview-stack">
+          <div class="preview-row">
+            <span class="wg-text-secondary">暗底未选</span>
+            <button class="wg-radio wg-radio--dark" type="button" aria-checked="false">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">暗底已选</span>
+            <button class="wg-radio wg-radio--checked wg-radio--dark" type="button" aria-checked="true">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">暗底禁用已选</span>
+            <button class="wg-radio wg-radio--checked wg-radio--dark wg-radio--disabled" type="button" aria-checked="true" disabled>
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="preview-panel preview-stack">
+        <h2 class="wg-h2">Cell 集成</h2>
+        <div class="preview-card preview-stack">
+          <div class="preview-row">
+            <span class="wg-text-secondary">普通项</span>
+            <button class="wg-radio" type="button" aria-checked="false">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="preview-row">
+            <span class="wg-text-secondary">当前项</span>
+            <button class="wg-radio wg-radio--checked" type="button" aria-checked="true">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
