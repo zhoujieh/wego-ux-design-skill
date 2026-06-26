@@ -47,6 +47,7 @@
 - 自行创造 iconfont 中不存在的图标样式
 - 使用 emoji 或图片替代功能图标
 - 不查 iconfont.json 直接使用 SVG 内联图标
+- iconfont 图标元素未设置 `line-height: 1` 导致垂直偏移
 
 ---
 

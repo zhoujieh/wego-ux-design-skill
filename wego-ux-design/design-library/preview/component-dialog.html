@@ -12,13 +12,23 @@
     /* @component-css-start */
 
     .wg-dialog-overlay {
+      --wg-component-dialog-width: 300px;
+      --wg-component-dialog-padding-block: var(--wg-spacing-24);
+      --wg-component-dialog-padding-inline: 20px;
+      --wg-component-dialog-title-only-padding-block: var(--wg-spacing-32);
+      --wg-component-dialog-button-height: var(--wg-size-48);
+      --wg-component-dialog-closed-scale: 0.9;
       position: fixed;
       inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
       z-index: var(--wg-zindex-modal);
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--wg-color-overlay-modal);
+      padding: var(--wg-spacing-0);
+      background-color: var(--wg-color-overlay-light);
+      opacity: 1;
       transition:
         opacity var(--wg-motion-duration-normal) var(--wg-motion-ease-standard);
     }
@@ -29,12 +39,12 @@
     }
 
     .wg-dialog {
-      inline-size: min(300px, 90vw);
-      max-block-size: 80vh;
+      inline-size: min(var(--wg-component-dialog-width), calc(100vw - var(--wg-spacing-32)));
+      max-block-size: calc(100vh - (var(--wg-spacing-24) * 2));
       display: flex;
       flex-direction: column;
       background-color: var(--wg-color-bg-surface);
-      border-radius: var(--wg-radius-xl);
+      border-radius: var(--wg-radius-lg);
       box-shadow: var(--wg-shadow-xl);
       overflow: hidden;
       transform: scale(1);
@@ -44,15 +54,19 @@
     }
 
     .wg-dialog-overlay[data-state="closed"] .wg-dialog {
-      transform: scale(0.95);
+      transform: scale(var(--wg-component-dialog-closed-scale));
       opacity: 0;
     }
 
     .wg-dialog__content {
-      padding: var(--wg-spacing-24) var(--wg-spacing-20);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: var(--wg-component-dialog-padding-block) var(--wg-component-dialog-padding-inline);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: var(--wg-spacing-12);
       text-align: center;
     }
 
@@ -60,18 +74,38 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: var(--wg-spacing-4);
+      gap: var(--wg-spacing-8);
+      inline-size: 100%;
+      min-inline-size: 0;
     }
 
     .wg-dialog__title {
       font-size: var(--wg-font-size-18);
       line-height: var(--wg-font-lineheight-18);
-      font-weight: var(--wg-font-weight-medium);
+      font-weight: var(--wg-font-weight-semibold);
       color: var(--wg-color-text-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      text-align: center;
+      word-break: break-word;
       max-inline-size: 100%;
+      margin: var(--wg-spacing-0);
+    }
+
+    .wg-dialog--title .wg-dialog__content {
+      padding: var(--wg-component-dialog-title-only-padding-block) var(--wg-component-dialog-padding-inline);
+    }
+
+    .wg-dialog--status .wg-dialog__content {
+      gap: var(--wg-spacing-12);
+    }
+
+    .wg-dialog--custom .wg-dialog__content {
+      align-items: stretch;
+      gap: var(--wg-spacing-12);
+    }
+
+    .wg-dialog--custom .wg-dialog__header,
+    .wg-dialog--custom .wg-dialog__description {
+      align-self: center;
     }
 
     .wg-dialog__icon {
@@ -80,6 +114,7 @@
       justify-content: center;
       font-size: var(--wg-size-24);
       flex-shrink: 0;
+      line-height: var(--wg-size-24);
     }
 
     .wg-dialog__icon--success {
@@ -95,23 +130,24 @@
     }
 
     .wg-dialog__description {
-      margin-block-start: var(--wg-spacing-12);
+      margin: var(--wg-spacing-0);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
       font-weight: var(--wg-font-weight-regular);
-      color: var(--wg-color-text-secondary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: var(--wg-color-text-primary);
+      text-align: center;
+      word-break: break-word;
       max-inline-size: 100%;
     }
 
     .wg-dialog__custom {
-      margin-block-start: var(--wg-spacing-12);
       inline-size: 100%;
+      margin: var(--wg-spacing-0);
+      padding: var(--wg-spacing-0);
     }
 
     .wg-dialog__action {
+      margin-block-start: var(--wg-spacing-0);
       border-block-start: var(--wg-stroke-width-hairline) var(--wg-stroke-style-solid) var(--wg-color-divider-default);
     }
 
@@ -122,7 +158,7 @@
     }
 
     .wg-dialog__buttons--dual {
-      gap: var(--wg-spacing-16);
+      gap: var(--wg-spacing-0);
     }
 
     .wg-dialog__buttons--single {
@@ -134,26 +170,27 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      block-size: var(--wg-size-48);
+      flex: 1 1 0;
+      min-inline-size: 0;
+      block-size: var(--wg-component-dialog-button-height);
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background: transparent;
+      background-color: var(--wg-color-bg-surface);
       cursor: pointer;
       font-family: var(--wg-font-family-text);
       font-size: var(--wg-font-size-16);
       line-height: var(--wg-font-lineheight-16);
       font-weight: var(--wg-font-weight-medium);
       transition:
-        opacity var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
     }
 
-    .wg-dialog__buttons--dual .wg-dialog__button {
-      flex: 1 1 0;
-      min-inline-size: 0;
+    .wg-dialog__buttons--dual .wg-dialog__button + .wg-dialog__button {
+      border-inline-start: var(--wg-stroke-width-hairline) var(--wg-stroke-style-solid) var(--wg-color-divider-default);
     }
 
     .wg-dialog__buttons--single .wg-dialog__button {
-      inline-size: 100%;
+      flex-basis: 100%;
     }
 
     .wg-dialog__button--dismiss {
@@ -161,19 +198,19 @@
     }
 
     .wg-dialog__button--confirm {
-      color: var(--wg-color-action-primary-default);
+      color: var(--wg-color-action-link-default);
     }
 
     .wg-dialog__button--confirm.wg-dialog__button--danger {
       color: var(--wg-color-action-danger-default);
     }
 
-    .wg-dialog__button:not(:disabled):active {
-      opacity: 0.6;
+    .wg-dialog__button:not(:disabled):hover {
+      background-color: var(--wg-color-state-hover);
     }
 
-    .wg-dialog__button:focus-visible {
-      outline: none;
+    .wg-dialog__button:not(:disabled):active {
+      background-color: var(--wg-color-state-pressed);
     }
 
     .wg-dialog__button:focus-visible {
@@ -222,7 +259,10 @@
 
     .dialog-demo-stage {
       position: relative;
-      background-color: var(--wg-color-overlay-modal);
+      background-color: var(--wg-color-bg-muted);
+      background-image: url("../../resources/images/14/1664276960210_50005.jpg");
+      background-position: center;
+      background-size: cover;
       border-radius: var(--wg-radius-md);
       overflow: hidden;
       min-block-size: 220px;
@@ -232,7 +272,9 @@
     }
 
     .dialog-demo-stage .wg-dialog-overlay {
-      position: relative;
+      position: absolute;
+      inset: 0;
+      padding: var(--wg-spacing-0);
     }
 
     .dialog-demo-stage--tall {
@@ -262,6 +304,65 @@
       outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
       outline-offset: calc(-1 * var(--wg-spacing-2));
     }
+
+    .dialog-interaction-stage {
+      min-block-size: 280px;
+    }
+
+    .dialog-entry-panel {
+      position: relative;
+      z-index: var(--wg-zindex-base);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--wg-spacing-12);
+      padding: var(--wg-spacing-24);
+      border-radius: var(--wg-radius-md);
+      background-color: var(--wg-color-bg-surface);
+      box-shadow: var(--wg-shadow-sm);
+    }
+
+    .dialog-entry-title {
+      margin: var(--wg-spacing-0);
+      color: var(--wg-color-text-primary);
+      font-size: var(--wg-font-size-16);
+      line-height: var(--wg-font-lineheight-16);
+      font-weight: var(--wg-font-weight-semibold);
+    }
+
+    .dialog-demo-trigger {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-block-size: var(--wg-touch-min);
+      padding: var(--wg-spacing-0) var(--wg-spacing-16);
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+      border-radius: var(--wg-radius-sm);
+      background-color: var(--wg-color-action-primary-default);
+      color: var(--wg-color-text-inverse);
+      font-family: var(--wg-font-family-text);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
+      font-weight: var(--wg-font-weight-medium);
+      cursor: pointer;
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .dialog-demo-trigger:hover {
+      background-color: var(--wg-color-action-primary-hover);
+    }
+
+    .dialog-demo-trigger:active {
+      background-color: var(--wg-color-action-primary-pressed);
+    }
+
+    .dialog-demo-trigger:focus-visible {
+      outline: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) var(--wg-color-state-focus);
+      outline-offset: var(--wg-spacing-2);
+    }
+
   </style>
 </head>
 <body class="preview-body">
@@ -275,42 +376,15 @@
   </p>
 </div>
 
-<!-- ===== 文本 + 双按钮 (危险) ===== -->
+<!-- ===== 默认样式：标题 + 双按钮 ===== -->
 <section class="scope-section">
-  <h2 class="wg-h2">text variant · dual buttons · danger</h2>
+  <h2 class="wg-h2">default · title variant · dual buttons</h2>
 
   <div class="variant-card">
-    <h3>确认删除 — 标题 + 描述 + 取消/删除</h3>
+    <h3>开启手动跟图 — 默认标题弹窗 + 取消/确认</h3>
     <div class="dialog-demo-stage">
       <div class="wg-dialog-overlay">
-        <div class="wg-dialog">
-          <div class="wg-dialog__content">
-            <div class="wg-dialog__header">
-              <span class="wg-dialog__title">确认删除</span>
-            </div>
-            <p class="wg-dialog__description">删除后无法恢复，确定要删除吗？</p>
-          </div>
-          <div class="wg-dialog__action">
-            <div class="wg-dialog__buttons wg-dialog__buttons--dual">
-              <button class="wg-dialog__button wg-dialog__button--dismiss" type="button">取消</button>
-              <button class="wg-dialog__button wg-dialog__button--confirm wg-dialog__button--danger" type="button">删除</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 标题 + 双按钮 ===== -->
-<section class="scope-section">
-  <h2 class="wg-h2">title variant · dual buttons</h2>
-
-  <div class="variant-card">
-    <h3>开启手动跟图 — 仅标题 + 取消/确认</h3>
-    <div class="dialog-demo-stage">
-      <div class="wg-dialog-overlay">
-        <div class="wg-dialog">
+        <div class="wg-dialog wg-dialog--title">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
               <span class="wg-dialog__title">开启手动跟图</span>
@@ -328,6 +402,33 @@
   </div>
 </section>
 
+<!-- ===== 文本 + 双按钮 (危险) ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">title + text variant · dual buttons · danger</h2>
+
+  <div class="variant-card">
+    <h3>确认删除 — 标题 + 描述 + 取消/删除</h3>
+    <div class="dialog-demo-stage">
+      <div class="wg-dialog-overlay">
+        <div class="wg-dialog wg-dialog--text">
+          <div class="wg-dialog__content">
+            <div class="wg-dialog__header">
+              <span class="wg-dialog__title">确认删除</span>
+            </div>
+            <p class="wg-dialog__description">删除后无法恢复，请谨慎操作</p>
+          </div>
+          <div class="wg-dialog__action">
+            <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+              <button class="wg-dialog__button wg-dialog__button--dismiss" type="button">取消</button>
+              <button class="wg-dialog__button wg-dialog__button--confirm wg-dialog__button--danger" type="button">删除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 状态 + 单按钮 (success) ===== -->
 <section class="scope-section">
   <h2 class="wg-h2">status variant · single button · success</h2>
@@ -336,12 +437,13 @@
     <h3>操作成功 — 成功图标 + 标题 + "知道了"</h3>
     <div class="dialog-demo-stage">
       <div class="wg-dialog-overlay">
-        <div class="wg-dialog">
+        <div class="wg-dialog wg-dialog--status">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
-              <i class="wego-iconfont-s icon-yuangou-mian wg-dialog__icon wg-dialog__icon--success"></i>
+              <i class="wego-iconfont-s icon-gou wg-dialog__icon wg-dialog__icon--success"></i>
               <span class="wg-dialog__title">操作成功</span>
             </div>
+            <p class="wg-dialog__description">您的订单已提交成功</p>
           </div>
           <div class="wg-dialog__action">
             <div class="wg-dialog__buttons wg-dialog__buttons--single">
@@ -362,16 +464,58 @@
     <h3>退款失败 — 危险图标 + 标题 + "知道了"</h3>
     <div class="dialog-demo-stage">
       <div class="wg-dialog-overlay">
-        <div class="wg-dialog">
+        <div class="wg-dialog wg-dialog--status">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
-              <i class="wego-iconfont-s icon-yuancha-mian wg-dialog__icon wg-dialog__icon--danger"></i>
+              <i class="wego-iconfont-s icon-cha-cu wg-dialog__icon wg-dialog__icon--danger"></i>
               <span class="wg-dialog__title">退款失败</span>
             </div>
+            <p class="wg-dialog__description">该订单正在处理中，请稍后重试</p>
           </div>
           <div class="wg-dialog__action">
             <div class="wg-dialog__buttons wg-dialog__buttons--single">
               <button class="wg-dialog__button wg-dialog__button--confirm" type="button">知道了</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 正文链接 + 双按钮 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">text variant · content link</h2>
+
+  <div class="variant-card">
+    <h3>协议更新 — 正文内链接 + 取消/同意</h3>
+    <div class="dialog-demo-stage">
+      <div class="wg-dialog-overlay">
+        <div class="wg-dialog wg-dialog--text">
+          <div class="wg-dialog__content">
+            <div class="wg-dialog__header">
+              <span class="wg-dialog__title">协议更新</span>
+            </div>
+            <p class="wg-dialog__description">
+              请阅读
+              <a class="wg-link wg-link--inline" href="#">
+                <span class="wg-link__surface">
+                  <span class="wg-link__label">用户协议</span>
+                </span>
+              </a>
+              和
+              <a class="wg-link wg-link--inline" href="#">
+                <span class="wg-link__surface">
+                  <span class="wg-link__label">隐私政策</span>
+                </span>
+              </a>
+              后继续
+            </p>
+          </div>
+          <div class="wg-dialog__action">
+            <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+              <button class="wg-dialog__button wg-dialog__button--dismiss" type="button">取消</button>
+              <button class="wg-dialog__button wg-dialog__button--confirm" type="button">同意</button>
             </div>
           </div>
         </div>
@@ -388,7 +532,7 @@
     <h3>创建标签 — 标题 + 描述 + 自定义输入 + 取消/创建</h3>
     <div class="dialog-demo-stage dialog-demo-stage--tall">
       <div class="wg-dialog-overlay">
-        <div class="wg-dialog">
+        <div class="wg-dialog wg-dialog--custom">
           <div class="wg-dialog__content">
             <div class="wg-dialog__header">
               <span class="wg-dialog__title">创建标签</span>
@@ -410,18 +554,98 @@
   </div>
 </section>
 
+<!-- ===== 禁用按钮状态 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">text variant · disabled buttons</h2>
+
+  <div class="variant-card">
+    <h3>提交中 — 双按钮 disabled 状态</h3>
+    <div class="dialog-demo-stage">
+      <div class="wg-dialog-overlay">
+        <div class="wg-dialog wg-dialog--text">
+          <div class="wg-dialog__content">
+            <div class="wg-dialog__header">
+              <span class="wg-dialog__title">正在提交</span>
+            </div>
+            <p class="wg-dialog__description">请稍候，系统正在处理您的操作</p>
+          </div>
+          <div class="wg-dialog__action">
+            <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+              <button class="wg-dialog__button wg-dialog__button--dismiss" type="button" disabled>取消</button>
+              <button class="wg-dialog__button wg-dialog__button--confirm" type="button" disabled>确认</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 点击入口打开弹窗 ===== -->
+<section class="scope-section">
+  <h2 class="wg-h2">interaction · trigger open</h2>
+
+  <div class="variant-card">
+    <h3>点击入口 — mask 0→30% + dialog 90→100%</h3>
+    <div class="dialog-demo-stage dialog-interaction-stage">
+      <div class="dialog-entry-panel">
+        <p class="dialog-entry-title">批量删除商品</p>
+        <button class="dialog-demo-trigger" type="button" data-dialog-open>打开确认弹窗</button>
+      </div>
+      <div class="wg-dialog-overlay" data-state="closed" data-dialog-overlay>
+        <div class="wg-dialog wg-dialog--text">
+          <div class="wg-dialog__content">
+            <div class="wg-dialog__header">
+              <span class="wg-dialog__title">确认删除</span>
+            </div>
+            <p class="wg-dialog__description">删除后无法恢复，请谨慎操作</p>
+          </div>
+          <div class="wg-dialog__action">
+            <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+              <button class="wg-dialog__button wg-dialog__button--dismiss" type="button" data-dialog-close>取消</button>
+              <button class="wg-dialog__button wg-dialog__button--confirm wg-dialog__button--danger" type="button" data-dialog-close>删除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 说明 -->
 <section class="scope-section">
   <div class="variant-card">
     <h3>使用说明</h3>
     <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
-      <li class="wg-text-body-sm">演示中的 dialog overlay 使用 <code>position: relative</code> 模拟容器展示，实际使用为 <code>position: fixed</code> 全屏遮罩</li>
-      <li class="wg-text-body-sm">关闭动画通过 <code>data-state="closed"</code> 属性触发 transform/opacity 过渡</li>
+      <li class="wg-text-body-sm">每个预览场景使用图片底图展示 30% mask 覆盖效果</li>
+      <li class="wg-text-body-sm">演示中的 dialog overlay 覆盖整个预览容器，实际使用为 <code>position: fixed</code> 全屏遮罩</li>
       <li class="wg-text-body-sm">按钮 active 态需点击体验，focus-visible 态需 Tab 键聚焦查看</li>
       <li class="wg-text-body-sm">所有样式值通过 <code>var(--wg-*)</code> 引用，零硬编码</li>
     </ul>
   </div>
 </section>
+
+<script>
+  const dialogOverlay = document.querySelector('[data-dialog-overlay]');
+  const dialogOpenButton = document.querySelector('[data-dialog-open]');
+  const dialogCloseButtons = document.querySelectorAll('[data-dialog-close]');
+
+  dialogOpenButton.addEventListener('click', () => {
+    dialogOverlay.dataset.state = 'open';
+  });
+
+  dialogCloseButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      dialogOverlay.dataset.state = 'closed';
+    });
+  });
+
+  dialogOverlay.addEventListener('click', (event) => {
+    if (event.target === dialogOverlay) {
+      dialogOverlay.dataset.state = 'closed';
+    }
+  });
+</script>
 
 </body>
 </html>

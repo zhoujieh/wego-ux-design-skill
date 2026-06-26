@@ -212,9 +212,9 @@
 
 /* ---- 图标尺寸工具类 ---- */
 
-.wg-icon--16 { font-size: var(--wg-size-16); }
-.wg-icon--20 { font-size: var(--wg-size-20); }
-.wg-icon--24 { font-size: var(--wg-size-24); }
-.wg-icon--28 { font-size: var(--wg-size-28); }
-.wg-icon--32 { font-size: var(--wg-size-32); }
-.wg-icon--48 { font-size: var(--wg-size-48); }
+.wg-icon--16 { font-size: var(--wg-size-16); line-height: 1; }
+.wg-icon--20 { font-size: var(--wg-size-20); line-height: 1; }
+.wg-icon--24 { font-size: var(--wg-size-24); line-height: 1; }
+.wg-icon--28 { font-size: var(--wg-size-28); line-height: 1; }
+.wg-icon--32 { font-size: var(--wg-size-32); line-height: 1; }
+.wg-icon--48 { font-size: var(--wg-size-48); line-height: 1; }

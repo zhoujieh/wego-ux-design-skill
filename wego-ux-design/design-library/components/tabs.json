@@ -14,6 +14,11 @@
       "values": ["divide", "scroll"],
       "default": "divide"
     },
+    "icon": {
+      "description": "标签图标位置",
+      "values": ["none", "left", "right"],
+      "default": "none"
+    },
     "state": {
       "description": "交互状态",
       "values": ["default", "pressed", "focus-visible"],
@@ -21,9 +26,9 @@
     }
   },
   "tokensConsumed": [
-    "wg-spacing-0", "wg-spacing-2", "wg-spacing-8", "wg-spacing-16",
-    "wg-size-48", "wg-size-56",
-    "wg-radius-full",
+    "wg-spacing-0", "wg-spacing-2", "wg-spacing-4", "wg-spacing-8", "wg-spacing-16",
+    "wg-size-16", "wg-size-48", "wg-size-56",
+    "wg-radius-none",
     "wg-font-size-14", "wg-font-size-16",
     "wg-font-lineheight-14", "wg-font-lineheight-16",
     "wg-font-weight-medium",
@@ -31,13 +36,18 @@
     "wg-color-text-primary", "wg-color-text-secondary",
     "wg-color-action-primary-default",
     "wg-color-state-focus",
-    "wg-stroke-width-none", "wg-stroke-width-strong",
+    "wg-stroke-width-default", "wg-stroke-width-none", "wg-stroke-width-strong",
     "wg-stroke-style-none", "wg-stroke-style-solid",
-    "wg-motion-duration-fast", "wg-motion-ease-standard"
+    "wg-motion-duration-fast", "wg-motion-duration-normal",
+    "wg-motion-ease-emphasized", "wg-motion-ease-standard"
   ],
   "internalProperties": {
-    "--_tabs-indicator-standard-height": "3px",
-    "--_tabs-indicator-mini-height": "2px"
+    "--_tabs-indicator-standard-height": "calc(var(--wg-spacing-2) + var(--wg-stroke-width-default))",
+    "--_tabs-indicator-mini-height": "var(--wg-spacing-2)",
+    "--_tabs-indicator-x": "由脚本按选中项内容位置写入",
+    "--_tabs-indicator-width": "由脚本按选中项内容宽度写入",
+    "--_tabs-label-standard-max": "calc(var(--wg-font-size-16) * 4)",
+    "--_tabs-label-mini-max": "calc(var(--wg-font-size-14) * 4)"
   },
   "domAnatomy": {
     "root": ".wg-tabs",
@@ -45,27 +55,32 @@
       ".wg-tabs--standard",
       ".wg-tabs--mini",
       ".wg-tabs--divide",
-      ".wg-tabs--scroll"
+      ".wg-tabs--scroll",
+      ".wg-tabs--icon-left",
+      ".wg-tabs--icon-right"
     ],
     "children": {
       "scroll": ".wg-tabs__scroll",
       "item": ".wg-tabs__item",
+      "content": ".wg-tabs__content",
+      "icon": ".wg-tabs__icon",
       "label": ".wg-tabs__label",
-      "indicator": ".wg-tabs__indicator"
+      "activeIndicator": ".wg-tabs__active-indicator"
     }
   },
   "usageHints": [
-    "divide 模式：均分容器宽度，每个 tab flex: 1，适合 2-4 个标签",
-    "scroll 模式：横向滚动，overflow-x: auto 且隐藏滚动条，适合 5+ 标签",
-    "选中态通过 aria-selected='true' 控制，配合 .wg-tabs__indicator 显示底部指示条",
+    "divide 模式：均分容器宽度，每个 tab flex: 1，适合 2-5 个标签",
+    "scroll 模式：横向滚动，overflow-x: auto 且隐藏滚动条，适合 6+ 标签或强制滚动场景",
+    "选中态通过 aria-selected='true' 控制，配合 .wg-tabs__active-indicator 显示底部指示条",
     "standard 尺寸：item 高 56px、label 字号 16px、indicator 高 3px",
     "mini 尺寸：item 高 48px、label 字号 14px、indicator 高 2px",
-    "mini 模式首个 item 添加 .wg-tabs__item--first 增加左侧 padding",
-    "indicator 默认 display: none，aria-selected='true' 时 display: block",
-    "standard indicator：block-size 由 --_tabs-indicator-standard-height 定义，inline-size: 100%",
-    "mini indicator：block-size 由 --_tabs-indicator-mini-height 定义，flex: 1 自适应",
-    "indicator 使用 --wg-color-action-primary-default 品牌绿色，border-radius: full 胶囊形",
-    "所有状态通过 :active（opacity 0.6）、:focus-visible（outline ring）实现",
+    "mini 模式始终使用 scroll 布局，首个 item 添加 .wg-tabs__item--first 增加左侧 padding",
+    "active indicator 是每组 tabs 共用的单一元素，切换 tab 时通过 --_tabs-indicator-x 和 --_tabs-indicator-width 移动",
+    "standard indicator：block-size 由 --_tabs-indicator-standard-height 定义，divide 模式跟随文本内容宽度居中",
+    "mini indicator：block-size 由 --_tabs-indicator-mini-height 定义，跟随内容宽度",
+    "indicator 使用 --wg-color-action-primary-default 品牌绿色，border-radius: none 直角形，移动动画使用 --wg-motion-duration-normal + --wg-motion-ease-emphasized",
+    "可选图标通过 .wg-tabs__icon 放在 label 左侧或右侧，颜色跟随选中态文字颜色",
+    "所有状态通过 :active（opacity 0.6，无背景色变化）、:focus-visible（outline ring）实现",
     "根元素背景固定为 --wg-color-bg-surface（白色），不随页面背景变化"
   ],
   "doNotInvent": [
@@ -73,11 +88,16 @@
     "不要自创布局方式（只能用 divide/scroll）",
     "不要修改指示条颜色（固定品牌绿色）",
     "不要修改指示条高度（standard=3px, mini=2px）",
+    "不要给指示条添加圆角",
     "不要给标签栏添加额外背景色",
+    "不要给 pressed/clicked 状态添加背景色变化",
     "不要自创选中态 class 名（只能用 aria-selected 属性选择器）",
+    "不要省略 .wg-tabs__content，指示器依赖该内容容器对齐文本宽度",
+    "不要回退到每个 tab 内各放一个 indicator 的显隐方案",
+    "不要使用非 .wg-tabs__icon 的自定义图标结构",
     "不要在 scroll 模式下给 item 设置固定宽度",
-    "不要修改 label 的截断策略（white-space: nowrap + text-overflow: ellipsis + max-width: 4em）",
-    "不要去掉 indicator 的 display: none 默认隐藏逻辑"
+    "不要修改 label 的截断策略（white-space: nowrap + text-overflow: ellipsis + max-width 使用内部 Token）",
+    "不要去掉 active indicator 的 transform / inline-size 过渡"
   ],
   "provenance": {
     "preview": "preview/component-tabs.html",

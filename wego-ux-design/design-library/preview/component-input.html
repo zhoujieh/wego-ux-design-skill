@@ -16,29 +16,86 @@
       inline-size: 100%;
     }
 
-    .wg-input--full {
-    }
-
-    .wg-input--card {
-    }
-
     .wg-input__container {
       display: flex;
       align-items: center;
-      block-size: var(--wg-size-36);
+      block-size: calc(var(--wg-size-32) + var(--wg-spacing-4));
       padding-inline: var(--wg-spacing-12);
-      background-color: var(--wg-color-bg-surface);
+      background-color: var(--wg-color-bg-subtle);
       border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
       border-radius: var(--wg-radius-sm);
       transition:
         border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
-        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        box-shadow var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-input--full .wg-input__container {
+      block-size: var(--wg-touch-default);
+      padding-inline: var(--wg-spacing-0);
+      background-color: transparent;
+      border-width: var(--wg-stroke-width-none) var(--wg-stroke-width-none) var(--wg-stroke-width-default);
+      border-style: var(--wg-stroke-style-none) var(--wg-stroke-style-none) var(--wg-stroke-style-solid);
+      border-color: var(--wg-color-border-default);
+      border-radius: var(--wg-radius-none);
+    }
+
+    .wg-input--number .wg-input__container {
+      block-size: var(--wg-size-32);
+      inline-size: min(100%, calc(var(--wg-size-64) * 2));
+      min-inline-size: calc(var(--wg-size-40) * 2);
+    }
+
+    .wg-input--full.wg-input--number .wg-input__container {
+      inline-size: 100%;
+    }
+
+    .wg-input--card.wg-input--number {
+      inline-size: fit-content;
+    }
+
+    .wg-input--card.wg-input--number .wg-input__field {
+      font-family: var(--wg-font-family-number-fallback);
+    }
+
+    .wg-input--filled .wg-input__container {
+      border-color: var(--wg-color-border-strong);
+    }
+
+    .wg-input--full.wg-input--filled .wg-input__container {
+      border-color: var(--wg-color-border-default);
+    }
+
+    .wg-input--card .wg-input__container:focus-within,
+    .wg-input--card.wg-input--focused .wg-input__container {
+      border-color: var(--wg-color-border-focus);
+      box-shadow: var(--wg-shadow-xs);
+    }
+
+    .wg-input--full .wg-input__container:focus-within,
+    .wg-input--full.wg-input--focused .wg-input__container {
+      border-color: var(--wg-color-border-focus);
+    }
+
+    .wg-input--card .wg-input__container:hover {
+      border-color: var(--wg-color-border-strong);
+    }
+
+    .wg-input--card.wg-input--error .wg-input__container:hover {
+      border-color: var(--wg-color-status-danger-border);
+    }
+
+    .wg-input--card.wg-input--focused .wg-input__container:hover,
+    .wg-input--card .wg-input__container:focus-within:hover {
+      border-color: var(--wg-color-border-focus);
+    }
+
+    .wg-input--disabled .wg-input__container:hover {
+      border-color: var(--wg-color-border-subtle);
     }
 
     .wg-input--full .wg-input__field {
-      block-size: var(--wg-touch-default);
-      padding-inline: var(--wg-spacing-0);
-      border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+      block-size: 100%;
       background: transparent;
     }
 
@@ -51,11 +108,12 @@
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
       background: transparent;
       font-family: var(--wg-font-family-text);
-      font-size: var(--wg-font-size-16);
-      line-height: var(--wg-font-lineheight-16);
+      font-size: var(--wg-font-size-14);
+      line-height: var(--wg-font-lineheight-14);
       font-weight: var(--wg-font-weight-regular);
       color: var(--wg-color-text-primary);
       outline: none;
+      caret-color: var(--wg-color-border-focus);
     }
 
     .wg-input__field::placeholder {
@@ -64,7 +122,7 @@
 
     .wg-input--multiline .wg-input__container {
       block-size: auto;
-      min-block-size: var(--wg-size-56);
+      min-block-size: calc(var(--wg-size-56) + var(--wg-spacing-2));
       align-items: flex-start;
       padding-block: var(--wg-spacing-8);
     }
@@ -88,14 +146,6 @@
       font-weight: var(--wg-font-weight-regular);
       color: var(--wg-color-text-secondary);
       white-space: nowrap;
-    }
-
-    .wg-input--card .wg-input__container:focus-within {
-      border-color: var(--wg-color-border-focus);
-    }
-
-    .wg-input--full .wg-input__field:focus {
-      border-block-end: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-focus);
     }
 
     .wg-input--error .wg-input__container {
@@ -123,11 +173,13 @@
       background-color: var(--wg-color-state-disabled-bg);
       border-color: var(--wg-color-border-subtle);
       cursor: not-allowed;
+      box-shadow: var(--wg-shadow-none);
     }
 
     .wg-input--disabled .wg-input__field {
       color: var(--wg-color-text-disabled);
       cursor: not-allowed;
+      -webkit-text-fill-color: var(--wg-color-text-disabled);
     }
 
     .wg-input--disabled .wg-input__unit {
@@ -175,7 +227,7 @@
   <p class="wg-text-secondary" style="margin-top: var(--wg-spacing-8);">
     scope: card / full &nbsp;|&nbsp;
     type: text / number / multiline &nbsp;|&nbsp;
-    state: default / error / disabled
+    state: default / filled / focused / error / disabled
   </p>
 </div>
 
@@ -193,8 +245,26 @@
   </div>
 
   <div class="variant-card">
-    <h3>card + number + unit — 居中加粗 / 单位</h3>
-    <div class="wg-input wg-input--card wg-input--number">
+    <h3>card + text（filled）— 已输入</h3>
+    <div class="wg-input wg-input--card wg-input--filled">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="张三">
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>card + text（focused）— 聚焦态</h3>
+    <div class="wg-input wg-input--card wg-input--focused">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="正在输入">
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>card + number + unit — 32 高度 / 居中加粗 / 单位</h3>
+    <div class="wg-input wg-input--card wg-input--number wg-input--filled">
       <div class="wg-input__container">
         <input class="wg-input__field" type="text" inputmode="numeric" value="100">
         <span class="wg-input__unit">元</span>
@@ -240,6 +310,43 @@
     <div class="wg-input wg-input--full">
       <div class="wg-input__container">
         <input class="wg-input__field" type="text" placeholder="请输入姓名">
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>full + text（filled）— 已输入</h3>
+    <div class="wg-input wg-input--full wg-input--filled">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="微购门店">
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>full + text（focused）— 分割线高亮</h3>
+    <div class="wg-input wg-input--full wg-input--focused">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="正在输入">
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>full + error — 错误提示</h3>
+    <div class="wg-input wg-input--full wg-input--error">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="abc">
+      </div>
+      <span class="wg-input__error">请输入正确格式</span>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>full + disabled — 不可编辑</h3>
+    <div class="wg-input wg-input--full wg-input--disabled">
+      <div class="wg-input__container">
+        <input class="wg-input__field" type="text" value="系统生成内容" disabled>
       </div>
     </div>
   </div>

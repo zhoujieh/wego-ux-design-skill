@@ -93,15 +93,29 @@ assets/fonts/iconfont/
 通过 `font-size` 控制图标尺寸，iconfont 默认 `font-size: 16px`。修改尺寸时使用 Token：
 
 ```css
-.wg-icon--16 { font-size: var(--wg-size-16); }
-.wg-icon--20 { font-size: var(--wg-size-20); }
-.wg-icon--24 { font-size: var(--wg-size-24); }
-.wg-icon--28 { font-size: var(--wg-size-28); }
-.wg-icon--32 { font-size: var(--wg-size-32); }
-.wg-icon--48 { font-size: var(--wg-size-48); }
+.wg-icon--16 { font-size: var(--wg-size-16); line-height: 1; }
+.wg-icon--20 { font-size: var(--wg-size-20); line-height: 1; }
+.wg-icon--24 { font-size: var(--wg-size-24); line-height: 1; }
+.wg-icon--28 { font-size: var(--wg-size-28); line-height: 1; }
+.wg-icon--32 { font-size: var(--wg-size-32); line-height: 1; }
+.wg-icon--48 { font-size: var(--wg-size-48); line-height: 1; }
 ```
 
 不得硬编码 `font-size` 像素值。
+
+## 行高设置
+
+iconfont 图标元素必须设置 `line-height: 1`，确保行高等于字号，防止继承父元素行高导致图标垂直偏移或出现额外上下间距。
+
+`.wego-iconfont-s` 基类中应包含：
+
+```css
+.wego-iconfont-s {
+  line-height: 1;
+}
+```
+
+所有以 `font-size` 控制图标尺寸的 CSS 类，必须同步设置 `line-height: 1`。不得通过 `line-height` 硬编码像素值。
 
 ---
 

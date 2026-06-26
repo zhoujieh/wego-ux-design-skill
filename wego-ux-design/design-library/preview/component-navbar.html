@@ -16,9 +16,9 @@
       top: 0;
       z-index: var(--wg-zindex-sticky);
       display: flex;
-      align-items: flex-end;
+      align-items: center;
+      box-sizing: border-box;
       block-size: var(--wg-touch-default);
-      padding-block: var(--wg-spacing-8);
       padding-inline: var(--wg-spacing-16);
       background-color: var(--wg-color-bg-page);
     }
@@ -131,6 +131,7 @@
       justify-content: center;
       min-block-size: var(--wg-touch-min);
       min-inline-size: var(--wg-touch-min);
+      margin-inline-start: calc(-1 * (var(--wg-touch-min) - var(--wg-size-24)) / 2);
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
       background: transparent;
@@ -145,6 +146,7 @@
       align-items: center;
       justify-content: center;
       font-size: var(--wg-size-24);
+      line-height: 1;
     }
 
     .wg-navbar__left-btn--text {
@@ -226,6 +228,7 @@
     .wg-navbar__action--icon-text {
       flex-direction: column;
       padding-inline: var(--wg-spacing-4);
+      min-inline-size: var(--wg-touch-default);
     }
 
     .wg-navbar__action-icon {
@@ -233,6 +236,7 @@
       align-items: center;
       justify-content: center;
       font-size: var(--wg-size-20);
+      line-height: 1;
     }
 
     .wg-navbar__action--icon-text .wg-navbar__action-label {
@@ -299,6 +303,7 @@
       margin-inline-end: var(--wg-spacing-4);
       color: var(--wg-color-text-placeholder);
       font-size: var(--wg-size-20);
+      line-height: 1;
     }
 
     .wg-navbar--divider::after {
@@ -309,6 +314,10 @@
       right: 0;
       block-size: var(--wg-stroke-width-hairline);
       background-color: var(--wg-stroke-color-default);
+    }
+
+    .wg-navbar--actions-icon-text {
+      padding-inline-end: var(--wg-spacing-4);
     }
 
     /* @component-css-end */
@@ -443,7 +452,7 @@
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn" type="button" aria-label="关闭">
-          <i class="wego-iconfont-s icon-guanbi wg-navbar__left-icon"></i>
+          <i class="wego-iconfont-s icon-cha wg-navbar__left-icon"></i>
         </button>
       </div>
       <div class="wg-navbar__center">
@@ -458,7 +467,7 @@
   </div>
 
   <div class="variant-card">
-    <h3>standard + 文字左侧按钮 + 文字右侧</h3>
+    <h3>standard + 取消文字 + button 右侧</h3>
     <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
       <div class="wg-navbar__left">
         <button class="wg-navbar__left-btn wg-navbar__left-btn--text" type="button">
@@ -469,7 +478,7 @@
         <span class="wg-navbar__title">编辑资料</span>
       </div>
       <div class="wg-navbar__actions">
-        <button class="wg-navbar__action wg-navbar__action--text" type="button">
+        <button class="wg-navbar__action wg-navbar__action--button" type="button">
           <span class="wg-navbar__action-label">保存</span>
         </button>
       </div>
@@ -498,6 +507,34 @@
         </button>
         <button class="wg-navbar__action wg-navbar__action--button" type="button">
           <span class="wg-navbar__action-label">购买</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="variant-card">
+    <h3>standard + 返回 + 纯 icon-text 右侧 (compact)</h3>
+    <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider wg-navbar--actions-icon-text">
+      <div class="wg-navbar__left">
+        <button class="wg-navbar__left-btn" type="button" aria-label="返回">
+          <i class="wego-iconfont-s icon-fanhui wg-navbar__left-icon"></i>
+        </button>
+      </div>
+      <div class="wg-navbar__center">
+        <span class="wg-navbar__title">我的订单</span>
+      </div>
+      <div class="wg-navbar__actions">
+        <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="筛选">
+          <i class="wego-iconfont-s icon-shaixuan wg-navbar__action-icon"></i>
+          <span class="wg-navbar__action-label">筛选</span>
+        </button>
+        <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="搜索">
+          <i class="wego-iconfont-s icon-sousuo wg-navbar__action-icon"></i>
+          <span class="wg-navbar__action-label">搜索</span>
+        </button>
+        <button class="wg-navbar__action wg-navbar__action--icon-text" type="button" aria-label="更多">
+          <i class="wego-iconfont-s icon-sandian wg-navbar__action-icon"></i>
+          <span class="wg-navbar__action-label">更多</span>
         </button>
       </div>
     </div>

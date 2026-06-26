@@ -52,6 +52,7 @@
       ".wg-navbar--bg-default",
       ".wg-navbar--bg-transparent",
       ".wg-navbar--bg-custom",
+      ".wg-navbar--actions-icon-text",
       ".wg-navbar--divider"
     ],
     "children": {
@@ -75,11 +76,13 @@
     "title-only 模式：标题左对齐占 flex:1，操作按钮在右侧不挤压标题",
     "search 模式：左侧返回按钮固定宽，搜索框 flex:1 自适应，右侧操作固定宽",
     "左侧按钮 back：渲染 .wg-navbar__left-icon（icon-fanhui 返回箭头）",
-    "左侧按钮 close：渲染 .wg-navbar__left-icon（icon-guanbi 关闭图标）",
+    "左侧按钮 close：渲染 .wg-navbar__left-icon（icon-cha 关闭图标）",
     "左侧按钮 text：使用 .wg-navbar__left-btn--text 修饰符，渲染 .wg-navbar__left-text",
     "右侧 action 类型：text（纯文字）、icon-text（图标+文字纵向排列）、button（实色按钮）",
-    "icon-text action 使用 .wg-navbar__action--icon-text，文字字号 10px",
+    "icon-text action 使用 .wg-navbar__action--icon-text，文字字号 10px，最小宽度 44px",
     "button action 使用 .wg-navbar__action--button，渲染小 primary 按钮（高 32px）",
+    "左侧按钮 text（取消）时，必须搭配右侧 button action，形成「取消+按钮」固定搭配",
+    "右侧全部为 icon-text action 时，给 .wg-navbar 添加 --actions-icon-text 修饰符，右侧边缘间距 4px",
     "bg-default：标准页面灰色背景（--wg-color-bg-page）",
     "bg-transparent：透明背景，文字/图标反白（--wg-color-text-inverse），用于品牌页/活动页",
     "bg-custom：用于暗色等自定义背景，需通过 inline style 设置背景色并用 --wg-color-text-inverse 着色内容",
@@ -98,7 +101,9 @@
     "不要修改左侧按钮的图标尺寸（固定 wg-size-24）",
     "不要修改 action 图标尺寸（固定 wg-size-20）",
     "不要给 icon-text action 的文字使用其他字号（固定 10px）",
-    "不要在 transparent 背景下使用非反白文字颜色"
+    "不要在 transparent 背景下使用非反白文字颜色",
+    "左侧为取消文字按钮时，右侧不得使用 text 或 icon-text 样式",
+    "右侧使用 icon-text action 时必须加 --actions-icon-text 修饰符"
   ],
   "provenance": {
     "preview": "preview/component-navbar.html",

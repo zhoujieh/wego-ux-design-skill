@@ -6,6 +6,7 @@
   <title>Tabs 组件预览 — 微购设计库</title>
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../scaffold.css">
+  <link rel="stylesheet" href="../assets/fonts/iconfont/iconfont.css">
   <link rel="stylesheet" href="../components.css">
   <style>
     /* @component-css-start */
@@ -14,11 +15,14 @@
       display: flex;
       inline-size: 100%;
       background-color: var(--wg-color-bg-surface);
-      --_tabs-indicator-standard-height: 3px;
-      --_tabs-indicator-mini-height: 2px;
+      --_tabs-indicator-standard-height: calc(var(--wg-spacing-2) + var(--wg-stroke-width-default));
+      --_tabs-indicator-mini-height: var(--wg-spacing-2);
+      --_tabs-label-standard-max: calc(var(--wg-font-size-16) * 4);
+      --_tabs-label-mini-max: calc(var(--wg-font-size-14) * 4);
     }
 
     .wg-tabs__scroll {
+      position: relative;
       display: flex;
       inline-size: 100%;
     }
@@ -50,8 +54,7 @@
     .wg-tabs__item {
       appearance: none;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
       padding: var(--wg-spacing-0);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
@@ -60,6 +63,26 @@
       position: relative;
       transition:
         opacity var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-tabs__content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      block-size: 100%;
+      gap: var(--wg-spacing-4);
+      min-inline-size: 0;
+    }
+
+    .wg-tabs--divide .wg-tabs__content {
+      inline-size: fit-content;
+      max-inline-size: 100%;
+      margin-inline: auto;
+    }
+
+    .wg-tabs--scroll .wg-tabs__content {
+      inline-size: 100%;
     }
 
     .wg-tabs--standard .wg-tabs__item {
@@ -75,10 +98,21 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-inline-size: 4em;
+      max-inline-size: var(--_tabs-label-standard-max);
     }
 
     .wg-tabs--standard .wg-tabs__item[aria-selected="true"] .wg-tabs__label {
+      color: var(--wg-color-text-primary);
+    }
+
+    .wg-tabs__icon {
+      flex-shrink: 0;
+      color: var(--wg-color-text-secondary);
+      font-size: var(--wg-size-16);
+      line-height: 1;
+    }
+
+    .wg-tabs__item[aria-selected="true"] .wg-tabs__icon {
       color: var(--wg-color-text-primary);
     }
 
@@ -99,34 +133,34 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-inline-size: 4em;
+      max-inline-size: var(--_tabs-label-mini-max);
     }
 
     .wg-tabs--mini .wg-tabs__item[aria-selected="true"] .wg-tabs__label {
       color: var(--wg-color-text-primary);
     }
 
-    .wg-tabs__indicator {
-      display: none;
-      block-size: var(--wg-stroke-width-none);
-      background-color: var(--wg-color-action-primary-default);
-      border-radius: var(--wg-radius-full);
-      margin-inline: var(--wg-spacing-2);
-    }
-
-    .wg-tabs__item[aria-selected="true"] .wg-tabs__indicator {
+    .wg-tabs__active-indicator {
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      inline-size: var(--_tabs-indicator-width, var(--wg-stroke-width-none));
       display: block;
+      background-color: var(--wg-color-action-primary-default);
+      border-radius: var(--wg-radius-none);
+      transform: translateX(var(--_tabs-indicator-x, var(--wg-spacing-0)));
+      transition:
+        transform var(--wg-motion-duration-normal) var(--wg-motion-ease-emphasized),
+        inline-size var(--wg-motion-duration-normal) var(--wg-motion-ease-emphasized);
+      pointer-events: none;
     }
 
-    .wg-tabs--standard .wg-tabs__indicator {
+    .wg-tabs--standard .wg-tabs__active-indicator {
       block-size: var(--_tabs-indicator-standard-height);
-      inline-size: 100%;
     }
 
-    .wg-tabs--mini .wg-tabs__indicator {
+    .wg-tabs--mini .wg-tabs__active-indicator {
       block-size: var(--_tabs-indicator-mini-height);
-      flex: 1 1 0;
-      min-inline-size: 0;
     }
 
     .wg-tabs__item:not(:disabled):active {
@@ -170,9 +204,8 @@
       margin-bottom: var(--wg-spacing-16);
     }
 
-    .variant-card h3 {
-      margin-bottom: var(--wg-spacing-12);
-      color: var(--wg-color-text-secondary);
+    .variant-card--scroll-demo {
+      overflow: hidden;
     }
   </style>
 </head>
@@ -187,60 +220,119 @@
 </div>
 
 <section class="scope-section">
-  <h2 class="wg-h2">standard + divide (均分，3 个标签)</h2>
+  <h2 class="wg-h2">standard + divide (均分，5 个标签)</h2>
 
   <div class="variant-card">
-    <h3>推荐 · 关注 · 热榜</h3>
     <div class="wg-tabs wg-tabs--standard wg-tabs--divide" role="tablist">
       <div class="wg-tabs__scroll">
         <button class="wg-tabs__item" role="tab" aria-selected="true" type="button">
-          <span class="wg-tabs__label">推荐</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">推荐</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">关注</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">关注</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">热榜</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">热榜</span>
+          </span>
         </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">科技</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">财经</span>
+          </span>
+        </button>
+        <span class="wg-tabs__active-indicator" aria-hidden="true"></span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="scope-section">
-  <h2 class="wg-h2">standard + scroll (横向滚动，6 个标签)</h2>
+  <h2 class="wg-h2">standard + scroll (横向滚动，14 个标签)</h2>
 
-  <div class="variant-card">
-    <h3>推荐 · 关注 · 热榜 · 科技 · 财经 · 体育</h3>
+  <div class="variant-card variant-card--scroll-demo">
     <div class="wg-tabs wg-tabs--standard wg-tabs--scroll" role="tablist">
       <div class="wg-tabs__scroll">
         <button class="wg-tabs__item" role="tab" aria-selected="true" type="button">
-          <span class="wg-tabs__label">推荐</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">推荐</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">关注</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">关注</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">热榜</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">热榜</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">科技</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">科技</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">财经</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">财经</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">体育</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">体育</span>
+          </span>
         </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">生活</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">娱乐</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">汽车</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">教育</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">促销活动</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">新品上架</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">会员福利</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">直播专场</span>
+          </span>
+        </button>
+        <span class="wg-tabs__active-indicator" aria-hidden="true"></span>
       </div>
     </div>
   </div>
@@ -250,38 +342,151 @@
   <h2 class="wg-h2">mini + scroll (紧凑横向滚动，3 个标签)</h2>
 
   <div class="variant-card">
-    <h3>全部 · 待付款 · 待发货</h3>
     <div class="wg-tabs wg-tabs--mini wg-tabs--scroll" role="tablist">
       <div class="wg-tabs__scroll">
         <button class="wg-tabs__item wg-tabs__item--first" role="tab" aria-selected="true" type="button">
-          <span class="wg-tabs__label">全部</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">全部</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">待付款</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">待付款</span>
+          </span>
         </button>
         <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
-          <span class="wg-tabs__label">待发货</span>
-          <span class="wg-tabs__indicator"></span>
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">待发货</span>
+          </span>
         </button>
+        <span class="wg-tabs__active-indicator" aria-hidden="true"></span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="scope-section">
+  <h2 class="wg-h2">standard + icon-left (左侧图标)</h2>
+
   <div class="variant-card">
-    <h3>使用说明</h3>
-    <ul class="wg-stack-8" style="list-style: disc; padding-left: var(--wg-spacing-24);">
-      <li class="wg-text-body-sm">点击标签切换 aria-selected 状态，展示 indicator 指示器</li>
-      <li class="wg-text-body-sm">:active 状态会降低透明度至 0.6，模拟按压反馈</li>
-      <li class="wg-text-body-sm">focus-visible 效果需 Tab 键聚焦查看</li>
-      <li class="wg-text-body-sm">scroll 变体支持横向滑动，滚动条已隐藏</li>
-      <li class="wg-text-body-sm">所有样式值通过 var(--wg-*) 引用，零硬编码</li>
-    </ul>
+    <div class="wg-tabs wg-tabs--standard wg-tabs--divide wg-tabs--icon-left" role="tablist">
+      <div class="wg-tabs__scroll">
+        <button class="wg-tabs__item" role="tab" aria-selected="true" type="button">
+          <span class="wg-tabs__content">
+            <i class="wego-iconfont-s icon-shangcheng wg-tabs__icon" aria-hidden="true"></i>
+            <span class="wg-tabs__label">商城</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <i class="wego-iconfont-s icon-dianpu wg-tabs__icon" aria-hidden="true"></i>
+            <span class="wg-tabs__label">店铺</span>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <i class="wego-iconfont-s icon-gouwuche wg-tabs__icon" aria-hidden="true"></i>
+            <span class="wg-tabs__label">购物车</span>
+          </span>
+        </button>
+        <span class="wg-tabs__active-indicator" aria-hidden="true"></span>
+      </div>
+    </div>
   </div>
 </section>
+
+<section class="scope-section">
+  <h2 class="wg-h2">standard + icon-right (右侧图标)</h2>
+
+  <div class="variant-card">
+    <div class="wg-tabs wg-tabs--standard wg-tabs--scroll wg-tabs--icon-right" role="tablist">
+      <div class="wg-tabs__scroll">
+        <button class="wg-tabs__item" role="tab" aria-selected="true" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">全部</span>
+            <i class="wego-iconfont-s icon-xiajiantou-mian16 wg-tabs__icon" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">分类</span>
+            <i class="wego-iconfont-s icon-xiajiantou-mian16 wg-tabs__icon" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">筛选</span>
+            <i class="wego-iconfont-s icon-xiajiantou-mian16 wg-tabs__icon" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="wg-tabs__item" role="tab" aria-selected="false" type="button">
+          <span class="wg-tabs__content">
+            <span class="wg-tabs__label">价格</span>
+            <i class="wego-iconfont-s icon-xiajiantou-mian16 wg-tabs__icon" aria-hidden="true"></i>
+          </span>
+        </button>
+        <span class="wg-tabs__active-indicator" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function updateTabsIndicator(tabs) {
+    const scroll = tabs.querySelector('.wg-tabs__scroll');
+    const indicator = tabs.querySelector('.wg-tabs__active-indicator');
+    const selected = tabs.querySelector('.wg-tabs__item[aria-selected="true"] .wg-tabs__content');
+
+    if (!scroll || !indicator || !selected) {
+      return;
+    }
+
+    const scrollRect = scroll.getBoundingClientRect();
+    const selectedRect = selected.getBoundingClientRect();
+    const x = selectedRect.left - scrollRect.left + scroll.scrollLeft;
+
+    indicator.style.setProperty('--_tabs-indicator-x', `${x}px`);
+    indicator.style.setProperty('--_tabs-indicator-width', `${selectedRect.width}px`);
+  }
+
+  document.querySelectorAll('.wg-tabs').forEach((tabs) => {
+    const items = Array.from(tabs.querySelectorAll('.wg-tabs__item'));
+    const scroll = tabs.querySelector('.wg-tabs__scroll');
+
+    requestAnimationFrame(() => updateTabsIndicator(tabs));
+
+    items.forEach((item) => {
+      item.addEventListener('click', () => {
+        items.forEach((candidate) => {
+          candidate.setAttribute('aria-selected', String(candidate === item));
+        });
+
+        updateTabsIndicator(tabs);
+
+        item.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      });
+    });
+
+    if (tabs.classList.contains('wg-tabs--scroll')) {
+      scroll.addEventListener('wheel', (event) => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+          return;
+        }
+
+        event.preventDefault();
+        scroll.scrollLeft += event.deltaY;
+      }, { passive: false });
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.wg-tabs').forEach(updateTabsIndicator);
+  });
+</script>
 
 </body>
 </html>
