@@ -34,7 +34,6 @@ REQUIRED_FILES = {
     "examples/good-ui.md",
     "examples/bad-ui.md",
     "examples/output.md",
-    "resources/README.md",
     
 }
 
@@ -160,9 +159,7 @@ def validate_library_consumption() -> list[str]:
         errors.append("library-consumption.json must declare downstreamScenarios.useResourceAssets")
 
     for resource_path in (
-        ROOT / "resources" / "README.md",
-        ROOT / "resources" / "images",
-        ROOT / "resources" / "fonts",
+        ROOT / "design-library" / "assets" / "fonts",
         ROOT / "design-library" / "assets" / "icons",
         ROOT / "design-library" / "assets" / "video",
     ):
@@ -195,7 +192,7 @@ def validate_project_css_assets() -> list[str]:
     if not font_names:
         errors.append("design-library/tokens.css must reference project-local fonts under ../assets/fonts/")
     for name in font_names:
-        if not (ROOT / "resources" / "fonts" / name).is_file():
+        if not (ROOT / "design-library" / "assets" / "fonts" / name).is_file():
             errors.append(f"tokens.css references missing source font: {name}")
     return errors
 

@@ -12,7 +12,11 @@
   "uiKitsDir": "ui_kits",
   "consumptionLayers": {
     "tokens": {
-      "files": ["tokens.json", "tokens.css", "scaffold.css"],
+      "files": [
+        "tokens.json",
+        "tokens.css",
+        "scaffold.css"
+      ],
       "copyable": {
         "tokens.json": false,
         "tokens.css": true,
@@ -48,26 +52,28 @@
         "assets/fonts/iconfont/*": true
       },
       "purpose": "图标字体资源层：为组件和页面中的图标位提供统一字形与 CSS。",
-      "downstreamRule": "使用图标时复制整个 assets/fonts/iconfont/ 目录，HTML 中通过 <i class=\"wego-iconfont-s icon-{font_class}\"></i> 渲染。不得只复制 iconfont.css，不得替换为自绘 SVG，除非 iconfont 确认缺失。"
+      "downstreamRule": "使用图标时参考顶层 iconUsage 区块；复制整个 assets/fonts/iconfont/ 目录。不得只复制 iconfont.css，不得替换为自绘 SVG，除非 iconfont 确认缺失。"
     },
     "resourceAssets": {
       "files": [
-        "resources/images",
-        "resources/fonts",
-        "design-library/assets/icons",
-        "design-library/assets/video"
+        "assets/media",
+        "assets/icons/app-center",
+        "assets/video",
+        "assets/fonts"
       ],
       "copyable": {
-        "resources/images/*": true,
-        "resources/fonts/*": true,
-        "design-library/assets/icons/*": true,
-        "design-library/assets/video/*": true
+        "assets/media/*": true,
+        "assets/icons/app-center/*": true,
+        "assets/video/*": true,
+        "assets/fonts/*": true
       },
-      "purpose": "素材资源层：提供后续页面规则、业务场景和示例原型可复用的图片、视频、SVG 和字体素材。",
-      "downstreamRule": "只有当页面需求、组件契约或规则明确需要素材时才读取对应资源；不得为了寻找组件而扫描素材目录。复制素材时保持原目录结构，并在 app.css 中继续通过 Token 控制尺寸、圆角、遮罩和层级。"
+      "purpose": "素材资源层：产品媒体（图片/视频/gif）、应用图标、非产品视频、字体素材。",
+      "downstreamRule": "使用素材时参考顶层 appIconUsage / mediaUsage / videoUsage 区块。仅复制当前页面实际使用的素材，保持目录结构；图片、视频和 SVG 只作为内容或业务素材，不作为组件规范来源。"
     },
     "uikit": {
-      "files": ["ui_kits/{type}/index.html"],
+      "files": [
+        "ui_kits/{type}/index.html"
+      ],
       "copyable": false,
       "purpose": "页面级 showcase 层：仅用于后续结构参考，当前库未提供正式 ui_kits 页面。",
       "downstreamRule": "目前 ui_kits/ 为空目录。存在页面级 showcase 后，只能作为结构参考，不能直接复制其外层 shell。"
@@ -75,7 +81,11 @@
   },
   "downstreamScenarios": {
     "useTokensOnly": {
-      "read": ["tokens.json", "tokens.css", "scaffold.css"],
+      "read": [
+        "tokens.json",
+        "tokens.css",
+        "scaffold.css"
+      ],
       "consume": "复制 tokens.css；只在需要排版工具类或布局骨架时复制 scaffold.css；业务样式全部通过 var(--wg-*) 使用 Token。"
     },
     "buildSingleComponent": {
@@ -101,10 +111,10 @@
     },
     "useResourceAssets": {
       "read": [
-        "resources/README.md",
-        "resources/images 或 design-library/assets/icons 或 design-library/assets/video 中的目标资源"
+        "assets/media/index.json",
+        "assets/media 或 assets/icons/app-center 或 assets/video 中的目标资源"
       ],
-      "consume": "仅复制当前页面实际使用的素材，保留相对目录结构；图片、视频和 SVG 只作为内容或业务素材，不作为组件规范来源。"
+      "consume": "先读 assets/media/index.json 获取产品标题；仅复制当前页面实际使用的素材，保持相对目录结构；图片、视频和 SVG 只作为内容或业务素材，不作为组件规范来源。"
     }
   },
   "recommendedReadOrder": [
@@ -131,5 +141,93 @@
     "素材资源只能在需求或规则明确需要时读取；不得把 resources/ 或 design-library/assets/ 当作组件发现入口。",
     "ui_kits/ 仅作结构参考；当前目录为空时不得伪造 showcase 来源。"
   ],
-  "uiKitsAvailable": []
+  "uiKitsAvailable": [],
+  "iconUsage": {
+    "modeA_iconfont": {
+      "syntax": "<i class=\"wego-iconfont-s icon-{font_class}\"></i>",
+      "recolorable": true,
+      "querySource": "assets/fonts/iconfont/iconfont.json → glyphs[].font_class",
+      "useFor": "iconfont 中已存在的图标（默认首选）",
+      "colorRule": "通过 CSS color + var(--wg-color-*) Token 控制，禁止硬编码 HEX/rgb()",
+      "sizeRule": "通过 font-size + var(--wg-size-*) Token 控制（16/20/24/28/32/48px）；必须设置 line-height: 1",
+      "copyRule": "复制整个 assets/fonts/iconfont/ 目录，保持 iconfont.css 与字体文件同目录"
+    },
+    "modeB_svgFallback": {
+      "syntax": "<svg class=\"wg-icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"...\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"butt\" stroke-linejoin=\"round\"/></svg>",
+      "recolorable": true,
+      "useFor": "iconfont 中不存在的图标，必须标注缺失",
+      "constraints": "stroke-width: 1.5（默认）| 2.0/2.25（加粗版）；stroke-linecap: butt；stroke-linejoin: round；fill: none（线性）| currentColor（面性）",
+      "missingAnnotation": "当前使用：SVG 内联图标（名称）/ 原因：iconfont 缺失 / 建议补充至 assets/fonts/iconfont/"
+    },
+    "prohibited": [
+      "iconfont 中存在对应图标时使用 SVG 内联或图片替代",
+      "硬编码图标尺寸（font-size: 16px 等）",
+      "硬编码图标颜色（color: #333 等）",
+      "使用 emoji 或图片替代功能图标",
+      "不查 iconfont.json 直接使用 SVG",
+      "iconfont 元素不设 line-height: 1"
+    ]
+  },
+  "appIconUsage": {
+    "source": "assets/icons/app-center/",
+    "format": "SVG",
+    "syntax": "<img src=\"assets/icons/app-center/{name}.svg\" width=\"48\" height=\"48\" alt=\"应用名\">",
+    "purpose": "应用中心/业务入口图标，SVG 内 fill 已固化业务色值，不通过 CSS 覆盖",
+    "recommendedSizes": {
+      "default": 48,
+      "large": 64,
+      "small": 40
+    },
+    "copyRule": "仅复制当前页面使用的图标 SVG，保持目录结构；不得修改 SVG 内部 fill"
+  },
+  "mediaUsage": {
+    "source": "assets/media/{category}/{product-id}/",
+    "formats": [
+      "JPG",
+      "PNG",
+      "GIF",
+      "MP4",
+      "HEIC"
+    ],
+    "indexFile": "assets/media/index.json — 品类→产品→标题映射，引用媒体前必读",
+    "organization": "品类（中文）→ 产品ID（数字或短slug），同产品下图片/视频/gif/实况图混放",
+    "imageSyntax": "<img src=\"assets/media/{category}/{product-id}/{file}\" alt=\"描述\">",
+    "videoSyntax": "<video src=\"assets/media/{category}/{product-id}/{file}\" controls playsinline></video>",
+    "copyRule": "仅复制当前页面需要的产品媒体文件，保持 {category}/{product-id}/ 目录结构",
+    "sizeRule": "通过 CSS var(--wg-*) Token 控制容器尺寸，禁止硬编码宽高",
+    "prohibited": [
+      "将产品媒体目录当作组件发现入口",
+      "硬编码媒体容器尺寸",
+      "用产品图替代功能图标"
+    ]
+  },
+  "videoUsage": {
+    "source": "assets/video/",
+    "format": "MP4",
+    "syntax": "<video src=\"assets/video/{name}.mp4\" controls playsinline></video>",
+    "purpose": "非产品类视频：宣传片、教程、背景视频",
+    "copyRule": "仅复制当前页面使用的视频",
+    "constraints": "移动端必须 playsinline；不自动播放（autoplay）除非用户明确要求；max-width: 100%",
+    "prohibited": [
+      "未经用户确认使用 autoplay",
+      "硬编码视频容器尺寸"
+    ]
+  },
+  "governance": {
+    "syncStrategy": "patternBased — JSON 定义消费模式（怎么用），不枚举具体文件（有哪些）。新增同类资源无需修改本文件。",
+    "whenToUpdate": [
+      "新增资源 TYPE（如音频、3D模型）→ 新增 usage 区块",
+      "消费语法变更",
+      "约束规则变更"
+    ],
+    "addSameType": "直接放入对应目录即可",
+    "addNewCategory": "在 assets/media/ 下创建中文品类目录 + 更新 index.json",
+    "addNewProduct": "在品类目录下创建产品ID目录 + 更新 index.json",
+    "namingConstraints": {
+      "productId": "数字或短slug，小写英文+连字符",
+      "mediaFile": "{type}-{desc}.{ext}，小写英文+连字符",
+      "appIcon": "拼音slug.svg，无括号无空格",
+      "video": "短中文或拼音.mp4"
+    }
+  }
 }

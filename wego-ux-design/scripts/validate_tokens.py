@@ -39,7 +39,6 @@ SCAN_FILES = [
     ROOT / "rules" / "icon-guidelines.md",
     *sorted((ROOT / "rules").glob("*.md")),
     *sorted((ROOT / "examples").glob("*.md")),
-    ROOT / "resources" / "README.md",
 ]
 DESIGN_LIBRARY_TOKENS_CSS = ROOT / "design-library" / "tokens.css"
 

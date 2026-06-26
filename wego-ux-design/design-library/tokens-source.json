@@ -5,24 +5,44 @@
   "fontFaces": [
     {
       "family": "WegoKeyboard N9",
-      "source": "resources/fonts/WegoKeyboardN9-Regular.otf",
+      "source": "design-library/assets/fonts/WegoKeyboardN9-Regular.otf",
       "weight": 400
     },
     {
       "family": "WegoKeyboard N9",
-      "source": "resources/fonts/WegoKeyboardN9-Medium.otf",
+      "source": "design-library/assets/fonts/WegoKeyboardN9-Medium.otf",
       "weight": 500
     },
     {
       "family": "WegoKeyboard N9",
-      "source": "resources/fonts/WegoKeyboardN9-Bold.otf",
+      "source": "design-library/assets/fonts/WegoKeyboardN9-Bold.otf",
       "weight": 600
     }
   ],
   "baseReset": {
     "description": "清除浏览器默认间距，确保 Token 是间距的唯一来源。未清除时，浏览器默认 margin/padding 会与 Token 间距叠加，导致实际渲染值偏离设计意图。",
-    "marginZero": ["body", "h1", "h2", "h3", "h4", "h5", "h6", "p", "ul", "ol", "dl", "figure", "blockquote", "hr", "fieldset", "pre"],
-    "listReset": ["ul", "ol"],
+    "marginZero": [
+      "body",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "ul",
+      "ol",
+      "dl",
+      "figure",
+      "blockquote",
+      "hr",
+      "fieldset",
+      "pre"
+    ],
+    "listReset": [
+      "ul",
+      "ol"
+    ],
     "bodyDefaults": {
       "fontFamily": "wg.font.family.text",
       "fontSize": "wg.font.size.f14",

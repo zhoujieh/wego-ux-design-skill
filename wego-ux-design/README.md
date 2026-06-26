@@ -24,7 +24,6 @@
 | `scripts/validate_skill.py` | 校验任务路由、交互项目契约和旧约束回归 |
 | `design-library/` | 设计库消费产物（tokens / scaffold / components / preview / assets / library-consumption） |
 | `examples/` | 非规范示例，仅供人工参考或显式调用 |
-| `resources/` | 字体、图片等原型资源 |
 
 ## 质量验证
 
@@ -40,22 +39,6 @@ python scripts/validate_tokens.py
 python scripts/validate_skill.py
 ```
 校验任务路由、交互项目契约和旧约束回归。
-
-### 生成项目回归校验
-```bash
-# 在项目根目录运行
-python scripts/validate_generated_projects.py
-```
-校验 `tests/fixtures/generated/` 中的生成项目：
-- 项目结构完整性
-- HTML/CSS/JS 分离
-- CSS 无硬编码设计值
-- JS 包含真实交互逻辑
-- Token 文件与源文件一致
-
-### CI 入口
-GitHub Actions 在 push 到 main 和 pull_request 时自动运行所有校验：
-- `.github/workflows/validate.yml`
 
 ## 维护原则
 
