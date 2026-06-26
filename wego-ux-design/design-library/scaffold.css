@@ -149,6 +149,26 @@
   gap: var(--wg-spacing-32);
 }
 
+/* ---- 页面留白工具类 M0-3 ---- */
+
+.wg-page-m0 { padding-inline: 0; }
+.wg-page-m1 { padding-inline: var(--wg-spacing-8); }
+.wg-page-m2 { padding-inline: var(--wg-spacing-16); }
+.wg-page-m3 { padding-inline: var(--wg-spacing-32); }
+
+/* ---- 分组间距工具类 G1-2 ---- */
+
+.wg-group-g1 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-16);
+}
+.wg-group-g2 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-32);
+}
+
 /* ---- 间距工具类 ---- */
 
 .wg-mt-8 { margin-top: var(--wg-spacing-8); }

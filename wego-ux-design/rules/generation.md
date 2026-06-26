@@ -93,6 +93,33 @@ AI 生成界面时，必须优先保证：
 
 禁止随意新增 M / G 模式。
 
+### 布局工具类
+
+M/G 模式通过 `design-library/scaffold.css` 中的工具类表达，不得在 app.css 中手写 `padding-inline` / `gap`。
+
+**页面级左右留白**（`.wg-page-m{0-3}`）：
+
+| 类名 | 值 | 适用场景 |
+|---|---|---|
+| `.wg-page-m0` | `padding-inline: 0` | 表单、设置页 |
+| `.wg-page-m1` | `padding-inline: var(--wg-spacing-8)` | 卡片布局 — 使用前必须先判断卡片 vs 通栏（参见 6.8 节） |
+| `.wg-page-m2` | `padding-inline: var(--wg-spacing-16)` | **默认**，信息密度较低的一般场景 |
+| `.wg-page-m3` | `padding-inline: var(--wg-spacing-32)` | 最低密度场景（如结果页） |
+
+**分组内部间距**（`.wg-group-g{1-2}`）：
+
+| 类名 | 值 | 适用场景 |
+|---|---|---|
+| `.wg-group-g1` | `gap: var(--wg-spacing-16)` | 紧密连续信息（如 form group 内字段） |
+| `.wg-group-g2` | `gap: var(--wg-spacing-32)` | 宽松模块信息（如卡片组） |
+
+示例：
+
+  默认业务页面 → 页面容器 class="wg-page-m2"
+  卡片列表     → 页面容器 class="wg-page-m1"，卡片组 class="wg-group-g2"
+  表单编辑页   → 页面容器 class="wg-page-m0"，字段组 class="wg-group-g1"
+
+
 ### 页面背景色
 
 按页面内容结构选择：

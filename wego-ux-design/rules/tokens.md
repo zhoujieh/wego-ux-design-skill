@@ -73,6 +73,16 @@ design-library/scaffold.css（需要布局骨架时）
 - 紧密连续信息使用 G1，宽松模块信息使用 G2
 - 屏幕、内容宽度和模态高度只使用 `wg.layout.*` 中已有定义
 
+### 布局工具类
+
+M/G 模式通过 `design-library/scaffold.css` 的工具类在代码中表达：
+
+- `.wg-page-m{0-3}`：页面级左右留白
+- `.wg-group-g{1-2}`：分组内子元素间距
+
+具体值、适用场景及使用示例参见 `rules/generation.md` 布局选择章节。
+
+
 ## Elevation、Stroke、Blur 与 Motion
 
 - 默认无阴影；只有层级确实浮起时使用 `wg.shadow.*`
