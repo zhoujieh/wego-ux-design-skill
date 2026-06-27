@@ -82,6 +82,29 @@ class Phase6ValidatorTests(unittest.TestCase):
         self.assertEqual("structural-reference", report["copyPolicy"])
         self.assertIn("5464:4685", report["figmaSource"]["nodeId"])
 
+    def test_uikit_quality_reports_are_in_page_consumption_path(self) -> None:
+        data = json.loads(
+            (SKILL_ROOT / "design-library" / "library-consumption.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        self.assertIn(
+            "ui_kits/{type}/quality-report.json",
+            data["downstreamScenarios"]["buildFullPageCustomCanvas"]["read"],
+        )
+        self.assertIn(
+            "ui_kits/{type}/quality-report.json",
+            data["recommendedReadOrder"],
+        )
+
+    def test_skill_runtime_entry_declares_uikit_matching_step(self) -> None:
+        text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("2.5.1", text)
+        self.assertIn("ui_kits/index.json", text)
+        self.assertIn("quality-report.json", text)
+
     def test_business_settings_uikit_encodes_settings_layout_rules(self) -> None:
         library = SKILL_ROOT / "design-library"
         html = (
@@ -257,6 +280,121 @@ class Phase6ValidatorTests(unittest.TestCase):
             errors = module.validate_library_package(root)
 
         self.assertEqual([], errors)
+
+    def test_validate_library_cross_ref_requires_quality_report_consumption(self) -> None:
+        module = load_module(
+            "validate_library_uikit_quality_report",
+            SKILL_ROOT / "scripts" / "validate_library.py",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "design-library"
+            (library / "ui_kits").mkdir(parents=True)
+            (library / "library-consumption.json").write_text(
+                json.dumps(
+                    {
+                        "uiKitsAvailable": ["business-settings"],
+                        "recommendedReadOrder": [
+                            "library-consumption.json",
+                            "ui_kits/index.json",
+                            "ui_kits/{type}/index.html",
+                        ],
+                        "downstreamScenarios": {
+                            "buildFullPageCustomCanvas": {
+                                "read": [
+                                    "ui_kits/index.json",
+                                    "ui_kits/{type}/index.html",
+                                ]
+                            }
+                        },
+                        "consumptionLayers": {
+                            "uikit": {
+                                "files": [
+                                    "ui_kits/index.json",
+                                    "ui_kits/{type}/quality-report.json",
+                                    "ui_kits/{type}/index.html",
+                                ]
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (library / "ui_kits" / "index.json").write_text(
+                json.dumps(
+                    {
+                        "schemaVersion": 1,
+                        "patterns": [{"type": "business-settings"}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            errors = module.validate_library_consumption_cross_ref(root)
+
+        joined = "\n".join(errors)
+        self.assertIn(
+            "recommendedReadOrder must include ui_kits/{type}/quality-report.json",
+            joined,
+        )
+        self.assertIn(
+            "buildFullPageCustomCanvas.read must include ui_kits/{type}/quality-report.json",
+            joined,
+        )
+
+    def test_validate_library_uikit_helpers_report_bad_json(self) -> None:
+        module = load_module(
+            "validate_library_bad_uikit_json",
+            SKILL_ROOT / "scripts" / "validate_library.py",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "design-library"
+            (library / "ui_kits").mkdir(parents=True)
+            (library / "ui_kits" / "index.json").write_text("{bad json", encoding="utf-8")
+            (library / "library-consumption.json").write_text("{}", encoding="utf-8")
+
+            directory_errors = module.validate_ui_kits_directory_consistency(root)
+            quality_errors = module.validate_quality_reports(root)
+            cross_ref_errors = module.validate_library_consumption_cross_ref(root)
+
+        joined = "\n".join([*directory_errors, *quality_errors, *cross_ref_errors])
+        self.assertIn("design-library/ui_kits/index.json is invalid JSON", joined)
+
+    def test_validate_skill_requires_uikit_matching_in_runtime_entry(self) -> None:
+        module = load_module(
+            "validate_skill_uikit_runtime_entry",
+            SKILL_ROOT / "scripts" / "validate_skill.py",
+        )
+        original_root = module.ROOT
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                (root / "rules").mkdir(parents=True)
+                (root / "design-library" / "ui_kits").mkdir(parents=True)
+                (root / "SKILL.md").write_text(
+                    "---\nname: wego-ux-design\ndescription: test\n---\n",
+                    encoding="utf-8",
+                )
+                (root / "rules" / "generation.md").write_text(
+                    "ui_kits/index.json\n浏览型 操作型 表单型 结果型 异常型 空状态\n",
+                    encoding="utf-8",
+                )
+                (root / "rules" / "execution.md").write_text(
+                    "2.5.1 ui_kits 模式匹配\n未命中已有页面模式\n",
+                    encoding="utf-8",
+                )
+                (root / "design-library" / "ui_kits" / "index.json").write_text(
+                    json.dumps({"schemaVersion": 1, "patterns": []}),
+                    encoding="utf-8",
+                )
+                module.ROOT = root
+
+                errors = module.validate_ui_kits_in_rules()
+        finally:
+            module.ROOT = original_root
+
+        self.assertIn("SKILL.md must mention 2.5.1 ui_kits matching", errors)
 
     def test_validate_design_library_token_names_detects_extra_css_variable(self) -> None:
         module = load_module(

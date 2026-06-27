@@ -203,6 +203,13 @@ def validate_ui_kits_in_rules() -> list[str]:
     errors: list[str] = []
     root = ROOT
 
+    # Skill runtime entry is authoritative and must expose the new decision step.
+    skill_path = root / "SKILL.md"
+    skill_text = skill_path.read_text(encoding="utf-8") if skill_path.is_file() else ""
+    skill_markers = ("2.5.1", "ui_kits/index.json", "quality-report.json")
+    if any(marker not in skill_text for marker in skill_markers):
+        errors.append("SKILL.md must mention 2.5.1 ui_kits matching")
+
     # F: generation.md §6.8 must reference ui_kits/index.json (no hardcoded type list)
     gen_path = root / "rules" / "generation.md"
     gen_text = gen_path.read_text(encoding="utf-8") if gen_path.is_file() else ""

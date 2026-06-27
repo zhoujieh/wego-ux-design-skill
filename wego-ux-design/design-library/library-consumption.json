@@ -103,6 +103,7 @@
     "buildFullPageCustomCanvas": {
       "read": [
         "ui_kits/index.json",
+        "ui_kits/{type}/quality-report.json",
         "tokens.json",
         "scaffold.css",
         "components/index.json",
@@ -132,6 +133,7 @@
     "assets/fonts/iconfont/iconfont.css",
     "resources/README.md",
     "ui_kits/index.json",
+    "ui_kits/{type}/quality-report.json",
     "ui_kits/{type}/index.html"
   ],
   "hardConstraints": [

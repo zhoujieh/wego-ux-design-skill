@@ -43,7 +43,7 @@ design-library/
 design-library/library-consumption.json
 ```
 
-之后再按其中的 `recommendedReadOrder` 决定继续读取哪些文件。未读取该文件前，不得直接扫描 `design-library/preview/`、`design-library/components/` 或自行猜测组件路径。
+之后再按其中的 `recommendedReadOrder` 决定继续读取哪些文件。生成完整页面时，若 `ui_kits/index.json` 命中页面模式，必须继续读取对应 `quality-report.json` 并遵守其中的布局规则。未读取该文件前，不得直接扫描 `design-library/preview/`、`design-library/components/` 或自行猜测组件路径。
 
 ## 当前阶段：产品设计（可交互 Web 原型）
 
@@ -82,7 +82,7 @@ design-library/library-consumption.json
 执行 `rules/confirmation.md` 确认六个维度，输出《需求确认卡》。用户确认后进入阶段二。详见 `rules/execution.md#2.1`。
 
 ### 阶段二：设计决策（内部门禁，AI 自主，产物驱动）
-10 步依赖链，产物驱动，禁止从组件拼页面。详见 `rules/execution.md#2.2`。
+11 步依赖链（含 2.5.1 `ui_kits/index.json` 模式匹配与 `quality-report.json` 约束读取），产物驱动，禁止从组件拼页面。详见 `rules/execution.md#2.2`。
 
 ### 阶段三：实现
 按 `design-library/library-consumption.json` 消费设计库，禁止手写组件 CSS。详见 `rules/execution.md#2.3`。
@@ -96,7 +96,7 @@ design-library/library-consumption.json
 | 任务类型 | 必读文件 |
 |
 ---------|---------|
-| 生成完整页面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`rules/icon-guidelines.md`、`design-library/tokens.css`；再按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/components/index.json`，并针对命中组件读取对应 JSON 契约与 preview 文件 |
+| 生成完整页面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`rules/icon-guidelines.md`、`design-library/tokens.css`；再按 `recommendedReadOrder` 读取 `design-library/tokens.json`、`design-library/tokens.css`、`design-library/scaffold.css`、`design-library/ui_kits/index.json`、`design-library/components/index.json`，命中 ui_kit 时读取 `design-library/ui_kits/{type}/quality-report.json`，并针对命中组件读取对应 JSON 契约与 preview 文件 |
 | 生成单个组件或按钮 | `design-library/library-consumption.json`、`rules/execution.md`、`rules/generation.md`、`rules/tokens.md`、`rules/components.md`、`rules/output.md`、`rules/checkout.md`、`rules/icon-guidelines.md`、`design-library/tokens.css`；再按 `recommendedReadOrder` 读取目标组件的 JSON 契约与 preview 文件 |
 | 审查已有界面 | `design-library/library-consumption.json`、`principles/design-principles.md`、`rules/tokens.md`、`rules/components.md`、`rules/review.md`、`rules/checkout.md`；识别到已注册组件时读取 `design-library/components/index.json`、对应组件 JSON 契约与 preview 文件；涉及代码时再读 `design-library/tokens.css` |
 | 优化已有界面 | 先按“审查已有界面”读取，再按对应生成任务补充读取 |
@@ -166,4 +166,3 @@ design-library/library-consumption.json
 3. **其他 rules/ 文件本身即按需读取**：`execution.md`、`generation.md`、`tokens.md`、`components.md`、`checkout.md` 等
 
 截断时 AI 只需记住：去 `design-library/library-consumption.json` → 按路由表读对应规则文件 → 执行，不会丢失核心能力。
-

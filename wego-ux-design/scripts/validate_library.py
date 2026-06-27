@@ -73,6 +73,8 @@ def load_json(path: Path, root: Path) -> tuple[dict[str, Any] | None, list[str]]
 UI_KITS_DIR = DESIGN_LIBRARY / "ui_kits"
 UI_KITS_INDEX = UI_KITS_DIR / "index.json"
 CONSUMPTION_JSON = DESIGN_LIBRARY / "library-consumption.json"
+UIKIT_INDEX_REF = "ui_kits/index.json"
+UIKIT_QUALITY_REPORT_REF = "ui_kits/{type}/quality-report.json"
 
 REQUIRED_UIKIT_INDEX_FIELDS = {
     "type", "name", "path", "qualityReport",
@@ -173,7 +175,10 @@ def validate_ui_kits_directory_consistency(root: Path = ROOT) -> list[str]:
     if not index_path.is_file():
         return ["design-library/ui_kits/index.json does not exist — cannot verify directory consistency"]
 
-    data = json.loads(index_path.read_text(encoding="utf-8"))
+    data, json_errors = load_json(index_path, root)
+    errors.extend(json_errors)
+    if data is None:
+        return errors
     patterns = data.get("patterns", [])
     registered_types = {p["type"] for p in patterns if isinstance(p, dict) and "type" in p}
 
@@ -215,14 +220,19 @@ def validate_quality_reports(root: Path = ROOT) -> list[str]:
     if not index_path.is_file():
         return []
 
-    data = json.loads(index_path.read_text(encoding="utf-8"))
+    data, json_errors = load_json(index_path, root)
+    errors.extend(json_errors)
+    if data is None:
+        return errors
     components_index_path = root / "design-library" / "components" / "index.json"
     valid_slugs: set[str] = set()
     if components_index_path.is_file():
-        comp_data = json.loads(components_index_path.read_text(encoding="utf-8"))
-        for c in comp_data.get("components", []):
-            if isinstance(c, dict) and "slug" in c:
-                valid_slugs.add(c["slug"])
+        comp_data, comp_errors = load_json(components_index_path, root)
+        errors.extend(comp_errors)
+        if comp_data is not None:
+            for c in comp_data.get("components", []):
+                if isinstance(c, dict) and "slug" in c:
+                    valid_slugs.add(c["slug"])
 
     for pattern in data.get("patterns", []):
         if not isinstance(pattern, dict):
@@ -271,8 +281,12 @@ def validate_library_consumption_cross_ref(root: Path = ROOT) -> list[str]:
     if not index_path.is_file():
         return []
 
-    consumption = json.loads(consumption_path.read_text(encoding="utf-8"))
-    index_data = json.loads(index_path.read_text(encoding="utf-8"))
+    consumption, consumption_errors = load_json(consumption_path, root)
+    index_data, index_errors = load_json(index_path, root)
+    errors.extend(consumption_errors)
+    errors.extend(index_errors)
+    if consumption is None or index_data is None:
+        return errors
 
     # uiKitsAvailable must match index types
     available = set(consumption.get("uiKitsAvailable", []))
@@ -288,19 +302,35 @@ def validate_library_consumption_cross_ref(root: Path = ROOT) -> list[str]:
 
     # recommendedReadOrder must include ui_kits/index.json
     read_order = consumption.get("recommendedReadOrder", [])
-    if "ui_kits/index.json" not in read_order:
-        errors.append("library-consumption.json recommendedReadOrder must include ui_kits/index.json")
+    if UIKIT_INDEX_REF not in read_order:
+        errors.append(f"library-consumption.json recommendedReadOrder must include {UIKIT_INDEX_REF}")
+    if UIKIT_QUALITY_REPORT_REF not in read_order:
+        errors.append(
+            f"library-consumption.json recommendedReadOrder must include {UIKIT_QUALITY_REPORT_REF}"
+        )
 
     # downstreamScenarios.buildFullPageCustomCanvas must reference ui_kits/index.json
     scenario = consumption.get("downstreamScenarios", {}).get("buildFullPageCustomCanvas", {})
     scenario_read = scenario.get("read", [])
-    if "ui_kits/index.json" not in scenario_read:
-        errors.append("library-consumption.json downstreamScenarios.buildFullPageCustomCanvas.read must include ui_kits/index.json")
+    if UIKIT_INDEX_REF not in scenario_read:
+        errors.append(
+            f"library-consumption.json downstreamScenarios.buildFullPageCustomCanvas.read must include {UIKIT_INDEX_REF}"
+        )
+    if UIKIT_QUALITY_REPORT_REF not in scenario_read:
+        errors.append(
+            f"library-consumption.json downstreamScenarios.buildFullPageCustomCanvas.read must include {UIKIT_QUALITY_REPORT_REF}"
+        )
 
     # consumptionLayers.uikit must reference ui_kits/index.json
     uikit_files = consumption.get("consumptionLayers", {}).get("uikit", {}).get("files", [])
-    if "ui_kits/index.json" not in uikit_files:
-        errors.append("library-consumption.json consumptionLayers.uikit.files must include ui_kits/index.json")
+    if UIKIT_INDEX_REF not in uikit_files:
+        errors.append(
+            f"library-consumption.json consumptionLayers.uikit.files must include {UIKIT_INDEX_REF}"
+        )
+    if UIKIT_QUALITY_REPORT_REF not in uikit_files:
+        errors.append(
+            f"library-consumption.json consumptionLayers.uikit.files must include {UIKIT_QUALITY_REPORT_REF}"
+        )
 
     return errors
 
