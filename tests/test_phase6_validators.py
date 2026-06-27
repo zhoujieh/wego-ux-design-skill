@@ -172,6 +172,15 @@ class Phase6ValidatorTests(unittest.TestCase):
         self.assertIn("tests/golden-prompts/", text)
         self.assertIn("scripts/validate_generated_projects.py --require-fixtures", text)
 
+    def test_phase1_confirmation_card_rules_require_compact_output(self) -> None:
+        module = load_module(
+            "validate_skill_confirmation_contract",
+            SKILL_ROOT / "scripts" / "validate_skill.py",
+        )
+
+        self.assertTrue(hasattr(module, "validate_confirmation_card_contract"))
+        self.assertEqual([], module.validate_confirmation_card_contract())
+
     def test_component_css_hardcoding_reports_file_and_line(self) -> None:
         module = load_module(
             "validate_components_phase6",
