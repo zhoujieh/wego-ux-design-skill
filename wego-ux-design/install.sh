@@ -3,15 +3,20 @@ set -euo pipefail
 
 # ============================================================
 # 微购设计系统 Skill — 一键安装脚本
-# 支持: Codex (插件) / Claude Code (Skill) / Trae (Skill)
+# 支持: Codex / Claude Code / Trae (全部作为 Skill)
 # 用法:
 #   curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/wego-ux-design/install.sh | bash
 #   或本地执行: bash install.sh
 # ============================================================
 
 SKILL_NAME="wego-ux-design"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "/tmp")"
+# 优先使用脚本所在目录作为源目录
 SKILL_SRC_DIR="$SCRIPT_DIR"
+# 如果脚本不在源目录，则保留为空触发自动发现
+if [ ! -f "$SKILL_SRC_DIR/SKILL.md" ]; then
+    SKILL_SRC_DIR=""
+fi
 
 # ---- 颜色 ----
 if [ -t 1 ]; then
@@ -27,8 +32,8 @@ fi
 # ---- 获取各平台安装路径 ----
 get_platform_dir() {
     case "$1" in
-        # Codex: 作为插件安装到 ~/.codex/plugins/
-        codex)  echo "$HOME/.codex/plugins/$SKILL_NAME" ;;
+        # Codex: Skill 安装到 ~/.codex/skills/
+        codex)  echo "$HOME/.codex/skills/$SKILL_NAME" ;;
         # Claude Code: Skill 目录
         claude) echo "$HOME/.claude/skills/$SKILL_NAME" ;;
         # Trae: Skill 目录
@@ -42,17 +47,17 @@ show_help() {
     echo "用法: bash install.sh [选项]"
     echo ""
     echo "选项:"
-    echo "  --all        安装到所有检测到的平台 (默认)"
-    echo "  --codex      仅安装到 Codex (作为插件)"
-    echo "  --claude     仅安装到 Claude Code (作为 Skill)"
-    echo "  --trae       仅安装到 Trae (作为 Skill)"
+    echo "  --all        安装到所有检测到的 AI 编码平台 (默认)"
+    echo "  --codex      仅安装到 Codex"
+    echo "  --claude     仅安装到 Claude Code"
+    echo "  --trae       仅安装到 Trae"
     echo "  --update     强制覆盖更新"
     echo "  --uninstall  卸载所有平台的 skill"
     echo "  --help       显示此帮助信息"
     echo ""
     echo "示例:"
     echo "  bash install.sh                    # 安装到所有已安装的平台"
-    echo "  bash install.sh --codex --update   # 更新 Codex 插件"
+    echo "  bash install.sh --codex --update   # 更新 Codex skill"
     echo "  bash install.sh --uninstall        # 卸载所有平台"
 }
 
@@ -69,23 +74,6 @@ detect_platforms() {
         detected="$detected trae"
     fi
     echo "$detected" | sed 's/^ *//'
-}
-
-
-# ---- 迁移旧位置 ----
-migrate_old_install() {
-    local old_skills="$HOME/.codex/skills/$SKILL_NAME"
-    local old_system="$HOME/.codex/skills/.system/$SKILL_NAME"
-    if [ -d "$old_skills" ]; then
-        echo "  ${YELLOW}检测到旧安装 (skill-installer 遗留): ${old_skills}${NC}"
-        echo "  ${YELLOW}  → 迁移到插件位置...${NC}"
-        rm -rf "$old_skills"
-    fi
-    if [ -d "$old_system" ]; then
-        echo "  ${YELLOW}检测到旧安装 (.system 遗留): ${old_system}${NC}"
-        echo "  ${YELLOW}  → 清理中...${NC}"
-        rm -rf "$old_system"
-    fi
 }
 
 # ---- 验证 skill 源目录 ----
@@ -111,9 +99,15 @@ install_to_platform() {
 
     echo "${CYAN}→ 正在安装到 ${platform}...${NC}"
 
-    # Codex: 安装前清理可能的旧位置
+    # Codex: 安装前清理旧插件位置
     if [ "$platform" = "codex" ]; then
-        migrate_old_install
+        local old_plugin="$HOME/.codex/plugins/$SKILL_NAME"
+        if [ -d "$old_plugin" ]; then
+            echo "  ${YELLOW}检测到旧插件安装: ${old_plugin}${NC}"
+            echo "  ${YELLOW}  → 已迁移到 skills 目录${NC}"
+            rm -rf "$old_plugin"
+        fi
+        rm -rf "$HOME/.codex/skills/.system/$SKILL_NAME" 2>/dev/null || true
     fi
 
     if [ -d "$dest" ]; then
@@ -129,14 +123,9 @@ install_to_platform() {
     mkdir -p "$(dirname "$dest")"
     cp -r "$SKILL_SRC_DIR" "$dest"
 
-    # 清理不需要复制的文件
-    rm -f "$dest/install.sh" "$dest/uninstall.sh" 2>/dev/null || true
+    # 清理不需要复制的文件 (skill 目录只需要 SKILL.md 和相关内容)
     rm -rf "$dest/.git" "$dest/.github" 2>/dev/null || true
-
-    # 对于 Claude/Trae: 清理 Codex 专用插件文件
-    if [ "$platform" = "claude" ] || [ "$platform" = "trae" ]; then
-        rm -rf "$dest/.codex-plugin" 2>/dev/null || true
-    fi
+    rm -f "$dest/install.sh" "$dest/uninstall.sh" 2>/dev/null || true
 
     echo "  ${GREEN}✓ 已安装到 ${dest}${NC}"
     return 0
@@ -152,28 +141,25 @@ uninstall_from_platform() {
         return
     fi
 
-    # 同时清理可能在旧位置 (skills/) 或新位置 (plugins/) 的安装
     if [ "$platform" = "codex" ]; then
-        # 清理插件位置
+        # 清理 skill 位置
         if [ -d "$dest" ]; then
             rm -rf "$dest"
             echo "  ${GREEN}✓ 已从 ${platform} 卸载 (${dest})${NC}"
         fi
-        # 清理可能的旧 skills 位置
-        if [ -d "$HOME/.codex/skills/$SKILL_NAME" ]; then
-            rm -rf "$HOME/.codex/skills/$SKILL_NAME"
-            echo "  ${YELLOW}  同时清理了旧位置: $HOME/.codex/skills/$SKILL_NAME${NC}"
+        # 同时清理可能的旧插件位置
+        if [ -d "$HOME/.codex/plugins/$SKILL_NAME" ]; then
+            rm -rf "$HOME/.codex/plugins/$SKILL_NAME"
+            echo "  ${YELLOW}  同时清理了旧插件位置${NC}"
         fi
         if [ -d "$HOME/.codex/skills/.system/$SKILL_NAME" ]; then
             rm -rf "$HOME/.codex/skills/.system/$SKILL_NAME"
-            echo "  ${YELLOW}  同时清理了旧位置: $HOME/.codex/skills/.system/$SKILL_NAME${NC}"
+            echo "  ${YELLOW}  同时清理了旧 .system 位置${NC}"
         fi
     else
         if [ -d "$dest" ]; then
             rm -rf "$dest"
             echo "  ${GREEN}✓ 已从 ${platform} 卸载 (${dest})${NC}"
-        else
-            echo "  ${YELLOW}${platform}: 未安装，跳过${NC}"
         fi
     fi
 }
@@ -280,8 +266,6 @@ main() {
             echo "${GREEN}════════════════════════════════════════${NC}"
             echo "${GREEN}  安装完成!${NC}"
             echo "${GREEN}════════════════════════════════════════${NC}"
-            echo ""
-            echo -e "${YELLOW}⚠  请完全退出并重启对应的 AI 编码工具以加载新 Skill。${NC}"
             echo ""
             echo "使用方式 (自然语言，在任意项目中):"
             echo "  \"帮我设计一个微购的商品列表页\""

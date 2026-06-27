@@ -24,7 +24,7 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 
 | 平台 | 安装位置 | 方式 |
 |------|---------|------|
-| Codex | `~/.codex/plugins/wego-ux-design/` | 插件（自动发现） |
+| Codex | `~/.codex/skills/wego-ux-design/` | Skill（自动识别） |
 | Claude Code | `~/.claude/skills/wego-ux-design/` | Skill |
 | Trae | `~/.trae-cn/skills/wego-ux-design/` | Skill |
 
@@ -33,11 +33,11 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 | 命令 | 说明 |
 |------|------|
 | `bash install.sh` | 安装到所有检测到的平台 |
-| `bash install.sh --codex` | 仅安装到 Codex（作为插件） |
+| `bash install.sh --codex` | 仅安装到 Codex |
 | `bash install.sh --claude` | 仅安装到 Claude Code |
 | `bash install.sh --trae` | 仅安装到 Trae |
 | `bash install.sh --update` | 覆盖更新已安装的 skill |
-| `bash install.sh --codex --update` | 覆盖更新 Codex 插件 |
+| `bash install.sh --codex --update` | 覆盖更新 Codex skill |
 | `bash install.sh --uninstall` | 卸载所有平台（含旧位置清理） |
 
 ### 更新 Skill
@@ -61,9 +61,7 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 **Codex：**
 
 ```
-执行以下终端命令安装微购设计系统 Skill：
-
-curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/wego-ux-design/install.sh | bash
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill 到本地
 ```
 
 **Claude Code：**
@@ -99,7 +97,6 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 | 路径 | 作用 |
 |---|---|
 | `SKILL.md` | 唯一运行时入口和任务路由 |
-| `.codex-plugin/plugin.json` | Codex 插件注册清单 |
 | `install.sh` | 一键安装/更新/卸载脚本 |
 | `principles/` | 微购设计判断原则 |
 | `rules/` | 运行时控制层规则（execution / generation / tokens / components / review / output / checkout / confirmation） |
