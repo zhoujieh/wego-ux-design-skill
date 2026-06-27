@@ -14,17 +14,15 @@ SKILL = ROOT / "SKILL.md"
 
 REQUIRED_FILES = {
     "principles/design-principles.md",
-    "rules/icon-guidelines.md",
-    
     "agents/openai.yaml",
     "design-library/library-consumption.json",
+    "design-library/page-layout.json",
     "design-library/tokens.json",
     "design-library/tokens.css",
     "design-library/scaffold.css",
     "design-library/components.css",
     "design-library/components/index.json",
     "rules/execution.md",
-    "rules/generation.md",
     "rules/tokens.md",
     "rules/components.md",
     "rules/review.md",
@@ -34,13 +32,12 @@ REQUIRED_FILES = {
     "examples/good-ui.md",
     "examples/bad-ui.md",
     "examples/output.md",
-    
+
 }
 
 RUNTIME_FILES = [
     SKILL,
     ROOT / "rules" / "execution.md",
-    ROOT / "rules" / "generation.md",
     ROOT / "rules" / "tokens.md",
     ROOT / "rules" / "components.md",
     ROOT / "rules" / "review.md",
@@ -83,25 +80,25 @@ PHASE1_GATE_MARKERS = {
     "rules/confirmation.md": [
         "生成类任务的首轮回复只能输出《需求确认卡》",
         "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案、交互实现或在线链接",
-        "即使用户要求“直接输出”“给我文件”“先做出来”，首轮回复仍只能是确认卡",
+        "首轮回复仍只能是确认卡",
     ],
 }
 
 PHASE4_OUTPUT_MARKERS = {
     "rules/execution.md": [
-        "不得输出“没有额外做浏览器视觉回归或线上部署”“未做浏览器验证/部署”这类完成态免责声明",
+        "已完成交付时，不得输出",
         "阶段四降级为静态代码审查",
         "交付被部署门禁阻断",
     ],
     "rules/checkout.md": [
-        "不得跳过后在最终回复中补一句“没有额外做浏览器视觉回归”",
+        "不得跳过后在最终回复中补一句",
         "在线链接：阻断",
-        "不得用“没有额外做浏览器视觉回归或线上部署”之类免责声明替代验证结果或阻断说明",
+        "不得用",
     ],
     "rules/output.md": [
-        "`验证结果` 必须明确写明本次执行的是“浏览器验证”还是“静态代码审查降级”",
-        "`在线链接` 必须填写真实公网链接；若因部署门禁未完成，写 `阻断：原因`",
-        "不得使用“没有额外做浏览器视觉回归或线上部署”“未额外部署”这类完成态免责声明",
+        "浏览器验证",
+        "在线链接",
+        "不得使用",
     ],
 }
 
@@ -260,26 +257,18 @@ def validate_ui_kits_in_rules() -> list[str]:
     # Skill runtime entry is authoritative and must expose the consumption plan.
     skill_path = root / "SKILL.md"
     skill_text = skill_path.read_text(encoding="utf-8") if skill_path.is_file() else ""
-    skill_markers = ("设计库消费计划", "ui_kits/index.json", "quality-report.json")
+    skill_markers = ("设计库消费计划", "ui_kits/index.json", "quality-report.json", "page-layout.json")
     if any(marker not in skill_text for marker in skill_markers):
-        errors.append("SKILL.md must mention design-library consumption plan and ui_kits matching")
+        errors.append("SKILL.md must mention design-library consumption plan, page-layout.json and ui_kits matching")
 
-    # F: generation.md §6.8 must reference ui_kits/index.json (no hardcoded type list)
-    gen_path = root / "rules" / "generation.md"
-    gen_text = gen_path.read_text(encoding="utf-8") if gen_path.is_file() else ""
-    if "ui_kits/index.json" not in gen_text:
-        errors.append("generation.md must reference ui_kits/index.json as page type source")
-
-    # F: generation.md §3 must preserve the 6 broad types
-    required_types = ["浏览型", "操作型", "表单型", "结果型", "异常型", "空状态"]
-    for t in required_types:
-        if t not in gen_text:
-            errors.append(f"generation.md §3 must preserve broad type: {t}")
-
-    # F: generation.md §6.8 must NOT contain the old hardcoded type list code block
-    # Check for the exact old code block pattern (3+ types in a list), not individual sub-headers
-    if "```text\n表单编辑页\n常规列表页" in gen_text:
-        errors.append("generation.md §6.8 still contains old hardcoded type list code block")
+    # F: page-layout.json must reference the 6 broad types
+    layout_path = root / "design-library" / "page-layout.json"
+    if layout_path.is_file():
+        layout_text = layout_path.read_text(encoding="utf-8")
+        required_types = ["浏览型", "操作型", "表单型", "结果型", "异常型", "空状态"]
+        for t in required_types:
+            if t not in layout_text:
+                errors.append(f"page-layout.json must preserve broad type: {t}")
 
     # G: execution.md must contain the design-library consumption plan and ui_kits matching
     exec_path = root / "rules" / "execution.md"

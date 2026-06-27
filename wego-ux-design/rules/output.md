@@ -1,7 +1,7 @@
-# 06 Output Format
+# Output Format
 
 > 微购 Design System Skill / rules
-> Version 2.0
+> Version 3.0
 > 本文档定义被 `SKILL.md` 选中任务的具体输出格式。
 
 ---
@@ -34,6 +34,7 @@ AI 输出必须：
 ```text
 index.html
 styles/tokens.css
+styles/scaffold.css
 styles/components.css
 styles/app.css
 scripts/app.js
@@ -41,9 +42,22 @@ assets/（按实际需要）
 ```
 
 - HTML、CSS、JavaScript 分离。已注册组件的 Canonical CSS 写入 `styles/components.css`，页面级业务样式写入 `styles/app.css`。
+- M/G 布局工具类通过 `styles/scaffold.css` 提供，页面级布局使用 scaffold 工具类（`.wg-page-m{0-3}`、`.wg-group-g{1-2}`），禁止在 app.css 中手写 `padding-inline`/`gap` 伪造同效果。
 - 所有本地引用必须在交付目录内可解析。
 - 使用框架或构建工具时，包含依赖清单、入口文件和启动命令。
 - 不创建任务不需要的空目录或占位资源。
+
+**样式加载顺序：**
+
+HTML 中按以下顺序引入样式表：
+
+```html
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/scaffold.css">
+<link rel="stylesheet" href="assets/fonts/iconfont/iconfont.css">  <!-- 如有图标 -->
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/app.css">
+```
 
 **项目命名与结构：**
 
@@ -59,12 +73,14 @@ assets/（按实际需要）
 ├── index.html
 ├── styles/
 │   ├── tokens.css
+│   ├── scaffold.css
 │   ├── components.css
 │   └── app.css
 ├── scripts/
 │   └── app.js
 └── assets/
     ├── fonts/
+    │   └── iconfont/
     ├── images/
     └── data/
 ```
@@ -95,9 +111,9 @@ assets/（按实际需要）
 
 其中：
 
-- `验证结果` 必须明确写明本次执行的是“浏览器验证”还是“静态代码审查降级”
+- `验证结果` 必须明确写明本次执行的是"浏览器验证"还是"静态代码审查降级"
 - `在线链接` 必须填写真实公网链接；若因部署门禁未完成，写 `阻断：原因`
-- 不得使用“没有额外做浏览器视觉回归或线上部署”“未额外部署”这类完成态免责声明
+- 不得使用"没有额外做浏览器视觉回归或线上部署""未额外部署"这类完成态免责声明
 
 ---
 

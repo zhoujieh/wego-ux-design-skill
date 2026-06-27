@@ -78,7 +78,7 @@
       ],
       "copyable": false,
       "purpose": "页面级模式层：AI 通过 ui_kits/index.json 查找匹配的页面模式，通过 quality-report.json 提取必须遵守的布局规则。index.html 仅作结构参考（copyPolicy: structural-reference），不可复制。",
-      "downstreamRule": "读取 ui_kits/index.json → 按 appliesTo + keyFeatures 匹配当前页面 → 命中则读取对应 quality-report.json 的 layoutRulesCaptured 作为强制约束，可选读 index.html 做视觉确认；未命中走 generation.md §6.8 通用规则并产出缺失标注。"
+      "downstreamRule": "读取 ui_kits/index.json → 按 appliesTo + keyFeatures 匹配当前页面 → 命中则读取对应 quality-report.json 的 layoutRulesCaptured 作为强制约束，可选读 index.html 做视觉确认；未命中走 page-layout.json 通用规则并产出缺失标注。"
     }
   },
   "downstreamScenarios": {
@@ -136,16 +136,32 @@
     "ui_kits/{type}/quality-report.json",
     "ui_kits/{type}/index.html"
   ],
+  "pageLayoutContract": "page-layout.json",
   "hardConstraints": [
     "必须先读取 library-consumption.json，再决定要读哪些设计库文件。",
     "组件发现只能从 components/index.json 开始，不得扫描整个 preview/ 或 components/ 目录自行猜测。",
-    "组件 markup 只能从 preview/component-{slug}.html 复制，不得凭视觉相似自行重写结构。",
+    "组件 markup 只能从 preview/component-{slug}.html 复制（通过 @component-markup-start / @component-markup-end 标记定位），不得凭视觉相似自行重写结构。",
     "组件视觉样式只能来自 components.css；禁止手写或覆盖组件内部 CSS。",
     "业务样式只能通过 var(--wg-*) 使用 Token；禁止在业务 CSS 中写 HEX、rgb()、命名色、裸 px/rem 等设计值。",
     "组件契约中的 doNotInvent、variantDimensions、domAnatomy 属于硬边界；未声明的变体、状态和 anatomy 不得自创。",
     "使用图标时必须复制整个 assets/fonts/iconfont/ 目录，保持 iconfont.css 与字体文件同目录。",
     "素材资源只能在需求或规则明确需要时读取；不得把 resources/ 或 design-library/assets/ 当作组件发现入口。",
-    "ui_kits/ 仅作结构参考；当前目录为空时不得伪造 showcase 来源。"
+    "ui_kits/ 仅作结构参考；当前目录为空时不得伪造 showcase 来源。",
+    "生成完整页面时，必须读取 design-library/page-layout.json，按页面类型、信息层级、布局模式、页面转场等约束生成页面结构。",
+    "M/G 布局模式通过 design-library/scaffold.css 工具类表达（.wg-page-m{0-3}、.wg-group-g{1-2}），禁止在 app.css 中手写 padding-inline/gap 伪造同效果。",
+    "scaffold.css 完整复制到 styles/scaffold.css，HTML 加载顺序为 tokens.css → scaffold.css → iconfont.css（如有）→ components.css → app.css。",
+    "禁止滥用渐变、毛玻璃、重阴影、高饱和色、多层卡片嵌套等装饰性视觉元素。",
+    "禁止用静态 DOM 同时陈列所有状态代替真实状态转换；所有关键交互必须可实际操作。",
+    "禁止不读设计库契约直接生成页面；禁止用通用 UI 规则替代微购规则。",
+    "同一业务动作在页面中只能有一个 primary/strong 表达，其余重复入口必须降级为 text/weak/secondary。",
+    "同一个 form group 内禁止左右对齐混用；label、输入区、value/action 对齐方式必须统一。",
+    "导航区承载页面级动作时不得被普通内容滚动带走；底部工具栏不得进入 ScrollView 或被内容遮挡。",
+    "大屏下业务页面内容不得超过 --wg-layout-page-max-width（768px）。",
+    "页面切换必须使用 transform+opacity 转场动画（Push/Present/Fade），禁止 display:none 硬切。",
+    "所有可滚动区域必须隐藏浏览器默认滚动条（scrollbar-width:none + ::-webkit-scrollbar{display:none}）。",
+    "Loading 必须表达具体任务语义，禁止空 spinner 长时间占位或全屏 loading 无文案。",
+    "错误状态在用户修正后必须清除（error class、错误文案、aria-invalid、边框/背景色），不得残留。",
+    "不可逆操作必须具备确认文案、后果说明、取消路径、失败恢复。"
   ],
   "uiKitsAvailable": [
     "business-settings"

@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "description": "微购页面布局契约。定义 AI 生成页面时必须遵守的页面类型、信息层级、布局模式、页面结构、转场动画等约束。替代原 rules/generation.md 中与布局决策相关的 prose 规则。",
+  "pageTypes": {
+    "description": "页面粗类型，决定信息密度和布局方式",
+    "values": [
+      { "type": "browse", "name": "浏览型", "density": "medium", "typicalScroll": true },
+      { "type": "action", "name": "操作型", "density": "medium", "typicalScroll": false },
+      { "type": "form", "name": "表单型", "density": "compact", "typicalScroll": false },
+      { "type": "result", "name": "结果型", "density": "low", "typicalScroll": false },
+      { "type": "error", "name": "异常型", "density": "low", "typicalScroll": false },
+      { "type": "empty", "name": "空状态", "density": "low", "typicalScroll": false }
+    ]
+  },
+  "informationHierarchy": {
+    "description": "默认信息层级，一个页面只允许一个核心视觉重心",
+    "levels": [
+      { "level": 1, "label": "核心目标/关键结果/主标题", "rule": "唯一视觉重心" },
+      { "level": 2, "label": "主要内容/主要表单/主要列表", "rule": "承载核心任务" },
+      { "level": 3, "label": "辅助说明/状态解释/次要信息", "rule": "必须弱化" },
+      { "level": 4, "label": "弱提示/时间/标签/占位内容", "rule": "最低视觉权重" }
+    ],
+    "constraints": [
+      "一个页面只允许一个核心视觉重心",
+      "主操作必须清晰",
+      "辅助信息必须弱化",
+      "状态信息必须靠近对应对象"
+    ]
+  },
+  "layoutModes": {
+    "description": "M/G 布局模式通过 scaffold.css 工具类表达",
+    "pageMargin": [
+      { "class": "wg-page-m0", "value": "padding-inline:0", "usage": "表单、设置页、通栏列表" },
+      { "class": "wg-page-m1", "value": "padding-inline:var(--wg-spacing-8)", "usage": "卡片布局（使用前必须判断卡片 vs 通栏）" },
+      { "class": "wg-page-m2", "value": "padding-inline:var(--wg-spacing-16)", "usage": "默认，信息密度较低的一般场景" },
+      { "class": "wg-page-m3", "value": "padding-inline:var(--wg-spacing-32)", "usage": "最低密度场景（如结果页）" }
+    ],
+    "groupGap": [
+      { "class": "wg-group-g1", "value": "gap:var(--wg-spacing-16)", "usage": "紧密连续信息（如 form group 内字段）" },
+      { "class": "wg-group-g2", "value": "gap:var(--wg-spacing-32)", "usage": "宽松模块信息（如卡片组）" }
+    ],
+    "defaults": {
+      "普通业务页面": "M2",
+      "高密度列表": "M0",
+      "通栏连续列表": "M1",
+      "低密度聚焦页面": "M3",
+      "紧密连续信息": "G1",
+      "宽松模块信息": "G2"
+    },
+    "constraints": [
+      "禁止随意新增 M/G 模式",
+      "M0 通栏场景不得给内容分组增加页面级左右 margin 或圆角",
+      "设置页默认使用 M0，内容按通栏列表或通栏分组组织",
+      "简单设置项不得用多层卡片包裹；只有 M1/M2 且页面背景非白色、内容对应真实模块或实体时才使用卡片"
+    ]
+  },
+  "settingPageRules": {
+    "description": "设置类页面的特殊布局规则",
+    "rules": [
+      "设置、权限、开关项、配置项等页面默认使用 wg-page-m0",
+      "M0 通栏场景不得给内容分组增加页面级左右 margin 或圆角",
+      "简单设置项不得用多层卡片包裹",
+      "业务分组之间通过滚动容器的 flex gap 和页面背景色形成分隔，不插入空的 section-gap/spacer 节点",
+      "同一业务分组内使用连续 Cell 列表",
+      "分组标题行与 Cell 节奏保持一致，右侧文字动作必须使用 Link 组件，右侧开关必须使用 Switch 组件",
+      "业绩归属、选款与上架、订单与客户等不同业务域必须拆成独立分组，不得为了视觉紧凑合并",
+      "NavBar 左侧为「取消」或关闭叉时，页面属于全屏模块，打开方式使用弹出（Present，从底部往上打开），而不是 Push"
+    ]
+  },
+  "radius": {
+    "description": "圆角只在明确容器语义中使用",
+    "mapping": [
+      { "scenario": "模态窗/ActionSheet 顶部容器", "token": "wg.radius.xl", "value": "16px" },
+      { "scenario": "Dialog 弹窗", "token": "wg.radius.lg", "value": "12px" },
+      { "scenario": "卡片", "token": "wg.radius.md", "value": "8px" },
+      { "scenario": "48px 按钮", "token": "wg.radius.md", "value": "8px" },
+      { "scenario": "32px 按钮", "token": "wg.radius.sm", "value": "6px" }
+    ],
+    "constraints": [
+      "M0 通栏列表和设置页分组不使用卡片圆角",
+      "卡片圆角默认使用 wg.radius.md，不得用 wg.radius.lg 代替卡片圆角",
+      "胶囊、头像、checkbox/radio/switch 按各自组件契约使用 wg.radius.full"
+    ]
+  },
+  "pageBackground": {
+    "description": "页面背景色选择规则",
+    "primary": [
+      { "scenario": "多卡片/多模块页面", "background": "bg-page（灰色）", "cardBackground": "bg-surface（白色）" },
+      { "scenario": "聚焦型单任务页面", "background": "bg-surface（白色）", "cardBackground": "不使用卡片容器" }
+    ],
+    "hierarchy": {
+      "description": "二级及以下页面背景色继承规则",
+      "rules": [
+        { "condition": "一级页面是白底（聚焦型）", "rule": "二级页面继承白底，保持视觉连续性" },
+        { "condition": "一级页面是灰底（多模块型）", "rule": "二级页面根据内容结构独立选择" },
+        { "condition": "跨层级跳转", "rule": "目标页面按自身内容结构选择背景色" }
+      ]
+    },
+    "navbarLinkage": {
+      "description": "NavBar 背景色必须与页面背景联动",
+      "rules": [
+        { "pageBackground": "bg-page（灰色）", "navbarBackground": "wg-navbar--bg-default（--wg-color-bg-page）" },
+        { "pageBackground": "bg-surface（白色）", "navbarBackground": "在 app.css 中添加 .page-surface .wg-navbar--bg-default { background-color: var(--wg-color-bg-surface) }，或对 NavBar 使用 bg-custom" }
+      ]
+    }
+  },
+  "pageDimensions": {
+    "maxWidth": {
+      "value": "768px",
+      "token": "--wg-layout-page-max-width",
+      "rule": "页面容器设置 max-inline-size:var(--wg-layout-page-max-width) 和 margin-inline:auto",
+      "exceptions": [
+        { "scenario": "沉浸式页面（视频播放、图片预览）", "rule": "无限制" }
+      ]
+    },
+    "height": {
+      "default": "100vh（兼容：100dvh）",
+      "rule": "页面容器默认占满一屏，使用 block-size 而非 min-height",
+      "scroll": {
+        "noScroll": "表单型、结果型、聚焦型页面 → overflow:hidden",
+        "allowScroll": "浏览型、列表型页面 → overflow-y:auto",
+        "scrollbarHidden": "所有可滚动区域必须隐藏浏览器默认滚动条：* { scrollbar-width:none; -ms-overflow-style:none } *::-webkit-scrollbar { display:none }"
+      }
+    }
+  },
+  "pageStructure": {
+    "description": "标准页面骨架",
+    "skeleton": {
+      "zones": [
+        { "name": "Background", "role": "页面底色" },
+        { "name": "NavBar", "role": "顶部导航，position:sticky 固定", "constraint": "承载页面级动作时必须固定" },
+        { "name": "SecondaryBar", "role": "搜索/筛选/Tab，可选", "constraint": "影响整页数据时必须固定在 NavBar 下方" },
+        { "name": "ScrollView", "role": "主体内容，可滚动", "constraint": "承载页面主要内容" },
+        { "name": "BottomBar", "role": "底部操作区，可选，固定", "constraint": "提交/确认/发布等页面级操作必须固定在底部" },
+        { "name": "SafeArea", "role": "iOS 安全区占位" }
+      ]
+    },
+    "scrollStructure": {
+      "description": "滚动结构判断",
+      "decisionTree": [
+        "页面内容是否超出可视区域？→ 否 → 无需拆分滚动结构",
+        "页面内容超出 → 导航区是否承载页面级动作？→ 是 → 导航区必须独立于内容滚动区",
+        "底部是否有核心操作？→ 是 → 是否需要在滚动时保持可见？→ 是 → 底部操作区固定"
+      ],
+      "constraints": [
+        "导航区必须独立于内容滚动区，或使用可靠 sticky/fixed 结构",
+        "内容滚动不得导致导航区消失",
+        "固定区必须具备明确 z-index（使用 wg.zIndex.* Token）",
+        "ScrollView 必须为固定底部栏预留安全距离，避免最后一项被遮挡"
+      ]
+    },
+    "cardVsFullBleed": {
+      "description": "卡片 vs 通栏判断",
+      "cardConditions": [
+        "页面主体由重复业务实体组成",
+        "每个实体结构一致，只是填充值不同",
+        "每个实体内部至少有 2 层信息结构",
+        "每个实体可以独立理解、独立操作",
+        "用户需要按实体快速扫描、比较或处理"
+      ],
+      "fullBleedRequired": [
+        "设置项列表",
+        "表单字段列表",
+        "简单文本列表",
+        "权限开关列表",
+        "字段编辑页",
+        "卡片无法对应真实业务实体的内容"
+      ],
+      "constraints": [
+        "禁止为了视觉丰富而使用卡片",
+        "禁止卡片不对应业务实体",
+        "禁止简单表单分组套卡片",
+        "禁止设置项、字段项乱用卡片"
+      ]
+    },
+    "tableRules": {
+      "description": "多列表格规则（SKU、价格、库存等横向编辑场景）",
+      "rules": [
+        "字段超过 5 列且需要横向比较或批量编辑时，优先使用表格",
+        "表格允许横向滚动，不得强行压缩到容器宽度内",
+        "表头高度 44，数据行高 48",
+        "图片列可用 56，规格列可用 108，价格/库存/重量等短字段列可用 88，编码/条码等长字段列可用 200",
+        "批量填写可以作为局部辅助操作，但不能替代页面级保存动作"
+      ]
+    },
+    "batchOperationRules": {
+      "description": "批量操作页结构",
+      "skeleton": "NavBar(固定) → Search/Filter(固定,可选) → ScrollView → SelectableList → BottomBar(固定: 左侧选择状态+右侧批量操作) → SafeArea",
+      "constraints": [
+        "底部工具栏固定",
+        "左侧展示选择状态或全选",
+        "右侧最多放 2 个操作按钮",
+        "删除/确认/完成等强操作只能有一个主按钮",
+        "列表底部必须预留底部工具栏高度"
+      ]
+    },
+    "dataStateRules": {
+      "description": "同一页面的空/少/多三种数据状态",
+      "empty": "没有数据时，仍需保留搜索、添加入口、底部操作状态，不要让页面空白失衡",
+      "fewItems": "内容不足一屏时，底部操作仍固定在底部，内容不要被强行拉满",
+      "manyItems": "内容超过一屏时，顶部导航和底部工具栏固定，ScrollView 独立滚动；必须额外检查 NavBar/Search/Tabs/BottomBar 是否固定、ScrollView 是否预留底部占位、最后一项是否会被工具栏遮挡"
+    }
+  },
+  "dialogAndOverlay": {
+    "description": "Dialog/Sheet/Popover 浮层内容组织规则",
+    "structure": ["标题：说明问题或动作", "说明：解释原因", "限制条件：独立成组，不得混在长段落中", "操作：主次明确"],
+    "spacing": [
+      "title 与 description 之间必须有明确间距",
+      "description 与限制条件之间必须有明确间距",
+      "多条限制条件必须用列表或独立块呈现",
+      "内容与按钮之间必须有明确间距",
+      "文本不能贴边、拥挤或压缩"
+    ],
+    "textConstraints": [
+      "标题限制最大行数",
+      "描述限制最大行数或具备滚动策略",
+      "长内容必须进入内容滚动区",
+      "按钮区不得被长内容挤压"
+    ],
+    "constraints": [
+      "浮层不得只是把文本和按钮塞进去",
+      "必须判断用户为什么看到这个浮层、需要理解什么限制、需要做什么决定",
+      "操作按钮必须有 default/hover/pressed/disabled 态"
+    ]
+  },
+  "transitions": {
+    "description": "页面转场动画。原型中的页面切换必须模拟 App 原生导航体验，禁止 display:none 硬切。",
+    "types": [
+      {
+        "type": "push",
+        "name": "推入（Push）",
+        "enterFrom": "translateX(100%)",
+        "enterTo": "translateX(0)",
+        "exitTo": "translateX(100%)",
+        "duration": "var(--wg-motion-duration-normal) (250ms)",
+        "easing": "var(--wg-motion-ease-emphasized)",
+        "usage": "二级页面进入：从一级页面进入详情、表单、设置等子页面"
+      },
+      {
+        "type": "present",
+        "name": "弹出（Present）",
+        "enterFrom": "translateY(100%)",
+        "enterTo": "translateY(0)",
+        "exitTo": "translateY(100%)",
+        "duration": "var(--wg-motion-duration-normal) (250ms)",
+        "easing": "var(--wg-motion-ease-emphasized)",
+        "usage": "全屏模态：绑定手机号、独立流程、需要关闭而非返回的页面"
+      },
+      {
+        "type": "fade",
+        "name": "淡入（Fade）",
+        "enterFrom": "opacity:0",
+        "enterTo": "opacity:1",
+        "exitTo": "opacity:0",
+        "duration": "var(--wg-motion-duration-fast) (150ms)",
+        "easing": "var(--wg-motion-ease-standard)",
+        "usage": "同级切换：Tab 切换、登录方式切换等不涉及层级变化的场景"
+      }
+    ],
+    "decisionTree": [
+      "新页面与当前页面是什么关系？",
+      "→ 层级深入（详情、表单、子页面）→ 推入（Push）",
+      "→ 独立流程（绑定、授权、全屏操作）→ 弹出（Present）",
+      "→ 同级切换（Tab、模式切换）→ 淡入（Fade）"
+    ],
+    "implementation": {
+      "method": "视图容器使用绝对定位堆叠，通过 CSS transform + transition 实现",
+      "cssTemplate": ".view{position:absolute;inset:0;transition:transform var(--wg-motion-duration-normal) var(--wg-motion-ease-emphasized),opacity var(--wg-motion-duration-normal) var(--wg-motion-ease-standard)} .view[data-position=\"right\"]{transform:translateX(100%);opacity:0;pointer-events:none} .view[data-position=\"bottom\"]{transform:translateY(100%);opacity:0;pointer-events:none} .view[data-active=\"true\"]{transform:translateX(0);opacity:1;pointer-events:auto}"
+    },
+    "constraints": [
+      "不得使用 display:none 切换视图，必须使用 transform + opacity 实现连续动画",
+      "推入时，底层页面保持不动（不跟随滑动），与 iOS 原生行为一致",
+      "弹出时，底层页面可添加轻微缩放效果（scale(0.95)）增强层次感，但不强制",
+      "转场期间，退出页面的交互必须禁用（pointer-events:none）",
+      "NavBar 左侧为取消或关闭时，打开方式必须是 present-bottom，不得使用 Push",
+      "返回按钮交互必须与进入转场类型匹配（Push→右滑出，Present→下滑出，Fade→淡出）"
+    ]
+  },
+  "interactionRequirements": {
+    "description": "原型必须覆盖用户任务的完整交互链路",
+    "requiredStates": [
+      "初始状态",
+      "输入与校验",
+      "触发操作",
+      "处理中（Loading 必须表达具体任务语义）",
+      "成功结果",
+      "失败反馈与重试",
+      "取消、返回或撤销",
+      "空状态与数据恢复",
+      "页面或步骤跳转"
+    ],
+    "constraints": [
+      "不能只用静态 DOM 同时陈列所有状态来代替真实状态转换",
+      "可使用原生 JavaScript、模块化脚本、框架、Mock 数据、本地存储或本地服务"
+    ]
+  }
+}

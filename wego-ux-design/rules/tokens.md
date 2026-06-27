@@ -1,7 +1,8 @@
 # 微购 Token 与消费规则
 
 > 微购 Design System Skill / rules
-> 本文档定义 Token 的权威来源、下游消费方式、合规检查和缺失处理。
+> Version 3.0
+> 本文档定义 Token 的权威来源和消费原则。Token 定义和映射以 `design-library/tokens.json` 和 `design-library/tokens.css` 为准。布局工具类以 `design-library/scaffold.css` 和 `design-library/page-layout.json` 为准。
 
 ## 权威来源
 
@@ -9,31 +10,16 @@
 - 机器可读投影：`design-library/tokens.json`
 - 可复制 CSS：`design-library/tokens.css`
 - 页面骨架：`design-library/scaffold.css`
-- CSS 映射参考：`design-library/token-css-map.md`
 
 `design-library/tokens.json` 和 `design-library/tokens.css` 是供 AI / 下游消费的产物；`design-library/tokens-source.json` 是维护入口。不得手工修改生成物去绕过源数据。
-
-## 读取顺序
-
-消费设计库时，Token 层的推荐顺序是：
-
-```text
-design-library/library-consumption.json
-↓
-design-library/tokens.json
-↓
-design-library/tokens.css
-↓
-design-library/scaffold.css（需要布局骨架时）
-```
 
 ## 总原则
 
 - 优先使用 Semantic Token，其次使用 Pattern Token，最后使用 Base Token。
-- HTML/CSS 只使用 `design-library/token-css-map.md` 中存在的 `var(--wg-*)`。
+- HTML/CSS 只使用 `design-library/tokens.css` 中存在的 `var(--wg-*)`。
 - 业务样式不直接写颜色、字号、间距、圆角、尺寸、阴影、动效或层级值。
 - 不把组件结构、组件状态或页面专属补丁写进 Token。
-- 页面级辅助排版优先复用 `scaffold.css`，不要用临时样式重新定义同类基础规则。
+- 页面级辅助排版优先复用 `scaffold.css` 工具类，不要用临时样式重新定义同类基础规则。
 
 ## Color
 
@@ -47,6 +33,7 @@ design-library/scaffold.css（需要布局骨架时）
 - 多模块 / 多卡片页面：`wg.color.bg.page`
 - 聚焦型单任务页面：`wg.color.bg.surface`
 - 不确定时优先选择白底 `bg-surface`
+- NavBar 背景色必须与页面背景联动（详见 `design-library/page-layout.json` → `pageBackground.navbarLinkage`）
 
 ## Typography
 
@@ -59,29 +46,17 @@ design-library/scaffold.css（需要布局骨架时）
 ## Spacing、Radius 与 Size
 
 - 所有间距从 `wg.spacing.*` 选择
-- 所有圆角从 `wg.radius.*` 选择
+- 所有圆角从 `wg.radius.*` 选择（场景映射见 `design-library/page-layout.json` → `radius`）
 - 图标、头像和通用尺寸从 `wg.size.*` 选择
 - 可点击区域不得小于 `wg.touch.min`
 - 不通过临时 padding 制造新的页面布局规则
 
 ## Layout
 
-- 默认业务页面使用 M2
-- 高密度列表使用 M0
-- 通栏连续内容使用 M1
-- 低密度聚焦页面使用 M3
+- M/G 布局模式通过 `scaffold.css` 工具类表达，具体映射见 `design-library/page-layout.json` → `layoutModes`
+- 默认业务页面使用 M2，高密度列表使用 M0，通栏连续内容使用 M1，低密度聚焦页面使用 M3
 - 紧密连续信息使用 G1，宽松模块信息使用 G2
 - 屏幕、内容宽度和模态高度只使用 `wg.layout.*` 中已有定义
-
-### 布局工具类
-
-M/G 模式通过 `design-library/scaffold.css` 的工具类在代码中表达：
-
-- `.wg-page-m{0-3}`：页面级左右留白
-- `.wg-group-g{1-2}`：分组内子元素间距
-
-具体值、适用场景及使用示例参见 `rules/generation.md` 布局选择章节。
-
 
 ## Elevation、Stroke、Blur 与 Motion
 
@@ -107,16 +82,16 @@ M/G 模式通过 `design-library/scaffold.css` 的工具类在代码中表达：
 
 检查界面或代码时必须确认：
 
-- 使用的 `wg.*` 名称存在于 `design-library/tokens.json` 或 `design-library/token-css-map.md`
+- 使用的 `wg.*` 名称存在于 `design-library/tokens.json`
 - 使用的 `var(--wg-*)` 存在于 `design-library/tokens.css`
 - 业务样式不存在硬编码颜色、字号、间距、圆角、尺寸、阴影、动效或 z-index
 - Semantic Token 可以表达时，没有退回 Base Token
 - Copywriting Token 没有被误用为 CSS 变量
 - 缺失 Token 没有通过临时值绕过
 
-## 图标关系
+## 图标资源
 
-图标尺寸、颜色和 SVG 兜底规则仍以 `rules/icon-guidelines.md` 为准。图标资源的消费边界以 `design-library/library-consumption.json` 的 `icons` layer 为准。
+图标尺寸、颜色和使用方式以 `design-library/library-consumption.json` → `iconUsage` 为准。图标字体文件的复制规则以 `library-consumption.json` → `consumptionLayers.icons` 为准。
 
 ## 缺失处理
 
@@ -157,10 +132,10 @@ M/G 模式通过 `design-library/scaffold.css` 的工具类在代码中表达：
 48px 按钮圆角：wg.radius.md
 胶囊圆角：wg.radius.full
 
-默认业务页面：wg.layout.page.m2.margin
-高密度列表：wg.layout.page.m0.margin
-紧密分组：G1
-宽松分组：G2
+默认业务页面：M2 + wg.page-m2
+高密度列表：M0 + wg.page-m0
+紧密分组：G1 + wg.group-g1
+宽松分组：G2 + wg.group-g2
 ```
 
 错误示例：
@@ -180,7 +155,7 @@ box-shadow: 0 8px 40px rgba(...)
 
 ```text
 当前使用：wg.spacing.24
-原因：缺少专用于「筛选区与结果列表之间」的间距 Token
+原因：缺少专用于"筛选区与结果列表之间"的间距 Token
 建议新增：wg.spacing.xxx
 归属位置：design-library/tokens-source.json
 ```
@@ -188,7 +163,7 @@ box-shadow: 0 8px 40px rgba(...)
 ## 禁止事项
 
 - 为单页面或单个临时变体新增 Token
-- 手工修改 `design-library/tokens.json`、`design-library/tokens.css` 或 `design-library/token-css-map.md`
+- 手工修改 `design-library/tokens.json` 或 `design-library/tokens.css`
 - 使用未定义的 `wg.*` 或 `--wg-*`
 - 用魔法数字绕过 Token
 - 把组件结构写进 Token

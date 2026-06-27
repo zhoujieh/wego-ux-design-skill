@@ -73,7 +73,7 @@
     }
   },
   "usageHints": [
-    "page 级按钮用于页面底部固定操作区",
+    "page 级按钮用于页面底部固定操作区；宽度策略：表单型页面按钮自适应容器宽度（inline-size:100%），结果/异常型页面按钮使用固定宽度 180px（--wg-component-button-width-page-single）",
     "container 级按钮用于表单/卡片内，flex 自适应宽度",
     "compact 级按钮用于表格行内或小空间内",
     "strong 用于主操作（提交/保存/确认）",

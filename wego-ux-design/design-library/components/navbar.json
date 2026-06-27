@@ -83,7 +83,7 @@
     "button action 使用 .wg-navbar__action--button，渲染小 primary 按钮（高 32px）",
     "左侧按钮 text（取消）时，必须搭配右侧 button action，形成「取消+按钮」固定搭配",
     "右侧全部为 icon-text action 时，给 .wg-navbar 添加 --actions-icon-text 修饰符，右侧边缘间距 4px",
-    "bg-default：标准页面灰色背景（--wg-color-bg-page）",
+    "bg-default：跟随页面背景色 — 灰底页（bg-page）使用 --wg-color-bg-page，白底页（bg-surface）使用 --wg-color-bg-surface。页面使用 bg-surface 背景时，NavBar 必须使用 bg-custom 并设置 background-color:var(--wg-color-bg-surface)，或在页面级 app.css 中通过 .page-surface .wg-navbar--bg-default 覆盖为 --wg-color-bg-surface",
     "bg-transparent：透明背景，文字/图标反白（--wg-color-text-inverse），用于品牌页/活动页",
     "bg-custom：用于暗色等自定义背景，需通过 inline style 设置背景色并用 --wg-color-text-inverse 着色内容",
     "divider 修饰符：底部 0.5px 分割线",
