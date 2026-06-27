@@ -76,7 +76,6 @@ PHASE1_GATE_MARKERS = {
     "rules/confirmation.md": [
         "生成类任务的首轮回复只能输出《需求确认卡》",
         "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案、交互实现或在线链接",
-        "首轮回复仍只能是确认卡",
     ],
 }
 
@@ -231,6 +230,37 @@ def validate_confirmation_card_contract() -> list[str]:
         for marker in markers:
             if marker not in text:
                 errors.append(f"{relative} missing phase1 gate marker: {marker}")
+    confirmation_text = (ROOT / "rules" / "confirmation.md").read_text(encoding="utf-8")
+    required_confirmation_markers = (
+        "唯一权威描述",
+        "- 用户角色：[",
+        "- 使用场景：[",
+        "- 用户任务：[",
+        "- 业务目标：[",
+        "- 页面范围：[",
+        "- 不做范围：[",
+        "- 业务规则：[",
+        "- 待确认：[",
+    )
+    for marker in required_confirmation_markers:
+        if marker not in confirmation_text:
+            errors.append(f"rules/confirmation.md missing confirmation card contract marker: {marker}")
+
+    forbidden_legacy_labels = (
+        "- 我理解的用户角色：[",
+        "- 我理解的使用场景：[",
+        "- 我理解的用户任务：[",
+        "- 我理解的业务目标：[",
+        "- 本次页面范围：[",
+        "- 本次不做范围：[",
+        "- 已知业务规则：[",
+        "- 缺失信息与设计假设：[",
+        "- 需要用户确认的问题：[",
+        "- 设计假设：[",
+    )
+    for marker in forbidden_legacy_labels:
+        if marker in confirmation_text:
+            errors.append(f"rules/confirmation.md contains legacy confirmation card label: {marker}")
     return errors
 
 
