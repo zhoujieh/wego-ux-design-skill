@@ -51,7 +51,7 @@ show_help() {
     echo "  --codex      仅安装到 Codex"
     echo "  --claude     仅安装到 Claude Code"
     echo "  --trae       仅安装到 Trae"
-    echo "  --update     强制覆盖更新"
+    echo "  --update     删除目标目录后强制覆盖更新"
     echo "  --uninstall  卸载所有平台的 skill"
     echo "  --help       显示此帮助信息"
     echo ""
@@ -115,7 +115,7 @@ install_to_platform() {
             echo "  ${YELLOW}已存在，覆盖更新...${NC}"
             rm -rf "$dest"
         else
-            echo "  ${YELLOW}已存在，跳过 (使用 --update 强制覆盖)${NC}"
+            echo "  ${YELLOW}已存在，跳过 (使用 --update 直接覆盖，或先 --uninstall 再重装)${NC}"
             return 1
         fi
     fi

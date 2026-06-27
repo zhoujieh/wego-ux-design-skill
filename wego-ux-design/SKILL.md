@@ -79,10 +79,10 @@ design-library/library-consumption.json
 生成界面时按 4 阶段闭环执行。每阶段有明确入口、出口和门禁，未通过门禁不得进入下一阶段。详细规则见 `rules/execution.md`。
 
 ### 阶段一：需求理解与确认（唯一用户门禁）
-执行 `rules/confirmation.md` 确认六个维度，输出《需求确认卡》。用户确认后进入阶段二。详见 `rules/execution.md#2.1`。
+执行 `rules/confirmation.md` 确认六个维度，输出《需求确认卡》。用户确认后进入阶段二。生成类任务的首轮回复只能是《需求确认卡》；未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案或在线链接。详见 `rules/execution.md#2.1`。
 
 ### 阶段二：设计决策（内部门禁，AI 自主，产物驱动）
-11 步依赖链（含 2.5.1 `ui_kits/index.json` 模式匹配与 `quality-report.json` 约束读取），产物驱动，禁止从组件拼页面。详见 `rules/execution.md#2.2`。
+产出《设计库消费计划》（页面粗类型、`ui_kits/index.json` 匹配、`quality-report.json` 约束、组件/资源/状态/缺失清单），禁止从组件拼页面。详见 `rules/execution.md#2.2`。
 
 ### 阶段三：实现
 按 `design-library/library-consumption.json` 消费设计库，禁止手写组件 CSS。详见 `rules/execution.md#2.3`。
@@ -144,9 +144,9 @@ design-library/library-consumption.json
 
 ## 扩展与约束
 
-**组件完善期处理**：未注册组件的临时实现规则详见 `rules/execution.md#4.6`。
+**组件完善期处理**：未注册组件的临时实现规则详见 `rules/execution.md#2.3`。
 
-**缺失处理**：Token 或组件不够用时，不写硬编码值、不修改正式契约，按 `rules/execution.md#5` 标注缺失。
+**缺失处理**：Token 或组件不够用时，不写硬编码值、不修改正式契约，按 `rules/execution.md#4` 标注缺失。
 
 **硬性禁令**：详见 `rules/forbidden.md`。核心底线：
 - 业务样式禁用硬编码设计值

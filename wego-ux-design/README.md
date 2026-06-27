@@ -36,11 +36,13 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 | `bash install.sh --codex` | 仅安装到 Codex |
 | `bash install.sh --claude` | 仅安装到 Claude Code |
 | `bash install.sh --trae` | 仅安装到 Trae |
-| `bash install.sh --update` | 覆盖更新已安装的 skill |
+| `bash install.sh --update` | 删除目标目录后覆盖更新已安装的 skill |
 | `bash install.sh --codex --update` | 覆盖更新 Codex skill |
 | `bash install.sh --uninstall` | 卸载所有平台（含旧位置清理） |
 
 ### 更新 Skill
+
+更新策略固定为二选一：直接 `--update` 覆盖，或先 `--uninstall` 再重装；不需要、也不建议先做本地备份。
 
 ```bash
 git clone https://github.com/zhoujieh/wego-ux-design-skill.git /tmp/wego-ux-design-skill && \
@@ -61,19 +63,19 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 **Codex：**
 
 ```
-从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill 到本地
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 更新本地 skill；如果已存在就直接覆盖，不要做备份；如不能覆盖，就先删除已安装目录再重新克隆安装
 ```
 
 **Claude Code：**
 
 ```
-从 GitHub 仓库 zhoujieh/wego-ux-design-skill 的 wego-ux-design 目录安装 skill 到本地 ~/.claude/skills/
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 的 wego-ux-design 目录更新本地 ~/.claude/skills/ 下的 skill；如果已存在就直接覆盖，不要做备份；如不能覆盖，就先删除已安装目录再重新克隆安装
 ```
 
 **Trae：**
 
 ```
-从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill 到 ~/.trae-cn/skills/
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 更新 ~/.trae-cn/skills/ 下的 skill；如果已存在就直接覆盖，不要做备份；如不能覆盖，就先删除已安装目录再重新克隆安装
 ```
 
 ### 安装后

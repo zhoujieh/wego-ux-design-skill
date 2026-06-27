@@ -71,6 +71,40 @@ PROJECT_CONTRACT_MARKERS = {
     "关键交互",
 }
 
+PHASE1_GATE_MARKERS = {
+    "SKILL.md": [
+        "生成类任务的首轮回复只能是《需求确认卡》",
+        "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案或在线链接",
+    ],
+    "rules/execution.md": [
+        "生成类任务的首轮回复只能输出《需求确认卡》",
+        "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案、交互实现或在线链接",
+    ],
+    "rules/confirmation.md": [
+        "生成类任务的首轮回复只能输出《需求确认卡》",
+        "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案、交互实现或在线链接",
+        "即使用户要求“直接输出”“给我文件”“先做出来”，首轮回复仍只能是确认卡",
+    ],
+}
+
+PHASE4_OUTPUT_MARKERS = {
+    "rules/execution.md": [
+        "不得输出“没有额外做浏览器视觉回归或线上部署”“未做浏览器验证/部署”这类完成态免责声明",
+        "阶段四降级为静态代码审查",
+        "交付被部署门禁阻断",
+    ],
+    "rules/checkout.md": [
+        "不得跳过后在最终回复中补一句“没有额外做浏览器视觉回归”",
+        "在线链接：阻断",
+        "不得用“没有额外做浏览器视觉回归或线上部署”之类免责声明替代验证结果或阻断说明",
+    ],
+    "rules/output.md": [
+        "`验证结果` 必须明确写明本次执行的是“浏览器验证”还是“静态代码审查降级”",
+        "`在线链接` 必须填写真实公网链接；若因部署门禁未完成，写 `阻断：原因`",
+        "不得使用“没有额外做浏览器视觉回归或线上部署”“未额外部署”这类完成态免责声明",
+    ],
+}
+
 
 def validate_frontmatter(text: str) -> list[str]:
     errors: list[str] = []
@@ -197,18 +231,38 @@ def validate_project_css_assets() -> list[str]:
     return errors
 
 
+def validate_confirmation_card_contract() -> list[str]:
+    errors: list[str] = []
+    for relative, markers in PHASE1_GATE_MARKERS.items():
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in text:
+                errors.append(f"{relative} missing phase1 gate marker: {marker}")
+    return errors
+
+
+def validate_phase4_output_contract() -> list[str]:
+    errors: list[str] = []
+    for relative, markers in PHASE4_OUTPUT_MARKERS.items():
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in text:
+                errors.append(f"{relative} missing phase4 output marker: {marker}")
+    return errors
+
+
 
 def validate_ui_kits_in_rules() -> list[str]:
     """F/G/H: Check ui_kits integration in rules files."""
     errors: list[str] = []
     root = ROOT
 
-    # Skill runtime entry is authoritative and must expose the new decision step.
+    # Skill runtime entry is authoritative and must expose the consumption plan.
     skill_path = root / "SKILL.md"
     skill_text = skill_path.read_text(encoding="utf-8") if skill_path.is_file() else ""
-    skill_markers = ("2.5.1", "ui_kits/index.json", "quality-report.json")
+    skill_markers = ("设计库消费计划", "ui_kits/index.json", "quality-report.json")
     if any(marker not in skill_text for marker in skill_markers):
-        errors.append("SKILL.md must mention 2.5.1 ui_kits matching")
+        errors.append("SKILL.md must mention design-library consumption plan and ui_kits matching")
 
     # F: generation.md §6.8 must reference ui_kits/index.json (no hardcoded type list)
     gen_path = root / "rules" / "generation.md"
@@ -227,11 +281,11 @@ def validate_ui_kits_in_rules() -> list[str]:
     if "```text\n表单编辑页\n常规列表页" in gen_text:
         errors.append("generation.md §6.8 still contains old hardcoded type list code block")
 
-    # G: execution.md must contain 2.5.1 step
+    # G: execution.md must contain the design-library consumption plan and ui_kits matching
     exec_path = root / "rules" / "execution.md"
     exec_text = exec_path.read_text(encoding="utf-8") if exec_path.is_file() else ""
-    if "2.5.1" not in exec_text or "ui_kits 模式匹配" not in exec_text:
-        errors.append("execution.md must contain 2.5.1 ui_kits 模式匹配 step")
+    if "设计库消费计划" not in exec_text or "ui_kits/index.json" not in exec_text:
+        errors.append("execution.md must contain design-library consumption plan and ui_kits matching")
 
     # G: execution.md must contain missing annotation template
     if "未命中已有页面模式" not in exec_text:
@@ -266,6 +320,8 @@ def main() -> int:
         *validate_frontmatter(skill_text),
         *validate_files(),
         *validate_runtime_contract(),
+        *validate_confirmation_card_contract(),
+        *validate_phase4_output_contract(),
         *validate_library_consumption(),
         *validate_components_index(),
         *validate_project_css_assets(),

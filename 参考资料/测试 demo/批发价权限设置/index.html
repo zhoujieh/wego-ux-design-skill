@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>批发价权限</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="assets/fonts/iconfont/iconfont.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="page" id="page">
+    <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider" id="navbar">
+      <div class="wg-navbar__left">
+        <button class="wg-navbar__left-btn" type="button" id="btn-cancel" aria-label="关闭">
+          <i class="wego-iconfont-s icon-cha wg-navbar__left-icon"></i>
+        </button>
+      </div>
+      <div class="wg-navbar__center">
+        <span class="wg-navbar__title">批发价权限</span>
+      </div>
+      <div class="wg-navbar__actions"></div>
+    </div>
+
+    <div class="content" id="content">
+      <div class="group-header">
+        <span class="group-header__title">批发价可见范围</span>
+      </div>
+      <div class="group-body" id="group-visibility">
+        <div class="wg-cell wg-cell--select wg-cell--divider-full" data-radio="public">
+          <div class="wg-cell__select">
+            <button class="wg-radio wg-radio--checked" type="button" aria-checked="true" data-value="public">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">公开</div>
+              </div>
+              <div class="wg-cell__subtitle">所有粉丝均可见</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--select wg-cell--divider-full" data-radio="private">
+          <div class="wg-cell__select">
+            <button class="wg-radio" type="button" aria-checked="false" data-value="private">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">私密</div>
+              </div>
+              <div class="wg-cell__subtitle">仅自己可见</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--select wg-cell--divider-full" data-radio="partial">
+          <div class="wg-cell__select">
+            <button class="wg-radio" type="button" aria-checked="false" data-value="partial">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">部分可见</div>
+              </div>
+              <div class="wg-cell__subtitle">仅选中的粉丝可见</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--select" data-radio="exclude">
+          <div class="wg-cell__select">
+            <button class="wg-radio" type="button" aria-checked="false" data-value="exclude">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">不给谁看</div>
+              </div>
+              <div class="wg-cell__subtitle">选中的粉丝不可见</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fan-groups hidden" id="fan-groups">
+          <div class="wg-cell wg-cell--select wg-cell--divider-full" data-checkbox="vip">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check" type="button" aria-checked="false" data-value="vip">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">VIP客户</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wg-cell wg-cell--select wg-cell--divider-full" data-checkbox="regular">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check" type="button" aria-checked="false" data-value="regular">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">常客粉丝</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wg-cell wg-cell--select wg-cell--divider-full" data-checkbox="new">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check" type="button" aria-checked="false" data-value="new">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">新客户</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wg-cell wg-cell--select" data-checkbox="wholesale">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check" type="button" aria-checked="false" data-value="wholesale">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">批发客户</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-header">
+        <span class="group-header__title">批发参数</span>
+      </div>
+      <div class="group-body">
+        <div class="wg-cell wg-cell--divider-full">
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">销售单位</div>
+              </div>
+            </div>
+            <div class="wg-cell__action">
+              <span class="unit-input-wrap">
+                <input class="unit-input" type="text" placeholder="件" id="input-unit" maxlength="4">
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--divider-full">
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">最小起购量</div>
+              </div>
+            </div>
+            <div class="wg-cell__action">
+              <div class="increment-stepper" id="stepper-qty">
+                <button class="stepper-btn stepper-btn--minus" type="button" aria-label="减少">
+                  <i class="wego-iconfont-s icon-jian16"></i>
+                </button>
+                <input class="stepper-value" type="text" inputmode="numeric" value="1" id="input-qty" maxlength="5">
+                <button class="stepper-btn stepper-btn--plus" type="button" aria-label="增加">
+                  <i class="wego-iconfont-s icon-jia16"></i>
+                </button>
+              </div>
+              <span class="stepper-unit hidden" id="qty-unit">件</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--double wg-cell--select wg-cell--divider-full" data-radio-pick="single">
+          <div class="wg-cell__select">
+            <button class="wg-radio wg-radio--checked" type="button" aria-checked="true" data-value="single">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">单款</div>
+              </div>
+              <div class="wg-cell__subtitle">每个款式独立拿货</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--double wg-cell--select wg-cell--divider-full" data-radio-pick="multi">
+          <div class="wg-cell__select">
+            <button class="wg-radio" type="button" aria-checked="false" data-value="multi">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">多款混批</div>
+              </div>
+              <div class="wg-cell__subtitle">多款一起混批拿货</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wg-cell wg-cell--double wg-cell--select" data-radio-pick="store">
+          <div class="wg-cell__select">
+            <button class="wg-radio" type="button" aria-checked="false" data-value="store">
+              <span class="wg-radio__dot"></span>
+            </button>
+          </div>
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">全店混批</div>
+              </div>
+              <div class="wg-cell__subtitle">全店商品混批拿货</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-header">
+        <span class="group-header__title">批发规则</span>
+      </div>
+      <div class="group-body">
+        <div class="wg-cell" id="cell-mix-rule">
+          <div class="wg-cell__main">
+            <div class="wg-cell__text">
+              <div class="wg-cell__title-row">
+                <div class="wg-cell__title">全店混批配置</div>
+              </div>
+            </div>
+            <div class="wg-cell__action">
+              <a class="wg-link wg-link--standalone" href="#" id="link-mix-rule">
+                <span class="wg-link__surface">
+                  <span class="wg-link__label">设置规则</span>
+                </span>
+              </a>
+              <i class="wego-iconfont-s icon-youjiantou16 wg-cell__arrow"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="wg-button-group wg-button-group--form">
+        <button class="wg-button wg-button--strong" type="button" id="btn-save">
+          <span class="wg-button__surface">
+            <span class="wg-button__label">保存</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "微购页面模式注册表。AI 在 execution.md 阶段二 2.5.1 读取本文件，按 appliesTo 和 keyFeatures 匹配页面模式。每个模式携带强制约束（openMode / layoutMode / background / layoutRulesCaptured）。未命中时走 generation.md §6.8 通用规则。",
+  "description": "微购页面模式注册表。AI 在 execution.md 阶段二《设计库消费计划》中读取本文件，按 appliesTo 和 keyFeatures 匹配页面模式。每个模式携带强制约束（openMode / layoutMode / background / layoutRulesCaptured）。未命中时走 generation.md §6.8 通用规则。",
   "patterns": [
     {
       "type": "business-settings",

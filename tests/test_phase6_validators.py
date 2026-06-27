@@ -101,7 +101,7 @@ class Phase6ValidatorTests(unittest.TestCase):
     def test_skill_runtime_entry_declares_uikit_matching_step(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
 
-        self.assertIn("2.5.1", text)
+        self.assertIn("设计库消费计划", text)
         self.assertIn("ui_kits/index.json", text)
         self.assertIn("quality-report.json", text)
 
@@ -180,6 +180,52 @@ class Phase6ValidatorTests(unittest.TestCase):
 
         self.assertTrue(hasattr(module, "validate_confirmation_card_contract"))
         self.assertEqual([], module.validate_confirmation_card_contract())
+        skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+        execution_text = (SKILL_ROOT / "rules" / "execution.md").read_text(encoding="utf-8")
+        confirmation_text = (SKILL_ROOT / "rules" / "confirmation.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("生成类任务的首轮回复只能是《需求确认卡》", skill_text)
+        self.assertIn(
+            "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案或在线链接",
+            skill_text,
+        )
+        self.assertIn("生成类任务的首轮回复只能输出《需求确认卡》", execution_text)
+        self.assertIn(
+            "未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案、交互实现或在线链接",
+            execution_text,
+        )
+        self.assertIn("生成类任务的首轮回复只能输出《需求确认卡》", confirmation_text)
+        self.assertIn("即使用户要求“直接输出”“给我文件”“先做出来”，首轮回复仍只能是确认卡", confirmation_text)
+
+    def test_phase4_output_contract_blocks_completion_disclaimers(self) -> None:
+        module = load_module(
+            "validate_skill_phase4_output_contract",
+            SKILL_ROOT / "scripts" / "validate_skill.py",
+        )
+
+        self.assertTrue(hasattr(module, "validate_phase4_output_contract"))
+        self.assertEqual([], module.validate_phase4_output_contract())
+
+        execution_text = (SKILL_ROOT / "rules" / "execution.md").read_text(encoding="utf-8")
+        checkout_text = (SKILL_ROOT / "rules" / "checkout.md").read_text(encoding="utf-8")
+        output_text = (SKILL_ROOT / "rules" / "output.md").read_text(encoding="utf-8")
+
+        self.assertIn(
+            "不得输出“没有额外做浏览器视觉回归或线上部署”“未做浏览器验证/部署”这类完成态免责声明",
+            execution_text,
+        )
+        self.assertIn("阶段四降级为静态代码审查", execution_text)
+        self.assertIn("交付被部署门禁阻断", execution_text)
+        self.assertIn("不得跳过后在最终回复中补一句“没有额外做浏览器视觉回归”", checkout_text)
+        self.assertIn("在线链接：阻断", checkout_text)
+        self.assertIn(
+            "不得用“没有额外做浏览器视觉回归或线上部署”之类免责声明替代验证结果或阻断说明",
+            checkout_text,
+        )
+        self.assertIn("`验证结果` 必须明确写明本次执行的是“浏览器验证”还是“静态代码审查降级”", output_text)
+        self.assertIn("`在线链接` 必须填写真实公网链接；若因部署门禁未完成，写 `阻断：原因`", output_text)
 
     def test_component_css_hardcoding_reports_file_and_line(self) -> None:
         module = load_module(
@@ -390,7 +436,7 @@ class Phase6ValidatorTests(unittest.TestCase):
                     encoding="utf-8",
                 )
                 (root / "rules" / "execution.md").write_text(
-                    "2.5.1 ui_kits 模式匹配\n未命中已有页面模式\n",
+                    "设计库消费计划\nui_kits/index.json\n未命中已有页面模式\n",
                     encoding="utf-8",
                 )
                 (root / "design-library" / "ui_kits" / "index.json").write_text(
@@ -403,7 +449,7 @@ class Phase6ValidatorTests(unittest.TestCase):
         finally:
             module.ROOT = original_root
 
-        self.assertIn("SKILL.md must mention 2.5.1 ui_kits matching", errors)
+        self.assertIn("SKILL.md must mention design-library consumption plan and ui_kits matching", errors)
 
     def test_validate_design_library_token_names_detects_extra_css_variable(self) -> None:
         module = load_module(

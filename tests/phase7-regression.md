@@ -2,6 +2,45 @@
 
 > This record captures the deterministic checks that back the Phase 7 prompt acceptance criteria. It does not replace a live AI session review, but it verifies that the runtime contracts required by those prompts are present and validated.
 
+## Phase 1 Gate
+
+Contract evidence:
+
+```text
+wego-ux-design/SKILL.md
+wego-ux-design/rules/execution.md
+wego-ux-design/rules/confirmation.md
+生成类任务的首轮回复只能是《需求确认卡》
+未获用户确认前，不得输出原型代码、项目目录、文件内容、组件方案、页面方案或在线链接
+```
+
+Verification:
+
+```bash
+python3 wego-ux-design/scripts/validate_skill.py
+python3 -m unittest tests/test_phase6_validators.py
+```
+
+## Phase 4 Output Gate
+
+Contract evidence:
+
+```text
+wego-ux-design/rules/execution.md
+wego-ux-design/rules/checkout.md
+wego-ux-design/rules/output.md
+不得输出“没有额外做浏览器视觉回归或线上部署”“未做浏览器验证/部署”这类完成态免责声明
+在线链接：阻断
+验证结果：浏览器验证 / 静态代码审查降级
+```
+
+Verification:
+
+```bash
+python3 wego-ux-design/scripts/validate_skill.py
+python3 -m unittest tests/test_phase6_validators.py
+```
+
 ## Prompt: strong 主按钮
 
 Acceptance target:

@@ -179,7 +179,7 @@ M/G 模式通过 `design-library/scaffold.css` 中的工具类表达，不得在
 |---|---|---|
 | 默认业务页面 | 768px | 大多数表单、详情、列表和设置页面 |
 | 沉浸式页面 | 无限制 | 视频播放、图片预览等全屏内容 |
-| 特殊指定 | 按需求定义 | 需在阶段二明确标注 |
+| 特殊指定 | 按需求定义 | 需在阶段二《设计库消费计划》中明确标注 |
 
 实现方式：
 - 页面容器设置 `max-inline-size: var(--wg-layout-page-max-width)` 和 `margin-inline: auto`
@@ -521,7 +521,7 @@ Page
 1. 读取 `design-library/ui_kits/index.json`
 2. 按当前页面的 §3 粗类型匹配 `appliesTo`，按结构特征匹配 `keyFeatures`
 3. **命中** → 应用该模式的 `openMode` / `layoutMode` / `background` 强制约束；读取对应 `quality-report.json`，逐条遵守 `layoutRulesCaptured`
-4. **未命中** → 按下方子规则自行判断，输出时标注「未命中已有页面模式」（标注格式见 `rules/execution.md` §5）
+4. **未命中** → 按下方子规则自行判断，输出时标注「未命中已有页面模式」（标注格式见 `rules/execution.md` §4）
 
 命中模式后每条强制约束不得违反。index.html 仅作视觉确认参考，不得复制其 DOM 结构或外层壳（`copyPolicy: structural-reference`）。
 
@@ -770,7 +770,7 @@ disabled
 
 **NavBar 取消规则（硬性约束）：**
 
-当 NavBar 左侧按钮为 `取消` 或 `关闭` 时，页面为全屏模态，打开方式必须是 `present-bottom`（弹出），不得使用 Push 推入。此规则在 `execution.md` 2.5.1 阶段自动匹配对应的 ui_kit 模式时强制执行，不受 §3 粗类型推理覆盖。
+当 NavBar 左侧按钮为 `取消` 或 `关闭` 时，页面为全屏模态，打开方式必须是 `present-bottom`（弹出），不得使用 Push 推入。此规则在阶段二《设计库消费计划》的 ui_kit 匹配中强制执行，不受 §3 粗类型推理覆盖。
 
 ### 约束
 

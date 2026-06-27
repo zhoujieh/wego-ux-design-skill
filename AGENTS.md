@@ -62,3 +62,4 @@ wego-design-system/
 - **测试 fixture 管理**: 新增 golden prompt 用例后，需手动生成对应的 fixture 并放入 `tests/fixtures/generated/`，然后运行校验脚本确认通过。
 - **设计原则优先级**: 清晰 > 一致 > 效率 > 美观 > 创新。微购风格：简洁 · 干净 · 淡雅 · 克制 · 高信息密度 · 微信生态一致。
 - **Skill 安装**: Skill 通过 `wego-ux-design/install.sh` 安装到 Codex、Claude Code 或 Trae。`.claude/` 目录已预配置该 Skill。
+- **Skill 更新策略**: 更新已安装 Skill 时，不做本地备份；只使用 `bash wego-ux-design/install.sh --update` 直接覆盖，或先执行 `bash wego-ux-design/install.sh --uninstall` 再重新安装 / 重新克隆。
