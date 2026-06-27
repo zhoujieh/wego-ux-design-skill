@@ -39,6 +39,8 @@ SCAN_FILES = [
     ROOT / "rules" / "icon-guidelines.md",
     *sorted((ROOT / "rules").glob("*.md")),
     *sorted((ROOT / "examples").glob("*.md")),
+    *sorted((ROOT / "design-library" / "ui_kits").rglob("index.html")),
+    *sorted((ROOT / "design-library" / "ui_kits").rglob("quality-report.json")),
 ]
 DESIGN_LIBRARY_TOKENS_CSS = ROOT / "design-library" / "tokens.css"
 

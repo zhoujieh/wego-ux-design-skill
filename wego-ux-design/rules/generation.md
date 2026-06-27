@@ -516,19 +516,16 @@ Page
 
 ### 页面类型判断
 
-生成页面前必须判断并选择：
+生成页面前必须从 `ui_kits/index.json` 查找匹配的页面模式：
 
-```text
-表单编辑页
-常规列表页
-实体卡片列表页
-多列表格编辑页
-搜索筛选页
-批量操作页
-空状态 / 少内容 / 多内容状态
-```
+1. 读取 `design-library/ui_kits/index.json`
+2. 按当前页面的 §3 粗类型匹配 `appliesTo`，按结构特征匹配 `keyFeatures`
+3. **命中** → 应用该模式的 `openMode` / `layoutMode` / `background` 强制约束；读取对应 `quality-report.json`，逐条遵守 `layoutRulesCaptured`
+4. **未命中** → 按下方子规则自行判断，输出时标注「未命中已有页面模式」（标注格式见 `rules/execution.md` §5）
 
-每种页面类型必须明确：
+命中模式后每条强制约束不得违反。index.html 仅作视觉确认参考，不得复制其 DOM 结构或外层壳（`copyPolicy: structural-reference`）。
+
+每种页面结构必须明确：
 
 - 顶部结构
 - 主体结构
@@ -770,6 +767,10 @@ disabled
 ├─ 独立流程（绑定、授权、全屏操作）→ 弹出（Present）
 └─ 同级切换（Tab、模式切换）→ 淡入（Fade）
 ```
+
+**NavBar 取消规则（硬性约束）：**
+
+当 NavBar 左侧按钮为 `取消` 或 `关闭` 时，页面为全屏模态，打开方式必须是 `present-bottom`（弹出），不得使用 Push 推入。此规则在 `execution.md` 2.5.1 阶段自动匹配对应的 ui_kit 模式时强制执行，不受 §3 粗类型推理覆盖。
 
 ### 约束
 

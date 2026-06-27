@@ -74,5 +74,12 @@
     "openMode": "present-bottom",
     "outerShellCopyable": false,
     "defaultScrollbarVisible": false
-  }
+  },
+  "promotableStructures": [
+    {
+      "name": "section-title-row",
+      "reason": "设置页分组标题行（标题+右侧Link/Switch），在业务设置、系统设置等多个页面类型中复用。当前为临时结构，等待 ≥2 个 ui_kit 共用后讨论提升为正式组件。",
+      "promotable": true
+    }
+  ]
 }

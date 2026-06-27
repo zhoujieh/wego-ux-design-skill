@@ -72,11 +72,13 @@
     },
     "uikit": {
       "files": [
+        "ui_kits/index.json",
+        "ui_kits/{type}/quality-report.json",
         "ui_kits/{type}/index.html"
       ],
       "copyable": false,
-      "purpose": "页面级 showcase 层：仅用于后续结构参考，当前库未提供正式 ui_kits 页面。",
-      "downstreamRule": "目前 ui_kits/ 为空目录。存在页面级 showcase 后，只能作为结构参考，不能直接复制其外层 shell。"
+      "purpose": "页面级模式层：AI 通过 ui_kits/index.json 查找匹配的页面模式，通过 quality-report.json 提取必须遵守的布局规则。index.html 仅作结构参考（copyPolicy: structural-reference），不可复制。",
+      "downstreamRule": "读取 ui_kits/index.json → 按 appliesTo + keyFeatures 匹配当前页面 → 命中则读取对应 quality-report.json 的 layoutRulesCaptured 作为强制约束，可选读 index.html 做视觉确认；未命中走 generation.md §6.8 通用规则并产出缺失标注。"
     }
   },
   "downstreamScenarios": {
@@ -100,6 +102,7 @@
     },
     "buildFullPageCustomCanvas": {
       "read": [
+        "ui_kits/index.json",
         "tokens.json",
         "scaffold.css",
         "components/index.json",
@@ -128,6 +131,7 @@
     "components.css",
     "assets/fonts/iconfont/iconfont.css",
     "resources/README.md",
+    "ui_kits/index.json",
     "ui_kits/{type}/index.html"
   ],
   "hardConstraints": [
@@ -231,5 +235,10 @@
       "appIcon": "拼音slug.svg，无括号无空格",
       "video": "短中文或拼音.mp4"
     }
+  },
+  "uikitConstraints": {
+    "copyPolicy": "structural-reference",
+    "maxShellWidth": "var(--wg-layout-page-max-width) (768px)",
+    "warningForDownstream": "ui_kits/*/index.html 是页面级视觉参考，不可直接复制其 DOM 结构或外层壳 (.uikit-shell)。AI 必须通过 ui_kits/index.json → quality-report.json 链路消费页面模式约束，自行编写业务页面结构。"
   }
 }

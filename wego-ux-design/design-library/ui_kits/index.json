@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "description": "微购页面模式注册表。AI 在 execution.md 阶段二 2.5.1 读取本文件，按 appliesTo 和 keyFeatures 匹配页面模式。每个模式携带强制约束（openMode / layoutMode / background / layoutRulesCaptured）。未命中时走 generation.md §6.8 通用规则。",
+  "patterns": [
+    {
+      "type": "business-settings",
+      "name": "业务设置页",
+      "path": "business-settings/index.html",
+      "qualityReport": "business-settings/quality-report.json",
+      "appliesTo": ["操作型"],
+      "openMode": "present-bottom",
+      "layoutMode": "M0",
+      "background": "bg-page",
+      "keyFeatures": [
+        "fixed-navbar-cancel-save",
+        "cell-groups-section-titles",
+        "checkbox-permission-pattern",
+        "switch-group-toggle",
+        "m0-full-bleed"
+      ],
+      "copyPolicy": "structural-reference"
+    }
+  ]
+}
