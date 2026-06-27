@@ -71,6 +71,23 @@ detect_platforms() {
     echo "$detected" | sed 's/^ *//'
 }
 
+
+# ---- 迁移旧位置 ----
+migrate_old_install() {
+    local old_skills="$HOME/.codex/skills/$SKILL_NAME"
+    local old_system="$HOME/.codex/skills/.system/$SKILL_NAME"
+    if [ -d "$old_skills" ]; then
+        echo "  ${YELLOW}检测到旧安装 (skill-installer 遗留): ${old_skills}${NC}"
+        echo "  ${YELLOW}  → 迁移到插件位置...${NC}"
+        rm -rf "$old_skills"
+    fi
+    if [ -d "$old_system" ]; then
+        echo "  ${YELLOW}检测到旧安装 (.system 遗留): ${old_system}${NC}"
+        echo "  ${YELLOW}  → 清理中...${NC}"
+        rm -rf "$old_system"
+    fi
+}
+
 # ---- 验证 skill 源目录 ----
 validate_source() {
     if [ ! -f "$SKILL_SRC_DIR/SKILL.md" ]; then
@@ -93,6 +110,11 @@ install_to_platform() {
     fi
 
     echo "${CYAN}→ 正在安装到 ${platform}...${NC}"
+
+    # Codex: 安装前清理可能的旧位置
+    if [ "$platform" = "codex" ]; then
+        migrate_old_install
+    fi
 
     if [ -d "$dest" ]; then
         if [ "$force" = "true" ]; then
@@ -193,13 +215,33 @@ main() {
     fi
 
     # 自动定位源目录（兼容 curl | bash 场景）
-    if [ "$SKILL_SRC_DIR" = "/tmp" ] || [ ! -f "$SKILL_SRC_DIR/SKILL.md" ]; then
-        for d in /tmp/wego-ux-design-skill/wego-ux-design /tmp/codex/skill-install-*/wego-ux-design; do
-            if [ -f "$d/SKILL.md" ]; then
-                SKILL_SRC_DIR="$d"
-                break
-            fi
+    if [ ! -f "$SKILL_SRC_DIR/SKILL.md" ]; then
+        # 先尝试常见克隆位置
+        for d in             /tmp/wego-ux-design-skill/wego-ux-design             /tmp/codex/skill-install-*/wego-ux-design             "$(pwd)/wego-ux-design"             "wego-ux-design"; do
+            [ -f "$d/SKILL.md" ] && SKILL_SRC_DIR="$d" && break
         done
+        # 如果还是找不到，自动从 GitHub 下载
+        if [ ! -f "$SKILL_SRC_DIR/SKILL.md" ]; then
+            echo "${YELLOW}未找到本地源文件，正在从 GitHub 下载...${NC}"
+            DOWNLOAD_DIR="/tmp/wego-ux-design-skill-$$"
+            mkdir -p "$DOWNLOAD_DIR"
+            if command -v git >/dev/null 2>&1; then
+                git clone --depth 1 https://github.com/zhoujieh/wego-ux-design-skill.git "$DOWNLOAD_DIR" >/dev/null 2>&1 || true
+                if [ -f "$DOWNLOAD_DIR/wego-ux-design/SKILL.md" ]; then
+                    SKILL_SRC_DIR="$DOWNLOAD_DIR/wego-ux-design"
+                fi
+            fi
+            # git 不可用则用 curl + unzip 兜底
+            if [ ! -f "$SKILL_SRC_DIR/SKILL.md" ] && command -v curl >/dev/null 2>&1; then
+                curl -fsSL "https://codeload.github.com/zhoujieh/wego-ux-design-skill/zip/main" -o "$DOWNLOAD_DIR/repo.zip" 2>/dev/null || true
+                if [ -f "$DOWNLOAD_DIR/repo.zip" ] && command -v unzip >/dev/null 2>&1; then
+                    unzip -qo "$DOWNLOAD_DIR/repo.zip" -d "$DOWNLOAD_DIR" 2>/dev/null || true
+                    if [ -f "$DOWNLOAD_DIR/wego-ux-design-skill-main/wego-ux-design/SKILL.md" ]; then
+                        SKILL_SRC_DIR="$DOWNLOAD_DIR/wego-ux-design-skill-main/wego-ux-design"
+                    fi
+                fi
+            fi
+        fi
     fi
 
     validate_source

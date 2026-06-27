@@ -61,7 +61,9 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 **Codex：**
 
 ```
-请安装 skill-creator 插件，然后用它从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill
+执行以下终端命令安装微购设计系统 Skill：
+
+curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/wego-ux-design/install.sh | bash
 ```
 
 **Claude Code：**
