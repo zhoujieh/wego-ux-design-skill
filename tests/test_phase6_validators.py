@@ -12,6 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "wego-ux-design"
 
 
+def normalize_quotes(text: str) -> str:
+    return text.replace("“", '"').replace("”", '"')
+
+
 def load_module(name: str, path: Path):
     scripts_dir = str(SKILL_ROOT / "scripts")
     if scripts_dir not in sys.path:
@@ -33,18 +37,12 @@ class Phase6ValidatorTests(unittest.TestCase):
 
         required_files = set(module.REQUIRED_FILES)
 
-        self.assertIn("principles/design-principles.md", required_files)
+        self.assertIn("rules/design-principles.md", required_files)
         self.assertIn("rules/review.md", required_files)
-        self.assertIn("examples/good-ui.md", required_files)
-        self.assertIn("examples/bad-ui.md", required_files)
-        self.assertIn("examples/output.md", required_files)
         self.assertNotIn("01-principles/01-design-principles.md", required_files)
         self.assertNotIn("03-components/registry.json", required_files)
         self.assertFalse(
             any(path.startswith("04-ai-rules/") for path in required_files)
-        )
-        self.assertFalse(
-            any(path.startswith("05-examples/") for path in required_files)
         )
 
     def test_library_consumption_declares_resource_assets_layer(self) -> None:
@@ -197,7 +195,10 @@ class Phase6ValidatorTests(unittest.TestCase):
             execution_text,
         )
         self.assertIn("生成类任务的首轮回复只能输出《需求确认卡》", confirmation_text)
-        self.assertIn("即使用户要求“直接输出”“给我文件”“先做出来”，首轮回复仍只能是确认卡", confirmation_text)
+        self.assertIn(
+            '即使用户要求"直接输出""给我文件""先做出来"，首轮回复仍只能是确认卡',
+            normalize_quotes(confirmation_text),
+        )
 
     def test_phase4_output_contract_blocks_completion_disclaimers(self) -> None:
         module = load_module(
@@ -213,18 +214,24 @@ class Phase6ValidatorTests(unittest.TestCase):
         output_text = (SKILL_ROOT / "rules" / "output.md").read_text(encoding="utf-8")
 
         self.assertIn(
-            "不得输出“没有额外做浏览器视觉回归或线上部署”“未做浏览器验证/部署”这类完成态免责声明",
-            execution_text,
+            '不得输出"没有额外做浏览器视觉回归或线上部署""未做浏览器验证/部署"这类完成态免责声明',
+            normalize_quotes(execution_text),
         )
         self.assertIn("阶段四降级为静态代码审查", execution_text)
         self.assertIn("交付被部署门禁阻断", execution_text)
-        self.assertIn("不得跳过后在最终回复中补一句“没有额外做浏览器视觉回归”", checkout_text)
+        self.assertIn(
+            '不得跳过后在最终回复中补一句"没有额外做浏览器视觉回归"',
+            normalize_quotes(checkout_text),
+        )
         self.assertIn("在线链接：阻断", checkout_text)
         self.assertIn(
-            "不得用“没有额外做浏览器视觉回归或线上部署”之类免责声明替代验证结果或阻断说明",
-            checkout_text,
+            '不得用"没有额外做浏览器视觉回归或线上部署"之类免责声明替代验证结果或阻断说明',
+            normalize_quotes(checkout_text),
         )
-        self.assertIn("`验证结果` 必须明确写明本次执行的是“浏览器验证”还是“静态代码审查降级”", output_text)
+        self.assertIn(
+            '`验证结果` 必须明确写明本次执行的是"浏览器验证"还是"静态代码审查降级"',
+            normalize_quotes(output_text),
+        )
         self.assertIn("`在线链接` 必须填写真实公网链接；若因部署门禁未完成，写 `阻断：原因`", output_text)
 
     def test_component_css_hardcoding_reports_file_and_line(self) -> None:
@@ -449,7 +456,10 @@ class Phase6ValidatorTests(unittest.TestCase):
         finally:
             module.ROOT = original_root
 
-        self.assertIn("SKILL.md must mention design-library consumption plan and ui_kits matching", errors)
+        self.assertIn(
+            "SKILL.md must mention design-library consumption plan, page-layout.json and ui_kits matching",
+            errors,
+        )
 
     def test_validate_design_library_token_names_detects_extra_css_variable(self) -> None:
         module = load_module(

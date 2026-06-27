@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Wego token source, generated artifacts, and prototype examples."""
+"""Validate Wego token source and generated design-library artifacts."""
 
 from __future__ import annotations
 
@@ -21,11 +21,6 @@ from token_utils import (
 CSS_VAR_USE_RE = re.compile(r"var\((--wg-[a-z0-9-]+)\)")
 CSS_VAR_DEF_RE = re.compile(r"(?m)^\s*(--wg-[a-z0-9-]+)\s*:")
 TOKEN_USE_RE = re.compile(r"(?<![A-Za-z0-9_-])(wg\.[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)+)")
-FENCE_RE = re.compile(r"```(?:css|html|text)?\n(.*?)```", re.DOTALL)
-HARDCODED_STYLE_RE = re.compile(
-    r"(?m)^\s*(?!-{2})[a-z-]+\s*:\s*[^;\n]*(?:#[0-9A-Fa-f]{3,8}|rgba?\(|(?<![-\w])\d+(?:\.\d+)?px)"
-)
-
 SCAN_FILES = [
     ROOT / "SKILL.md",
     ROOT / "README.md",
@@ -36,9 +31,7 @@ SCAN_FILES = [
     ROOT / "design-library" / "components.css",
     *sorted((ROOT / "design-library" / "preview").glob("component-*.html")),
     *sorted((ROOT / "principles").glob("*.md")),
-    ROOT / "rules" / "icon-guidelines.md",
     *sorted((ROOT / "rules").glob("*.md")),
-    *sorted((ROOT / "examples").glob("*.md")),
     *sorted((ROOT / "design-library" / "ui_kits").rglob("index.html")),
     *sorted((ROOT / "design-library" / "ui_kits").rglob("quality-report.json")),
 ]
@@ -150,7 +143,7 @@ def validate_references(data: dict) -> list[str]:
     tokens = data["tokens"]
     css_variables = {css_name(name) for name, entry in tokens.items() if css_enabled(entry)}
 
-    for path in [*SCAN_FILES]:
+    for path in (path for path in SCAN_FILES if path.is_file()):
 
         text = path.read_text(encoding="utf-8")
         for variable in CSS_VAR_USE_RE.findall(text):
@@ -186,30 +179,6 @@ def validate_design_library_token_names(
     return errors
 
 
-def validate_examples() -> list[str]:
-    errors: list[str] = []
-    for path in sorted((ROOT / "examples").glob("*.md")):
-        text = path.read_text(encoding="utf-8")
-        allow_next = False
-        position = 0
-        for match in FENCE_RE.finditer(text):
-            prefix = text[position : match.start()]
-            if "token-lint: allow-hardcoded" in prefix:
-                allow_next = True
-            block = match.group(1)
-            if not allow_next:
-                violation = HARDCODED_STYLE_RE.search(block)
-                if violation:
-                    line = text[: match.start(1) + violation.start()].count("\n") + 1
-                    errors.append(
-                        f"{path.relative_to(ROOT)}:{line} contains hardcoded design value: "
-                        f"{violation.group(0).strip()}"
-                    )
-            allow_next = False
-            position = match.end()
-    return errors
-
-
 def validate_generated_files() -> list[str]:
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "generate_tokens.py"), "--check"],
@@ -230,7 +199,6 @@ def main() -> int:
         *validate_generated_files(),
         *validate_design_library_token_names(data),
         *validate_references(data),
-        *validate_examples(),
     ]
     if errors:
         print("Token validation failed:")

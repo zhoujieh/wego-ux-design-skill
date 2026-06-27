@@ -109,7 +109,6 @@ curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/
 | `scripts/validate_tokens.py` | 校验引用、映射、漂移和示例硬编码 |
 | `scripts/validate_skill.py` | 校验任务路由、交互项目契约和旧约束回归 |
 | `design-library/` | 设计库消费产物（tokens / scaffold / components / preview / assets / library-consumption） |
-| `examples/` | 非规范示例，仅供人工参考或显式调用 |
 
 ## 质量验证
 
@@ -134,4 +133,4 @@ python scripts/validate_skill.py
 - 新增资料时明确其阶段和用途，避免产品设计资料与开发实现资料混用。
 - 修改 Token 时只编辑 `design-library/tokens-source.json`，随后运行生成和校验脚本。
 - 组件发现以 `design-library/components/index.json` 为唯一入口，不再维护旧组件注册表。
-- 规则入口统一在 `rules/`，示例统一在 `examples/`，原则统一在 `principles/`。
+- 规则入口统一在 `rules/`，原则统一在 `principles/`。

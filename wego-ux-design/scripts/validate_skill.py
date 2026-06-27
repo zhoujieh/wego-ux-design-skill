@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "SKILL.md"
 
 REQUIRED_FILES = {
-    "principles/design-principles.md",
+    "rules/design-principles.md",
     "agents/openai.yaml",
     "design-library/library-consumption.json",
     "design-library/page-layout.json",
@@ -29,10 +29,6 @@ REQUIRED_FILES = {
     "rules/output.md",
     "rules/checkout.md",
     "rules/confirmation.md",
-    "examples/good-ui.md",
-    "examples/bad-ui.md",
-    "examples/output.md",
-
 }
 
 RUNTIME_FILES = [

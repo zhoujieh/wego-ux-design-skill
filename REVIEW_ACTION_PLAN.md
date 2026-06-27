@@ -179,7 +179,7 @@
   - 在 `.gitignore` 中确认 `.DS_Store` 已忽略
   - 验收：`find . -name ".DS_Store"` 无结果
 
-- [ ] **P2-2.3** 评估 `principles/design-principles.md` 的退役条件是否满足
+- [ ] **P2-2.3** 评估 `rules/design-principles.md` 的退役条件是否满足
   - 条件：doNotInvent 覆盖所有不该做的事、hardConstraints 覆盖所有禁止项、Canonical CSS 覆盖所有变体、forbidden.md 覆盖所有视觉禁忌
   - 如果满足，可标记为"兜底安全网，可选读"；如果不满足，标注剩余缺口
   - 验收：principles 文件中有明确的留/退役判断说明

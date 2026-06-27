@@ -1,7 +1,7 @@
 interface:
-  display_name: "微购可交互原型"
-  short_description: "生成、审查符合微购规范的完整可交互 Web 原型项目"
-  default_prompt: "使用 $wego-ux-design 生成一个符合微购规范、包含完整交互链路的 Web 原型项目。"
+  display_name: "微购AI设计系统"
+  short_description: "生成符合微购设计规范的可交互产品原型，快速验证产品概念方案"
+  default_prompt: "使用 $wego-ux-design 生成一个符合微购规范、包含完整交互链路的产品原型项目。"
 
 policy:
   allow_implicit_invocation: true

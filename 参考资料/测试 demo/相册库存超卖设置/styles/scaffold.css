@@ -1,0 +1,240 @@
+/* ============================================
+   scaffold.css — 微购设计库页面骨架
+   排版工具类 + 布局工具类
+   在 tokens.css 之后引入。所有值通过 var(--wg-*) 使用。
+   ============================================ */
+
+/* ---- 排版工具类 ---- */
+
+.wg-h1 {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-22);
+  line-height: var(--wg-font-lineheight-22);
+  font-weight: var(--wg-font-weight-semibold);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-h2 {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-18);
+  line-height: var(--wg-font-lineheight-18);
+  font-weight: var(--wg-font-weight-semibold);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-h3 {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-16);
+  line-height: var(--wg-font-lineheight-16);
+  font-weight: var(--wg-font-weight-medium);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-eyebrow {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-12);
+  line-height: var(--wg-font-lineheight-12);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wg-text-body {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-14);
+  line-height: var(--wg-font-lineheight-14);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-primary);
+}
+
+.wg-text-body-sm {
+  font-family: var(--wg-font-family-text);
+  font-size: var(--wg-font-size-12);
+  line-height: var(--wg-font-lineheight-12);
+  font-weight: var(--wg-font-weight-regular);
+  color: var(--wg-color-text-secondary);
+}
+
+.wg-text-secondary {
+  color: var(--wg-color-text-secondary);
+}
+
+.wg-text-tertiary {
+  color: var(--wg-color-text-tertiary);
+}
+
+.wg-text-link {
+  color: var(--wg-color-text-link);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wg-text-link:hover {
+  opacity: 0.8;
+}
+
+.wg-text-danger {
+  color: var(--wg-color-text-danger);
+}
+
+.wg-text-number {
+  font-family: var(--wg-font-family-number-decorative);
+}
+
+/* ---- 布局工具类 ---- */
+
+.wg-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.wg-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.wg-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wg-spacing-16);
+}
+
+.wg-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--wg-spacing-12);
+}
+
+.wg-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--wg-spacing-8);
+}
+
+.wg-stack-4 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-4);
+}
+
+.wg-stack-8 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-8);
+}
+
+.wg-stack-12 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-12);
+}
+
+.wg-stack-16 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-16);
+}
+
+.wg-stack-24 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-24);
+}
+
+.wg-stack-32 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-32);
+}
+
+/* ---- 页面留白工具类 M0-3 ---- */
+
+.wg-page-m0 { padding-inline: 0; }
+.wg-page-m1 { padding-inline: var(--wg-spacing-8); }
+.wg-page-m2 { padding-inline: var(--wg-spacing-16); }
+.wg-page-m3 { padding-inline: var(--wg-spacing-32); }
+
+/* ---- 分组间距工具类 G1-2 ---- */
+
+.wg-group-g1 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-16);
+}
+.wg-group-g2 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg-spacing-32);
+}
+
+/* ---- 间距工具类 ---- */
+
+.wg-mt-8 { margin-top: var(--wg-spacing-8); }
+.wg-mt-12 { margin-top: var(--wg-spacing-12); }
+.wg-mt-16 { margin-top: var(--wg-spacing-16); }
+.wg-mt-24 { margin-top: var(--wg-spacing-24); }
+.wg-mt-32 { margin-top: var(--wg-spacing-32); }
+
+.wg-mb-8 { margin-bottom: var(--wg-spacing-8); }
+.wg-mb-12 { margin-bottom: var(--wg-spacing-12); }
+.wg-mb-16 { margin-bottom: var(--wg-spacing-16); }
+.wg-mb-24 { margin-bottom: var(--wg-spacing-24); }
+.wg-mb-32 { margin-bottom: var(--wg-spacing-32); }
+
+.wg-p-16 { padding: var(--wg-spacing-16); }
+.wg-p-24 { padding: var(--wg-spacing-24); }
+
+.wg-px-16 {
+  padding-left: var(--wg-spacing-16);
+  padding-right: var(--wg-spacing-16);
+}
+
+/* ---- 容器工具类 ---- */
+
+.wg-surface {
+  background-color: var(--wg-color-bg-surface);
+  border-radius: var(--wg-radius-md);
+}
+
+.wg-page-container {
+  max-width: var(--wg-layout-page-max-width);
+  margin: var(--wg-spacing-0) auto;
+  min-height: 100vh;
+  background-color: var(--wg-color-bg-page);
+}
+
+.wg-fluid {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ---- 文本对齐 ---- */
+
+.wg-text-center { text-align: center; }
+.wg-text-left { text-align: left; }
+.wg-text-right { text-align: right; }
+
+/* ---- 弹性辅助 ---- */
+
+.wg-flex-1 { flex: 1; }
+.wg-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wg-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---- 图标尺寸工具类 ---- */
+
+.wg-icon--16 { font-size: var(--wg-size-16); line-height: 1; }
+.wg-icon--20 { font-size: var(--wg-size-20); line-height: 1; }
+.wg-icon--24 { font-size: var(--wg-size-24); line-height: 1; }
+.wg-icon--28 { font-size: var(--wg-size-28); line-height: 1; }
+.wg-icon--32 { font-size: var(--wg-size-32); line-height: 1; }
+.wg-icon--48 { font-size: var(--wg-size-48); line-height: 1; }
