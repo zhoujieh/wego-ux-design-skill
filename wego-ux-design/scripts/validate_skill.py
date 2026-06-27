@@ -241,6 +241,7 @@ def validate_confirmation_card_contract() -> list[str]:
         "- 不做范围：[",
         "- 业务规则：[",
         "- 待确认：[",
+        "必须放在单个 `text` 代码块中输出",
     )
     for marker in required_confirmation_markers:
         if marker not in confirmation_text:
