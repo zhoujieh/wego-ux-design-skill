@@ -12,9 +12,13 @@
 
     .wg-radio {
       --wg-radio-accent: var(--wg-color-action-primary-default);
-      --wg-radio-accent-disabled: var(--wg-color-action-primary-disabled);
+      --wg-radio-disabled-fill: var(--wg-color-base-neutral-alpha-08);
+      --wg-radio-control-size: var(--wg-size-20);
+      --wg-radio-dot-size: var(--wg-size-12);
+      --wg-radio-ring-color: var(--wg-color-base-neutral-500);
       inline-size: var(--wg-size-24);
       block-size: var(--wg-size-24);
+      position: relative;
       padding: var(--wg-spacing-0);
       display: inline-flex;
       align-items: center;
@@ -22,19 +26,34 @@
       appearance: none;
       -webkit-appearance: none;
       border-radius: var(--wg-radius-full);
-      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
-      background-color: var(--wg-color-bg-surface);
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+      background-color: transparent;
       cursor: pointer;
       font: inherit;
       transition:
-        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
-        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
         transform var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
     }
 
+    .wg-radio::before {
+      content: "";
+      inline-size: var(--wg-radio-control-size);
+      block-size: var(--wg-radio-control-size);
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      box-sizing: border-box;
+      border-radius: var(--wg-radius-full);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-radio-ring-color);
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
     .wg-radio__dot {
-      inline-size: var(--wg-size-10);
-      block-size: var(--wg-size-10);
+      inline-size: var(--wg-radio-dot-size);
+      block-size: var(--wg-radio-dot-size);
       border-radius: var(--wg-radius-full);
       background-color: var(--wg-radio-accent);
       opacity: 0;
@@ -46,6 +65,10 @@
     }
 
     .wg-radio--checked {
+      --wg-radio-ring-color: var(--wg-radio-accent);
+    }
+
+    .wg-radio--checked::before {
       border-color: var(--wg-radio-accent);
     }
 
@@ -59,26 +82,31 @@
     }
 
     .wg-radio--disabled:not(.wg-radio--checked) {
-      border-color: var(--wg-color-state-disabled-bg);
-      background-color: var(--wg-color-state-disabled-bg);
+      --wg-radio-ring-color: var(--wg-color-state-disabled-bg);
     }
 
     .wg-radio--disabled.wg-radio--checked {
-      border-color: var(--wg-radio-accent-disabled);
+      --wg-radio-ring-color: var(--wg-radio-disabled-fill);
+    }
+
+    .wg-radio--disabled:not(.wg-radio--checked)::before {
+      background-color: var(--wg-color-base-neutral-alpha-03);
     }
 
     .wg-radio--disabled.wg-radio--checked .wg-radio__dot {
-      background-color: var(--wg-radio-accent-disabled);
+      background-color: var(--wg-radio-disabled-fill);
     }
 
     .wg-radio--dark:not(.wg-radio--checked) {
-      border-color: var(--wg-color-text-inverse-weak);
+      --wg-radio-ring-color: var(--wg-color-base-static-white);
+    }
+
+    .wg-radio--dark:not(.wg-radio--checked)::before {
       background-color: var(--wg-color-bg-inverse-subtle);
     }
 
     .wg-radio--dark.wg-radio--checked {
-      border-color: var(--wg-color-bg-surface);
-      background-color: var(--wg-color-transparent);
+      --wg-radio-ring-color: var(--wg-radio-accent);
     }
 
     .wg-radio:not(.wg-radio--disabled):active {

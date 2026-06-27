@@ -12,9 +12,14 @@
 
     .wg-checkbox {
       --wg-checkbox-accent: var(--wg-color-action-primary-default);
-      --wg-checkbox-accent-disabled: var(--wg-color-action-primary-disabled);
+      --wg-checkbox-disabled-fill: var(--wg-color-base-neutral-alpha-08);
+      --wg-checkbox-control-size: var(--wg-size-20);
+      --wg-checkbox-checkmark-stroke: 2px;
+      --wg-checkbox-number-size: 11px;
+      --wg-checkbox-ring-color: var(--wg-color-base-neutral-500);
       inline-size: var(--wg-size-24);
       block-size: var(--wg-size-24);
+      position: relative;
       padding: var(--wg-spacing-0);
       display: inline-flex;
       align-items: center;
@@ -22,16 +27,31 @@
       appearance: none;
       -webkit-appearance: none;
       border-radius: var(--wg-radius-full);
-      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-color-border-default);
-      background-color: var(--wg-color-bg-surface);
+      border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
+      background-color: transparent;
       color: var(--wg-color-text-inverse);
       cursor: pointer;
       font: inherit;
       transition:
-        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
-        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
         color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
         transform var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
+    }
+
+    .wg-checkbox::before {
+      content: "";
+      inline-size: var(--wg-checkbox-control-size);
+      block-size: var(--wg-checkbox-control-size);
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      box-sizing: border-box;
+      border-radius: var(--wg-radius-full);
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-checkbox-ring-color);
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      transition:
+        background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
+        border-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard);
     }
 
     .wg-checkbox__indicator {
@@ -50,7 +70,11 @@
 
     .wg-checkbox--checked,
     .wg-checkbox--indeterminate {
-      border-color: var(--wg-checkbox-accent);
+      --wg-checkbox-ring-color: var(--wg-checkbox-accent);
+    }
+
+    .wg-checkbox--checked::before,
+    .wg-checkbox--indeterminate::before {
       background-color: var(--wg-checkbox-accent);
     }
 
@@ -60,26 +84,42 @@
       transform: scale(1);
     }
 
+    .wg-checkbox--mark-check .wg-checkbox__indicator::before,
     .wg-checkbox--mark-check .wg-checkbox__indicator::after {
       content: "";
-      inline-size: var(--wg-spacing-4);
-      block-size: var(--wg-spacing-8);
-      border-inline-end: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) currentColor;
-      border-block-end: var(--wg-stroke-width-strong) var(--wg-stroke-style-solid) currentColor;
-      transform: rotate(45deg) translateY(calc(var(--wg-spacing-2) / -2));
+      position: absolute;
+      block-size: var(--wg-checkbox-checkmark-stroke);
+      border-radius: var(--wg-radius-full);
+      background-color: currentColor;
+    }
+
+    .wg-checkbox--mark-check .wg-checkbox__indicator::before {
+      inline-size: calc(var(--wg-spacing-4) + var(--wg-spacing-2));
+      inset-block-start: 9px;
+      inset-inline-start: 0;
+      transform: rotate(45deg);
+      transform-origin: calc(100% - 1px) 50%;
+    }
+
+    .wg-checkbox--mark-check .wg-checkbox__indicator::after {
+      inline-size: calc(var(--wg-spacing-8) + var(--wg-spacing-4));
+      inset-block-start: 8px;
+      inset-inline-start: 4px;
+      transform: rotate(-45deg);
+      transform-origin: 1px 50%;
     }
 
     .wg-checkbox--mark-minus .wg-checkbox__indicator::after {
       content: "";
-      inline-size: var(--wg-spacing-8);
+      inline-size: calc(var(--wg-spacing-4) + var(--wg-spacing-2));
       block-size: var(--wg-spacing-2);
       border-radius: var(--wg-radius-full);
       background-color: currentColor;
     }
 
     .wg-checkbox--mark-number .wg-checkbox__indicator {
-      font-size: var(--wg-font-size-10);
-      line-height: var(--wg-font-lineheight-10);
+      font-size: var(--wg-checkbox-number-size);
+      line-height: var(--wg-size-12);
       font-weight: var(--wg-font-weight-semibold);
     }
 
@@ -88,21 +128,31 @@
     }
 
     .wg-checkbox--disabled:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate) {
-      border-color: var(--wg-color-state-disabled-bg);
-      background-color: var(--wg-color-state-disabled-bg);
+      --wg-checkbox-ring-color: var(--wg-color-state-disabled-bg);
       color: var(--wg-color-state-disabled-text);
     }
 
     .wg-checkbox--disabled.wg-checkbox--checked,
     .wg-checkbox--disabled.wg-checkbox--indeterminate {
-      border-color: var(--wg-checkbox-accent-disabled);
-      background-color: var(--wg-checkbox-accent-disabled);
+      --wg-checkbox-ring-color: var(--wg-checkbox-disabled-fill);
+    }
+
+    .wg-checkbox--disabled:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate)::before {
+      background-color: var(--wg-color-base-neutral-alpha-03);
+    }
+
+    .wg-checkbox--disabled.wg-checkbox--checked::before,
+    .wg-checkbox--disabled.wg-checkbox--indeterminate::before {
+      background-color: var(--wg-checkbox-disabled-fill);
     }
 
     .wg-checkbox--dark:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate) {
-      border-color: var(--wg-color-text-inverse-weak);
-      background-color: var(--wg-color-bg-inverse-subtle);
+      --wg-checkbox-ring-color: var(--wg-color-base-static-white);
       color: var(--wg-color-text-inverse);
+    }
+
+    .wg-checkbox--dark:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate)::before {
+      background-color: var(--wg-color-bg-inverse-subtle);
     }
 
     .wg-checkbox:not(.wg-checkbox--disabled):active {
