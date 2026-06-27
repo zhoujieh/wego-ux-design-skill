@@ -1,0 +1,40 @@
+{
+  "name": "wego-ux-design",
+  "version": "1.0.0",
+  "description": "微购(WeGo)设计系统 — 生成符合微购规范的完整可交互 Web 原型项目，并支持界面审查、Token 合规检查和规范问答。覆盖设计原则、Token 体系、布局模式、组件契约、交互实现、UI 生成与审查。",
+  "author": {
+    "name": "zhoujieh"
+  },
+  "homepage": "https://github.com/zhoujieh/wego-ux-design-skill",
+  "repository": "https://github.com/zhoujieh/wego-ux-design-skill",
+  "license": "MIT",
+  "keywords": [
+    "wego",
+    "wechat",
+    "design-system",
+    "ui-prototype",
+    "微购",
+    "微信",
+    "设计系统",
+    "原型"
+  ],
+  "skills": "./",
+  "interface": {
+    "displayName": "微购设计系统",
+    "shortDescription": "生成符合微购规范的完整可交互 Web 原型项目，支持界面审查和 Token 合规检查",
+    "longDescription": "微购(WeGo)设计系统 Skill — 面向产品设计阶段，用于生成完整可交互 Web 原型项目、审查界面和检查 Token 合规性。覆盖设计原则、Token 体系、布局模式、组件契约、交互实现。",
+    "developerName": "zhoujieh",
+    "category": "Design",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/zhoujieh/wego-ux-design-skill",
+    "brandColor": "#07C160",
+    "defaultPrompt": [
+      "帮我设计一个微购的商品列表页",
+      "生成一个微购风格的登录页面",
+      "审查这个页面的设计合规性"
+    ]
+  }
+}

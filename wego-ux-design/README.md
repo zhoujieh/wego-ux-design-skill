@@ -3,6 +3,89 @@
 > 维护者索引，不参与 AI 运行时决策。  
 > AI 的任务分类、读取路由、阶段边界和输出要求以 `SKILL.md` 为唯一依据。
 
+## 安装
+
+### 一键终端安装
+
+```bash
+# 克隆仓库并安装到所有检测到的 AI 编码平台
+git clone https://github.com/zhoujieh/wego-ux-design-skill.git /tmp/wego-ux-design-skill && \
+  bash /tmp/wego-ux-design-skill/wego-ux-design/install.sh --all && \
+  rm -rf /tmp/wego-ux-design-skill
+```
+
+或直接从 GitHub 下载（无 git 依赖）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/wego-ux-design/install.sh | bash
+```
+
+**安装位置：**
+
+| 平台 | 安装位置 | 方式 |
+|------|---------|------|
+| Codex | `~/.codex/plugins/wego-ux-design/` | 插件（自动发现） |
+| Claude Code | `~/.claude/skills/wego-ux-design/` | Skill |
+| Trae | `~/.trae-cn/skills/wego-ux-design/` | Skill |
+
+### 安装选项
+
+| 命令 | 说明 |
+|------|------|
+| `bash install.sh` | 安装到所有检测到的平台 |
+| `bash install.sh --codex` | 仅安装到 Codex（作为插件） |
+| `bash install.sh --claude` | 仅安装到 Claude Code |
+| `bash install.sh --trae` | 仅安装到 Trae |
+| `bash install.sh --update` | 覆盖更新已安装的 skill |
+| `bash install.sh --codex --update` | 覆盖更新 Codex 插件 |
+| `bash install.sh --uninstall` | 卸载所有平台（含旧位置清理） |
+
+### 更新 Skill
+
+```bash
+git clone https://github.com/zhoujieh/wego-ux-design-skill.git /tmp/wego-ux-design-skill && \
+  bash /tmp/wego-ux-design-skill/wego-ux-design/install.sh --all --update && \
+  rm -rf /tmp/wego-ux-design-skill
+```
+
+或一行：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/zhoujieh/wego-ux-design-skill/main/wego-ux-design/install.sh | bash -s -- --update
+```
+
+### 通过 AI 自然语言安装
+
+将以下提示词复制发送给对应的 AI 编码工具即可自动安装。
+
+**Codex：**
+
+```
+请安装 skill-creator 插件，然后用它从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill
+```
+
+**Claude Code：**
+
+```
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 的 wego-ux-design 目录安装 skill 到本地 ~/.claude/skills/
+```
+
+**Trae：**
+
+```
+从 GitHub 仓库 zhoujieh/wego-ux-design-skill 路径 wego-ux-design 安装 skill 到 ~/.trae-cn/skills/
+```
+
+### 安装后
+
+**务必完全退出并重启**对应的 AI 编码工具，然后在任意项目中用自然语言触发：
+
+> 「帮我设计一个微购的商品列表页」  
+> 「生成一个微购风格的登录页面」  
+> 「审查这个页面的设计合规性」
+
+---
+
 ## 当前用途
 
 该 Skill 面向产品设计阶段，用于生成完整可交互 Web 原型项目、审查界面和检查 Token 合规性。
@@ -14,6 +97,8 @@
 | 路径 | 作用 |
 |---|---|
 | `SKILL.md` | 唯一运行时入口和任务路由 |
+| `.codex-plugin/plugin.json` | Codex 插件注册清单 |
+| `install.sh` | 一键安装/更新/卸载脚本 |
 | `principles/` | 微购设计判断原则 |
 | `rules/` | 运行时控制层规则（execution / generation / tokens / components / review / output / checkout / confirmation） |
 | `design-library/tokens-source.json` | 唯一 Token 数据源 |

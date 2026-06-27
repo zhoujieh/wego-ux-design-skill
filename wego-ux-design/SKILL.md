@@ -1,7 +1,6 @@
 ---
 name: wego-ux-design
-description: 微购设计系统 — 生成符合微购规范、具备完整交互链路的 Web 原型项目，并支持界面审查、Token 合规检查和规范问答。当用户需要设计微购/wego页面、生成可交互UI原型、做界面demo、审查设计合规性、检查 Token、或询问微购设计规范时自动触发。即使只说"设计一个页面""做个原型""帮我看看这个UI""生成一个按钮样式"，只要在微购项目上下文中都应使用本Skill。覆盖设计原则、Token体系、布局模式、组件契约、交互实现、UI生成与审查。
----
+description: 微购(WeGo)设计系统 — 生成符合微购规范的完整可交互 Web 原型项目，并支持界面审查、Token 合规检查和规范问答。当用户需要设计微购/wego/WeGo 页面、生成可交互 UI 原型、做界面 demo、审查设计合规性、检查 Token、或询问微购设计规范时自动触发。触发词包括但不限于："设计一个页面""做个原型""生成一个按钮""帮我看看这个UI""设计一个微购的XX页""生成微购风格""WeGo design""wego页面""微购组件"。覆盖设计原则、Token 体系、布局模式、组件契约、交互实现、UI 生成与审查。支持安装到 Codex / Claude Code / Trae，详见 install.sh。
 
 # 微购设计系统 Skill
 
@@ -165,3 +164,4 @@ design-library/library-consumption.json
 3. **其他 rules/ 文件本身即按需读取**：`execution.md`、`generation.md`、`tokens.md`、`components.md`、`checkout.md` 等
 
 截断时 AI 只需记住：去 `design-library/library-consumption.json` → 按路由表读对应规则文件 → 执行，不会丢失核心能力。
+
