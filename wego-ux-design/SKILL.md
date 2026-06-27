@@ -1,6 +1,6 @@
 ---
 name: "wego-ux-design"
-description: "微购(WeGo)设计系统 — 生成符合微购规范的完整可交互 Web 原型项目，并支持界面审查、Token 合规检查和规范问答。当用户需要设计微购/wego/WeGo 页面、生成可交互 UI 原型、做界面 demo、审查设计合规性、检查 Token、或询问微购设计规范时自动触发。触发词包括但不限于：\"设计一个页面\"\"做个原型\"\"生成一个按钮\"\"帮我看看这个UI\"\"设计一个微购的XX页\"\"生成微购风格\"\"WeGo design\"\"wego页面\"\"微购组件\"。覆盖设计原则、Token 体系、布局模式、组件契约、交互实现、UI 生成与审查。支持安装到 Codex / Claude Code / Trae，详见 install.sh。"
+description: "生成和审查微购/WeGo Web UI：页面、组件、可交互 Web 原型项目、界面 demo、Token 合规检查和设计规范问答。Use when the user asks for 微购/WeGo/wego design, 微购风格, 设计微购页面, 生成微购组件, 审查微购 UI, 检查微购 Token, or WeGo design rules. Do not use for generic UI/design tasks unless 微购/WeGo style or compliance is requested."
 ---
 
 # 微购设计系统 Skill
