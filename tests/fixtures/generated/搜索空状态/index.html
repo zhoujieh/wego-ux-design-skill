@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜索空状态</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">搜索商品</span></div>
+  <div class="wg-navbar__actions"></div>
+</header>
+<main class="content">
+  <section class="card">
+    <div class="wg-navbar__search-box">
+      <input class="wg-navbar__search-input" type="search" value="蓝色毛呢外套" data-required>
+      <button class="wg-navbar__action" type="button" data-action="search">搜索</button>
+    </div>
+  </section>
+  <section class="wg-result wg-result--error" data-result>
+  <div class="wg-result__icon">!</div>
+  <h2 class="wg-result__title">暂无搜索结果</h2>
+  <p class="wg-result__description">换个关键词试试，或直接发布新品。</p>
+</section>
+  <button class="wg-button wg-button--page wg-button--strong" type="button" data-action="navigate-detail"><span class="wg-button__surface"><span class="wg-button__label">发布新品</span></span></button>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

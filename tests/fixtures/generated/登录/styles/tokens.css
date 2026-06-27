@@ -290,21 +290,11 @@
   --wg-layout-modal-height-430-standard: 652px;
   --wg-layout-modal-height-430-top44: 888px;
   --wg-layout-modal-height-430-top88: 844px;
-  --wg-layout-page-m0-margin: 8px;
-  --wg-layout-page-m1-margin: 0px;
+  --wg-layout-page-m0-margin: 0px;
+  --wg-layout-page-m1-margin: 8px;
   --wg-layout-page-m2-margin: 16px;
   --wg-layout-page-m3-margin: 32px;
-  --wg-layout-page-max-width: var(--wg-layout-screen-430);
-  --wg-layout-screen-375: 375px;
-  --wg-layout-screen-430: 430px;
-  --wg-layout-width-375-m0: 359px;
-  --wg-layout-width-375-m1: 375px;
-  --wg-layout-width-375-m2: 343px;
-  --wg-layout-width-375-m3: 311px;
-  --wg-layout-width-430-m0: 414px;
-  --wg-layout-width-430-m1: 430px;
-  --wg-layout-width-430-m2: 398px;
-  --wg-layout-width-430-m3: 366px;
+  --wg-layout-page-max-width: 768px;
 
   /* Elevation */
   --wg-shadow-lg: 0 8px 32px rgba(30, 32, 40, 0.12);

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>strong 主按钮</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <main class="content">
+  <section class="card">
+    <div class="headline">
+      <h1 class="title">主操作按钮</h1>
+      <p class="subtitle">用于保存、提交、确认等页面级主任务。</p>
+    </div>
+    <div class="wg-button-group wg-button-group--page"><button class="wg-button wg-button--page wg-button--strong" type="button" data-action="submit"><span class="wg-button__surface"><span class="wg-button__label">保存设置</span></span></button></div>
+  </section>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

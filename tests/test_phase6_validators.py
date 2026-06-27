@@ -56,11 +56,85 @@ class Phase6ValidatorTests(unittest.TestCase):
 
         layers = data["consumptionLayers"]
         self.assertIn("resourceAssets", layers)
-        self.assertIn("resources/images", layers["resourceAssets"]["files"])
-        self.assertIn("resources/fonts", layers["resourceAssets"]["files"])
-        self.assertIn("design-library/assets/icons", layers["resourceAssets"]["files"])
-        self.assertIn("design-library/assets/video", layers["resourceAssets"]["files"])
+        self.assertIn("assets/media", layers["resourceAssets"]["files"])
+        self.assertIn("assets/icons/app-center", layers["resourceAssets"]["files"])
+        self.assertIn("assets/video", layers["resourceAssets"]["files"])
+        self.assertIn("assets/fonts", layers["resourceAssets"]["files"])
         self.assertIn("useResourceAssets", data["downstreamScenarios"])
+
+    def test_business_settings_uikit_is_registered_as_structural_showcase(self) -> None:
+        library = SKILL_ROOT / "design-library"
+        data = json.loads((library / "library-consumption.json").read_text(encoding="utf-8"))
+        available = data.get("uiKitsAvailable", [])
+
+        self.assertIn("business-settings", available)
+        self.assertTrue((library / "ui_kits" / "business-settings" / "index.html").is_file())
+        self.assertTrue(
+            (library / "ui_kits" / "business-settings" / "quality-report.json").is_file()
+        )
+
+        report = json.loads(
+            (library / "ui_kits" / "business-settings" / "quality-report.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual("business-settings", report["type"])
+        self.assertEqual("structural-reference", report["copyPolicy"])
+        self.assertIn("5464:4685", report["figmaSource"]["nodeId"])
+
+    def test_business_settings_uikit_encodes_settings_layout_rules(self) -> None:
+        library = SKILL_ROOT / "design-library"
+        html = (
+            library
+            / "ui_kits"
+            / "business-settings"
+            / "index.html"
+        ).read_text(encoding="utf-8")
+        tokens = json.loads((library / "tokens-source.json").read_text(encoding="utf-8"))
+
+        self.assertEqual("0px", tokens["tokens"]["wg.layout.page.m0.margin"]["value"])
+        self.assertEqual("768px", tokens["tokens"]["wg.layout.page.max.width"]["value"])
+        self.assertFalse(
+            any(name.startswith("wg.layout.screen.") for name in tokens["tokens"])
+        )
+        self.assertFalse(
+            any(name.startswith("wg.layout.width.") for name in tokens["tokens"])
+        )
+        self.assertIn("max-inline-size: var(--wg-layout-page-max-width)", html)
+        self.assertIn("business-page wg-page-m0", html)
+        self.assertIn('data-open-mode="present-bottom"', html)
+        self.assertIn("nav-safe-placeholder", html)
+        self.assertNotIn("statusbar__battery", html)
+        self.assertNotIn("section-gap", html)
+        self.assertNotIn("business-card", html)
+        self.assertIn("html,\n    body {\n      block-size: 100%;\n      background: var(--wg-color-bg-surface);", html)
+        self.assertIn("wg-checkbox wg-checkbox--mark-check", html)
+        self.assertIn("js-permission-checkbox", html)
+        self.assertIn("js-switch", html)
+        self.assertIn("wg-link wg-link--standalone", html)
+        self.assertIn('aria-label="业绩归属"', html)
+
+    def test_page_width_tokens_are_consolidated_to_single_max_width(self) -> None:
+        root_text_paths = [
+            SKILL_ROOT / "SKILL.md",
+            SKILL_ROOT / "rules" / "generation.md",
+            SKILL_ROOT / "rules" / "output.md",
+            SKILL_ROOT / "design-library" / "tokens-source.json",
+            SKILL_ROOT / "design-library" / "tokens.css",
+            ROOT / "website" / "styles" / "tokens.css",
+        ]
+        fixture_token_paths = sorted((ROOT / "tests" / "fixtures" / "generated").glob("*/styles/tokens.css"))
+        combined = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in [*root_text_paths, *fixture_token_paths]
+            if path.exists()
+        )
+
+        self.assertIn("--wg-layout-page-max-width: 768px", combined)
+        self.assertNotIn("--wg-layout-screen-", combined)
+        self.assertNotIn("--wg-layout-width-", combined)
+        self.assertNotIn("--wg-layout-page-max-width: 430px", combined)
+        self.assertNotIn("页面最大宽度 670px", combined)
 
     def test_phase7_regression_record_covers_planned_prompts(self) -> None:
         record = ROOT / "tests" / "phase7-regression.md"

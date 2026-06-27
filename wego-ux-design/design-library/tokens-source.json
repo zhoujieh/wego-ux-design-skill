@@ -1636,16 +1636,16 @@
       "description": "430 屏距顶部 88px"
     },
     "wg.layout.page.m0.margin": {
-      "value": "8px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "高密度列表、下拉列表、搜索建议、筛选面板"
-    },
-    "wg.layout.page.m1.margin": {
       "value": "0px",
       "type": "dimension",
       "category": "layout",
-      "description": "通栏页面、连续列表、沉浸式内容"
+      "description": "通栏页面、连续列表、设置项、权限开关列表"
+    },
+    "wg.layout.page.m1.margin": {
+      "value": "8px",
+      "type": "dimension",
+      "category": "layout",
+      "description": "卡片布局、轻量模块分组"
     },
     "wg.layout.page.m2.margin": {
       "value": "16px",
@@ -1660,70 +1660,10 @@
       "description": "宽松页面、强聚焦页面、引导页"
     },
     "wg.layout.page.max.width": {
-      "value": "{wg.layout.screen.430}",
+      "value": "768px",
       "type": "dimension",
       "category": "layout",
-      "description": "页面主体最大宽度"
-    },
-    "wg.layout.screen.375": {
-      "value": "375px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "标准移动端设计参考宽度"
-    },
-    "wg.layout.screen.430": {
-      "value": "430px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "大屏移动端设计参考宽度"
-    },
-    "wg.layout.width.375.m0": {
-      "value": "359px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "8px"
-    },
-    "wg.layout.width.375.m1": {
-      "value": "375px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "0px"
-    },
-    "wg.layout.width.375.m2": {
-      "value": "343px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "16px"
-    },
-    "wg.layout.width.375.m3": {
-      "value": "311px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "32px"
-    },
-    "wg.layout.width.430.m0": {
-      "value": "414px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "8px"
-    },
-    "wg.layout.width.430.m1": {
-      "value": "430px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "0px"
-    },
-    "wg.layout.width.430.m2": {
-      "value": "398px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "16px"
-    },
-    "wg.layout.width.430.m3": {
-      "value": "366px",
-      "type": "dimension",
-      "category": "layout",
-      "description": "32px"
+      "description": "页面主体最大宽度；M0-M3 只通过页面 padding 控制内容留白，不维护派生内容宽度"
     },
     "wg.motion.duration.fast": {
       "value": "150ms",

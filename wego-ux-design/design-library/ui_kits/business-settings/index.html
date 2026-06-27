@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>微购 Business Settings Showcase</title>
+  <link rel="stylesheet" href="../../tokens.css">
+  <link rel="stylesheet" href="../../scaffold.css">
+  <link rel="stylesheet" href="../../assets/fonts/iconfont/iconfont.css">
+  <link rel="stylesheet" href="../../components.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    *::-webkit-scrollbar {
+      display: none;
+    }
+
+    html,
+    body {
+      block-size: 100%;
+      background: var(--wg-color-bg-surface);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      margin: var(--wg-spacing-0);
+    }
+
+    .uikit-shell {
+      inline-size: 100%;
+      max-inline-size: var(--wg-layout-page-max-width);
+      block-size: 100dvh;
+      background: var(--wg-color-bg-page);
+      overflow: hidden;
+    }
+
+    .business-page {
+      block-size: 100%;
+      display: grid;
+      grid-template-rows: auto minmax(var(--wg-spacing-0), 1fr);
+      background: var(--wg-color-bg-page);
+    }
+
+    .business-top {
+      position: sticky;
+      inset-block-start: var(--wg-spacing-0);
+      z-index: var(--wg-zindex-sticky);
+      background: var(--wg-color-bg-page);
+    }
+
+    .nav-safe-placeholder {
+      display: none;
+      block-size: env(safe-area-inset-top);
+      min-block-size: var(--wg-spacing-0);
+      background: var(--wg-color-bg-page);
+    }
+
+    .uikit-shell[data-show-nav-safe-area="true"] .nav-safe-placeholder {
+      display: block;
+    }
+
+    .business-scroll {
+      min-block-size: var(--wg-spacing-0);
+      display: flex;
+      flex-direction: column;
+      gap: var(--wg-spacing-8);
+      overflow-y: auto;
+      padding-block-end: var(--wg-spacing-48);
+      background: var(--wg-color-bg-page);
+    }
+
+    .cell-group {
+      background: var(--wg-color-bg-surface);
+    }
+
+    .employee-card {
+      background: var(--wg-color-bg-surface);
+    }
+
+    .role-avatar {
+      inline-size: var(--wg-size-24);
+      block-size: var(--wg-size-24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--wg-radius-full);
+      background: var(--wg-color-bg-promotion);
+      color: var(--wg-color-text-promotion);
+      font-size: var(--wg-font-size-12);
+      line-height: var(--wg-font-lineheight-12);
+      font-weight: var(--wg-font-weight-semibold);
+      flex: none;
+    }
+
+    .section-title-row {
+      min-block-size: var(--wg-size-56);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--wg-spacing-16);
+      padding-inline: var(--wg-spacing-16);
+      background: var(--wg-color-bg-surface);
+      border-block-end: var(--wg-stroke-width-hairline) var(--wg-stroke-style-solid) var(--wg-color-divider-default);
+    }
+
+    .section-title {
+      font-size: var(--wg-font-size-16);
+      line-height: var(--wg-font-lineheight-16);
+      font-weight: var(--wg-font-weight-semibold);
+      color: var(--wg-color-text-primary);
+    }
+
+    .permission-list {
+      background: var(--wg-color-bg-surface);
+    }
+
+    .permission-cell .wg-cell__title {
+      white-space: normal;
+    }
+
+    .permission-cell .wg-cell__subtitle {
+      white-space: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="uikit-shell" data-layout-guard="uikit-v1" data-copy-policy="structural-reference" data-open-mode="present-bottom">
+    <main class="business-page wg-page-m0" aria-label="业务设置页布局 Showcase">
+      <div class="business-top">
+        <div class="nav-safe-placeholder" aria-hidden="true"></div>
+
+        <div class="wg-navbar wg-navbar--standard wg-navbar--bg-default">
+          <div class="wg-navbar__left">
+            <button class="wg-navbar__left-btn wg-navbar__left-btn--text" type="button">
+              <span class="wg-navbar__left-text">取消</span>
+            </button>
+          </div>
+          <div class="wg-navbar__center">
+            <span class="wg-navbar__title">岗位权限设置</span>
+          </div>
+          <div class="wg-navbar__actions">
+            <button class="wg-navbar__action wg-navbar__action--button" type="button">
+              <span class="wg-navbar__action-label">保存</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="business-scroll">
+        <section class="employee-card" aria-label="当前岗位">
+          <div class="wg-cell wg-cell--avatar-sm wg-cell--divider-full" tabindex="0">
+            <div class="wg-cell__avatar-slot wg-cell__avatar-slot--sm">
+              <span class="role-avatar">车</span>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">车车</div>
+                  <div class="wg-tag wg-tag--20 wg-tag--green">
+                    <span class="wg-tag__text">管理员</span>
+                  </div>
+                </div>
+              </div>
+              <div class="wg-cell__action wg-cell__action--link">
+                <a class="wg-link wg-link--standalone" href="#">
+                  <span class="wg-link__surface">
+                    <span class="wg-link__label">切换岗位</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell-group" aria-label="业绩归属">
+          <div class="section-title-row">
+            <h2 class="section-title">业绩归属</h2>
+            <a class="wg-link wg-link--standalone" href="#">
+              <span class="wg-link__surface">
+                <span class="wg-link__label">查看归属设置</span>
+              </span>
+            </a>
+          </div>
+          <div class="wg-cell wg-cell--select wg-cell--double wg-cell--divider-full permission-cell" tabindex="0">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check js-permission-checkbox" type="button" aria-checked="false">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">允许已归属粉丝被其他员工划分</div>
+                </div>
+                <div class="wg-cell__subtitle">粉丝从其他员工处访问店铺或开单，将会更改归属到对应员工</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell-group" aria-label="选款与上架">
+          <div class="section-title-row">
+            <h2 class="section-title">选款与上架</h2>
+            <button class="wg-switch wg-switch--on js-switch" type="button" aria-checked="true">
+              <span class="wg-switch__thumb"></span>
+            </button>
+          </div>
+
+          <div class="permission-list">
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许查看上家的联系方式</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许查看上家的置顶动态和签名</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许查看上家的动态(不含置顶)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许关注或取关上家</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--double wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许发布、转发、编辑、删除、恢复和上下架、设置帮卖佣金、推广员佣金</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许查看和编辑库存</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+              <div class="wg-cell__select">
+                <button class="wg-checkbox wg-checkbox--mark-check js-permission-checkbox" type="button" aria-checked="false">
+                  <span class="wg-checkbox__indicator"></span>
+                </button>
+              </div>
+              <div class="wg-cell__main">
+                <div class="wg-cell__text">
+                  <div class="wg-cell__title-row">
+                    <div class="wg-cell__title">允许查看本店商品价格</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell-group" aria-label="订单与客户">
+          <div class="section-title-row">
+            <h2 class="section-title">订单与客户</h2>
+          </div>
+
+          <div class="wg-cell wg-cell--select wg-cell--divider-full permission-cell" tabindex="0">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">允许查看订单和客户信息</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wg-cell wg-cell--select wg-cell--double wg-cell--divider-full permission-cell" tabindex="0">
+            <div class="wg-cell__select">
+              <button class="wg-checkbox wg-checkbox--mark-check wg-checkbox--checked js-permission-checkbox" type="button" aria-checked="true">
+                <span class="wg-checkbox__indicator"></span>
+              </button>
+            </div>
+            <div class="wg-cell__main">
+              <div class="wg-cell__text">
+                <div class="wg-cell__title-row">
+                  <div class="wg-cell__title">允许处理售后、退款和发货</div>
+                </div>
+                <div class="wg-cell__subtitle">高风险权限需要在岗位设置中单独确认</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    document.querySelectorAll('.js-permission-checkbox').forEach((control) => {
+      control.addEventListener('click', () => {
+        const checked = control.getAttribute('aria-checked') !== 'true';
+        control.setAttribute('aria-checked', checked ? 'true' : 'false');
+        control.classList.toggle('wg-checkbox--checked', checked);
+      });
+    });
+
+    document.querySelectorAll('.js-switch').forEach((control) => {
+      control.addEventListener('click', () => {
+        const checked = control.getAttribute('aria-checked') !== 'true';
+        control.setAttribute('aria-checked', checked ? 'true' : 'false');
+        control.classList.toggle('wg-switch--on', checked);
+      });
+    });
+  </script>
+</body>
+</html>

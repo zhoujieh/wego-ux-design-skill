@@ -62,6 +62,14 @@ CI 只校验已放入 `fixtures/generated/` 的生成结果。
 6. 提交
 ```
 
+阶段 7 的标准验收与 golden prompt fixtures 可用确定性脚本刷新：
+
+```bash
+python scripts/generate_phase7_fixtures.py
+python scripts/validate_generated_projects.py --require-fixtures
+python -m unittest tests/test_phase7_acceptance.py
+```
+
 ### 如何运行校验
 
 ```bash

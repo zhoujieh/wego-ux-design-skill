@@ -199,7 +199,7 @@
 }
 
 .wg-page-container {
-  max-width: var(--wg-layout-screen-375);
+  max-width: var(--wg-layout-page-max-width);
   margin: var(--wg-spacing-0) auto;
   min-height: 100vh;
   background-color: var(--wg-color-bg-page);

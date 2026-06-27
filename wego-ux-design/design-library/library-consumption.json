@@ -141,7 +141,9 @@
     "素材资源只能在需求或规则明确需要时读取；不得把 resources/ 或 design-library/assets/ 当作组件发现入口。",
     "ui_kits/ 仅作结构参考；当前目录为空时不得伪造 showcase 来源。"
   ],
-  "uiKitsAvailable": [],
+  "uiKitsAvailable": [
+    "business-settings"
+  ],
   "iconUsage": {
     "modeA_iconfont": {
       "syntax": "<i class=\"wego-iconfont-s icon-{font_class}\"></i>",

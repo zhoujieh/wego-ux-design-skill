@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品发布</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">商品发布</span></div>
+  <div class="wg-navbar__actions"><button class="wg-navbar__action" type="button" data-action="open-dialog">草稿</button></div>
+</header>
+<main class="content">
+  <section class="card">
+    <div class="headline"><h1 class="title">基本信息</h1><p class="subtitle">按商品发布流程补全必要字段。</p></div>
+    <div class="wg-form-group">
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">商品名称</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="title" placeholder="请输入商品名称" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>商品名称不能为空</div>
+</div>
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">价格</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="price" placeholder="请输入销售价" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>价格不能为空</div>
+</div>
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">库存</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="stock" placeholder="请输入库存数量" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>库存不能为空</div>
+</div>
+    </div>
+  </section>
+  <section class="upload-panel">
+    <span class="badge">图片上传成功</span>
+    <p class="helper">上传失败时可重新选择图片并重试。</p>
+  </section>
+  <div class="toolbar"><button class="wg-button wg-button--page wg-button--weak" type="button" data-action="open-dialog"><span class="wg-button__surface"><span class="wg-button__label">保存草稿</span></span></button><button class="wg-button wg-button--page wg-button--strong" type="button" data-action="submit"><span class="wg-button__surface"><span class="wg-button__label">发布商品</span></span></button></div>
+  <div class="wg-dialog-overlay" data-dialog data-state="closed" hidden>
+  <div class="wg-dialog wg-dialog--text" role="dialog" aria-modal="true">
+    <div class="wg-dialog__content">
+      <div class="wg-dialog__header"><span class="wg-dialog__title">保存草稿</span></div>
+      <p class="wg-dialog__description">当前内容会保存为草稿，稍后可继续编辑。</p>
+    </div>
+    <div class="wg-dialog__action">
+      <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+        <button class="wg-dialog__button wg-dialog__button--dismiss" type="button" data-action="close-dialog">取消</button>
+        <button class="wg-dialog__button wg-dialog__button--confirm wg-dialog__button--danger" type="button" data-action="confirm-delete">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支付结果</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <main class="content">
+  <section class="wg-result" data-result>
+  <div class="wg-result__icon">✓</div>
+  <h2 class="wg-result__title">支付成功</h2>
+  <p class="wg-result__description">订单已生成，买家会收到支付通知。</p>
+</section>
+  <section class="wg-result wg-result--error" data-result>
+  <div class="wg-result__icon">!</div>
+  <h2 class="wg-result__title">支付失败</h2>
+  <p class="wg-result__description">网络异常导致支付失败，请重试支付。</p>
+</section>
+  <div class="toolbar"><button class="wg-button wg-button--page wg-button--medium" type="button" data-action="navigate-detail"><span class="wg-button__surface"><span class="wg-button__label">查看订单</span></span></button><button class="wg-button wg-button--page wg-button--strong" type="button" data-action="retry"><span class="wg-button__surface"><span class="wg-button__label">重试支付</span></span></button></div>
+  <button class="wg-button wg-button--page wg-button--weak" type="button" data-action="toggle-result"><span class="wg-button__surface"><span class="wg-button__label">切换结果</span></span></button>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

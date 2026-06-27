@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "type": "business-settings",
+  "name": "业务设置页",
+  "copyPolicy": "structural-reference",
+  "figmaSource": {
+    "file": "📙 wegoo 组件应用场景",
+    "fileKey": "L9Wi08W6Fyq0x4QIbHSTDf",
+    "nodeId": "5464:4685",
+    "selectedFrame": {
+      "nodeId": "5464:5417",
+      "name": "岗位权限设置"
+    }
+  },
+  "purpose": "让 AI 理解微购业务设置页的移动端布局规则：固定 NavBar、按需安全占位、M0 通栏滚动区、灰底分组、连续 Cell 列表、左侧权限多选、右侧动作控件和长文案换行节奏。",
+  "layoutRulesCaptured": [
+    "顶部固定区由可选 nav-safe-placeholder 和 NavBar 组成，不模拟系统电池栏；主体内容独立滚动。",
+    "NavBar 左侧为取消或关闭时属于全屏模块，打开方式为 present-bottom。",
+    "设置页使用 M0 通栏布局工具类，页面最大宽度遵守 --wg-layout-page-max-width。",
+    "M0 通栏设置页不使用卡片圆角；分组通过 flex gap 和 bg-page 间隔区分。",
+    "业绩归属是独立业务分组，不与选款与上架合并。",
+    "一级分组标题行高度与 Cell 节奏一致，右侧可放 Link 组件或 switch。",
+    "权限项为多项独立授权时使用 checkbox；只有互斥选项才使用 radio。",
+    "checkbox 与 switch 需要可点击并同步 aria-checked。",
+    "长权限文案允许在 Cell 主内容区换行，避免压缩右侧控件或缩小字号。",
+    "业务身份区使用小头像 Cell + 20px tag + 右侧 Link 组件动作。",
+    "该 showcase 只可读作结构参考，不得复制外层 uikit-shell 作为真实业务页面模板。"
+  ],
+  "componentsUsed": [
+    {
+      "slug": "navbar",
+      "usage": "standard + left text + right button"
+    },
+    {
+      "slug": "cell",
+      "usage": "avatar-sm, select, double, divider-full"
+    },
+    {
+      "slug": "checkbox",
+      "usage": "permission multi-select states"
+    },
+    {
+      "slug": "switch",
+      "usage": "group-level enable toggle"
+    },
+    {
+      "slug": "link",
+      "usage": "text actions in setting rows and section headers"
+    },
+    {
+      "slug": "tag",
+      "usage": "role badge"
+    }
+  ],
+  "temporaryStructures": [
+    {
+      "name": "nav-safe-placeholder",
+      "reason": "导航栏上方的安全区高度需要按运行环境动态显示；showcase 只保留占位逻辑，不绘制系统状态栏。"
+    },
+    {
+      "name": "section-title-row",
+      "reason": "业务设置页需要分组标题与右侧链接或开关；当前组件库未注册设置分组标题。"
+    }
+  ],
+  "validation": {
+    "usesRegisteredComponents": true,
+    "usesTokenVariables": true,
+    "usesHardcodedBusinessDesignValues": false,
+    "usesInteractiveCheckboxes": true,
+    "usesInteractiveSwitches": true,
+    "usesLinkComponentForTextActions": true,
+    "usesM0FullBleedLayout": true,
+    "usesRoundedCards": false,
+    "openMode": "present-bottom",
+    "outerShellCopyable": false,
+    "defaultScrollbarVisible": false
+  }
+}

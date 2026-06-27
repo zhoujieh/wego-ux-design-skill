@@ -11,12 +11,8 @@
     /* @component-css-start */
 
     .wg-checkbox {
-      --wg-checkbox-accent: var(--wg-color-action-primary-default);
-      --wg-checkbox-disabled-fill: var(--wg-color-base-neutral-alpha-08);
-      --wg-checkbox-control-size: var(--wg-size-20);
-      --wg-checkbox-checkmark-stroke: 2px;
-      --wg-checkbox-number-size: 11px;
-      --wg-checkbox-ring-color: var(--wg-color-base-neutral-500);
+      --checkbox-disabled-fill: var(--wg-checkbox-accent-disabled);
+      --checkbox-ring-color: var(--wg-color-base-neutral-500);
       inline-size: var(--wg-size-24);
       block-size: var(--wg-size-24);
       position: relative;
@@ -28,7 +24,7 @@
       -webkit-appearance: none;
       border-radius: var(--wg-radius-full);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background-color: transparent;
+      background-color: var(--wg-color-transparent);
       color: var(--wg-color-text-inverse);
       cursor: pointer;
       font: inherit;
@@ -39,15 +35,15 @@
 
     .wg-checkbox::before {
       content: "";
-      inline-size: var(--wg-checkbox-control-size);
-      block-size: var(--wg-checkbox-control-size);
+      inline-size: var(--wg-size-20);
+      block-size: var(--wg-size-20);
       position: absolute;
       inset-block-start: 50%;
       inset-inline-start: 50%;
       box-sizing: border-box;
       border-radius: var(--wg-radius-full);
-      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-checkbox-ring-color);
-      background-color: transparent;
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--checkbox-ring-color);
+      background-color: var(--wg-color-transparent);
       transform: translate(-50%, -50%);
       transition:
         background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
@@ -70,7 +66,7 @@
 
     .wg-checkbox--checked,
     .wg-checkbox--indeterminate {
-      --wg-checkbox-ring-color: var(--wg-checkbox-accent);
+      --checkbox-ring-color: var(--wg-checkbox-accent);
     }
 
     .wg-checkbox--checked::before,
@@ -88,25 +84,25 @@
     .wg-checkbox--mark-check .wg-checkbox__indicator::after {
       content: "";
       position: absolute;
-      block-size: var(--wg-checkbox-checkmark-stroke);
+      block-size: var(--wg-spacing-2);
       border-radius: var(--wg-radius-full);
       background-color: currentColor;
     }
 
     .wg-checkbox--mark-check .wg-checkbox__indicator::before {
       inline-size: calc(var(--wg-spacing-4) + var(--wg-spacing-2));
-      inset-block-start: 9px;
+      inset-block-start: calc(var(--wg-spacing-8) + var(--wg-stroke-width-default));
       inset-inline-start: 0;
       transform: rotate(45deg);
-      transform-origin: calc(100% - 1px) 50%;
+      transform-origin: calc(100% - var(--wg-stroke-width-default)) 50%;
     }
 
     .wg-checkbox--mark-check .wg-checkbox__indicator::after {
       inline-size: calc(var(--wg-spacing-8) + var(--wg-spacing-4));
-      inset-block-start: 8px;
-      inset-inline-start: 4px;
+      inset-block-start: var(--wg-spacing-8);
+      inset-inline-start: var(--wg-spacing-4);
       transform: rotate(-45deg);
-      transform-origin: 1px 50%;
+      transform-origin: var(--wg-stroke-width-default) 50%;
     }
 
     .wg-checkbox--mark-minus .wg-checkbox__indicator::after {
@@ -118,8 +114,8 @@
     }
 
     .wg-checkbox--mark-number .wg-checkbox__indicator {
-      font-size: var(--wg-checkbox-number-size);
-      line-height: var(--wg-size-12);
+      font-size: var(--wg-font-size-10);
+      line-height: var(--wg-font-lineheight-10);
       font-weight: var(--wg-font-weight-semibold);
     }
 
@@ -128,13 +124,13 @@
     }
 
     .wg-checkbox--disabled:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate) {
-      --wg-checkbox-ring-color: var(--wg-color-state-disabled-bg);
+      --checkbox-ring-color: var(--wg-color-state-disabled-bg);
       color: var(--wg-color-state-disabled-text);
     }
 
     .wg-checkbox--disabled.wg-checkbox--checked,
     .wg-checkbox--disabled.wg-checkbox--indeterminate {
-      --wg-checkbox-ring-color: var(--wg-checkbox-disabled-fill);
+      --checkbox-ring-color: var(--checkbox-disabled-fill);
     }
 
     .wg-checkbox--disabled:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate)::before {
@@ -143,11 +139,11 @@
 
     .wg-checkbox--disabled.wg-checkbox--checked::before,
     .wg-checkbox--disabled.wg-checkbox--indeterminate::before {
-      background-color: var(--wg-checkbox-disabled-fill);
+      background-color: var(--checkbox-disabled-fill);
     }
 
     .wg-checkbox--dark:not(.wg-checkbox--checked):not(.wg-checkbox--indeterminate) {
-      --wg-checkbox-ring-color: var(--wg-color-base-static-white);
+      --checkbox-ring-color: var(--wg-color-base-static-white);
       color: var(--wg-color-text-inverse);
     }
 

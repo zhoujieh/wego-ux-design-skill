@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>订单列表</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">我的订单</span></div>
+  <div class="wg-navbar__actions"></div>
+</header>
+<main class="content">
+  <nav class="wg-tabs" aria-label="订单状态">
+    <button class="wg-tab wg-tab--active" type="button">全部</button>
+    <button class="wg-tab" type="button">待付款</button>
+    <button class="wg-tab" type="button">待发货</button>
+  </nav>
+  <section class="state-panel"><span class="wg-loading">加载中</span><p class="helper">下拉刷新和分页加载会展示处理中状态。</p></section>
+  <section class="stack">
+    <article class="wg-cell"><div><div class="wg-cell__title">订单 2026062701</div><div class="wg-cell__meta">待发货 · 2 件商品</div></div><button class="wg-button wg-button--compact wg-button--strong" type="button" data-action="submit"><span class="wg-button__surface"><span class="wg-button__label">处理</span></span></button></article>
+    <article class="wg-cell"><div><div class="wg-cell__title">订单 2026062702</div><div class="wg-cell__meta">网络错误后可重试</div></div><button class="wg-button wg-button--compact wg-button--strong" type="button" data-action="retry"><span class="wg-button__surface"><span class="wg-button__label">重试</span></span></button></article>
+  </section>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多页导航</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <main class="content">
+  <section class="view view--active" data-view="home">
+    <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">商品列表</span></div>
+  <div class="wg-navbar__actions"></div>
+</header>
+    <article class="wg-cell"><div><div class="wg-cell__title">夏季套装</div><div class="wg-cell__meta">点击进入详情页</div></div><button class="wg-button wg-button--compact wg-button--strong" type="button" data-action="navigate-detail"><span class="wg-button__surface"><span class="wg-button__label">查看</span></span></button></article>
+  </section>
+  <section class="view" data-view="detail">
+    <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">商品详情</span></div>
+  <div class="wg-navbar__actions"></div>
+</header>
+    <section class="card"><h1 class="title">夏季套装</h1><p class="subtitle">详情页返回会切回首页，并保留页面状态。</p><button class="wg-button wg-button--page wg-button--weak" type="button" data-action="back-home"><span class="wg-button__surface"><span class="wg-button__label">返回首页</span></span></button></section>
+  </section>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

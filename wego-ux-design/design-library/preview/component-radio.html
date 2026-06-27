@@ -11,11 +11,8 @@
     /* @component-css-start */
 
     .wg-radio {
-      --wg-radio-accent: var(--wg-color-action-primary-default);
-      --wg-radio-disabled-fill: var(--wg-color-base-neutral-alpha-08);
-      --wg-radio-control-size: var(--wg-size-20);
-      --wg-radio-dot-size: var(--wg-size-12);
-      --wg-radio-ring-color: var(--wg-color-base-neutral-500);
+      --radio-disabled-fill: var(--wg-radio-accent-disabled);
+      --radio-ring-color: var(--wg-color-base-neutral-500);
       inline-size: var(--wg-size-24);
       block-size: var(--wg-size-24);
       position: relative;
@@ -27,7 +24,7 @@
       -webkit-appearance: none;
       border-radius: var(--wg-radius-full);
       border: var(--wg-stroke-width-none) var(--wg-stroke-style-none);
-      background-color: transparent;
+      background-color: var(--wg-color-transparent);
       cursor: pointer;
       font: inherit;
       transition:
@@ -36,15 +33,15 @@
 
     .wg-radio::before {
       content: "";
-      inline-size: var(--wg-radio-control-size);
-      block-size: var(--wg-radio-control-size);
+      inline-size: var(--wg-size-20);
+      block-size: var(--wg-size-20);
       position: absolute;
       inset-block-start: 50%;
       inset-inline-start: 50%;
       box-sizing: border-box;
       border-radius: var(--wg-radius-full);
-      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--wg-radio-ring-color);
-      background-color: transparent;
+      border: var(--wg-stroke-width-default) var(--wg-stroke-style-solid) var(--radio-ring-color);
+      background-color: var(--wg-color-transparent);
       transform: translate(-50%, -50%);
       transition:
         background-color var(--wg-motion-duration-fast) var(--wg-motion-ease-standard),
@@ -52,8 +49,8 @@
     }
 
     .wg-radio__dot {
-      inline-size: var(--wg-radio-dot-size);
-      block-size: var(--wg-radio-dot-size);
+      inline-size: var(--wg-size-12);
+      block-size: var(--wg-size-12);
       border-radius: var(--wg-radius-full);
       background-color: var(--wg-radio-accent);
       opacity: 0;
@@ -65,7 +62,7 @@
     }
 
     .wg-radio--checked {
-      --wg-radio-ring-color: var(--wg-radio-accent);
+      --radio-ring-color: var(--wg-radio-accent);
     }
 
     .wg-radio--checked::before {
@@ -82,11 +79,11 @@
     }
 
     .wg-radio--disabled:not(.wg-radio--checked) {
-      --wg-radio-ring-color: var(--wg-color-state-disabled-bg);
+      --radio-ring-color: var(--wg-color-state-disabled-bg);
     }
 
     .wg-radio--disabled.wg-radio--checked {
-      --wg-radio-ring-color: var(--wg-radio-disabled-fill);
+      --radio-ring-color: var(--radio-disabled-fill);
     }
 
     .wg-radio--disabled:not(.wg-radio--checked)::before {
@@ -94,11 +91,11 @@
     }
 
     .wg-radio--disabled.wg-radio--checked .wg-radio__dot {
-      background-color: var(--wg-radio-disabled-fill);
+      background-color: var(--radio-disabled-fill);
     }
 
     .wg-radio--dark:not(.wg-radio--checked) {
-      --wg-radio-ring-color: var(--wg-color-base-static-white);
+      --radio-ring-color: var(--wg-color-base-static-white);
     }
 
     .wg-radio--dark:not(.wg-radio--checked)::before {
@@ -106,7 +103,7 @@
     }
 
     .wg-radio--dark.wg-radio--checked {
-      --wg-radio-ring-color: var(--wg-radio-accent);
+      --radio-ring-color: var(--wg-radio-accent);
     }
 
     .wg-radio:not(.wg-radio--disabled):active {

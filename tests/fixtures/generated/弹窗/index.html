@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>带标题和操作的 dialog</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <main class="content">
+  <section class="card">
+    <div class="headline">
+      <h1 class="title">确认操作</h1>
+      <p class="subtitle">点击按钮打开包含标题、正文和双操作区的对话框。</p>
+    </div>
+    <button class="wg-button wg-button--page wg-button--strong" type="button" data-action="open-dialog"><span class="wg-button__surface"><span class="wg-button__label">打开确认弹窗</span></span></button>
+  </section>
+  <div class="wg-dialog-overlay" data-dialog data-state="closed" hidden>
+  <div class="wg-dialog wg-dialog--text" role="dialog" aria-modal="true">
+    <div class="wg-dialog__content">
+      <div class="wg-dialog__header"><span class="wg-dialog__title">开启自动上新</span></div>
+      <p class="wg-dialog__description">开启后系统将按所选规则同步商品，请确认当前设置。</p>
+    </div>
+    <div class="wg-dialog__action">
+      <div class="wg-dialog__buttons wg-dialog__buttons--dual">
+        <button class="wg-dialog__button wg-dialog__button--dismiss" type="button" data-action="close-dialog">取消</button>
+        <button class="wg-dialog__button wg-dialog__button--confirm wg-dialog__button--danger" type="button" data-action="confirm-delete">开启</button>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

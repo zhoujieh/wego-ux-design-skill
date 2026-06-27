@@ -119,6 +119,35 @@ M/G 模式通过 `design-library/scaffold.css` 中的工具类表达，不得在
   卡片列表     → 页面容器 class="wg-page-m1"，卡片组 class="wg-group-g2"
   表单编辑页   → 页面容器 class="wg-page-m0"，字段组 class="wg-group-g1"
 
+设置类页面规则：
+
+- 设置、权限、开关项、配置项等页面默认使用 `wg-page-m0`，内容按通栏列表或通栏分组组织。
+- M0 通栏场景不得给内容分组增加页面级左右 margin 或圆角。
+- 简单设置项不得用多层卡片包裹；只有 M1 / M2 且页面背景非白色、内容对应真实模块或实体时才使用卡片。
+- 业务分组之间通过滚动容器的 flex gap 和页面背景色形成分隔，不插入空的 `section-gap` / spacer 节点。
+- 同一业务分组内使用连续 Cell 列表。
+- 分组标题行与 Cell 节奏保持一致，右侧文字动作必须使用 Link 组件，右侧开关必须使用 Switch 组件。
+- 业绩归属、选款与上架、订单与客户等不同业务域必须拆成独立分组，不得为了视觉紧凑合并。
+- NavBar 左侧为「取消」或关闭叉时，页面属于全屏模块，打开方式使用弹出（Present，从底部往上打开），而不是 Push。
+
+### 圆角使用
+
+圆角只在明确容器语义中使用：
+
+| 场景 | Token | 值 |
+|---|---|---|
+| 模态窗 / ActionSheet 顶部容器 | `wg.radius.xl` | 16px |
+| Dialog 弹窗 | `wg.radius.lg` | 12px |
+| 卡片 | `wg.radius.md` | 8px |
+| 48px 按钮 | `wg.radius.md` | 8px |
+| 32px 按钮 | `wg.radius.sm` | 6px |
+
+限制：
+
+- M0 通栏列表和设置页分组不使用卡片圆角。
+- 卡片圆角默认使用 `wg.radius.md`，不得用 `wg.radius.lg` 代替卡片圆角。
+- 胶囊、头像、checkbox/radio/switch 等组件按各自组件契约使用 `wg.radius.full`。
+
 
 ### 页面背景色
 
@@ -148,13 +177,16 @@ M/G 模式通过 `design-library/scaffold.css` 中的工具类表达，不得在
 
 | 页面类型 | 最大宽度 | 适用场景 |
 |---|---|---|
-| 默认业务页面 | 670px | 大多数表单、详情、列表页面 |
+| 默认业务页面 | 768px | 大多数表单、详情、列表和设置页面 |
 | 沉浸式页面 | 无限制 | 视频播放、图片预览等全屏内容 |
 | 特殊指定 | 按需求定义 | 需在阶段二明确标注 |
 
 实现方式：
 - 页面容器设置 `max-inline-size: var(--wg-layout-page-max-width)` 和 `margin-inline: auto`
-- 内容区域在最大宽度内居中显示
+- `--wg-layout-page-max-width` 直接定义页面最大宽度，当前为 768px。
+- M0 / M1 / M2 / M3 只控制页面容器内边距，不再维护 `screen-*` 或 `width-*-m*` 派生内容宽度。
+- 内容区域在最大宽度内居中显示；如需计算内容实际宽度，由 CSS 根据容器宽度和 padding 自然得到，不引用派生宽度 Token。
+- UI Kit showcase 也必须遵守页面最大宽度规则；可用外层 shell 承载结构参考，但不得把 shell 固定为单一设备宽度。
 
 ### 页面高度
 

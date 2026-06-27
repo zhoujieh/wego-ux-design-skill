@@ -134,9 +134,12 @@ design-library/library-consumption.json
 
 详见 `rules/output.md#2`。核心要点：
 - 项目根目录名必须使用中文（如 `商品发布`、`登录`、`订单列表`）
-- 页面最大宽度 670px（由 `--wg-layout-page-max-width` 控制），同时保持移动端响应式适配
+- 必须交付完整项目目录，至少包含 `index.html`、`styles/tokens.css`、`styles/components.css`、`styles/app.css`、`scripts/app.js`
+- 页面最大宽度 768px（由 `--wg-layout-page-max-width` 控制），同时保持移动端响应式适配
 - 输出完整项目目录，不合并为单文件
 - 所有关键交互必须可实际操作
+- 已注册组件的视觉样式只能复制到 `styles/components.css`，严禁自己手写组件 CSS；页面级业务样式只写入 `styles/app.css`
+- 组件库尚未覆盖的结构只能作为页面级临时结构实现；若具备复用价值，在交付说明中标记为组件候选，不得声明为正式组件规则
 
 ## 扩展与约束
 

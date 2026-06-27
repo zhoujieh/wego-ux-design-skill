@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微购店铺设置</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div class="app-shell" data-app data-status="initial">
+    <div class="page">
+      <header class="wg-navbar wg-navbar--standard wg-navbar--bg-default wg-navbar--divider">
+  <div class="wg-navbar__left">
+    <button class="wg-navbar__left-btn" type="button" data-action="back-home" aria-label="返回">返回</button>
+  </div>
+  <div class="wg-navbar__center"><span class="wg-navbar__title">店铺设置</span></div>
+  <div class="wg-navbar__actions"></div>
+</header>
+<main class="content">
+  <section class="card">
+    <div class="headline">
+      <h1 class="title">基础设置</h1>
+      <p class="subtitle">维护店铺展示信息和联系资料。</p>
+    </div>
+    <div class="wg-form-group">
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">店铺名称</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="shop" placeholder="请输入店铺名称" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>店铺名称不能为空</div>
+</div>
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">联系电话</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="phone" placeholder="请输入手机号" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>联系电话不能为空</div>
+</div>
+      <div class="wg-form wg-form--horizontal">
+  <div class="wg-form__body">
+    <div class="wg-form__label">发货地址</div>
+    <div class="wg-form__action"><input class="wg-form__input" name="address" placeholder="请输入详细地址" data-required></div>
+  </div>
+  <div class="wg-form__hint" data-error hidden>发货地址不能为空</div>
+</div>
+    </div>
+  </section>
+  <div class="wg-button-group wg-button-group--page"><button class="wg-button wg-button--page wg-button--strong" type="button" data-action="submit"><span class="wg-button__surface"><span class="wg-button__label">保存设置</span></span></button></div>
+</main>
+    </div>
+  </div>
+  <div class="wg-toast" data-toast data-state="hidden">
+    <div class="wg-toast__surface" data-toast-message>操作完成</div>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

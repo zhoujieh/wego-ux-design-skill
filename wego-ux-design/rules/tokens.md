@@ -150,8 +150,11 @@ M/G 模式通过 `design-library/scaffold.css` 的工具类在代码中表达：
 清晰分隔：wg.spacing.24
 模块分隔：wg.spacing.32
 
-默认圆角：wg.radius.md
-大圆角：wg.radius.lg
+卡片圆角：wg.radius.md
+弹窗圆角：wg.radius.lg
+模态窗圆角：wg.radius.xl
+32px 按钮圆角：wg.radius.sm
+48px 按钮圆角：wg.radius.md
 胶囊圆角：wg.radius.full
 
 默认业务页面：wg.layout.page.m2.margin

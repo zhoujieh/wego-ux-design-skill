@@ -70,6 +70,7 @@ AI 在验证通过后自动部署，无需用户手动操作：
 □ 页面高度是否使用 100vh/100dvh，滚动策略是否正确
 □ 滚动区域是否隐藏浏览器默认滚动条
 □ 页面转场是否使用 Push/Present/Fade 动画而非硬切
+□ NavBar 左侧为取消或关闭叉的全屏模块是否使用 Present 从底部打开
 □ 页面主体最大宽度是否 ≤ --wg-layout-page-max-width
 □ 大屏下页面是否没有被过度拉伸
 □ 滚动后导航区是否仍可见
@@ -95,6 +96,12 @@ AI 在验证通过后自动部署，无需用户手动操作：
 □ 是否没有自创组件变体
 □ 未注册结构是否使用页面级命名并标注为组件候选
 □ 是否没有读取或引用 KuiklyUI 组件 API
+□ 设置页、权限页和配置页是否使用 M0 通栏布局，并按业务域拆分分组
+□ M0 通栏分组是否没有页面级 margin、圆角卡片或空 spacer 节点
+□ 卡片圆角是否使用 wg.radius.md，弹窗 wg.radius.lg，模态窗 wg.radius.xl
+□ 多项独立授权是否使用 Checkbox，互斥选项是否使用 Radio
+□ Checkbox / Radio / Switch 是否可点击并同步 aria-checked
+□ 文字链是否全部使用 Link 组件，未用页面级 class 重写链接样式
 □ 命中组件的 Canonical CSS 是否逐字复制写入 styles/components.css（未增删规则、未修改选择器、未添加属性）
 □ 页面中所有可点击的 `<a>` 标签是否使用了 `.wg-link` 组件（包括协议链接、帮助链接、注册入口等）
 □ 可点击链接的 pressed / hover / focus-visible 状态是否符合 Link 组件规范（不得用 `opacity` 替代 Link 的 pressed 态背景色）

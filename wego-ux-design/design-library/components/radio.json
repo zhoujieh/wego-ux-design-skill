@@ -16,14 +16,15 @@
     }
   },
   "tokensConsumed": [
-    "wg-color-action-primary-default", "wg-color-action-primary-disabled",
+    "wg-radio-accent", "wg-radio-accent-disabled",
     "wg-color-bg-inverse-subtle", "wg-color-bg-surface",
-    "wg-color-border-default",
+    "wg-color-base-neutral-500", "wg-color-base-static-white",
+    "wg-color-border-default", "wg-color-transparent",
     "wg-color-state-disabled-bg", "wg-color-state-focus",
     "wg-color-text-inverse-weak",
     "wg-motion-duration-fast", "wg-motion-ease-standard",
     "wg-radius-full",
-    "wg-size-10", "wg-size-24",
+    "wg-size-12", "wg-size-20", "wg-size-24",
     "wg-spacing-2", "wg-spacing-8",
     "wg-stroke-style-solid", "wg-stroke-width-default", "wg-stroke-width-strong"
   ],
